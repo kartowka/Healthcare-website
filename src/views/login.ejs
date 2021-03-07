@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>Login Page</title>
-<link href="/css/index.css" rel="stylesheet">
-<link href="/css/login.css" rel="stylesheet">
-<script src="scripts.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Login</title>
+  <link href="/css/index.css" rel="stylesheet">
+  <link href="/css/login.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/favicon.ico"/>
+  <script src="/scripts/scripts.js"></script>
 
 </head>
+
 <body>
 
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="index.html">Home</a>
-        <a href="#">Services</a>
-        <a href="#">About</a>
-        <a href="#">Contact Us</a>
-      </div>
-      
-      <div id="main">
-        <button class="openbtn" onclick="openNav()">&#9776;</button> 
-      </div>
-      <body>
-        <div class="main">
-          <p class="sign" align="center">Sign in</p>
-          <form class="form1">
-            <input class="un " type="text" align="center" placeholder="Username">
-            <input class="pass" type="password" align="center" placeholder="Password">
-            <a class="submit" align="center">Sign in</a>
-            <p class="forgot" align="center"><a href="#">Forgot Password?</p>
-                  
-                      
-          </div>
-           
-      </body>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/">Home</a>
+    <a href="#">Services</a>
+    <a href="#">About</a>
+    <a href="#">Contact Us</a>
+  </div>
+
+  <div id="main">
+    <button class="openbtn" onclick="openNav()">&#9776;</button>
+  </div>
+
+  <body>
+    <div class="main">
+      <p class="sign" align="center">SIGN IN</p>
+      <form class="form1">
+        <input class="email " type="email" align="center" placeholder="Email" id="email">
+        <input class="pass" type="password" align="center" placeholder="Password" id="pwd">
+        <button type="submit" class="submit" align="center" onclick="validate()" id="submit">SIGN IN</button>
+        <p class="forgot" align="center"><a href="password_reset">Forgot Password?</p>
+        <p class="register" align="center"><a href="register">SIGN UP</p>
+
+
+
+    </div>
+
+  </body>
 </body>
 
 </html>
-
