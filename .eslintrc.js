@@ -52,5 +52,8 @@ module.exports =
         'default-param-last': [
             'error',
         ],
+        'no-unused-vars':[
+            'off',
+        ],
     },
 }
