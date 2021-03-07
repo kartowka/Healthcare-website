@@ -31,10 +31,15 @@ app.get('/password_reset', function(req, res) {
   res.render('password_reset', { title: 'password reset' })
 })
 
-app.get('/404', function(req, res) {
-  res.render('404', { title: '404' })
-})
 
+app.use( function(req, res, next) {
+
+    // you can do what ever you want here
+    // for example rendering a page with '404 Not Found'
+    res.status(404)
+    res.render('404', { error: 'Not Found'})
+
+})
 
 //Creating a connection
 app.listen(appPort, () => {
