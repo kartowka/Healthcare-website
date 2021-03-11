@@ -27,7 +27,7 @@ Our dependencies list:
   }
 ```
 ## Installation
-1. Clone our reposetory by using:
+1. Clone our repository by using:
     * HTTP - `git clone https://github.com/kartowka/ProjectManagement.git` or with
     * SSH - `git clone git@github.com:kartowka/ProjectManagement.git`
 <br/>
