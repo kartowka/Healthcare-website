@@ -5,10 +5,11 @@ The following project simulates the Agile software development methodology, we a
 
 ### Introduction
 #### Sprint Nº 1
-In the first sprint we've built a skeleton project to our website, it has basic features like a nav bar, log-in page (with no database connection as of yet) and other stub buttons like `Services`, `About` etc.
+In the first sprint we've built a skeleton structure for our website, it has basic features like a nav bar, log-in page (with no database connection as of yet) and other stub buttons like `Services`, `About` etc.
 
 Furthemore, we've built a custom page for `not found` pages i.e `404` page.
-The log-in page has an authentication for the syntax of the Email & Password fields.
+
+The log-in page has a syntax authentication Email & Password fields.
 - Password length has to be longer than 7 characters.
  
 ### Requirements
