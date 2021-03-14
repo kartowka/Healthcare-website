@@ -19,8 +19,10 @@ jQuery(document).ready(function () {
 
             var target = this.hash,
                 menu = target
+            // eslint-disable-next-line no-undef
             $target = $(target)
             $('html, body').stop().animate({
+                // eslint-disable-next-line no-undef
                 'scrollTop': $target.offset().top + 2
             }, 500, 'swing', function () {
                 window.location.hash = target
