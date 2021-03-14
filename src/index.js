@@ -8,7 +8,8 @@ app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, '/views/')))
 app.set('views', __dirname + '/views/')
 app.use('/css', express.static(__dirname + '/css'))
-app.use('/scripts', express.static(__dirname + '/scripts'))
+app.use('/fonts', express.static(__dirname + '/fonts'))
+app.use('/js', express.static(__dirname + '/js'))
 app.use('/img',express.static(__dirname +'/img'))
 
 
@@ -19,16 +20,6 @@ app.get('/', (req, res) => {
 
 app.get('/login', function(req, res) {
   res.render('login', { title: 'login' })
-})
-
-
-app.get('/signup', function(req, res) {
-  res.render('signup', { title: 'Sign up' })
-})
-
-
-app.get('/password_reset', function(req, res) {
-  res.render('password_reset', { title: 'password reset' })
 })
 
 
