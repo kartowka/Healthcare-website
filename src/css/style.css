@@ -16,7 +16,6 @@
     font-weight: 700;
     font-size: 14px;
     letter-spacing: 1px;
-    padding: 10px 20px;
     opacity: 0.5;
     border: none;
     outline: none;
@@ -32,7 +31,6 @@
     font-weight: 700;
     font-size: 14px;
     letter-spacing: 1px;
-    padding: 10px 20px;
     opacity: 0.5;
     border: none;
     outline: none;
@@ -205,7 +203,7 @@ li a.active {
     text-align: left;
     left: 12%;
     line-height: 1;
-    top: 50%;
+    top: 12%;
     margin-top: -100px;
 }
 .carousel-control .glyphicon-chevron-left,
@@ -590,6 +588,9 @@ li a.active {
     border-top: 1px solid #53cde5;
     padding-top: 15px;
     text-align: right;
+}
+#role_select{
+    display: none;
 }
 .contact-form input.submit-btn {
     width: 180px;
