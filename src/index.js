@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const User = require('./models/user');
 
 //connect to mongodb
-const dbURI = "mongodb+srv://jsas:q8L74rSEkuhuWU6k@healthcare.eq86f.mongodb.net/healthcare-db?retryWrites=true&w=majority";
+const dbURI = 'mongodb+srv://jsas:q8L74rSEkuhuWU6k@healthcare.eq86f.mongodb.net/healthcare-db?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err));
@@ -43,7 +43,6 @@ app.use(function (req, res, next) {
 
 //mongoose and mongo sandbox routes
 
-app.get('/add-')
 //Creating a connection
 app.listen(appPort, () => {
   console.log(`App is running. serve at port: ${appPort}`)
