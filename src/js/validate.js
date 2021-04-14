@@ -67,5 +67,5 @@ $(document).ready(function () {
   }
   function showDiv(divId, element)
 {
-    document.getElementById(divId).style.display = element.value == 'Doctor' ? 'block' : 'none';
+    document.getElementById(divId).style.display = element.value == 'Doctor' ? 'block' : 'none'
 }
