@@ -2,14 +2,14 @@ const express = require('express')
 const appPort = process.env.PORT || 4000
 const app = express()
 var path = require('path')
-const mongoose = require('mongoose');
-const User = require('./models/user');
+const mongoose = require('mongoose')
+const User = require('./models/user')
 
 //connect to mongodb
-const dbURI = 'mongodb+srv://jsas:q8L74rSEkuhuWU6k@healthcare.eq86f.mongodb.net/healthcare-db?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://jsas:q8L74rSEkuhuWU6k@healthcare.eq86f.mongodb.net/healthcare-db?retryWrites=true&w=majority'
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => app.listen(3000))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err))
 
 
 //Setting up Handlebars
