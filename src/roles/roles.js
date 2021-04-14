@@ -8,12 +8,12 @@ exports.roles = (function () {
         .readAny('profile')
 
     ac.grant('doctor')
-        .extend('basic')
+        .extend('patient')
         .readAny('profile')
 
     ac.grant('admin')
-        .extend('basic')
-        .extend('supervisor')
+        .extend('patient')
+        .extend('doctor')
         .updateAny('profile')
         .deleteAny('profile')
 
