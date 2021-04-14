@@ -2,7 +2,7 @@
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const { roles } = require('../roles')
+const { roles } = require('../roles/roles')
 
 exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
@@ -109,6 +109,20 @@ exports.deleteUser = async (req, res, next) => {
             data: null,
             message: 'User has been deleted'
         })
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.allowIfLoggedin = async (req, res, next) => {
+    try {
+        const user = res.locals.loggedInUser
+        if (!user)
+            return res.status(401).json({
+                error: 'You need to be logged in to access this route'
+            })
+        req.user = user
+        next()
     } catch (error) {
         next(error)
     }
