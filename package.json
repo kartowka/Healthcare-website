@@ -31,7 +31,7 @@
     "mongoose": "^5.12.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.15",
+    "@types/chai": "^4.2.16",
     "@types/mocha": "^8.2.2",
     "chai": "^4.3.4",
     "eslint": "^7.24.0",
