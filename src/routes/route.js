@@ -2,16 +2,21 @@ const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
 
-router.post('/signup', userController.signup)
+//signup page
+router.get('/register', function (req, res) {
+    res.render('register')})
+router.post('/register', userController.signup)
 
-router.post('/login', userController.login)
+//login page
+router.get('/login', function (req, res) {
+    res.render('login')})
+router.post('/index', userController.login)
+//router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
 
-router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
+//router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers)
 
-router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers)
+//router.put('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('updateAny', 'profile'), userController.updateUser)
 
-router.put('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('updateAny', 'profile'), userController.updateUser)
-
-router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser)
+//router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser)
 
 module.exports = router
