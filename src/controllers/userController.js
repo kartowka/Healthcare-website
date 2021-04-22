@@ -50,8 +50,9 @@ module.exports.signup = async (req, res, next) => {
     }
 }
 
-exports.login = async (req, res, next) => {
+module.exports.login = async (req, res, next) => {
     try {
+        console.log(req.body)
         const { email, password } = req.body
         const user = await User.findOne({ email })
         if (!user) return next(new Error('Email does not exist'))
