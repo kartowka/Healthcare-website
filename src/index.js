@@ -15,7 +15,7 @@ require('dotenv').config({
 
 //connect to mongodb
 const dbURI = 'mongodb+srv://jsas:RlKoBp5JquF2OvsF@healthcare.eq86f.mongodb.net/healthcare-db?retryWrites=true&w=majority'
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true,})
   .then((result) => app.listen(3000), console.log('mongoDB connected.'))
   .catch((err) => console.log(err))
 
