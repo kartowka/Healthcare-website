@@ -26,12 +26,26 @@ async function hashPassword(password) {
 async function validatePassword(plainPassword, hashedPassword) {
     return await bcrypt.compare(plainPassword, hashedPassword)
 }
-
-exports.signup = async (req, res, next) => {
+module.exports.signup = async (req, res, next) => {
     try {
-        const { email, password, role } = req.body
+        console.log(req.body)
+        var {clinic1,clinic2,clinic3,clinic4}=req.body
+        var doctor_related_clinics = new Array()
+        if(clinic1!=undefined){
+            doctor_related_clinics.push(clinic1)
+        }
+        if(clinic2!=undefined){
+            doctor_related_clinics.push(clinic2)
+        }
+        if(clinic3!=undefined){
+            doctor_related_clinics.push(clinic3)
+        }
+        if(clinic4!=undefined){
+            doctor_related_clinics.push(clinic4)
+        }
+        const { first_name,last_name,clinic,medical_license_id,email, password,role } = req.body
         const hashedPassword = await hashPassword(password)
-        const newUser = new User({ email, password: hashedPassword, role: role || 'basic' })
+        const newUser = new User({ first_name,last_name,medical_license_id,clinic,doctor_related_clinics,email, password: hashedPassword, role: role || 'patient' })
         const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
         })
