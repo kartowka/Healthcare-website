@@ -33,48 +33,48 @@
                                     <div class="form-group">
                                         <select name="role" class="form-control form-control-user"
                                             placeholder="Select Role" id="role" onchange="showDiv('role_select', this)"
-                                            required>
+                                            >
                                             <option value="" disabled selected>Select Role</option>
                                             <option value="doctor">Dr.</option>
                                             <option value="patient">Patient</option>
                                         </select>
                                     </div>
                                     <div id='role_select' class="form-group">
-                                        <input type="checkbox" id="clinic1" name="clinic1" value="Clalit">
+                                        <input type="checkbox" name="doctor_related_clinics[]" value="Clalit">
                                         <label for="clinic1"> Clalit</label><br>
-                                        <input type="checkbox" id="clinic2" name="clinic2" value="Meuhedet">
+                                        <input type="checkbox" name="doctor_related_clinics[]" value="Meuhedet">
                                         <label for="clinic2"> Meuhedet</label><br>
-                                        <input type="checkbox" id="clinic3" name="clinic3" value="Macabi">
+                                        <input type="checkbox" name="doctor_related_clinics[]" value="Macabi">
                                         <label for="clinic3"> Macabi</label><br>
-                                        <input type="checkbox" id="clinic4" name="clinic4" value="Leumit">
+                                        <input type="checkbox" name="doctor_related_clinics[]" value="Leumit">
                                         <label for="clinic4"> Leumit</label><br><br>
                                         <input class="form-control form-control-user" type="text"
                                             name="medical_license_id" placeholder="Medical Licence No." id="ml_ID"
-                                            required>
+                                            >
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
                                                 type="text" id="firstname" placeholder="First Name" name="first_name"
-                                                required></div>
+                                                ></div>
                                         <div class="col-sm-6"><input class="form-control form-control-user" type="text"
-                                                id="lastname" placeholder="Last Name" name="last_name" required></div>
+                                                id="lastname" placeholder="Last Name" name="last_name" ></div>
                                     </div>
                                     <div class="form-group"><input class="form-control form-control-user" type="email"
                                             id="email" aria-describedby="emailHelp" placeholder="Email Address"
-                                            name="email" required></div>
+                                            name="email" ></div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
                                                 type="password" id="pwd1" placeholder="Password" name="password"
-                                                required>
+                                                >
                                         </div>
                                         <div class="col-sm-6"><input class="form-control form-control-user"
                                                 type="password" id="pwd2" placeholder="Repeat Password"
-                                                name="password_repeat" required>
+                                                name="password_repeat" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <select name="clinic" class="form-control form-control-user"
-                                            placeholder="Select Clinic" id="clinic" required>
+                                            placeholder="Select Clinic" id="clinic" >
                                             <option value="" disabled selected>Select Clinic</option>
                                             <option value="Clalit">Clalit</option>
                                             <option value="Meuhedet">Meuhedet</option>
