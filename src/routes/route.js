@@ -7,6 +7,11 @@ router.get('/', function (req, res) {
     res.render('index')
 })
 
+//pateint profile
+router.get('/patientProfile', function (req, res) {
+    res.render('patientProfile')
+})
+
 //signup page
 router.get('/register', function (req, res) {
     res.render('register')
