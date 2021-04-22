@@ -4,14 +4,13 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const path = require('path')
 const User = require('./models/userModel')
-const routes = require('./routes/route.js')
-
+const routes = require('./routes/route')
 const appPort = process.env.PORT || 4000
 const app = express()
 
 //.env
 require('dotenv').config({
-  path: path.join(__dirname, '../.env')
+  path: path.join(__dirname, './.env')
 })
 
 //connect to mongodb
@@ -44,20 +43,8 @@ app.use('/css', express.static(__dirname + '/css'))
 app.use('/fonts', express.static(__dirname + '/fonts'))
 app.use('/js', express.static(__dirname + '/js'))
 app.use('/img', express.static(__dirname + '/img'))
-
-
-//routing
-app.get('/', (req, res) => {
-  res.render('index', { title: 'Home Page' })
-})
-
-app.get('/login', function (req, res) {
-  res.render('login', { title: 'login' })
-})
-app.get('/register', function(req, res) {
-  res.render('register', { title: 'register' })
-})
-
+app.use('/assets', express.static(__dirname + '/assets'))
+app.use('/', routes)
 
 
 app.use(function (req, res, next) {
