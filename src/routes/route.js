@@ -19,6 +19,8 @@ router.get('/login', function (req, res) {
     res.render('login')
 })
 
+router.post('/login', userController.login)
+
 router.post('/index', userController.login)
 //router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
 
