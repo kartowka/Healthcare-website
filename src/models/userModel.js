@@ -28,6 +28,7 @@ const UserSchema = new Schema({
     clinic: {
         type: String,
         enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
+        default: '',
         //required: true
     },
     medical_license_id: {
