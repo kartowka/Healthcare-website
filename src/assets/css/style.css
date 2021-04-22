@@ -1180,3 +1180,23 @@ responsive area
   }
 }
 
+#pwd_main-strength-status {
+    padding: 5px 10px;
+    color: #FFFFFF;
+    border-radius: 25px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+.medium-pass {
+    background-color: #ff9800;
+    max-width: 350px;
+
+}
+.weak-pass {
+    background-color: #F44336;
+    max-width: 350px;
+}
+.strong-pass {
+    background-color: #4CAF50;
+    max-width: 350px;
+}
