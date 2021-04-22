@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Register - JSAS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../assets/js/jquery.min.js"></script>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
@@ -35,8 +36,7 @@
                                 <form class="user" action="/register" method="POST">
                                     <div class="form-group">
                                         <select name="role" class="form-control form-control-user"
-                                            placeholder="Select Role" id="role" onchange="showDiv('role_select', this)"
-                                            >
+                                            placeholder="Select Role" id="role" onchange="showDiv('role_select', this)">
                                             <option value="" disabled selected>Select Role</option>
                                             <option value="doctor">Dr.</option>
                                             <option value="patient">Patient</option>
@@ -52,34 +52,36 @@
                                         <input type="checkbox" name="doctor_related_clinics[]" value="Leumit">
                                         <label for="clinic4"> Leumit</label><br><br>
                                         <input class="form-control form-control-user" type="text"
-                                            name="medical_license_id" placeholder="Medical Licence No." id="ml_ID"
-                                            >
+                                            name="medical_license_id" placeholder="Medical Licence No." id="ml_ID">
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
-                                                type="text" id="firstname" placeholder="First Name" name="first_name"
-                                                ></div>
+                                                type="text" id="firstname" placeholder="First Name" name="first_name">
+                                        </div>
                                         <div class="col-sm-6"><input class="form-control form-control-user" type="text"
-                                                id="lastname" placeholder="Last Name" name="last_name" ></div>
+                                                id="lastname" placeholder="Last Name" name="last_name"></div>
                                     </div>
                                     <div class="form-group"><input class="form-control form-control-user" type="email"
                                             id="email" aria-describedby="emailHelp" placeholder="Email Address"
-                                            name="email" ></div>
+                                            name="email"></div>
 
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
-                                                type="password" id="pwd" placeholder="Password" name="password"
-                                                >
+                                                type="password" id="pwd_main" placeholder="Password" name="password"
+                                                onKeyUp="checkPassStrength()">
                                         </div>
                                         <div class="col-sm-6"><input class="form-control form-control-user"
-                                                type="password" id="pwd" placeholder="Repeat Password"
-                                                name="password_repeat" >
+                                                type="password" id="pwd_rep" placeholder="Repeat Password"
+                                                name="password_repeat">
                                         </div>
+
                                     </div>
+                                    <div id="pwd_main-strength-status" align='center'></div>
+
                                     <div class="form-group">
                                         <select name="clinic" class="form-control form-control-user"
-                                            placeholder="Select Clinic" id="clinic" >
+                                            placeholder="Select Clinic" id="clinic">
                                             <option value="" disabled selected>Select Clinic</option>
                                             <option value="Clalit">Clalit</option>
                                             <option value="Meuhedet">Meuhedet</option>
@@ -87,7 +89,9 @@
                                             <option value="Leumit">Leumit</option>
                                         </select>
                                     </div>
-                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit" onclick="validate()" id="submit">Register
+
+                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit"
+                                        onclick="validate()" id="btn">Register
                                         Account</button>
                                     <hr>
                                 </form>
