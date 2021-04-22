@@ -1,166 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<title>Login</title>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet'
-		type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
-
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register - JSAS</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="../assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body>
-
-	<!-- ====================================================
-	header section -->
-	<header class="top-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-5 header-logo">
-					<br>
-					<a href="/"><img src="img/JSAS.png" alt="" class="img-responsive logo"></a>
-				</div>
-
-				<div class="col-md-7">
-					<nav class="navbar navbar-default">
-						<div class="container-fluid nav-bar">
-							<!-- Brand and toggle get grouped for better mobile display -->
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-									data-target="#bs-example-navbar-collapse-1">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								</button>
-							</div>
-
-							<!-- Collect the nav links, forms, and other content for toggling -->
-							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-								<ul class="nav navbar-nav navbar-right">
-									<li><a class="menu" href="/">Home</a></li>
-									<li><a class="menu active" a href="login">Login</a></li>
-									<li><a class="menu" href="/#about">about us</a></li>
-								</ul>
-							</div><!-- /navbar-collapse -->
-						</div><!-- / .container-fluid -->
-					</nav>
-				</div>
-			</div>
-		</div>
-	</header> <!-- end of header area -->
-	<section class="slider" id="home">
-		<div class="container-fluid">
-			<div class="row">
-				<div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
-					<div class="header-backup"></div>
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-							<img src="img/slide-three.jpg" alt="">
-							<div class="carousel-caption">
-								<p class="sign" align="">SIGN UP</p>
-								<form class="form1">
-									<div class="form-group">
-										<select name="usertype" class="pass" placeholder="Select Role" id="role"
-											onchange="showDiv('role_select', this)" required>
-											<option value="" disabled selected>Select Role</option>
-											<option value="Doctor">Dr.</option>
-											<option value="Patient">Patient</option>
-										</select>
-									</div>
-									<div id='role_select' class="form-group">
-										<input type="checkbox" id="clinic1" name="clinic1" value="Clalit">
-										<label for="clinic1"> Clalit</label><br>
-										<input type="checkbox" id="clinic2" name="clinic2" value="Meuhedet">
-										<label for="clinic2"> Meuhedet</label><br>
-										<input type="checkbox" id="clinic3" name="clinic3" value="Macabi">
-										<label for="clinic3"> Macabi</label><br>
-										<input type="checkbox" id="clinic4" name="clinic4" value="Leumit">
-										<label for="clinic4"> Leumit</label><br><br>
-										<input class="pass" type="text" align="left" placeholder="Medical Licence No."
-											id="ml_ID" required>
-									</div>
-									<div class="form-group">
-										<input class="pass" type="text" align="left" placeholder="First Name"
-											id="firstname" required>
-									</div>
-									<div class="form-group">
-										<input class="pass " type="text" align="left" placeholder="Middle Name"
-											id="middlename">
-									</div>
-									<div class="form-group">
-										<input class="pass " type="text" align="left" placeholder="Last Name"
-											id="lastname" required>
-									</div>
-									<div class="form-group">
-										<input class="email " type="email" align="left" placeholder="Email" id="email"
-											required>
-									</div>
-
-									<div class="form-group">
-										<input class="pass" type="password" align="left" placeholder="Password" id="pwd"
-											required>
-									</div>
-									<div class="form-group">
-										<input class="pass" type="password" align="left" placeholder="confirm Password"
-											id="pwd" required>
-									</div>
-									<div class="form-group">
-										<select name="clinics" class="pass" placeholder="Select Clinic" id="clinic"
-											required>
-											<option value="" disabled selected>Select Clinic</option>
-											<option value="Clalit">Clalit</option>
-											<option value="Meuhedet">Meuhedet</option>
-											<option value="Macabi">Macabi</option>
-											<option value="Leumit">Leumit</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<button type="submit" class="submit" align="center" onclick="validate()"
-											id="submit">SIGN IN</button>
-									</div>
-
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	</section><!-- end of slider section -->
-
-	<!-- footer starts here -->
-	<footer class="footer clearfix">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-6 footer-para">
-					<p>&copy;JSAS All right reserved</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-	<!-- script tags
-	============================================================= -->
-	<script src="https://code.jquery.com/jquery-2.2.1.js"
-		integrity="sha256-eNcUzO3jsv0XlJLveFEkbB8bA7/CroNpNVk3XpmnwHc=" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-		crossorigin="anonymous"></script>
-	<script src="js/smoothscroll.js"></script>
-	<script src="js/custom.js"></script>
+<body class="bg-gradient-primary" style="background: #3a9dca;">
+    <%- include('partials/header'); %>
+        <div class="text-monospace container" style="max-width: 1140px;">
+            <div class="card shadow-lg o-hidden border-0 my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-flex">
+                            <div class="flex-grow-1 bg-register-image"
+                                style="background-image: url(&quot;../assets/img/dogs/iu.png&quot;);transform-style: preserve-3d;">
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h4 class="text-dark mb-4">Create an Account!</h4>
+                                </div>
+                                <form class="user" action="/register" method="POST">
+                                    <div class="form-group">
+                                        <select name="role" class="form-control form-control-user"
+                                            placeholder="Select Role" id="role" onchange="showDiv('role_select', this)"
+                                            required>
+                                            <option value="" disabled selected>Select Role</option>
+                                            <option value="doctor">Dr.</option>
+                                            <option value="patient">Patient</option>
+                                        </select>
+                                    </div>
+                                    <div id='role_select' class="form-group">
+                                        <input type="checkbox" id="clinic1" name="clinic1" value="Clalit">
+                                        <label for="clinic1"> Clalit</label><br>
+                                        <input type="checkbox" id="clinic2" name="clinic2" value="Meuhedet">
+                                        <label for="clinic2"> Meuhedet</label><br>
+                                        <input type="checkbox" id="clinic3" name="clinic3" value="Macabi">
+                                        <label for="clinic3"> Macabi</label><br>
+                                        <input type="checkbox" id="clinic4" name="clinic4" value="Leumit">
+                                        <label for="clinic4"> Leumit</label><br><br>
+                                        <input class="form-control form-control-user" type="text"
+                                            name="medical_license_id" placeholder="Medical Licence No." id="ml_ID"
+                                            required>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
+                                                type="text" id="firstname" placeholder="First Name" name="first_name"
+                                                required></div>
+                                        <div class="col-sm-6"><input class="form-control form-control-user" type="text"
+                                                id="lastname" placeholder="Last Name" name="last_name" required></div>
+                                    </div>
+                                    <div class="form-group"><input class="form-control form-control-user" type="email"
+                                            id="email" aria-describedby="emailHelp" placeholder="Email Address"
+                                            name="email" required></div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
+                                                type="password" id="pwd1" placeholder="Password" name="password"
+                                                required>
+                                        </div>
+                                        <div class="col-sm-6"><input class="form-control form-control-user"
+                                                type="password" id="pwd2" placeholder="Repeat Password"
+                                                name="password_repeat" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="clinic" class="form-control form-control-user"
+                                            placeholder="Select Clinic" id="clinic" required>
+                                            <option value="" disabled selected>Select Clinic</option>
+                                            <option value="Clalit">Clalit</option>
+                                            <option value="Meuhedet">Meuhedet</option>
+                                            <option value="Macabi">Macabi</option>
+                                            <option value="Leumit">Leumit</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit">Register
+                                        Account</button>
+                                    <hr>
+                                </form>
+                                <div class="text-center"><a class="small" href="forgot-password">Forgot
+                                        Password?</a>
+                                </div>
+                                <div class="text-center"><a class="small" href="login">Already have an account?
+                                        Login!</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('partials/footer'); %>
+            <script src="../assets/js/jquery.min.js"></script>
+            <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+            <script src="../assets/js/custom.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+            <script src="../assets/js/jquery.min.js"></script>
+            <script src="../assets/js/smoothscroll.js"></script>
+            <script src="../assets/js/theme.js"></script>
+            <script>
+                function showDiv(divId, element) {
+                    document.getElementById(divId).style.display = element.value == 'doctor' ? 'block' : 'none'
+                }
+            </script>
 </body>
 
 </html>
