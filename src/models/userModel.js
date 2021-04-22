@@ -5,20 +5,20 @@ const Schema = mongoose.Schema
 const UserSchema = new Schema({
     first_name: {
         type: String,
-        //required: true,
+        required: true,
     },
     last_name: {
         type: String,
-        //required: true,
+        required: true,
     },
     email: {
         type: String,
         required: true,
-        //trim: true
+        trim: true
     },
     password: {
         type: String,
-        //required: true
+        required: true
     },
     role: {
         type: String,
@@ -29,7 +29,7 @@ const UserSchema = new Schema({
         type: String,
         enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
         default: '',
-        //required: true
+        required: true
     },
     medical_license_id: {
         type: String,
