@@ -40,7 +40,7 @@ $(document).ready(function () {
 })
 
 function buttonState() {
-    if (validateEmail() && checkPassStrength()) {
+    if (validateEmail() && checkPassStrength() && validatePasswordPairLength()) {
         // if the both email and password are validate
         // then button should show visible
         $('#btn').attr('disabled', false)
@@ -71,15 +71,18 @@ function checkPassStrength() {
         $('#pwd_main-strength-status').removeClass()
         $('#pwd_main-strength-status').addClass('weak-pass')
         $('#pwd_main-strength-status').html('<b>Weak</b> (At least 8 characters in length)')
+        return false
     } else {
         if (pwd.match(number) && pwd.match(alphabets) && pwd.match(special_characters) && pwd.match(/[A-Z]/)) {
             $('#pwd_main-strength-status').removeClass()
             $('#pwd_main-strength-status').addClass('strong-pass')
             $('#pwd_main-strength-status').html('<b>Very Strong</b>')
+            return true
         } else {
             $('#pwd_main-strength-status').removeClass()
             $('#pwd_main-strength-status').addClass('medium-pass')
             $('#pwd_main-strength-status').html('<b>Medium</b> (Should include Alphabets, Numbers, Special characters, and 1 Capital letter)')
+            return false
         }
     }
 }
