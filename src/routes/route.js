@@ -4,12 +4,16 @@ const userController = require('../controllers/userController')
 
 //signup page
 router.get('/register', function (req, res) {
-    res.render('register')})
+    res.render('register')
+})
+
 router.post('/register', userController.signup)
 
 //login page
 router.get('/login', function (req, res) {
-    res.render('login')})
+    res.render('login')
+})
+
 router.post('/index', userController.login)
 //router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
 
