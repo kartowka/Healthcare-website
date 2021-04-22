@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../assets/css/FontAwesome.css">
     <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../js/validate.js"></script>
+
 </head>
 
 <body class="bg-gradient-primary" style="background: #3a9dca;">
@@ -62,13 +64,15 @@
                                     <div class="form-group"><input class="form-control form-control-user" type="email"
                                             id="email" aria-describedby="emailHelp" placeholder="Email Address"
                                             name="email" ></div>
+
+
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
-                                                type="password" id="pwd1" placeholder="Password" name="password"
+                                                type="password" id="pwd" placeholder="Password" name="password"
                                                 >
                                         </div>
                                         <div class="col-sm-6"><input class="form-control form-control-user"
-                                                type="password" id="pwd2" placeholder="Repeat Password"
+                                                type="password" id="pwd" placeholder="Repeat Password"
                                                 name="password_repeat" >
                                         </div>
                                     </div>
@@ -82,7 +86,7 @@
                                             <option value="Leumit">Leumit</option>
                                         </select>
                                     </div>
-                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit">Register
+                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit" onclick="validate()" id="submit">Register
                                         Account</button>
                                     <hr>
                                 </form>
@@ -98,18 +102,10 @@
             </div>
         </div>
         <%- include('partials/footer'); %>
-            <script src="../assets/js/jquery.min.js"></script>
             <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-            <script src="../assets/js/custom.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-            <script src="../assets/js/jquery.min.js"></script>
-            <script src="../assets/js/smoothscroll.js"></script>
             <script src="../assets/js/theme.js"></script>
-            <script>
-                function showDiv(divId, element) {
-                    document.getElementById(divId).style.display = element.value == 'doctor' ? 'block' : 'none'
-                }
-            </script>
+
 </body>
 
 </html>
