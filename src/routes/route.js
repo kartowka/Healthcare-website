@@ -2,6 +2,11 @@ const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
 
+//homepage
+router.get('/', function (req, res) {
+    res.render('index')
+})
+
 //signup page
 router.get('/register', function (req, res) {
     res.render('register')
