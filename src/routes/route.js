@@ -12,6 +12,19 @@ router.get('/patientProfile', function (req, res) {
     res.render('patientProfile')
 })
 
+
+//previous appointments
+router.get('/patientProfile/previousAppointments', function (req, res) {
+    res.render('previousAppointments')
+})
+
+
+//future appointments
+router.get('/patientProfile/futureAppointments', function (req, res) {
+    res.render('futureAppointments')
+})
+
+
 //signup page
 router.get('/register', function (req, res) {
     res.render('register')
