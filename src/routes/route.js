@@ -12,6 +12,13 @@ router.get('/patientProfile', function (req, res) {
     res.render('patientProfile')
 })
 
+//doctor profile
+router.get('/doctorProfile', function (req, res) {
+    res.render('doctorProfile')
+})
+
+
+
 
 //previous appointments
 router.get('/patientProfile/previousAppointments', function (req, res) {
