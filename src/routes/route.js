@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
-
 //homepage
 router.get('/', function (req, res) {
     res.render('index')
@@ -50,8 +49,9 @@ router.get('/logout',function(req, res) {
     res.clearCookie('x-access-token')
     res.redirect('/')
 }) 
-
-router.get('/api/auth/confirm/:confirmationCode', userController.verifyUser)
+router.get('/confirm/:confirmationCode', function(req,res){
+    console.log(req.params.confiramationCode)
+} )
 
 router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
 
