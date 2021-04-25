@@ -52,7 +52,6 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try {
-        console.log(req.body)
         const { email, password } = req.body
         const user = await User.findOne({ email })
         if (!user) return next(new Error('Email does not exist'))
@@ -126,7 +125,6 @@ exports.deleteUser = async (req, res, next) => {
 exports.allowIfLoggedin = async (req, res, next) => {
     try {
         const user = res.locals.loggedInUser
-        console.log(user)
         if (!user)
             return res.status(401).json({
                 error: 'You need to be logged in to access this route'

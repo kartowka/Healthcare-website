@@ -33,6 +33,9 @@ router.get('/patientProfile/futureAppointments', function (req, res) {
 router.get('/register', function (req, res) {
     res.render('register')
 })
+router.get('/forgot-password', function (req, res) {
+    res.render('forgot-password')
+})
 
 router.post('/register', userController.signup)
 
@@ -40,7 +43,11 @@ router.post('/register', userController.signup)
 router.get('/login', function (req, res) {
     res.render('login')
 })
-router.post('/login', userController.login) 
+router.post('/login', userController.login)
+router.get('/logout',function(req, res) {
+    res.clearCookie('x-access-token')
+    res.redirect('/')
+}) 
 
 router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
 
