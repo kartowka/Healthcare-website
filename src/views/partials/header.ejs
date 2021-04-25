@@ -23,6 +23,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/#about">About Us</a>
                         </li>
+                        <% if (userLoggedIn == 1) { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/profile">Profile</a>
+                            </li>
+                        <% } %>
                     </ul>
                     <span class="navbar-text actions">
                         <% if (userLoggedIn == 0) { %>
