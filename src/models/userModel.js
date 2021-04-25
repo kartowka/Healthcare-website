@@ -38,6 +38,11 @@ const UserSchema = new Schema({
         type: [String],
         enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
     },
+    status: {
+      type: String, 
+      enum: ['Pending', 'Active'],
+      default: 'Pending'
+    },
     accessToken: {
         type: String
     }
