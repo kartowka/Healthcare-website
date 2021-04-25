@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile</title>
+    <title>Doctor's Profile</title>
 
 
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="../assets/bootstrap/css/profile.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
 </head>
 
@@ -29,7 +31,7 @@
                 <div class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" >
                     <div class="container-fluid menu1" ><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for a doctor">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for...">
                                 <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                             </div>
                         </form>
@@ -87,10 +89,12 @@
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-500 small">Valerie Luna</span><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-500"></i></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
-                                        <a class="dropdown-item" href="/patientProfile"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
+                                        <a class="dropdown-item" href="/doctorProfile"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Your Profile</a>
                                         <a class="dropdown-item" href="#User_Settings"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
-                                        <a class="dropdown-item" href="/patientProfile/previousAppointments"><i class="fa fa-calendar-check-o mr-2 text-gray-400"></i>&nbsp;Previous Appointments</a>
-                                        <a class="dropdown-item" href="/patientProfile/futureAppointments"><i class="fa fa-clock-o mr-2 text-gray-400"></i>&nbsp;Future Appointments</a>
+                                        <a class="dropdown-item" href="/doctorProfile/doctor_futureAppointments"><i class="fa fa-clock-o mr-2 text-gray-400"></i>&nbsp;Future Appointments</a>
+                                        <a class="dropdown-item" href="/doctorProfile/doctor_appointmentSummary"><i class="fa fa-book mr-2 text-gray-400"></i>&nbsp;Appointment Summary</a>
+                                        <a class="dropdown-item" href="#"><i class="fa fa-comments mr-2 text-gray-400"></i>&nbsp;Opinions about me</a>
+                                        <a class="dropdown-item" href="#General_Rating"><i class="fa fa-heart mr-2 text-gray-400"></i>&nbsp;My Rating</a>
                                         <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
                                 </div>
@@ -98,90 +102,124 @@
                         </ul>
                     </div>
                 </div>
+
+
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Profile</h3>
-                    <div class="row mb-3">
-                        <div class="col-lg-4">
-                            <div class="card mb-3 ">
-                                <div class="card-body space-around shadow row">
-                                    <table class="mr-5"id="t01">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="text-primary font-weight-bold m-0">Profile</h6>
+                        </div>
+                             <div class="row mb-3">
+                                 <div class="col-lg-4">
+                                    <div class="card mb-3 ">
+                                      <div class="card-body space-around shadow row">
+                                          <table class="mr-5"id="t01">
                                         <tr>
                                           <th>Firstname:&nbsp;</th>
-                                          <td>Eve</td>
+                                          <td>Sitara</td>
                                      
                                         </tr>
+
                                         <tr>
                                             <th>Lastname:&nbsp;</th> 
-                                            <td>Jackson</td> 
+                                            <td>Alayev</td> 
                                        
                                         </tr>
 
-                                      </table>
-                                      <table id="t02">
+                                        <tr>
+                                            <th>License number:&nbsp;</th>
+                                            <td>321967556</td>
+
+                                        </tr>
+
 
                                         <tr>
                                             <th>Email:&nbsp;</th>
-                                            <td>sitaraalayev@gmail.com</td>
+                                            <td>sitaraalayev@gmail.com<br></td>
                                           </tr>
+                                          
   
                                           <tr>
-                                              <th>Clinic:&nbsp;</th>
-                                              <td>Clalit</td>
-                                              <td>Macabi</td>
-                                              <td>Leumit</td>
-
+                                              <th>HMO's I work:&nbsp;</th>
+                                              <td>
+                                                    Clalit, 
+                                                    Macabi, 
+                                                    Leumit.
+                                                
+                                              </td>
                                             </tr>
 
                                             <tr>
-                                                <th>Working Days:&nbsp;</th>
-                                                <td>Sunday-Thursday : 10 AM - 19 PM</td>
-
+                                                <th>Work Days:&nbsp;</th>
+                                                <td>Sunday-Thursday</td>
+                                    
                                             </tr>
 
+                                            <tr>
+                                                <th>Reception hours:</th>
+                                                <td>10 AM - 19 PM</td>
+                                            </tr>
             
                                             <tr>
-                                                <th>Clinic location:&nbsp;</th>
-                                                <td>Bulvard street 98</td>
+                                                <th>Clinic address:&nbsp;</th>
+                                                <td>Sunset Blvd 38</td>
 
                                             </tr>
 
                                             <tr>
-                                                <th>Clinic location:&nbsp;</th>
-                                                <td>Bulvard street 98</td>
+                                                <th>Specialization:&nbsp;</th>
+                                                <td>Neurologist</td>
 
                                             </tr>
 
+                                            <tr>
+                                                <th>Languages:&nbsp;</th>
+                                                <td>Hebrew, Russian,English.</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>Phone number:&nbsp;</th>
+                                                <td>08-8525974</td>
+
+                                            </tr>
                                       </table>
+                                      </div>
+                                    </div>
+                                 
+                                   
+                           
+                            <div class="card shadow mb-4" id="General_Rating">
+                                <div class="card-header py-3">
+                                 <h6 class="text-primary font-weight-bold m-0">General Rating</h6>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star "></span>
                                 </div>
                             </div>
+
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="text-primary font-weight-bold m-0">Projects</h6>
+                                    <h6 class="text-primary font-weight-bold m-0">Reception hours</h6>
                                 </div>
                                 <div class="card-body">
-                                    <h4 class="small font-weight-bold">Server migration<span class="float-right">20%</span></h4>
-                                    <div class="progress progress-sm mb-3">
-                                        <div class="progress-bar bg-danger" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="sr-only">20%</span></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Sales tracking<span class="float-right">40%</span></h4>
-                                    <div class="progress progress-sm mb-3">
-                                        <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="sr-only">40%</span></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Customer Database<span class="float-right">60%</span></h4>
-                                    <div class="progress progress-sm mb-3">
-                                        <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60%</span></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Payout Details<span class="float-right">80%</span></h4>
-                                    <div class="progress progress-sm mb-3">
-                                        <div class="progress-bar bg-info" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Account setup<span class="float-right">Complete!</span></h4>
-                                    <div class="progress progress-sm mb-3">
-                                        <div class="progress-bar bg-success" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only">100%</span></div>
-                                    </div>
+                                    <fieldset>
+                                        <label for="from"><strong>From:</strong></label><input class="form-control" type="time" id="reception_hours_from" placeholder="10AM"/>
+                                        </label>
+                                        <label for="to:"><strong>To:</strong></label><input class="form-control" type="time" id="reception_hours_to" placeholder="19PM " name="reception_hours_to">
+                                        <br>
+                                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+
+                                    </fieldset>
                                 </div>
-                            </div>
+                                    
+                                </div>
                         </div>
+                       
+
+
                         <div class="col-lg-8">
                             <div class="row mb-3 d-none">
                                 <div class="col">
@@ -203,7 +241,7 @@
                                         <div class="card-body">
                                             <div class="row mb-2">
                                                 <div class="col">
-                                                    <p class="m-0">Peformance</p>
+                                                    <p class="m-0">Peformance ????</p>
                                                     <p class="m-0"><strong>65.2%</strong></p>
                                                 </div>
                                                 <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
@@ -223,18 +261,33 @@
                                             <form>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name"></div>
+                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="Sitara" name="first_name"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Doe" name="last_name"></div>
+                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Alayev" name="last_name"></div>
                                                     </div>
+
+
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="Clinic"><strong>Clinic</strong></label><input class="form-control" type="text" id="clinic" placeholder="John" name="clinic"></div>
+                                                        <div class="form-group"><label for="Clinic"><strong>Clinic</strong></label><input class="form-control" type="text" id="clinic" placeholder="Clalit" name="clinic"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="HMO's"><strong>HMO's</strong></label><input class="form-control" type="text" id="HMO's" placeholder="Clalit, Macabi, Leumit " name="hmo's"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="Work Days"><strong>Work Days</strong></label><input class="form-control" type="text" id="work_days" placeholder="Sunday-Thursday" name="clinic"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="specialization"><strong>Specialization</strong></label><input class="form-control" type="text"  id="specialization" placeholder="Neurologis" name="specialization"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
@@ -248,6 +301,7 @@
                                         <div class="card-body">
                                             <form>
                                                 <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address"></div>
+                                                <div class="form-group"><label for="languages"><strong>Languages</strong></label><input class="form-control" type="text" id="languages" placeholder="languages" name="languages"></div>
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city"></div>
@@ -255,6 +309,9 @@
                                                     <div class="col">
                                                         <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country"></div>
                                                     </div>
+                                                    <div class="col">
+                                                    <div class="form-group"><label for="Phone number"><strong>Phone number</strong></label><input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" id="phone _number" placeholder="08-8525974" name="phone _number"></div>
+                                                     </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
                                             </form>
@@ -264,6 +321,8 @@
                             </div>
                         </div>
                     </div>
+
+                    
                     <div class="card shadow mb-5">
                         <div class="card-header py-3">
                             <p class="text-primary m-0 font-weight-bold">Forum Settings</p>
