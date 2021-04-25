@@ -116,6 +116,7 @@ exports.getUsers = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
     try {
+        console.log(req.params)
         const userId = req.params.userId
         const user = await User.findById(userId)
         if (!user) return next(new Error('User does not exist'))
@@ -170,16 +171,15 @@ exports.allowIfLoggedin = async (req, res, next) => {
 }
 
 exports.verifyUser = (req, res, next) => {
-    console.log('hello')
-    User.findOne({
-        confirmationCode: req.params.confirmationCode,
-    })
+    User.findOne({ accessToken: req.params.confirmationCode})
         .then((user) => {
             if (!user) {
+                console.log(user)
                 return res.status(404).send({ message: 'User Not found.' })
             }
 
             user.status = 'Active'
+            res.redirect('/')
             user.save((err) => {
                 if (err) {
                     res.status(500).send({ message: err })
