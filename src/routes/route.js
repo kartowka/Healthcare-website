@@ -33,6 +33,8 @@ router.get('/patientProfile/futureAppointments', function (req, res) {
 router.get('/register', function (req, res) {
     res.render('register')
 })
+
+//forgot password
 router.get('/forgot-password', function (req, res) {
     res.render('forgot-password')
 })
@@ -48,6 +50,8 @@ router.get('/logout',function(req, res) {
     res.clearCookie('x-access-token')
     res.redirect('/')
 }) 
+
+router.get('/api/auth/confirm/:confirmationCode', userController.verifyUser)
 
 router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
 
