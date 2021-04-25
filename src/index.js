@@ -10,6 +10,7 @@ const app = express()
 const cookieParser = require('cookie-parser')
 
 app.use(cookieParser())
+app.locals.userLoggedIn=0
 
 //.env
 require('dotenv').config({
@@ -37,11 +38,15 @@ app.use(async (req, res, next) => {
         })
       }
       res.locals.loggedInUser = await User.findById(userId)
+      if(res.locals.loggedInUser){
+        res.locals.userLoggedIn=1
+      }
       next()
     } catch (error) {
       next(error)
     }
   } else {
+    res.locals.userLoggedIn=0
     next()
   }
 })
