@@ -36,8 +36,11 @@
                                 <form class="user" action="/register" method="POST">
                                     <div class="form-group">
                                         <select name="role" class="form-control form-control-user"
-                                            placeholder="Select Role" id="role" onchange="showDiv('role_select', this)">
-                                            <option value="" disabled selected>Select Role</option>
+                                            placeholder="Select Role" id="role" onchange="showDiv('role_select', this)"
+                                            style="
+                                            height: 65px;
+                                        ">
+                                            <option value="" disabled="" selected="">Select Role</option>
                                             <option value="doctor">Dr.</option>
                                             <option value="patient">Patient</option>
                                         </select>
@@ -81,8 +84,10 @@
 
                                     <div class="form-group">
                                         <select name="clinic" class="form-control form-control-user"
-                                            placeholder="Select Clinic" id="clinic">
-                                            <option value="" disabled selected>Select Clinic</option>
+                                            placeholder="Select Clinic" id="clinic" style="
+                                            height: 65px;
+                                        ">
+                                            <option value="" disabled="" selected="">Select Clinic</option>
                                             <option value="Clalit">Clalit</option>
                                             <option value="Meuhedet">Meuhedet</option>
                                             <option value="Macabi">Macabi</option>
