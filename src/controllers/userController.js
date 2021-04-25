@@ -3,6 +3,7 @@ const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../roles/roles')
+const nodemailer = require('../js/nodemailer')
 
 exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
@@ -44,12 +45,23 @@ exports.signup = async (req, res, next) => {
         const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
         })
+
         newUser.accessToken = accessToken
-        await newUser.save()
-        res.json({
+        await newUser.save(() => {
+            res.send({
+                message:
+                    'User was registered successfully! Please check your email',
+            })
+            nodemailer.sendConfirmationEmail(
+                newUser.username,
+                newUser.email,
+                newUser.accessToken
+            )
+        })
+        /* res.json({
             data: newUser,
             accessToken
-        })
+        }) */
     } catch (error) {
         next(error)
     }
@@ -63,6 +75,11 @@ exports.login = async (req, res, next) => {
         if (!user) return next(new Error('Email does not exist'))
         const validPassword = await validatePassword(password, user.password)
         if (!validPassword) return next(new Error('Password is not correct'))
+        if (user.status != 'Active') {
+            return res.status(401).send({
+                message: 'Pending Account. Please Verify Your Email!',
+            })
+        }
         const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
         })
@@ -144,4 +161,24 @@ exports.allowIfLoggedin = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
+}
+
+exports.verifyUser = (req, res, next) => {
+    User.findOne({
+        confirmationCode: req.params.confirmationCode,
+    })
+        .then((user) => {
+            if (!user) {
+                return res.status(404).send({ message: 'User Not found.' })
+            }
+
+            user.status = 'Active'
+            user.save((err) => {
+                if (err) {
+                    res.status(500).send({ message: err })
+                    return
+                }
+            })
+        })
+        .catch((e) => console.log('error', e))
 }
