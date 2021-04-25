@@ -61,13 +61,16 @@ exports.login = async (req, res, next) => {
         const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
         })
+        let options = {
+            path: '/',
+            sameSite: true,
+            maxAge: 1000 * 60 * 60 * 24, // would expire after 24 hours
+            httpOnly: true, // The cookie only accessible by the web server
+        }
+        res.cookie('x-access-token', accessToken, options)
         await User.findByIdAndUpdate(user._id, { accessToken })
-        res.status(200).json({
-            data: { email: user.email, role: user.role },
-            accessToken
-        })
-        
-    } catch (error) {
+        res.redirect('/')
+        } catch (error) {
         next(error)
     }
 }
