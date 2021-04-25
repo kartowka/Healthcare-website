@@ -7,6 +7,9 @@ const User = require('./models/userModel')
 const routes = require('./routes/route')
 const appPort = process.env.PORT || 4000
 const app = express()
+const cookieParser = require('cookie-parser')
+
+app.use(cookieParser())
 
 //.env
 require('dotenv').config({
@@ -23,9 +26,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true ,useCr
 app.use(express.urlencoded({ extended: true }))
 
 app.use(async (req, res, next) => {
-  if (req.headers['x-access-token']) {
+  if (req.cookies['x-access-token']) {
     try {
-      const accessToken = req.headers['x-access-token']
+      const accessToken = req.cookies['x-access-token']
       const { userId, exp } = await jwt.verify(accessToken, process.env.JWT_SECRET)
       // If token has expired
       if (exp < Date.now().valueOf() / 1000) {
