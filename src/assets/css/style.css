@@ -54,6 +54,11 @@
   padding-top: 10px;
 }
 
+.checked {
+  color: orange;
+}
+
+
 body {
   margin: 0;
   padding: 0;
@@ -1200,3 +1205,4 @@ responsive area
     background-color: #4CAF50;
     max-width: 350px;
 }
+
