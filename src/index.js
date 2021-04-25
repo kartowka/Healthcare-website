@@ -13,9 +13,10 @@ require('dotenv').config({
   path: path.join(__dirname, './.env')
 })
 
+
 //connect to mongodb
 const dbURI = 'mongodb+srv://jsas:RlKoBp5JquF2OvsF@healthcare.eq86f.mongodb.net/healthcare-db?retryWrites=true&w=majority'
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true,})
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true,useFindAndModify: false})
   .then((result) => app.listen(3000), console.log('mongoDB connected.'))
   .catch((err) => console.log(err))
 
@@ -23,13 +24,20 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(async (req, res, next) => {
   if (req.headers['x-access-token']) {
-    const accessToken = req.headers['x-access-token']
-    const { userId, exp } = await jwt.verify(accessToken, process.env.JWT_SECRET)
-    // Check if token has expired
-    if (exp < Date.now().valueOf() / 1000) {
-      return res.status(401).json({ error: 'JWT token has expired, please login to obtain a new one' })
+    try {
+      const accessToken = req.headers['x-access-token']
+      const { userId, exp } = await jwt.verify(accessToken, process.env.JWT_SECRET)
+      // If token has expired
+      if (exp < Date.now().valueOf() / 1000) {
+        return res.status(401).json({
+          error: 'JWT token has expired, please login to obtain a new one'
+        })
+      }
+      res.locals.loggedInUser = await User.findById(userId)
+      next()
+    } catch (error) {
+      next(error)
     }
-    res.locals.loggedInUser = await User.findById(userId); next()
   } else {
     next()
   }
@@ -46,15 +54,6 @@ app.use('/img', express.static(__dirname + '/img'))
 app.use('/assets', express.static(__dirname + '/assets'))
 app.use('/', routes)
 
-
-app.use(function (req, res, next) {
-
-  // you can do what ever you want here
-  // for example rendering a page with '404 Not Found'
-  res.status(404)
-  res.render('404', { error: 'Not Found' })
-
-})
 
 
 //Creating a connection

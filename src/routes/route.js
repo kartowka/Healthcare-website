@@ -17,9 +17,6 @@ router.get('/doctorProfile', function (req, res) {
     res.render('doctorProfile')
 })
 
-
-
-
 //previous appointments
 router.get('/patientProfile/previousAppointments', function (req, res) {
     res.render('previousAppointments')
@@ -43,16 +40,23 @@ router.post('/register', userController.signup)
 router.get('/login', function (req, res) {
     res.render('login')
 })
+router.post('/login', userController.login) 
 
-router.post('/login', userController.login)
+router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
 
-router.post('/index', userController.login)
-//router.get('/user/:userId', userController.allowIfLoggedin, userController.getUser)
+router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers)
 
-//router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers)
+router.put('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('updateAny', 'profile'), userController.updateUser)
 
-//router.put('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('updateAny', 'profile'), userController.updateUser)
+router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser)
 
-//router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser)
+router.use(function (req, res, next) {
+
+    // you can do what ever you want here
+    // for example rendering a page with '404 Not Found'
+    res.status(404)
+    res.render('404', { error: 'Not Found' })
+  
+  })
 
 module.exports = router
