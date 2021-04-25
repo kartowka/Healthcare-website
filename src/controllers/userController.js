@@ -27,6 +27,10 @@ async function validatePassword(plainPassword, hashedPassword) {
     return await bcrypt.compare(plainPassword, hashedPassword)
 }
 
+async function lowerCaseEmail(email) {
+    return await String(email).toLowerCase()
+}
+
 exports.signup = async (req, res, next) => {
     try {
         console.log(req.body)
@@ -35,7 +39,8 @@ exports.signup = async (req, res, next) => {
         if (role == 'doctor' && medical_license_id == '') throw 'You have to fill in your license id'
 
         const hashedPassword = await hashPassword(password)
-        const newUser = new User({ first_name, last_name, email, password: hashedPassword, role: role || 'patient', clinic, medical_license_id, doctor_related_clinics })
+        const lowerCasedEmail = await lowerCaseEmail(email)
+        const newUser = new User({ first_name, last_name, email: lowerCasedEmail, password: hashedPassword, role: role || 'patient', clinic, medical_license_id, doctor_related_clinics })
         const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
         })
@@ -53,7 +58,8 @@ exports.signup = async (req, res, next) => {
 exports.login = async (req, res, next) => {
     try {
         const { email, password } = req.body
-        const user = await User.findOne({ email })
+        const lowerCasedEmail = await lowerCaseEmail(email)
+        const user = await User.findOne({ email: lowerCasedEmail })
         if (!user) return next(new Error('Email does not exist'))
         const validPassword = await validatePassword(password, user.password)
         if (!validPassword) return next(new Error('Password is not correct'))
@@ -68,8 +74,12 @@ exports.login = async (req, res, next) => {
         }
         res.cookie('x-access-token', accessToken, options)
         await User.findByIdAndUpdate(user._id, { accessToken })
-        res.redirect('/')
-        } catch (error) {
+        if (user.role == 'patient') {
+            res.redirect('/patientProfile')
+        } else if (user.role == 'doctor') {
+            res.redirect('/doctorProfile')
+        } else { res.redirect('/') }
+    } catch (error) {
         next(error)
     }
 }
