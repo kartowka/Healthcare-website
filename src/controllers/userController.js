@@ -47,17 +47,23 @@ exports.signup = async (req, res, next) => {
         })
 
         newUser.accessToken = accessToken
-        await newUser.save(() => {
-            res.send({
-                message:
-                    'User was registered successfully! Please check your email',
-            })
-            nodemailer.sendConfirmationEmail(
-                newUser.username,
-                newUser.email,
-                newUser.accessToken
-            )
-        })
+        await newUser.save((err) => {
+            if (err) {
+              res.status(500).send({ message: err })
+                   return
+                }
+               res.send({
+                   message:
+                     'User was registered successfully! Please check your email',
+                })
+       
+              nodemailer.sendConfirmationEmail(
+                 newUser.first_name,
+                 newUser.last_name,
+                 newUser.email,
+                 newUser.accessToken
+          )
+       })
         /* res.json({
             data: newUser,
             accessToken
@@ -164,6 +170,7 @@ exports.allowIfLoggedin = async (req, res, next) => {
 }
 
 exports.verifyUser = (req, res, next) => {
+    console.log('hello')
     User.findOne({
         confirmationCode: req.params.confirmationCode,
     })
