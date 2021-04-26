@@ -8,7 +8,6 @@ exports.roles = (function () {
         .readAny('doctor_profile')
 
     ac.grant('doctor')
-        .readOwn('doctor_profile')
         .updateOwn('doctor_profile')
         .readAny(['patient_profile', 'doctor_profile'])
         .deleteAny('forumQuestions')
