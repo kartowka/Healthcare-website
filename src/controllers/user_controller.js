@@ -35,9 +35,6 @@ async function lowerCaseEmail(email) {
 exports.signup = async (req, res, next) => {
     try {
         const { first_name, last_name, email, password, role, clinic, medical_license_id, doctor_related_clinics } = req.body
-
-        if (role == 'doctor' && medical_license_id == '') throw 'You have to fill in your license id'
-
         const hashedPassword = await hashPassword(password)
         const lowerCasedEmail = await lowerCaseEmail(email)
         const newUser = new User({ first_name, last_name, email: lowerCasedEmail, password: hashedPassword, role: role || 'patient', clinic, medical_license_id, doctor_related_clinics })
