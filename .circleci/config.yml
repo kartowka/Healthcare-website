@@ -23,6 +23,7 @@ jobs:
                 template: basic_success_1
             - slack/notify:
                 channel: full-stuck
+                branch_pattern: master
                 event: pass
                 template: success_tagged_deploy_1
 workflows:
