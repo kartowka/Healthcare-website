@@ -7,7 +7,7 @@ const user_controller = require('../controllers/user_controller')
 
 //pateint profile
 profile
-    .route('/patient_profile')
+    .route('/patient_profile/:id')
     .get(user_controller.allowIfLoggedin, function (req, res) {
         res.render('patient_profile')
     })
@@ -26,8 +26,8 @@ profile
 
 //doctor profile
 profile
-    .route('/doctor_profile')
-    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), function (req, res) {
+    .route('/doctor_profile/:id')
+    .get(user_controller.allowIfLoggedin, user_controller.getUser, user_controller.grantAccess('readAny', 'doctor_profile'), function (req, res) {
         res.render('doctor_profile')
     })
     .put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'doctor_profile'))
