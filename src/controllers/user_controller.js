@@ -1,4 +1,3 @@
-// server/controllers/user_controller.js
 const User = require('../models/user_model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -35,6 +34,9 @@ async function lowerCaseEmail(email) {
 exports.signup = async (req, res, next) => {
     try {
         const { first_name, last_name, email, password, role, clinic, medical_license_id, doctor_related_clinics } = req.body
+
+        if (role == 'doctor' && medical_license_id == '') throw 'You have to fill in your license id'
+
         const hashedPassword = await hashPassword(password)
         const lowerCasedEmail = await lowerCaseEmail(email)
         const newUser = new User({ first_name, last_name, email: lowerCasedEmail, password: hashedPassword, role: role || 'patient', clinic, medical_license_id, doctor_related_clinics })
@@ -178,4 +180,54 @@ exports.verifyUser = (req, res, next) => {
             })
         })
         .catch((e) => console.log('error', e))
+}
+
+exports.forgotPassword = async (req, res) => {
+    const { email } = req.body
+    const user = await User.findOne({ email })
+        .then((user) => {
+            if (!user) {
+                return res.status(404).send({ message: 'User Not found.' })
+            }
+            const accessToken = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, {expiresIn: '20m'})
+            nodemailer.sendResetPassword(
+                user.first_name,
+                user.last_name,
+                user.email,
+                accessToken
+            )
+            res.redirect('/')
+            user.save((err) => {
+                if (err) {
+                    res.status(500).send({ message: err })
+                    return
+                }
+            })
+        })
+        .catch((e) => console.log('error', e))
+}
+exports.passwordReset = async (req, res) => {
+	try {
+		const { accessToken } = req.params
+		if (accessToken) {
+			const verified = jwt.verify(accessToken, process.env.JWT_SECRET)
+			if (verified) {
+				const { newPassword, confirmPassword } = req.body
+				const user = await User.findById(verified.userId)
+				if (newPassword === confirmPassword) {
+					const hashedPassword = await hashPassword(newPassword)
+					await User.updateOne({ _id: user._id }, { $set: { password: hashedPassword } }, { new: true })
+					res.status(201).json({ success: true, message: 'Password changed successfully' })
+				} else {
+					res.status(401).json({ success: false, message: 'Confirm password does not match' })
+				}
+			} else {
+				res.status(401).json({ success: false, message: 'Invalid accessToken' })
+			}
+		} else {
+			res.status(401).json({ success: false, message: 'accessToken not found' })
+		}
+	} catch (error) {
+		res.status(401).json({ success: false, message: error.message })
+	}
 }

@@ -37,6 +37,14 @@ router
     .get((req, res) => {
         res.render('forgot_password')
     })
+    .post(user_controller.forgotPassword)
+router
+    .route('/reset_password/:accessToken')
+    .get(async (req, res) => {
+        const {accessToken} = req.params
+        res.render('reset_password')
+    })
+    .post(user_controller.passwordReset)
 
 router
     .route('/confirm/:confirmationCode')

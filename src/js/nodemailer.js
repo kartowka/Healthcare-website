@@ -19,11 +19,23 @@ module.exports.sendConfirmationEmail = (first_name,last_name, email, confirmatio
     transport.sendMail({
         from: user,
         to: email,
-        subject: 'Please confirm your account',
+        subject: 'Reset your account password',
         html: `<h1>Email Confirmation</h1>
         <h2>Hello ${first_name} ${last_name}</h2>
         <p>Thank you for registering to our HealthCare system. Please confirm your email by clicking on the following link</p>
         <a href=http://127.0.0.1:4000/confirm/${confirmationCode}> Click here</a>
+        </div>`,
+    }).catch(err => console.log(err))
+}
+module.exports.sendResetPassword = (first_name,last_name, email, confirmationCode) => {
+    transport.sendMail({
+        from: user,
+        to: email,
+        subject: 'Password Reset',
+        html: `<h1>Reset Password</h1>
+        <h2>Hello ${first_name} ${last_name}</h2>
+        <p>To reset your password, complete this form:</p>
+        <a href=http://127.0.0.1:4000/reset_password/${confirmationCode}> Click here</a>
         </div>`,
     }).catch(err => console.log(err))
 }
