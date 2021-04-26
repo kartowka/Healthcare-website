@@ -40,7 +40,7 @@ const UserSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['Pending', 'Active'],
+        enum: ['Pending', 'Active', 'Waiting for Admin Approval'],
         default: 'Pending'
     },
     accessToken: {
