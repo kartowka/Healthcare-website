@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
+const patientRouter = require('./profileRoute')
 
 //homepage
 router
@@ -41,26 +42,11 @@ router
     .route('/confirm/:confirmationCode')
     .get(userController.verifyUser)
 
-//pateint profile
-router.get('/patientProfile', function (req, res) {
-    res.render('patientProfile')
-})
+router.use(patientRouter)
 
-//doctor profile
-router.get('/doctorProfile', function (req, res) {
-    res.render('doctorProfile')
-})
-
+/
 //previous appointments
-router.get('/patientProfile/previousAppointments', function (req, res) {
-    res.render('previousAppointments')
-})
 
-
-//future appointments
-router.get('/patientProfile/futureAppointments', function (req, res) {
-    res.render('futureAppointments')
-})
 router
 .route('/user/:userId')
 .get(userController.allowIfLoggedin,userController.getUser)
