@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    table,
+    td,
+    th {
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 50%;
+
+    }
+
+    .table-data {
+      position: relative;
+      left: 50px;
+      top: 50px;
+    }
+
+    th,
+    td {
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <!--====form section start====-->
+  <div class="table-data">
+    <table border="1">
+      <tr>
+        <th>S.N</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email Address</th>
+        <th>Role</th>
+        <th>Clinic</th>
+        <th>License ID</th>
+        <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+
+      <% if(users.length!=0){users.forEach(function(data, index){ %>
+        <tr>
+          <td contenteditable='true'>
+            <%=index+1 %>
+          </td>
+          <td>
+            <%=data.first_name %>
+          </td>
+          <td>
+            <%=data.last_name %>
+          </td>
+          <td>
+            <%=data.email %>
+          </td>
+          <td>
+            <%=data.role %>
+          </td>
+          <td>
+            <%=data.clinic %>
+          </td>
+          <td>
+            <%=data.medical_license_id %>
+          </td>
+          <td>
+            <%=data.status %>
+          </td>
+          <td><form action="/user/<%= data.id %>" method="POST">
+            <input type="submit" value="Edit">
+          </form></td>
+          <td><form action="/user/<%= data.id %>" method="POST">
+            <input type="submit" value="Delete">
+          </form></td>
+        </tr>
+        <% }) %>
+          <% } else{ %>
+            <tr>
+              <td colspan="7">No Data Found</td>
+            </tr>
+            <% } %>
+    </table>
+
+  <div class="forum-data">
+    <table border="1">
+      <tr>
+        <th>S.N</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>License ID</th>
+        <th>Status</th>
+        <th>Approve</th>
+      </tr>
+  
+      <% if(users.length!=0){users.forEach(function(data, index){ %>
+        <% if(data.role == 'doctor') { %>
+        <tr>
+          <td contenteditable='true'>
+            <%=index+1 %>
+          </td>
+          <td>
+            <%=data.first_name %>
+          </td>
+          <td>
+            <%=data.last_name %>
+          </td>
+          <td>
+            <%=data.medical_license_id %>
+          </td>
+          <td>
+            <%=data.status %>
+          </td>
+          <td><a href="/edit/<%=data.id%>">Approve</a></td>
+          <td>
+            <form action="/user/<%= data.id %>" method="POST">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+        <% } %>
+        <% }) %>
+          <% } else{ %>
+            <tr>
+              <td colspan="7">No Data Found</td>
+            </tr>
+            <% } %>
+    </table>
+
+
+  </div>
+</body>
+
+</html>
