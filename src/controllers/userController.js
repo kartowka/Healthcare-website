@@ -174,7 +174,6 @@ exports.verifyUser = (req, res, next) => {
     User.findOne({ accessToken: req.params.confirmationCode})
         .then((user) => {
             if (!user) {
-                console.log(user)
                 return res.status(404).send({ message: 'User Not found.' })
             }
 
