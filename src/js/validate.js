@@ -48,6 +48,14 @@ $(document).ready(function () {
     })
 })
 
+//alert message when  egister account clicked
+$(function () {
+    $('#btn').click(function () {
+        alert('Email Confirmation Has Been Sent')
+    }
+    )
+})
+
 function buttonState() {
     if (validateEmail() && checkPassStrength() && validatePasswordPairLength() && validateDoctorLicense() && validateRoleAndClinic()) {
         // if the both email and password are validate
