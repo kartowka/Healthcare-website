@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser')
 
 app.use(cookieParser())
 app.locals.userLoggedIn = 0
+app.locals.userID = ''
 app.locals.userRole = ''
 
 //.env
@@ -41,7 +42,8 @@ app.use(async (req, res, next) => {
       if (res.locals.loggedInUser) {
         res.locals.userLoggedIn = 1
         res.locals.userRole=res.locals.loggedInUser.role
-        
+        res.locals.userID = userId
+
       }
       next()
     } catch (error) {
