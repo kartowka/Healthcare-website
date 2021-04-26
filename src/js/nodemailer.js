@@ -1,8 +1,11 @@
 const nodemailer = require('nodemailer')
-const config = require('../js/nodemailer.config')
+const path = require('path')
+const config = require('dotenv').config({
+    path: path.join(__dirname, '../.env')
+  })
 
-const user = config.user
-const pass = config.pass
+const user = config.parsed.EMAILUSERNAME
+const pass = config.parsed.EMAILPASS
 
 const transport = nodemailer.createTransport({
     service: 'gmail',

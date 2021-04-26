@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const path = require('path')
 const User = require('./models/userModel')
 const routes = require('./routes/route')
-const appPort = process.env.PORT || 4000
+const appPort = process.env.PORT
 const app = express()
 const cookieParser = require('cookie-parser')
 
@@ -19,8 +19,7 @@ require('dotenv').config({
 
 
 //connect to mongodb
-const dbURI = 'mongodb+srv://jsas:RlKoBp5JquF2OvsF@healthcare.eq86f.mongodb.net/healthcare-db?retryWrites=true&w=majority'
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true,useFindAndModify: false})
+mongoose.connect(process.env.dbURI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true,useFindAndModify: false})
   .then((result) => app.listen(3000), console.log('mongoDB connected.'))
   .catch((err) => console.log(err))
 
