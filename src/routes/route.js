@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const user_controller = require('../controllers/user_controller')
 const profile_router = require('./profile_route')
+const User = require('../models/user_model')
 
 //homepage
 router
@@ -38,14 +39,17 @@ router
         res.render('forgot_password')
     })
     .post(user_controller.forgotPassword)
+
+//password reset
 router
     .route('/reset_password/:accessToken')
     .get(async (req, res) => {
-        const {accessToken} = req.params
+        const { accessToken } = req.params
         res.render('reset_password')
     })
     .post(user_controller.passwordReset)
 
+//confirmation code    
 router
     .route('/confirm/:confirmationCode')
     .get(user_controller.verifyUser)
@@ -56,14 +60,21 @@ router.use(profile_router)
 
 router
     .route('/user/:userId')
-    .get(user_controller.allowIfLoggedin, user_controller.getUser)
+    .post(user_controller.allowIfLoggedin, user_controller.deleteUser)
+    .post(user_controller.allowIfLoggedin, user_controller.updateUser)
 //.put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'profile'), user_controller.updateUser)
-//.delete('/user/:userId', user_controller.allowIfLoggedin, user_controller.grantAccess('deleteAny', 'profile'), user_controller.deleteUser)
 
+//admin interface
 router
-    .route('/users')
-    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'profile'), user_controller.getUsers)
+    .route('/admin_interface')
+    .get(async function (req, res, next) { //this is the function call
+        User.find({}).exec(function (err, data) {
+            if (err) throw err
+            res.render('admin_interface', { title: 'Employee Records', users: data}) //user-table.ejs (records this is the data as an object)
+        })
+    })
 
+//admin delete user
 
 router.use(function (req, res, next) {
 
