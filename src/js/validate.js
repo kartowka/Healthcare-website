@@ -18,7 +18,7 @@ $(document).ready(function () {
     // use keyup event on password
     $('#pwd_main').keyup(function () {
         // check
-    
+
         buttonState()
     })
 
@@ -37,14 +37,24 @@ $(document).ready(function () {
         }
         buttonState()
     })
+    $('#ml_ID').keyup(function () {
+        buttonState()
+    })
+    $('#clinic').click(function() {
+        buttonState()
+    })
+    $('#role').click(function () {
+        buttonState()
+    })
 })
 
 function buttonState() {
-    if (validateEmail() && checkPassStrength() && validatePasswordPairLength()) {
+    if (validateEmail() && checkPassStrength() && validatePasswordPairLength() && validateDoctorLicense() && validateRoleAndClinic()) {
         // if the both email and password are validate
-        // then button should show visible
+
         $('#btn').attr('disabled', false)
-    } else {
+    }
+    else {
         // if both email and pasword are not validated
         // button state should hidden
         $('#btn').attr('disabled', true)
@@ -88,16 +98,25 @@ function checkPassStrength() {
 }
 
 function validatePasswordPairLength() {
-    //get input password value
-    var pwd_main = $('#pwd_main').val()
-    var pwd_rep = $('#pwd_rep').val()
-
-    if (pwd_main != pwd_rep) {
+    //compare password & reapeat_password
+    if ($('#pwd_main').val() != $('#pwd_rep').val()) {
         return false
     } else {
         return true
     }
 }
+
+function validateDoctorLicense() {
+    if ($('#role').val() == 'patient') return true
+    else if ($('#ml_ID').val().length >= 10) {
+        return true
+    } else return false
+}
+
+function validateRoleAndClinic() {
+    return $('#clinic').val() != null && $('#clinic').val() != null
+}
+
 function showDiv(divId, element) {
     document.getElementById(divId).style.display = element.value == 'doctor' ? 'block' : 'none'
 }
