@@ -3,19 +3,21 @@ const ac = new AccessControl()
 
 exports.roles = (function () {
     ac.grant('patient')
-        .readOwn('profile')
-        .updateOwn('profile')
-        .readAny('profile')
+        .readOwn('patient_profile')
+        .updateOwn('patient_profile')
+        .readAny('doctor_profile')
 
     ac.grant('doctor')
-        .extend('patient')
-        .readAny('profile')
+        .readOwn('doctor_profile')
+        .updateOwn('doctor_profile')
+        .readAny(['patient_profile', 'doctor_profile'])
+        .deleteAny('forumQuestions')
 
     ac.grant('admin')
         .extend('patient')
         .extend('doctor')
-        .updateAny('profile')
-        .deleteAny('profile')
+        .updateAny(['patient_profile', 'doctor_profile'])
+        .deleteAny(['patient_profile', 'doctor_profile'])
 
     return ac
 })()
