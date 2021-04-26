@@ -8,11 +8,10 @@ exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
         try {
             const permission = roles.can(req.user.role)[action](resource)
-            if (!permission.granted) {
+            if (!permission.granted)
                 return res.status(401).json({
                     error: 'You don`t have enough permission to perform this action'
                 })
-            }
             next()
         } catch (error) {
             next(error)
@@ -50,7 +49,7 @@ exports.signup = async (req, res, next) => {
                 res.status(500).send({ message: err })
                 return
             }
-            
+
             nodemailer.sendConfirmationEmail(
                 newUser.first_name,
                 newUser.last_name,
@@ -91,9 +90,9 @@ exports.login = async (req, res, next) => {
         res.cookie('x-access-token', accessToken, options)
         await User.findByIdAndUpdate(user._id, { accessToken })
         if (user.role == 'patient') {
-            res.redirect('/patient_profile')
+            res.redirect(`/patient_profile/${user._id}`)
         } else if (user.role == 'doctor') {
-            res.redirect('/doctor_profile')
+            res.redirect(`/doctor_profile/${user._id}`)
         } else { res.redirect('/') }
     } catch (error) {
         next(error)
@@ -109,13 +108,13 @@ exports.getUsers = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
     try {
-        console.log(req.params)
-        const userId = req.params.userId
+        const userId = req.user._id
         const user = await User.findById(userId)
         if (!user) return next(new Error('User does not exist'))
         res.status(200).json({
             data: user
         })
+        
     } catch (error) {
         next(error)
     }
@@ -170,7 +169,10 @@ exports.verifyUser = (req, res, next) => {
                 return res.status(404).send({ message: 'User Not found.' })
             }
 
-            user.status = 'Active'
+            if (user.role == 'doctor') {
+                user.status = 'Waiting for Admin Approval'
+            } else user.status = 'Active'
+
             res.redirect('/')
             user.save((err) => {
                 if (err) {
@@ -189,7 +191,7 @@ exports.forgotPassword = async (req, res) => {
             if (!user) {
                 return res.status(404).send({ message: 'User Not found.' })
             }
-            const accessToken = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, {expiresIn: '20m'})
+            const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '20m' })
             nodemailer.sendResetPassword(
                 user.first_name,
                 user.last_name,
@@ -207,27 +209,27 @@ exports.forgotPassword = async (req, res) => {
         .catch((e) => console.log('error', e))
 }
 exports.passwordReset = async (req, res) => {
-	try {
-		const { accessToken } = req.params
-		if (accessToken) {
-			const verified = jwt.verify(accessToken, process.env.JWT_SECRET)
-			if (verified) {
-				const { newPassword, confirmPassword } = req.body
-				const user = await User.findById(verified.userId)
-				if (newPassword === confirmPassword) {
-					const hashedPassword = await hashPassword(newPassword)
-					await User.updateOne({ _id: user._id }, { $set: { password: hashedPassword } }, { new: true })
-					res.status(201).json({ success: true, message: 'Password changed successfully' })
-				} else {
-					res.status(401).json({ success: false, message: 'Confirm password does not match' })
-				}
-			} else {
-				res.status(401).json({ success: false, message: 'Invalid accessToken' })
-			}
-		} else {
-			res.status(401).json({ success: false, message: 'accessToken not found' })
-		}
-	} catch (error) {
-		res.status(401).json({ success: false, message: error.message })
-	}
+    try {
+        const { accessToken } = req.params
+        if (accessToken) {
+            const verified = jwt.verify(accessToken, process.env.JWT_SECRET)
+            if (verified) {
+                const { newPassword, confirmPassword } = req.body
+                const user = await User.findById(verified.userId)
+                if (newPassword === confirmPassword) {
+                    const hashedPassword = await hashPassword(newPassword)
+                    await User.updateOne({ _id: user._id }, { $set: { password: hashedPassword } }, { new: true })
+                    res.status(201).json({ success: true, message: 'Password changed successfully' })
+                } else {
+                    res.status(401).json({ success: false, message: 'Confirm password does not match' })
+                }
+            } else {
+                res.status(401).json({ success: false, message: 'Invalid accessToken' })
+            }
+        } else {
+            res.status(401).json({ success: false, message: 'accessToken not found' })
+        }
+    } catch (error) {
+        res.status(401).json({ success: false, message: error.message })
+    }
 }
