@@ -29,7 +29,7 @@ async function validatePassword(plainPassword, hashedPassword) {
 }
 
 async function lowerCaseEmail(email) {
-    return await String(email).toLowerCase()
+    return String(email).toLowerCase()
 }
 
 exports.signup = async (req, res, next) => {
@@ -48,22 +48,16 @@ exports.signup = async (req, res, next) => {
                 res.status(500).send({ message: err })
                 return
             }
-            res.send({
-                message:
-                    'User was registered successfully! Please check your email',
-            })
-
+            
             nodemailer.sendConfirmationEmail(
                 newUser.first_name,
                 newUser.last_name,
                 newUser.email,
                 newUser.accessToken
             )
+            res.redirect('/')
         })
-        /* res.json({
-            data: newUser,
-            accessToken
-        }) */
+
     } catch (error) {
         next(error)
     }
