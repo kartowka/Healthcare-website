@@ -22,7 +22,7 @@ module.exports.sendConfirmationEmail = (first_name,last_name, email, confirmatio
         subject: 'Please confirm your account',
         html: `<h1>Email Confirmation</h1>
         <h2>Hello ${first_name} ${last_name}</h2>
-        <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
+        <p>Thank you for registering to our HealthCare system. Please confirm your email by clicking on the following link</p>
         <a href=http://127.0.0.1:4000/confirm/${confirmationCode}> Click here</a>
         </div>`,
     }).catch(err => console.log(err))
