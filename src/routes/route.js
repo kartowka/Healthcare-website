@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const userController = require('../controllers/userController')
-const profileRouter = require('./profileRoute')
+const user_controller = require('../controllers/user_controller')
+const profile_router = require('./profile_route')
 
 //homepage
 router
@@ -15,7 +15,7 @@ router
     .get((req, res) => {
         res.render('login')
     })
-    .post(userController.login)
+    .post(user_controller.login)
 //logout
 router
     .route('/logout')
@@ -29,32 +29,32 @@ router
     .get((req, res) => {
         res.render('register')
     })
-    .post(userController.signup)
+    .post(user_controller.signup)
 
 //forgot password
 router
-    .route('/forgot-password')
+    .route('/forgot_password')
     .get((req, res) => {
-        res.render('forgot-password')
+        res.render('forgot_password')
     })
 
 router
     .route('/confirm/:confirmationCode')
-    .get(userController.verifyUser)
+    .get(user_controller.verifyUser)
 
-router.use(profileRouter)
+router.use(profile_router)
 
 //previous appointments
 
 router
-.route('/user/:userId')
-.get(userController.allowIfLoggedin,userController.getUser)
-//.put('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('updateAny', 'profile'), userController.updateUser)
-//.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser)
+    .route('/user/:userId')
+    .get(user_controller.allowIfLoggedin, user_controller.getUser)
+//.put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'profile'), user_controller.updateUser)
+//.delete('/user/:userId', user_controller.allowIfLoggedin, user_controller.grantAccess('deleteAny', 'profile'), user_controller.deleteUser)
 
 router
-.route('/users')
-.get(userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers)
+    .route('/users')
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'profile'), user_controller.getUsers)
 
 
 router.use(function (req, res, next) {

@@ -39,9 +39,9 @@ const UserSchema = new Schema({
         enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
     },
     status: {
-      type: String, 
-      enum: ['Pending', 'Active'],
-      default: 'Pending'
+        type: String,
+        enum: ['Pending', 'Active'],
+        default: 'Pending'
     },
     accessToken: {
         type: String

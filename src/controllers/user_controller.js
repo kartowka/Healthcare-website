@@ -1,5 +1,5 @@
-// server/controllers/userController.js
-const User = require('../models/userModel')
+// server/controllers/user_controller.js
+const User = require('../models/user_model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../roles/roles')
@@ -98,9 +98,9 @@ exports.login = async (req, res, next) => {
         res.cookie('x-access-token', accessToken, options)
         await User.findByIdAndUpdate(user._id, { accessToken })
         if (user.role == 'patient') {
-            res.redirect('/patientProfile')
+            res.redirect('/patient_profile')
         } else if (user.role == 'doctor') {
-            res.redirect('/doctorProfile')
+            res.redirect('/doctor_profile')
         } else { res.redirect('/') }
     } catch (error) {
         next(error)
