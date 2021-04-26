@@ -24,16 +24,20 @@
                             <a class="nav-link" href="/#about">About Us</a>
                         </li>
                         <% if (userLoggedIn==1) { %>
-                            <% if(userRole == 'patient') { %>
+                            <% if(userRole=='patient' ) { %>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/patient_profile">Profile</a>
                                     <% }else { %>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/doctor_profile">Profile</a>
-                                    <% } %>
-
                                 </li>
+                                <li>
+                                <div class="form-group"><label for="search-field"><i
+                                            class="fa fa-search"></i></label><input class="form-control search-field"
+                                        type="search" id="search-field" name="search"></div>
+                                    </li>
                                 <% } %>
+                                    <% } %>
                     </ul>
                     <span class="navbar-text actions">
                         <% if (userLoggedIn==0) { %>
