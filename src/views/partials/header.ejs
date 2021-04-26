@@ -18,24 +18,30 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link"  href="/">Home</a>
+                            <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/#about">About Us</a>
                         </li>
-                        <% if (userLoggedIn == 1) { %>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/profile">Profile</a>
-                            </li>
-                        <% } %>
+                        <% if (userLoggedIn==1) { %>
+                            <% if(userRole == 'patient') { %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/patientProfile">Profile</a>
+                                    <% }else { %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/doctorProfile">Profile</a>
+                                    <% } %>
+
+                                </li>
+                                <% } %>
                     </ul>
                     <span class="navbar-text actions">
-                        <% if (userLoggedIn == 0) { %>
+                        <% if (userLoggedIn==0) { %>
                             <a class="login" href="/login">Log In</a>
                             <a class="btn btn-light action-button" role="button" href="/register">Sign Up</a>
-                        <% } else { %>
-                            <a class="btn btn-light action-button" role="button" href="/logout">Logout</a>
-                        <% } %>
+                            <% } else { %>
+                                <a class="btn btn-light action-button" role="button" href="/logout">Logout</a>
+                                <% } %>
                     </span>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
-const patientRouter = require('./profileRoute')
+const profileRouter = require('./profileRoute')
 
 //homepage
 router
@@ -42,9 +42,8 @@ router
     .route('/confirm/:confirmationCode')
     .get(userController.verifyUser)
 
-router.use(patientRouter)
+router.use(profileRouter)
 
-/
 //previous appointments
 
 router

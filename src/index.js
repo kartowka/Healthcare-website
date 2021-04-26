@@ -10,7 +10,8 @@ const app = express()
 const cookieParser = require('cookie-parser')
 
 app.use(cookieParser())
-app.locals.userLoggedIn=0
+app.locals.userLoggedIn = 0
+app.locals.userRole = ''
 
 //.env
 require('dotenv').config({
@@ -19,7 +20,7 @@ require('dotenv').config({
 
 
 //connect to mongodb
-mongoose.connect(process.env.dbURI, { useNewUrlParser: true, useUnifiedTopology: true ,useCreateIndex: true,useFindAndModify: false})
+mongoose.connect(process.env.dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false })
   .then((result) => app.listen(3000), console.log('mongoDB connected.'))
   .catch((err) => console.log(err))
 
@@ -37,15 +38,17 @@ app.use(async (req, res, next) => {
         })
       }
       res.locals.loggedInUser = await User.findById(userId)
-      if(res.locals.loggedInUser){
-        res.locals.userLoggedIn=1
+      if (res.locals.loggedInUser) {
+        res.locals.userLoggedIn = 1
+        res.locals.userRole=res.locals.loggedInUser.role
+        
       }
       next()
     } catch (error) {
       next(error)
     }
   } else {
-    res.locals.userLoggedIn=0
+    res.locals.userLoggedIn = 0
     next()
   }
 })

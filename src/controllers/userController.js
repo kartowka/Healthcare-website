@@ -34,7 +34,6 @@ async function lowerCaseEmail(email) {
 
 exports.signup = async (req, res, next) => {
     try {
-        console.log(req.body)
         const { first_name, last_name, email, password, role, clinic, medical_license_id, doctor_related_clinics } = req.body
 
         if (role == 'doctor' && medical_license_id == '') throw 'You have to fill in your license id'
@@ -49,21 +48,21 @@ exports.signup = async (req, res, next) => {
         newUser.accessToken = accessToken
         await newUser.save((err) => {
             if (err) {
-              res.status(500).send({ message: err })
-                   return
-                }
-               res.send({
-                   message:
-                     'User was registered successfully! Please check your email',
-                })
-       
-              nodemailer.sendConfirmationEmail(
-                 newUser.first_name,
-                 newUser.last_name,
-                 newUser.email,
-                 newUser.accessToken
-          )
-       })
+                res.status(500).send({ message: err })
+                return
+            }
+            res.send({
+                message:
+                    'User was registered successfully! Please check your email',
+            })
+
+            nodemailer.sendConfirmationEmail(
+                newUser.first_name,
+                newUser.last_name,
+                newUser.email,
+                newUser.accessToken
+            )
+        })
         /* res.json({
             data: newUser,
             accessToken
@@ -75,6 +74,7 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try {
+
         const { email, password } = req.body
         const lowerCasedEmail = await lowerCaseEmail(email)
         const user = await User.findOne({ email: lowerCasedEmail })
@@ -171,7 +171,7 @@ exports.allowIfLoggedin = async (req, res, next) => {
 }
 
 exports.verifyUser = (req, res, next) => {
-    User.findOne({ accessToken: req.params.confirmationCode})
+    User.findOne({ accessToken: req.params.confirmationCode })
         .then((user) => {
             if (!user) {
                 return res.status(404).send({ message: 'User Not found.' })
