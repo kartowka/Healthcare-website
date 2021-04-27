@@ -54,7 +54,8 @@ exports.signup = async (req, res, next) => {
                 newUser.first_name,
                 newUser.last_name,
                 newUser.email,
-                newUser.accessToken
+                newUser.accessToken,
+                newUser.role
             )
             res.redirect('/')
         })
@@ -73,7 +74,7 @@ exports.login = async (req, res, next) => {
         if (!user) return next(new Error('Email does not exist'))
         const validPassword = await validatePassword(password, user.password)
         if (!validPassword) return next(new Error('Password is not correct'))
-        if (user.status != 'Active') {
+        if (user.status != 'Active' && user.status != 'Waiting for Admin Approval') {
             return res.status(401).send({
                 message: 'Pending Account. Please Verify Your Email!',
             })
