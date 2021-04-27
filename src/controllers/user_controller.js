@@ -115,10 +115,13 @@ exports.getUser = async (req, res, next) => {
         const user = await User.findById(userId)
         if (!user) return next
         const relatedPage = req.path.split(/[/]/)
+        if (res.locals.loggedInUser.status == 'Waiting for Admin Approval'){
+            alert('An admin sill hasn`t authorized you yet, please wait patiently')
+            return res.status(401).redirect('/')
+        }
         res.status(200).render(relatedPage[1],{data:user})
         
     } catch (error) {
-        //alert('User does not exist')
         next(new Error('User does not exist'))
     }
 }
