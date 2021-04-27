@@ -60,14 +60,14 @@ router.use(profile_router)
 
 router
     .route('/user/:userId')
-    .post(user_controller.allowIfLoggedin, user_controller.deleteUser)
-    .post(user_controller.allowIfLoggedin, user_controller.updateUser)
+    .post(user_controller.allowIfLoggedin, user_controller.getUser, user_controller.grantAccess('updateAny', 'admin_interface'), user_controller.deleteUser)
+    //.post(user_controller.allowIfLoggedin, user_controller.updateUser)
 //.put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'profile'), user_controller.updateUser)
 
 //admin interface
 router
-    .route('/admin_interface')
-    .get(async function (req, res, next) { //this is the function call
+    .route('/admin_interface/:id')
+    .get(user_controller.allowIfLoggedin, user_controller.getUser, user_controller.grantAccess('readAny', 'admin_interface'), async function (req, res, next) { //this is the function call
         User.find({}).exec(function (err, data) {
             if (err) throw err
             res.render('admin_interface', { title: 'Employee Records', users: data}) //user-table.ejs (records this is the data as an object)
