@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../roles/roles')
 const nodemailer = require('../js/nodemailer')
+const alert = require('alert')
 
 exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
@@ -123,13 +124,11 @@ exports.getUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
     try {
         const update = req.body
-        const userId = req.params.userId
+        const userId = req.params.id
         await User.findByIdAndUpdate(userId, update)
         const user = await User.findById(userId)
-        res.status(200).json({
-            data: user,
-            message: 'User has been updated'
-        })
+        alert('user has been updated.')
+        res.status(200).redirect('/')
     } catch (error) {
         next(error)
     }

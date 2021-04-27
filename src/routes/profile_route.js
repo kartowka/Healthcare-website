@@ -8,10 +8,10 @@ const User = require('../models/user_model')
 
 //pateint profile
 profile
-    .route('/patient_profile/:id')
-    .get(user_controller.allowIfLoggedin, function (req, res) {
-        res.render('patient_profile')
-    })
+    .route('/patient_profile/:id') 
+    .get(user_controller.allowIfLoggedin,user_controller.getUser,user_controller.grantAccess('readAny','doctor_profile'))
+    .post(user_controller.allowIfLoggedin,user_controller.grantAccess('updateOwn','patient_profile'),user_controller.updateUser)
+
 profile
     .route('/patient_profile/previous_appointments')
     .get(user_controller.allowIfLoggedin, function (req, res) {
