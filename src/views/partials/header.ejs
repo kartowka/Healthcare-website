@@ -49,6 +49,9 @@
                             <a class="login" href="/login">Log In</a>
                             <a class="btn btn-light action-button" role="button" href="/register">Sign Up</a>
                             <% } else { %>
+                                <% if (userRole=='admin'){ %>
+                                    <a class="btn btn-light action-button" role="button" href="/admin_interface/<%=userID%>">Admin Panel</a>
+                                    <%}%>
                                 <a class="btn btn-light action-button" role="button" href="/logout">Logout</a>
                                 <% } %>
                     </span>
