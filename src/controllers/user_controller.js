@@ -9,10 +9,10 @@ exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
         try {
             const permission = roles.can(req.user.role)[action](resource)
-            if (!permission.granted){
+            if (!permission.granted) {
                 alert('You don`t have enough permission to perform this action')
                 return res.status(401).redirect('/')
-        }
+            }
             next()
         } catch (error) {
             next(error)
@@ -74,7 +74,7 @@ exports.login = async (req, res, next) => {
             return res.status(401).redirect(req.get('referer'))
         }
         const validPassword = await validatePassword(password, user.password)
-        if (!validPassword){
+        if (!validPassword) {
             alert('Password is not correct')
             return res.status(401).redirect(req.get('referer'))
         }
@@ -106,7 +106,7 @@ exports.login = async (req, res, next) => {
 exports.getUsers = async (req, res, next) => {
     const users = await User.find({})
     const relatedPage = req.path.split(/[/]/)
-    res.status(200).render(relatedPage[1], {users})
+    res.status(200).render(relatedPage[1], { users })
 }
 
 exports.getUser = async (req, res, next) => {
@@ -115,12 +115,12 @@ exports.getUser = async (req, res, next) => {
         const user = await User.findById(userId)
         if (!user) return next
         const relatedPage = req.path.split(/[/]/)
-        if (res.locals.loggedInUser.status == 'Waiting for Admin Approval'){
+        if (res.locals.loggedInUser.status == 'Waiting for Admin Approval') {
             alert('An admin sill hasn`t authorized you yet, please wait patiently')
             return res.status(401).redirect('/')
         }
-        res.status(200).render(relatedPage[1],{data:user})
-        
+        res.status(200).render(relatedPage[1], { data: user })
+
     } catch (error) {
         next(new Error('User does not exist'))
     }
@@ -141,7 +141,7 @@ exports.updateUser = async (req, res, next) => {
 
 exports.deleteUser = async (req, res, next) => {
     try {
-        const userId = req.params.userId
+        const userId = req.params.id
         await User.findByIdAndDelete(userId)
         res.status(200).redirect(req.get('referer'))
     } catch (error) {
@@ -152,7 +152,7 @@ exports.deleteUser = async (req, res, next) => {
 exports.allowIfLoggedin = async (req, res, next) => {
     try {
         const user = res.locals.loggedInUser
-        if (!user){
+        if (!user) {
             alert('You need to be logged in to access this route')
             return res.status(401).redirect(req.get('referer'))
         }
@@ -182,6 +182,22 @@ exports.verifyUser = (req, res, next) => {
                     return
                 }
             })
+        })
+        .catch((e) => console.log('error', e))
+}
+
+exports.verifyDoctor = (req, res, next) => {
+
+    User.findOne({ _id: req.params.id })
+        .then(async(user) => {
+            nodemailer.sendAuthenticationApprovalToDoctor(
+                user.last_name,
+                user.email,
+                user._id
+            )
+            await User.updateOne({ _id: user._id }, { $set: { status: 'Active' } })
+            //console.log(req)
+            res.redirect(req.get('referer'))
         })
         .catch((e) => console.log('error', e))
 }
