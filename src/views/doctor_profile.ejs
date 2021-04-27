@@ -149,36 +149,37 @@
 
                                             <tr>
                                                 <th>Work Days:&nbsp;</th>
-                                                <td>Sunday-Thursday</td>
+                                                <td><%=data.start_day%>-<%=data.end_day%></td>
+                                                
                                     
                                             </tr>
 
                                             <tr>
-                                                <th>Reception hours:</th>
-                                                <td>10 AM - 19 PM</td>
+                                                <th>Reception hours:&nbsp;</th>
+                                                <td><%=data.start_time%>-<%=data.end_time%></td>
                                             </tr>
             
                                             <tr>
                                                 <th>Clinic address:&nbsp;</th>
-                                                <td>Sunset Blvd 38</td>
+                                                <td><%=data.clinic_address%></td>
 
                                             </tr>
 
                                             <tr>
                                                 <th>Specialization:&nbsp;</th>
-                                                <td>Neurologist</td>
+                                                <td><%=data.specialization%></td>
 
                                             </tr>
 
                                             <tr>
                                                 <th>Languages:&nbsp;</th>
-                                                <td>Hebrew, Russian,English.</td>
+                                                <td><%=data.spoken_languages%></td>
 
                                             </tr>
 
                                             <tr>
                                                 <th>Phone number:&nbsp;</th>
-                                                <td>08-8525974</td>
+                                                <td><%=data.clinic_phone_number%></td>
 
                                             </tr>
                                       </table>
@@ -200,6 +201,47 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
+                                    <h6 class="text-primary font-weight-bold m-0">Settings Work Days</h6>
+                                </div>
+                                <div class="card-body">
+                
+                                        <label for="Work Days"><strong>From:</strong></label>
+
+                                        <select name="Work Days" id="start_day">
+                                            <option value=""></option>
+                                            <option value="Sunday">Sunday</option>
+                                            <option value="Monday">Monday</option>
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Saturday">Saturday</option>
+                                          </select>
+                                          <br><br>
+
+                                          <label for="Work Days"><strong>To:</strong></label>
+
+                                          <select name="Work Days" id="end_day">
+                                              <option value=""></option>
+                                              <option value="Sunday">Sunday</option>
+                                              <option value="Monday">Monday</option>
+                                              <option value="Tuesday">Tuesday</option>
+                                              <option value="Wednesday">Wednesday</option>
+                                              <option value="Thursday">Thursday</option>
+                                              <option value="Friday">Friday</option>
+                                              <option value="Saturday">Saturday</option>
+                                            </select>
+                                            <br><br>
+                                        
+                                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+
+                                    
+                                </div>
+                                    
+                                </div>
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
                                     <h6 class="text-primary font-weight-bold m-0">Reception hours</h6>
                                 </div>
                                 <div class="card-body">
@@ -214,6 +256,10 @@
                                 </div>
                                     
                                 </div>
+
+                                
+
+
                         </div>
                        
 
@@ -259,35 +305,40 @@
                                             <form>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="Sitara" name="first_name"></div>
+                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="<%=data.first_name%>" name="first_name" value="<%=data.first_name%>"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Alayev" name="last_name"></div>
+                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="<%= data.last_name %>" name="last_name" value="<%= data.last_name %>"></div>
                                                     </div>
 
 
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="Clinic"><strong>Clinic</strong></label><input class="form-control" type="text" id="clinic" placeholder="Clalit" name="clinic"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="HMO's"><strong>HMO's</strong></label><input class="form-control" type="text" id="HMO's" placeholder="Clalit, Macabi, Leumit " name="hmo's"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="Work Days"><strong>Work Days</strong></label><input class="form-control" type="text" id="work_days" placeholder="Sunday-Thursday" name="clinic"></div>
-                                                    </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group"><label for="specialization"><strong>Specialization</strong></label><input class="form-control" type="text"  id="specialization" placeholder="Neurologis" name="specialization"></div>
                                                     </div>
                                                 </div>
+                                     
+                                        
+                                                <div class="form-row">
+                                            
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="Clinic"><strong>HMO's</strong></label><br>
+                                                            <form>
+                                                                <input type="checkbox" name="Clalit" value="Clalit">
+                                                                <label for="Clalit"> Clalit</label><br>
+                                                                <input type="checkbox" name="Macabi" value="Macabi">
+                                                                <label for="Macabi"> Macabi</label><br>
+                                                                <input type="checkbox" name="Meuhedet" value="Meuhedet">
+                                                                <label for="Meuhedet">Meuhedet</label><br>
+                                                                <input type="checkbox" name="Leumit" value="Leumit">
+                                                                <label for="Leumit">Leumit</label><br><br>
+                                                              </form>
+                                                            </div>
+                                                    </div>
+
+                                                </div>
+
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
                                             </form>
                                         </div>
