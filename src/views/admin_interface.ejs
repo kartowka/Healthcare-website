@@ -10,7 +10,7 @@
     td,
     th {
       border: 1px solid #ddd;
-      text-align: left;
+      text-align: middle;
     }
 
     table {
@@ -35,7 +35,7 @@
 <body>
   <!--====form section start====-->
   <div class="table-data">
-    <table border="1">
+    <table border="1" style="width:77%">
       <tr>
         <th>S.N</th>
         <th>First Name</th>
@@ -44,14 +44,14 @@
         <th>Role</th>
         <th>Clinic</th>
         <th>License ID</th>
-        <th>Status</th>
+        <th style="width:90%">Status</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
 
       <% if(users.length!=0){users.forEach(function(data, index){ %>
         <tr>
-          <td contenteditable='true'>
+          <td>
             <%=index+1 %>
           </td>
           <td>
