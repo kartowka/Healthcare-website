@@ -8,7 +8,7 @@ const user_controller = require('../controllers/user_controller')
 //pateint profile
 profile
     .route('/patient_profile/:id')
-    .get(user_controller.allowIfLoggedin, function (req, res) {
+    .get(user_controller.allowIfLoggedin,user_controller.getUser, function (req, res) {
         res.render('patient_profile')
     })
 profile
