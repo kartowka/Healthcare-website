@@ -75,7 +75,9 @@ router
     .route('/admin_interface/approve/:id')
     .post(user_controller.verifyDoctor)
 
-
+router
+    .route('/search')
+    .get(user_controller.allowIfLoggedin,user_controller.getUsers)
 router.use(function (req, res, next) {
 
     // you can do what ever you want here
