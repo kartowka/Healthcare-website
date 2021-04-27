@@ -106,87 +106,84 @@
 
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="text-primary font-weight-bold m-0">Profile</h6>
-                        </div>
                              <div class="row mb-3">
                                  <div class="col-lg-4">
                                     <div class="card mb-3 ">
-                                      <div class="card-body space-around shadow row">
-                                          <table class="mr-5"id="t01">
-                                        <tr>
-                                          <th>Firstname:&nbsp;</th>
-                                          <td><%=data.first_name%></td>
-                                     
-                                        </tr>
-
-                                        <tr>
-                                            <th>Lastname:&nbsp;</th> 
-                                            <td><%=data.last_name%></td> 
-                                       
-                                        </tr>
-
-                                        <tr>
-                                            <th>License number:&nbsp;</th>
-                                            <td><%=data.medical_license_id%></td>
-
-                                        </tr>
-
-
-                                        <tr>
-                                            <th>Email:&nbsp;</th>
-                                            <td><%=data.email%><br></td>
-                                          </tr>
-                                          
-  
-                                          <tr>
-                                              <th>HMO's I work:&nbsp;</th>
-                                              <td>
-                                                <%=data.doctor_related_clinics%>
-                                                
-                                              </td>
-                                            </tr>
-
+                                        <div class="card-header py-3">
+                                            <h6 class="text-primary font-weight-bold m-0">Profile</h6>
+                                        </div>
+                                        <table class="mr-8"id="t01">
                                             <tr>
-                                                <th>Work Days:&nbsp;</th>
-                                                <td><%=data.start_day%>-<%=data.end_day%></td>
-                                                
-                                    
+                                              <th>Firstname:</th>
+                                              <td><%=data.first_name%></td>
+                                         
                                             </tr>
-
+    
                                             <tr>
-                                                <th>Reception hours:&nbsp;</th>
-                                                <td><%=data.start_time%>-<%=data.end_time%></td>
+                                                <th>Lastname:</th> 
+                                                <td><%=data.last_name%></td> 
+                                           
                                             </tr>
-            
+    
                                             <tr>
-                                                <th>Clinic address:&nbsp;</th>
-                                                <td><%=data.clinic_address%></td>
-
+                                                <th>License number:</th>
+                                                <td><%=data.medical_license_id%></td>
+    
                                             </tr>
-
+    
+    
                                             <tr>
-                                                <th>Specialization:&nbsp;</th>
-                                                <td><%=data.specialization%></td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <th>Languages:&nbsp;</th>
-                                                <td><%=data.spoken_languages%></td>
-
-                                            </tr>
-
-                                            <tr>
-                                                <th>Phone number:&nbsp;</th>
-                                                <td><%=data.clinic_phone_number%></td>
-
-                                            </tr>
-                                      </table>
-                                      </div>
+                                                <th>Email:</th>
+                                                <td><%=data.email%><br></td>
+                                              </tr>
+                                              
+      
+                                              <tr>
+                                                  <th>HMO's I work:</th>
+                                                  <td>
+                                                    <%=data.doctor_related_clinics%>
+                                                    
+                                                  </td>
+                                                </tr>
+    
+                                                <tr>
+                                                    <th>Work Days:</th>
+                                                    <td><%=data.start_day%>-<%=data.end_day%></td>
+                                                    
+                                        
+                                                </tr>
+    
+                                                <tr>
+                                                    <th>Reception hours:</th>
+                                                    <td><%=data.start_time%>-<%=data.end_time%></td>
+                                                </tr>
+                
+                                                <tr>
+                                                    <th>Clinic address:</th>
+                                                    <td><%=data.clinic_address%></td>
+    
+                                                </tr>
+    
+                                                <tr>
+                                                    <th>Specialization:</th>
+                                                    <td><%=data.specialization%></td>
+    
+                                                </tr>
+    
+                                                <tr>
+                                                    <th>Languages:</th>
+                                                    <td><%=data.spoken_languages%></td>
+    
+                                                </tr>
+    
+                                                <tr>
+                                                    <th>Phone number:</th>
+                                                    <td><%=data.clinic_phone_number%></td>
+    
+                                                </tr>
+                                          </table>
                                     </div>
                                  
-                                   
                            
                             <div class="card shadow mb-4" id="General_Rating">
                                 <div class="card-header py-3">
@@ -201,13 +198,11 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="text-primary font-weight-bold m-0">Settings Work Days</h6>
+                                    <h6 class="text-primary font-weight-bold m-0">Work Days Settings</h6>
                                 </div>
                                 <div class="card-body">
-                
                                         <label for="Work Days"><strong>From:</strong></label>
-
-                                        <select name="Work Days" id="start_day">
+                                        <select name="Work Days" id="start_day" value="<%=data.start_day%>" selected= value>
                                             <option value=""></option>
                                             <option value="Sunday">Sunday</option>
                                             <option value="Monday">Monday</option>
@@ -219,9 +214,8 @@
                                           </select>
                                           <br><br>
 
-                                          <label for="Work Days"><strong>To:</strong></label>
-
-                                          <select name="Work Days" id="end_day">
+                                          <label for="Work Days"><strong>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                          <select name="Work Days" id="end_day"  value="<%=data.end_day%>" selected= value>
                                               <option value=""></option>
                                               <option value="Sunday">Sunday</option>
                                               <option value="Monday">Monday</option>
@@ -246,9 +240,9 @@
                                 </div>
                                 <div class="card-body">
                                     <fieldset>
-                                        <label for="from"><strong>From:</strong></label><input class="form-control" type="time" id="reception_hours_from" placeholder="10AM"/>
+                                        <label for="from"><strong>From:</strong></label><input class="form-control" type="time" id="reception_hours_from" placeholder="<%= data.start_time%>" value="<%= data.start_time%>">
                                         </label>
-                                        <label for="to:"><strong>To:</strong></label><input class="form-control" type="time" id="reception_hours_to" placeholder="19PM " name="reception_hours_to">
+                                        <label for="to:"><strong>To:</strong></label><input class="form-control" type="time" id="reception_hours_to" placeholder="<%= data.end_time%>" name="reception_hours_to" value="<%data.end_time%>">
                                         <br>
                                         <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
 
@@ -308,14 +302,14 @@
                                                         <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="<%=data.first_name%>" name="first_name" value="<%=data.first_name%>"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="<%= data.last_name %>" name="last_name" value="<%= data.last_name %>"></div>
+                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="<%= data.last_name%>" name="last_name" value="<%=data.last_name%>"></div>
                                                     </div>
 
 
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="specialization"><strong>Specialization</strong></label><input class="form-control" type="text"  id="specialization" placeholder="Neurologis" name="specialization"></div>
+                                                        <div class="form-group"><label for="specialization"><strong>Specialization</strong></label><input class="form-control" type="text"  id="specialization" placeholder="<%=data.specialization%>" name="specialization" value="<%= data.specialization%>"></div>
                                                     </div>
                                                 </div>
                                      
@@ -349,20 +343,17 @@
                                         </div>
                                         <div class="card-body">
                                             <form>
-                                                <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address"></div>
-                                                <div class="form-group"><label for="languages"><strong>Languages</strong></label><input class="form-control" type="text" id="languages" placeholder="languages" name="languages"></div>
+                                                <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="<%= data.clinic_address%>" name="address" value="<%= data.clinic_address%>"></div>
+                                                <div class="form-group"><label for="languages"><strong>Languages</strong></label><input class="form-control" type="text" id="languages" placeholder="<%= data.spoken_languages %>" name="languages" value="<%= data.spoken_languages%>"></div>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city"></div>
+                                                        <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="<%= data.clinic_city %>" name="city" value="<%= data.clinic_city%>"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                    <div class="form-group"><label for="Phone number"><strong>Phone number</strong></label><input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" id="phone _number" placeholder="08-8525974" name="phone _number"></div>
+                                                    <div class="form-group"><label for="Phone number"><strong>Phone number</strong></label><input class="form-control" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" id="phone _number" placeholder="<%= data.clinic_phone_number%>" name="phone _number" value="<%= data.clinic_phone_number%>"></div>
                                                      </div>
                                                 </div>
-                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
+                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
                                             </form>
                                         </div>
                                     </div>
