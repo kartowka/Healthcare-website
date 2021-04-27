@@ -108,12 +108,19 @@ exports.getUsers = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
     try {
+        console.log(req)
         const userId = req.user._id
         const user = await User.findById(userId)
         if (!user) return next(new Error('User does not exist'))
-        res.status(200).json({
-            data: user
-        })
+        if(user.role == 'doctor'){
+            res.render('doctor_profile',{ data : user })
+        }
+        else{
+            res.render('patient_profile',{ data : user })
+        }
+        //res.status(200).json({
+        //    data: user
+        //})
         
     } catch (error) {
         next(error)
