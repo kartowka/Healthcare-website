@@ -42,8 +42,7 @@ module.exports.sendConfirmationEmail = (first_name,last_name, email, confirmatio
     }
 }
 
-module.exports.sendAuthenticationApprovalToDoctor = (last_name, email, id) => {
-
+module.exports.sendAuthenticationApprovalToDoctor = (last_name, email, user_id) => {
     transport.sendMail({
         from: user,
         to: email,
@@ -51,7 +50,7 @@ module.exports.sendAuthenticationApprovalToDoctor = (last_name, email, id) => {
         html: `<h1>Email Confirmation</h1>
         <h2>Hello Dr.${last_name}</h2>
         <p>You have been authenticated by our admin, you can keep using our system with full doctor privileges</p>
-        <a href=http://127.0.0.1:4000/doctor_profile/:${id}> Click here</a>
+        <a href=http://127.0.0.1:4000/> Click here</a>
         </div>`,
     }).catch(err => console.log(err))
 }
