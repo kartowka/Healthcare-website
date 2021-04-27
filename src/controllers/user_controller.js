@@ -9,10 +9,10 @@ exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
         try {
             const permission = roles.can(req.user.role)[action](resource)
-            if (!permission.granted)
-                return res.status(401).json({
-                    error: 'You don`t have enough permission to perform this action'
-                })
+            if (!permission.granted){
+                alert('You don`t have enough permission to perform this action')
+                return res.status(401).redirect('/')
+        }
             next()
         } catch (error) {
             next(error)
@@ -34,9 +34,6 @@ async function lowerCaseEmail(email) {
 exports.signup = async (req, res, next) => {
     try {
         const { first_name, last_name, email, password, role, clinic, medical_license_id, doctor_related_clinics } = req.body
-
-        if (role == 'doctor' && medical_license_id == '') throw 'You have to fill in your license id'
-
         const hashedPassword = await hashPassword(password)
         const lowerCasedEmail = await lowerCaseEmail(email)
         const newUser = new User({ first_name, last_name, email: lowerCasedEmail, password: hashedPassword, role: role || 'patient', clinic, medical_license_id, doctor_related_clinics })
@@ -72,13 +69,18 @@ exports.login = async (req, res, next) => {
         const { email, password } = req.body
         const lowerCasedEmail = await lowerCaseEmail(email)
         const user = await User.findOne({ email: lowerCasedEmail })
-        if (!user) return next(new Error('Email does not exist'))
+        if (!user) {
+            alert('Email does not exists!')
+            return res.status(401).redirect(req.get('referer'))
+        }
         const validPassword = await validatePassword(password, user.password)
-        if (!validPassword) return next(new Error('Password is not correct'))
+        if (!validPassword){
+            alert('Password is not correct')
+            return res.status(401).redirect(req.get('referer'))
+        }
         if (user.status != 'Active' && user.status != 'Waiting for Admin Approval') {
-            return res.status(401).send({
-                message: 'Pending Account. Please Verify Your Email!',
-            })
+            alert('Pending Account. Please Verify Your Email!')
+            return res.status(401).redirect(req.get('referer'))
         }
         const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
@@ -117,6 +119,7 @@ exports.getUser = async (req, res, next) => {
         res.status(200).render(relatedPage[1],{data:user})
         
     } catch (error) {
+        //alert('User does not exist')
         next(new Error('User does not exist'))
     }
 }
@@ -127,8 +130,8 @@ exports.updateUser = async (req, res, next) => {
         const userId = req.params.id
         await User.findByIdAndUpdate(userId, update)
         const user = await User.findById(userId)
-        alert('user has been updated.')
-        res.status(200).redirect('/')
+        alert('User has been updated')
+        res.status(200).redirect(req.get('referer'))
     } catch (error) {
         next(error)
     }
@@ -150,10 +153,10 @@ exports.deleteUser = async (req, res, next) => {
 exports.allowIfLoggedin = async (req, res, next) => {
     try {
         const user = res.locals.loggedInUser
-        if (!user)
-            return res.status(401).json({
-                error: 'You need to be logged in to access this route'
-            })
+        if (!user){
+            alert('You need to be logged in to access this route')
+            return res.status(401).redirect(req.get('referer'))
+        }
         req.user = user
         next()
     } catch (error) {
@@ -165,7 +168,8 @@ exports.verifyUser = (req, res, next) => {
     User.findOne({ accessToken: req.params.confirmationCode })
         .then((user) => {
             if (!user) {
-                return res.status(404).send({ message: 'User Not found.' })
+                alert('User not found!')
+                return res.status(404).redirect(req.get('referer'))
             }
 
             if (user.role == 'doctor') {
@@ -188,7 +192,8 @@ exports.forgotPassword = async (req, res) => {
     const user = await User.findOne({ email })
         .then((user) => {
             if (!user) {
-                return res.status(404).send({ message: 'User Not found.' })
+                alert('User not found')
+                return res.status(404).redirect(req.get('referer'))
             }
             const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '20m' })
             nodemailer.sendResetPassword(
@@ -218,17 +223,22 @@ exports.passwordReset = async (req, res) => {
                 if (newPassword === confirmPassword) {
                     const hashedPassword = await hashPassword(newPassword)
                     await User.updateOne({ _id: user._id }, { $set: { password: hashedPassword } }, { new: true })
-                    res.status(201).json({ success: true, message: 'Password changed successfully' })
+                    alert('Password changed successfully')
+                    res.status(201).redirect(req.get('referer'))
                 } else {
-                    res.status(401).json({ success: false, message: 'Confirm password does not match' })
+                    alert('Confirm password does not match')
+                    res.status(401).redirect(req.get('referer'))
                 }
             } else {
-                res.status(401).json({ success: false, message: 'Invalid accessToken' })
+                alert('Invalid accessToken')
+                res.status(401).redirect(req.get('referer'))
             }
         } else {
-            res.status(401).json({ success: false, message: 'accessToken not found' })
+            alert('accessToken not found')
+            res.status(401).redirect(req.get('referer'))
         }
     } catch (error) {
-        res.status(401).json({ success: false, message: error.message })
+        alert(error.message)
+        res.status(401).redirect(req.get('referer'))
     }
 }
