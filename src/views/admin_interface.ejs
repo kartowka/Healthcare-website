@@ -10,17 +10,18 @@
     td,
     th {
       border: 1px solid #ddd;
-      text-align: middle;
     }
 
     table {
+      margin-left: auto;
+      margin-right: auto;
       border-collapse: collapse;
       width: 50%;
 
     }
 
     .table-data {
-      position: relative;
+      text-align: center;
       left: 50px;
       top: 50px;
     }
@@ -29,13 +30,18 @@
     td {
       padding: 15px;
     }
+
+    h1 {
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
   <!--====form section start====-->
+  <h1 style="text-align:center">All Integral User Data</h1>
   <div class="table-data">
-    <table border="1" style="width:77%">
+    <table border="1" style="width:77%" style="text-align:center">
       <tr>
         <th>S.N</th>
         <th>First Name</th>
@@ -81,7 +87,7 @@
             </form>
           </td>
           <td>
-            <form action="/admin_interface/<%= data.id %>" method="POST">
+            <form action="/admin_interface/delete/<%= data.id %>" method="POST">
               <input type="submit" value="Delete">
             </form>
           </td>
@@ -97,18 +103,19 @@
     <br>
 
     <div class="forum-data">
+      <h1 style="text-align:center">Doctor Validation</h1>
       <table border="1">
         <tr>
           <th>S.N</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>License ID</th>
-          <th>Status</th>
+          <th>Approved?</th>
           <th>Approve</th>
         </tr>
 
         <% if(users.length!=0){users.forEach(function(data, index){ %>
-          <% if(data.role=='doctor' ) { %>
+          <% if(data.role=='doctor' && data.status=='Waiting for Admin Approval' ) { %>
             <tr>
               <td contenteditable='true'>
                 <%=index+1 %>
@@ -125,10 +132,9 @@
               <td>
                 <%=data.status %>
               </td>
-              <td><a href="/edit/<%=data.id%>">Approve</a></td>
               <td>
-                <form action="/user/<%= data.id %>" method="POST">
-                  <input type="submit" value="Delete">
+                <form action="/admin_interface/approve/<%= data.id %>" method="POST">
+                  <input type="submit" value="Approve">
                 </form>
               </td>
             </tr>
