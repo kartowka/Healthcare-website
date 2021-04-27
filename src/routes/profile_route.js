@@ -9,7 +9,7 @@ const User = require('../models/user_model')
 //pateint profile
 profile
     .route('/patient_profile/:id') 
-    .get(user_controller.allowIfLoggedin,user_controller.getUser,user_controller.grantAccess('readAny','doctor_profile'))
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
     .post(user_controller.allowIfLoggedin,user_controller.grantAccess('updateOwn','patient_profile'),user_controller.updateUser)
 
 profile
@@ -28,7 +28,7 @@ profile
 //doctor profile
 profile
     .route('/doctor_profile/:id')
-    .get(user_controller.allowIfLoggedin,user_controller.getUser,user_controller.grantAccess('readAny', 'doctor_profile'))
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
     .put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'doctor_profile'))
 // TBD
 
