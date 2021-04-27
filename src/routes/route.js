@@ -68,7 +68,7 @@ router
 //admin delete user
 router
     .route('/admin_interface/:id')
-    .get(user_controller.allowIfLoggedin, user_controller.getUsers, user_controller.grantAccess('readAny', 'admin_interface'))
+    .get(user_controller.allowIfLoggedin,user_controller.grantAccess('readAny', 'admin_interface'),user_controller.getUsers)
     .post(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'admin_interface'), user_controller.deleteUser)
     .put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'admin_interface'), user_controller.updateUser)
 
