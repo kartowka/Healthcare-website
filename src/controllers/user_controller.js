@@ -105,9 +105,8 @@ exports.login = async (req, res, next) => {
 
 exports.getUsers = async (req, res, next) => {
     const users = await User.find({})
-    res.status(200).json({
-        data: users
-    })
+    const relatedPage = req.path.split(/[/]/)
+    res.status(200).render(relatedPage[1], {users})
 }
 
 exports.getUser = async (req, res, next) => {
@@ -141,10 +140,7 @@ exports.deleteUser = async (req, res, next) => {
     try {
         const userId = req.params.userId
         await User.findByIdAndDelete(userId)
-        res.status(200).json({
-            data: null,
-            message: 'User has been deleted'
-        })
+        res.status(200).redirect(req.get('referer'))
     } catch (error) {
         next(error)
     }
