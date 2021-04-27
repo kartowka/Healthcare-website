@@ -15,8 +15,10 @@ exports.roles = (function () {
     ac.grant('admin')
         .extend('patient')
         .extend('doctor')
-        .updateAny(['patient_profile', 'doctor_profile'])
-        .deleteAny(['patient_profile', 'doctor_profile'])
+        .readAny('admin_interface')
+        .updateAny(['patient_profile', 'doctor_profile', 'admin_interface'])
+        .deleteAny(['patient_profile', 'doctor_profile', 'admin_interface'])
+        
 
     return ac
 })()
