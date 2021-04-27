@@ -58,19 +58,23 @@ router.use(profile_router)
 
 //previous appointments
 
-router
-    .route('/user/:userId')
-    .post(user_controller.allowIfLoggedin, user_controller.getUser, user_controller.grantAccess('updateAny', 'admin_interface'), user_controller.deleteUser)
-
 
 //admin interface
+router
+    .route('/admin_interface/:id')
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'admin_interface'), user_controller.getUsers)
+    //admin edit user
+    //.put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'admin_interface'), user_controller.updateUser) 
 
 //admin delete user
 router
-    .route('/admin_interface/:id')
-    .get(user_controller.allowIfLoggedin,user_controller.grantAccess('readAny', 'admin_interface'),user_controller.getUsers)
-    .post(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'admin_interface'), user_controller.deleteUser)
-    .put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'admin_interface'), user_controller.updateUser)
+    .route('/admin_interface/delete/:id')
+    .post(user_controller.deleteUser)
+
+router
+    .route('/admin_interface/approve/:id')
+    .post(user_controller.verifyDoctor)
+
 
 router.use(function (req, res, next) {
 
