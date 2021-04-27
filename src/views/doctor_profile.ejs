@@ -116,35 +116,33 @@
                                           <table class="mr-5"id="t01">
                                         <tr>
                                           <th>Firstname:&nbsp;</th>
-                                          <td>Sitara</td>
+                                          <td><%=data.first_name%></td>
                                      
                                         </tr>
 
                                         <tr>
                                             <th>Lastname:&nbsp;</th> 
-                                            <td>Alayev</td> 
+                                            <td><%=data.last_name%></td> 
                                        
                                         </tr>
 
                                         <tr>
                                             <th>License number:&nbsp;</th>
-                                            <td>321967556</td>
+                                            <td><%=data.medical_license_id%></td>
 
                                         </tr>
 
 
                                         <tr>
                                             <th>Email:&nbsp;</th>
-                                            <td>sitaraalayev@gmail.com<br></td>
+                                            <td><%=data.email%><br></td>
                                           </tr>
                                           
   
                                           <tr>
                                               <th>HMO's I work:&nbsp;</th>
                                               <td>
-                                                    Clalit, 
-                                                    Macabi, 
-                                                    Leumit.
+                                                <%=data.doctor_related_clinics%>
                                                 
                                               </td>
                                             </tr>
