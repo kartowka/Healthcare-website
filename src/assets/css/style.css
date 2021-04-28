@@ -2228,3 +2228,7 @@ responsive area
     font-size: 10px;
   }
 }
+#canvas-wrapper.dark-mode {
+  background: #222;
+  color: #DDD;
+}
