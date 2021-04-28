@@ -63,7 +63,6 @@ app.use('/fonts', express.static(__dirname + '/fonts'))
 app.use('/js', express.static(__dirname + '/js'))
 app.use('/img', express.static(__dirname + '/img'))
 app.use('/assets', express.static(__dirname + '/assets'))
-app.use('/accessibility', express.static(__dirname + '/accessibility'))
 app.use('/', routes)
 
 
