@@ -16,22 +16,15 @@ profile
     .post(user_controller.allowIfLoggedin,user_controller.grantAccess('updateOwn','patient_profile'),user_controller.updateUser)
 
 profile
-    .route('/patient_profile/previous_appointments/:id')
+    .route([ '/previous_appointments/:id', '/patient_profile/previous_appointments/:id'])
     .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readOwn', 'patient_profile'), user_controller.getUser)
     .post(user_controller.allowIfLoggedin, user_controller.grantAccess('updateOwn', 'patient_profile'), user_controller.updateUser)
 
-//previous appointments
+//previous and future appointments
 profile
-    .route('/previous_appointments/:id')
+    .route(['/previous_appointments/:id', '/patient_profile/previous_appointments/:id','/future_appointments/:id', '/patient_profile/future_appointments/:id'])
     .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
     
-
-//future appointments
-profile
-    .route('/future_appointments/:id')
-    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
-  
-
 
 //doctor profile
 profile
