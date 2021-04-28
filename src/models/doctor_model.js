@@ -2,32 +2,30 @@ const mongoose = require('mongoose')
 const Scheme = mongoose.Schema
 
 const doctorDetails = new Scheme({
-    start_day:{
-        type:String
+    working_days: {
+        type: [String],
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     },
-    end_day:{
-        type:String
+    start_time: {
+        type: String
     },
-    start_time:{
-        type:String
+    end_time: {
+        type: String
     },
-    end_time:{
-        type:String
+    clinic_address: {
+        type: String
     },
-    clinic_address:{
-        type:String
+    clinic_city: {
+        type: String
     },
-    clinic_city:{
-        type:String
+    specialization: {
+        type: [String]
     },
-    specialization:{
-        type:String
+    spoken_languages: {
+        type: [String]
     },
-    spoken_languages:{
-        type:[String]
-    },
-    clinic_phone_number:{
-        type:String
+    clinic_phone_number: {
+        type: String
     }
 
 })
