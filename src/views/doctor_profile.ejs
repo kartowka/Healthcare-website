@@ -16,72 +16,44 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
 </head>
 
 <body id="page-top">
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
 
-        <%- include('partials/header'); %>
+            <%- include('partials/header'); %>
 
-            <div id="content">
- 
- 
-                <div class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" >
-                    <div class="container-fluid menu1" ><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for...">
-                                <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                            </div>
-                        </form>
-                        <ul class="navbar-nav flex-nowrap ml-auto">
-                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto navbar-search w-100">
-                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
-                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                                        </div>
-                                    </form>
+                <div id="content">
+
+
+                    <div class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                        <div class="container-fluid menu1"><button class="btn btn-link d-md-none rounded-circle mr-3"
+                                id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                            <form
+                                class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group"><input class="bg-light form-control border-0 small" type="text"
+                                        placeholder="Search for...">
+                                    <div class="input-group-append"><button class="btn btn-primary py-0"
+                                            type="button"><i class="fas fa-search"></i></button></div>
                                 </div>
-                            </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="badge badge-danger badge-counter">7</span><i class="fas fa-envelope fa-fw text-gray-500"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg">
-                                                <div class="bg-success status-indicator"></div>
+                            </form>
+                            <ul class="navbar-nav flex-nowrap ml-auto">
+                                <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-toggle="dropdown" href="#"><i
+                                            class="fas fa-search"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in"
+                                        aria-labelledby="searchDropdown">
+                                        <form class="form-inline mr-auto navbar-search w-100">
+                                            <div class="input-group"><input class="bg-light form-control border-0 small"
+                                                    type="text" placeholder="Search for ...">
+                                                <div class="input-group-append"><button class="btn btn-primary py-0"
+                                                        type="button"><i class="fas fa-search"></i></button></div>
                                             </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Hi there! I am wondering if you can help me with a problem I've been having.</span></div>
-                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar2.jpeg">
-                                                <div class="status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>I have the photos that you ordered last month!</span></div>
-                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar3.jpeg">
-                                                <div class="bg-warning status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Last month's report looks great, I am very happy with the progress so far, keep up the good work!</span></div>
-                                                <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
-                                            </div>
-                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar5.jpeg">
-                                                <div class="bg-success status-indicator"></div>
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
-                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                        </form>
                                     </div>
+<<<<<<< HEAD
                                 </div>
                                 <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
                             </li>
@@ -96,44 +68,166 @@
                                         <a class="dropdown-item" href="/doctor_profile/doctor_opinions"><i class="fa fa-comments mr-2 text-gray-400"></i>&nbsp;Opinions about me</a>
                                         <a class="dropdown-item" href="#General_Rating"><i class="fa fa-heart mr-2 text-gray-400"></i>&nbsp;My Rating</a>
                                         <div class="dropdown-divider"></div><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+=======
+                                </li>
+                                <li class="nav-item dropdown no-arrow mx-1">
+                                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                            aria-expanded="false" data-toggle="dropdown" href="#"><span
+                                                class="badge badge-danger badge-counter">7</span><i
+                                                class="fas fa-envelope fa-fw text-gray-500"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
+                                            <h6 class="dropdown-header">alerts center</h6><a
+                                                class="dropdown-item d-flex align-items-center" href="#">
+                                                <div class="dropdown-list-image mr-3"><img class="rounded-circle"
+                                                        src="assets/img/avatars/avatar4.jpeg">
+                                                    <div class="bg-success status-indicator"></div>
+                                                </div>
+                                                <div class="font-weight-bold">
+                                                    <div class="text-truncate"><span>Hi there! I am wondering if you can
+                                                            help me with a problem I've been having.</span></div>
+                                                    <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
+                                                </div>
+                                            </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                                <div class="dropdown-list-image mr-3"><img class="rounded-circle"
+                                                        src="assets/img/avatars/avatar2.jpeg">
+                                                    <div class="status-indicator"></div>
+                                                </div>
+                                                <div class="font-weight-bold">
+                                                    <div class="text-truncate"><span>I have the photos that you ordered
+                                                            last month!</span></div>
+                                                    <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
+                                                </div>
+                                            </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                                <div class="dropdown-list-image mr-3"><img class="rounded-circle"
+                                                        src="assets/img/avatars/avatar3.jpeg">
+                                                    <div class="bg-warning status-indicator"></div>
+                                                </div>
+                                                <div class="font-weight-bold">
+                                                    <div class="text-truncate"><span>Last month's report looks great, I
+                                                            am very happy with the progress so far, keep up the good
+                                                            work!</span></div>
+                                                    <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
+                                                </div>
+                                            </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                                <div class="dropdown-list-image mr-3"><img class="rounded-circle"
+                                                        src="assets/img/avatars/avatar5.jpeg">
+                                                    <div class="bg-success status-indicator"></div>
+                                                </div>
+                                                <div class="font-weight-bold">
+                                                    <div class="text-truncate"><span>Am I a good boy? The reason I ask
+                                                            is because someone told me that people say this to all dogs,
+                                                            even if they aren't good...</span></div>
+                                                    <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
+                                                </div>
+                                            </a><a class="dropdown-item text-center small text-gray-500" href="#">Show
+                                                All Alerts</a>
+                                        </div>
+>>>>>>> 04ec6729e338c82749cea17acc3e06276cebe5df
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+                                    <div class="shadow dropdown-list dropdown-menu dropdown-menu-right"
+                                        aria-labelledby="alertsDropdown"></div>
+                                </li>
+                                <div class="d-none d-sm-block topbar-divider"></div>
+                                <li class="nav-item dropdown no-arrow">
+                                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                            aria-expanded="false" data-toggle="dropdown" href="#"><span
+                                                class="d-none d-lg-inline mr-2 text-gray-500 small">Valerie
+                                                Luna</span><i
+                                                class="fas fa-user fa-sm fa-fw mr-2 text-gray-500"></i></a>
+                                        <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in">
+                                            <a class="dropdown-item" href="/doctor_profile"><i
+                                                    class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Your
+                                                Profile</a>
+                                            <a class="dropdown-item" href="#User_Settings"><i
+                                                    class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                            <a class="dropdown-item"
+                                                href="/doctor_profile/doctor_future_appointments"><i
+                                                    class="fa fa-clock-o mr-2 text-gray-400"></i>&nbsp;Future
+                                                Appointments</a>
+                                            <a class="dropdown-item"
+                                                href="/doctor_profile/doctor_appointment_summary"><i
+                                                    class="fa fa-book mr-2 text-gray-400"></i>&nbsp;Appointment
+                                                Summary</a>
+                                            <a class="dropdown-item" href="#"><i
+                                                    class="fa fa-comments mr-2 text-gray-400"></i>&nbsp;Opinions about
+                                                me</a>
+                                            <a class="dropdown-item" href="#General_Rating"><i
+                                                    class="fa fa-heart mr-2 text-gray-400"></i>&nbsp;My Rating</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
+                                                    class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
 
+<<<<<<< HEAD
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                              <div class="row mr-8">
                                  <div class="col-lg-12">
                                     <div class="card mb-2">
+=======
+                    <div class="container-fluid">
+                        <div class="card shadow mb-4">
+                            <div class="row mb-3">
+                                <div class="col-lg-4">
+                                    <div class="card mb-3 ">
+>>>>>>> 04ec6729e338c82749cea17acc3e06276cebe5df
                                         <div class="card-header py-3">
                                             <h6 class="text-primary font-weight-bold m-1">Profile</h6>
                                         </div>
+<<<<<<< HEAD
                                      
                                         <table class="mr-8"id="t01">
                                             <tr>
                                               <th>&nbsp;&nbsp;Firstname:</th>
                                               <td><%=data.first_name%> <br></td>
                                          
-                                            </tr>
-    
+=======
+                                        <table class="mr-8" id="t01">
                                             <tr>
+                                                <th>Firstname:</th>
+                                                <td>
+                                                    <%=data.first_name%>
+                                                </td>
+
+>>>>>>> 04ec6729e338c82749cea17acc3e06276cebe5df
+                                            </tr>
+
+                                            <tr>
+<<<<<<< HEAD
                                                 <th>&nbsp;&nbsp;Lastname:</th> 
                                                 <td><%=data.last_name%> <br></td> 
                                            
+=======
+                                                <th>Lastname:</th>
+                                                <td>
+                                                    <%=data.last_name%>
+                                                </td>
+
+>>>>>>> 04ec6729e338c82749cea17acc3e06276cebe5df
                                             </tr>
-    
+
                                             <tr>
+<<<<<<< HEAD
                                                 <th>&nbsp;&nbsp;License number:</th>
                                                 <td><%=data.medical_license_id%> <br></td>
     
+=======
+                                                <th>License number:</th>
+                                                <td>
+                                                    <%=data.medical_license_id%>
+                                                </td>
+
+>>>>>>> 04ec6729e338c82749cea17acc3e06276cebe5df
                                             </tr>
-    
-    
+
+
                                             <tr>
+<<<<<<< HEAD
                                                 <th>&nbsp;&nbsp;Email:</th>
                                                 <td><%=data.email%><br></td>
                                               </tr>
@@ -200,13 +294,324 @@
 
 
                         </div>
+=======
+                                                <th>Email:</th>
+                                                <td>
+                                                    <%=data.email%><br>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th>HMO's I work:</th>
+                                                <td>
+                                                    <%=data.doctor_related_clinics%>
+
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Work Days:</th>
+                                                <td>
+                                                    <%=data.start_day%>-<%=data.end_day%>
+                                                </td>
+
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>Reception hours:</th>
+                                                <td>
+                                                    <%=data.start_time%>-<%=data.end_time%>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Clinic address:</th>
+                                                <td>
+                                                    <%=data.clinic_address%>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>Specialization:</th>
+                                                <td>
+                                                    <%=data.specialization%>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>Languages:</th>
+                                                <td>
+                                                    <%=data.spoken_languages%>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>Phone number:</th>
+                                                <td>
+                                                    <%=data.clinic_phone_number%>
+                                                </td>
+
+                                            </tr>
+                                        </table>
+                                    </div>
+
+
+                                    <div class="card shadow mb-4" id="General_Rating">
+                                        <div class="card-header py-3">
+                                            <h6 class="text-primary font-weight-bold m-0">General Rating</h6>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star "></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="text-primary font-weight-bold m-0">Work Days Settings</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <label for="Work Days"><strong>From:</strong></label>
+                                            <select name="Work Days" id="start_day" value="<%=data.start_day%>"
+                                                selected=value>
+                                                <option value=""></option>
+                                                <option value="Sunday">Sunday</option>
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                            </select>
+                                            <br><br>
+
+                                            <label
+                                                for="Work Days"><strong>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                            <select name="Work Days" id="end_day" value="<%=data.end_day%>"
+                                                selected=value>
+                                                <option value=""></option>
+                                                <option value="Sunday">Sunday</option>
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                            </select>
+                                            <br><br>
+
+                                            <div class="form-group"><button class="btn btn-primary btn-sm"
+                                                    type="submit">Save Settings</button></div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="text-primary font-weight-bold m-0">Reception hours</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <fieldset>
+                                                <label for="from"><strong>From:</strong></label><input
+                                                    class="form-control" type="time" id="reception_hours_from"
+                                                    placeholder="<%= data.start_time%>" value="<%= data.start_time%>">
+                                                </label>
+                                                <label for="to:"><strong>To:</strong></label><input class="form-control"
+                                                    type="time" id="reception_hours_to"
+                                                    placeholder="<%= data.end_time%>" name="reception_hours_to"
+                                                    value="<%data.end_time%>">
+                                                <br>
+                                                <div class="form-group"><button class="btn btn-primary btn-sm"
+                                                        type="submit">Save Settings</button></div>
+
+                                            </fieldset>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+
+
+                                <div class="col-lg-8">
+                                    <div class="row mb-3 d-none">
+                                        <div class="col">
+                                            <div class="card text-white bg-primary shadow">
+                                                <div class="card-body">
+                                                    <div class="row mb-2">
+                                                        <div class="col">
+                                                            <p class="m-0">Peformance</p>
+                                                            <p class="m-0"><strong>65.2%</strong></p>
+                                                        </div>
+                                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                                    </div>
+                                                    <p class="text-white-50 small m-0"><i
+                                                            class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card text-white bg-success shadow">
+                                                <div class="card-body">
+                                                    <div class="row mb-2">
+                                                        <div class="col">
+                                                            <p class="m-0">Peformance ????</p>
+                                                            <p class="m-0"><strong>65.2%</strong></p>
+                                                        </div>
+                                                        <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                                    </div>
+                                                    <p class="text-white-50 small m-0"><i
+                                                            class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card shadow mb-3" id="User_Settings">
+                                                <div class="card-header py-3">
+                                                    <p class="text-primary m-0 font-weight-bold">User Settings</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form method="POST">
+                                                        <div class="form-row">
+                                                            <div class="col">
+                                                                <div class="form-group"><label
+                                                                        for="first_name"><strong>First
+                                                                            Name</strong></label><input
+                                                                        class="form-control" type="text" id="first_name"
+                                                                        placeholder="<%=data.first_name%>"
+                                                                        name="first_name" value="<%=data.first_name%>">
+                                                                </div>
+                                                            </div>
+                                                        <div class="col">
+                                                            <div class="form-group"><label for="last_name"><strong>Last
+                                                                        Name</strong></label><input class="form-control"
+                                                                    type="text" id="last_name"
+                                                                    placeholder="<%= data.last_name%>" name="last_name"
+                                                                    value="<%=data.last_name%>">
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label
+                                                                for="specialization"><strong>Specialization</strong></label><input
+                                                                class="form-control" type="text" id="specialization"
+                                                                placeholder="<%=data.specialization%>"
+                                                                name="specialization" value="<%= data.specialization%>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                <div class="form-group">
+                                                    <input type="checkbox" name="doctor_related_clinics[]" value="Clalit">
+                                                    <label for="clinic1"> Clalit</label><br>
+                                                    <input type="checkbox" name="doctor_related_clinics[]" value="Meuhedet">
+                                                    <label for="clinic2"> Meuhedet</label><br>
+                                                    <input type="checkbox" name="doctor_related_clinics[]" value="Macabi">
+                                                    <label for="clinic3"> Macabi</label><br>
+                                                    <input type="checkbox" name="doctor_related_clinics[]" value="Leumit">
+                                                    <label for="clinic4"> Leumit</label><br><br>
+                                                </div>
+                                                <div class="form-group"><button class="btn btn-primary btn-sm"
+                                                        type="submit">Save Settings</button></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="card shadow">
+                                            <div class="card-header py-3">
+                                                <p class="text-primary m-0 font-weight-bold">Contact Settings</p>
+                                            </div>
+                                            <div class="card-body">
+                                                <form>
+                                                    <div class="form-group"><label
+                                                            for="address"><strong>Address</strong></label><input
+                                                            class="form-control" type="text" id="address"
+                                                            placeholder="<%= data.clinic_address%>" name="address"
+                                                            value="<%= data.clinic_address%>"></div>
+                                                    <div class="form-group"><label
+                                                            for="languages"><strong>Languages</strong></label><input
+                                                            class="form-control" type="text" id="languages"
+                                                            placeholder="<%= data.spoken_languages %>" name="languages"
+                                                            value="<%= data.spoken_languages%>">
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="city"><strong>City</strong></label><input
+                                                                    class="form-control" type="text" id="city"
+                                                                    placeholder="<%= data.clinic_city %>" name="city"
+                                                                    value="<%= data.clinic_city%>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="Phone number"><strong>Phone
+                                                                        number</strong></label><input
+                                                                    class="form-control" type="tel"
+                                                                    pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                                                                    id="phone _number"
+                                                                    placeholder="<%= data.clinic_phone_number%>"
+                                                                    name="phone _number"
+                                                                    value="<%= data.clinic_phone_number%>"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group"><button class="btn btn-primary btn-sm"
+                                                            type="submit">Save Settings</button></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card shadow mb-5">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 font-weight-bold">Forum Settings</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form>
+                                            <div class="form-group"><label
+                                                    for="signature"><strong>Signature</strong><br></label><textarea
+                                                    class="form-control" id="signature" rows="4"
+                                                    name="signature"></textarea></div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-switch"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="formCheck-1"><label class="custom-control-label"
+                                                        for="formCheck-1"><strong>Notify me about new
+                                                            replies</strong></label></div>
+                                            </div>
+                                            <div class="form-group"><button class="btn btn-primary btn-sm"
+                                                    type="submit">Save Settings</button></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+>>>>>>> 04ec6729e338c82749cea17acc3e06276cebe5df
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- footer starts here -->
-            <%- include('partials/footer'); %>
+                <!-- footer starts here -->
+                <%- include('partials/footer'); %>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
 

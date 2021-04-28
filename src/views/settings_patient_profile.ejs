@@ -194,18 +194,73 @@
                                 <div class="col" >
                                     <div class="card shadow mb-3"  id="User_Settings">
                                         <div class="card-header py-3" >
-                                            <p class="text-primary m-0 font-weight-bold">Future Appointments</p>
+                                            <p class="text-primary m-0 font-weight-bold">User Settings</p>
                                         </div>
                                         <div class="card-body">
-                                            <h1>In Process</h1>
+                                            <form method="POST" >
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" name="first_name" value="<%= data.first_name %>"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" name="last_name" value="<%= data.last_name %>"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="clinic"><strong>Clinic</strong></label>
+                                                            <select name="clinic" class="form-control form-control-user"
+                                                                placeholder="Select Clinic" id="clinic" style="
+                                                                height: 65px" value="<%= data.clinic%>"  selected= value  required >
+                                                                 <option value="<%= data.clinic%>"><%= data.clinic%></option>
+                                                                <% if(data.clinic == "Clalit") {%>
+                                                                    <option value="Meuhedet">Meuhedet</option>
+                                                                    <option value="Macabi">Macabi</option>
+                                                                    <option value="Leumit">Leumit</option>
+                                                                    <% } %>
+                                                                <% if(data.clinic == "Meuhedet") {%>
+                                                                    <option value="Clalit">Clalit</option>
+                                                                    <option value="Macabi">Macabi</option>
+                                                                    <option value="Leumit">Leumit</option>
+                                                                    <% } %>
+                                                                <% if(data.clinic == "Macabi") {%>
+                                                                    <option value="Clalit">Clalit</option>
+                                                                    <option value="Meuhedet">Meuhedet</option>
+                                                                    <option value="Leumit">Leumit</option>
+                                                                    <% } %>
+                                                                <% if(data.clinic == "Leumit") {%>
+                                                                    <option value="Clalit">Clalit</option>
+                                                                    <option value="Meuhedet">Meuhedet</option>
+                                                                    <option value="Macabi">Macabi</option>
+                                                                    <% } %>
+                                                                    
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col"></div>
+                                                </div>
+                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" >Save Settings</button></div>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="card shadow">
                                         <div class="card-header py-3">
-                                            <p class="text-primary m-0 font-weight-bold">Previous Appointments</p>
+                                            <p class="text-primary m-0 font-weight-bold">Contact Settings</p>
                                         </div>
                                         <div class="card-body">
-                                            <h1>In Process</h1>
+                                            <form>
+                                                <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address"></div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

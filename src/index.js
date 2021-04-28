@@ -54,7 +54,6 @@ app.use(async (req, res, next) => {
     next()
   }
 })
-
 //Setting up Handlebars
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, '/views/')))

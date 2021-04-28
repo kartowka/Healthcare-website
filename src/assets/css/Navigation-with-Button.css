@@ -41,7 +41,7 @@
   border-top-color: #ddd;
 }
 
-.navigation-clean-button .navbar-nav a.active, .navigation-clean-button .navbar-nav > .show > a {
+.navigation-clean-button .navbar-nav a.active, .navigation-clean-button .navbar-nav>.show>a {
   background: none;
   box-shadow: none;
 }
@@ -67,9 +67,9 @@
   background-color: transparent;
 }
 
-.navigation-clean-button .navbar-nav > li > .dropdown-menu {
+.navigation-clean-button .navbar-nav>li>.dropdown-menu {
   margin-top: -5px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
   background-color: #fff;
   border-radius: 2px;
 }
@@ -102,6 +102,8 @@
   padding: .5rem 1rem;
   transition: background-color 0.25s;
   font-size: inherit;
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .navigation-clean-button .navbar-text .action-button:hover {
