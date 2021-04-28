@@ -28,8 +28,8 @@ profile
 //doctor profile
 profile
     .route('/doctor_profile/:id')
-    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
-    .put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'doctor_profile'))
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny','patient_profile'),user_controller.grantAccess('readAny','doctor_profile'), user_controller.getUser)
+    .post(user_controller.allowIfLoggedin,user_controller.grantAccess('updateOwn','doctor_profile'),user_controller.updateUser)
 // TBD
 
 module.exports = profile
