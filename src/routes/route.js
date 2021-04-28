@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const user_controller = require('../controllers/user_controller')
 const profile_router = require('./profile_route')
-const User = require('../models/user_model')
 
 //homepage
 router
