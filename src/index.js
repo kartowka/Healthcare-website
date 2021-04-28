@@ -54,7 +54,6 @@ app.use(async (req, res, next) => {
     next()
   }
 })
-
 //Setting up Handlebars
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, '/views/')))
@@ -64,6 +63,7 @@ app.use('/fonts', express.static(__dirname + '/fonts'))
 app.use('/js', express.static(__dirname + '/js'))
 app.use('/img', express.static(__dirname + '/img'))
 app.use('/assets', express.static(__dirname + '/assets'))
+app.use('/accessibility', express.static(__dirname + '/accessibility'))
 app.use('/', routes)
 
 
