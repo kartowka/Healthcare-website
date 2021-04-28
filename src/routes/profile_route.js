@@ -9,8 +9,9 @@ profile
     .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
 
 //settings patient profile
+
 profile
-    .route('/patient_profile/settings_patient_profile/:id')
+    .route(['/settings_patient_profile/:id', '/patient_profile/settings_patient_profile/:id'])
     .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readOwn', 'patient_profile'), user_controller.getUser)
     .post(user_controller.allowIfLoggedin,user_controller.grantAccess('updateOwn','patient_profile'),user_controller.updateUser)
 
