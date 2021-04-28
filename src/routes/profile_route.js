@@ -10,20 +10,27 @@ const User = require('../models/user_model')
 profile
     .route('/patient_profile/:id') 
     .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
+
+//settings patient profile
+profile
+    .route('/settings_patient_profile/:id') 
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readOwn', 'patient_profile'), user_controller.getUser)
     .post(user_controller.allowIfLoggedin,user_controller.grantAccess('updateOwn','patient_profile'),user_controller.updateUser)
 
+
+//previous appointments
 profile
-    .route('/patient_profile/previous_appointments')
-    .get(user_controller.allowIfLoggedin, function (req, res) {
-        res.render('previous_appointments')
-    })
+    .route('/previous_appointments/:id')
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
+    
+
 
 //future appointments
 profile
-    .route('/patient_profile/future_appointments')
-    .get(user_controller.allowIfLoggedin, function (req, res) {
-        res.render('future_appointments')
-    })
+    .route('/future_appointments/:id')
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'doctor_profile'), user_controller.getUser)
+  
+
 
 //doctor profile
 profile
