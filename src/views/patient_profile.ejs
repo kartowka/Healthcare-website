@@ -215,11 +215,29 @@
                                                             <label for="clinic"><strong>Clinic</strong></label>
                                                             <select name="clinic" class="form-control form-control-user"
                                                                 placeholder="Select Clinic" id="clinic" style="
-                                                                height: 65px" required value="<%= data.clinic%>"  selected= value >
-                                                                <option value="Clalit">Clalit</option>
-                                                                <option value="Meuhedet">Meuhedet</option>
-                                                                <option value="Macabi">Macabi</option>
-                                                                <option value="Leumit">Leumit</option>
+                                                                height: 65px" value="<%= data.clinic%>"  selected= value  required >
+                                                                 <option value="<%= data.clinic%>"><%= data.clinic%></option>
+                                                                <% if(data.clinic == "Clalit") {%>
+                                                                    <option value="Meuhedet">Meuhedet</option>
+                                                                    <option value="Macabi">Macabi</option>
+                                                                    <option value="Leumit">Leumit</option>
+                                                                    <% } %>
+                                                                <% if(data.clinic == "Meuhedet") {%>
+                                                                    <option value="Clalit">Clalit</option>
+                                                                    <option value="Macabi">Macabi</option>
+                                                                    <option value="Leumit">Leumit</option>
+                                                                    <% } %>
+                                                                <% if(data.clinic == "Macabi") {%>
+                                                                    <option value="Clalit">Clalit</option>
+                                                                    <option value="Meuhedet">Meuhedet</option>
+                                                                    <option value="Leumit">Leumit</option>
+                                                                    <% } %>
+                                                                <% if(data.clinic == "Leumit") {%>
+                                                                    <option value="Clalit">Clalit</option>
+                                                                    <option value="Meuhedet">Meuhedet</option>
+                                                                    <option value="Macabi">Macabi</option>
+                                                                    <% } %>
+                                                                    
                                                             </select>
                                                         </div>
                                                     </div>
