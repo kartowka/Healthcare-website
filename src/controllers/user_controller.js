@@ -8,13 +8,12 @@ const alert = require('alert')
 exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
         try {
-            console.log(req.user.id)
-            console.log(req.params.id)
+            var granted = true
+            const user = await User.findById(req.params.id)
+            if (req.user.id != user.id && user.role == 'patient' && req.user.role == 'patient') granted = false
+            else if (req.user.id != user.id && user.role == 'doctor' && req.user.role == 'doctor' && resource != 'doctor_profile') granted = false
             var permission = roles.can(req.user.role)[action](resource)
-            if (action == 'readOwn' && req.user.id != req.params.id){
-                permission = roles.deny(req.user.role).readAny(resource)
-            }
-            if (!permission.granted) {
+            if (!permission.granted || !granted) {
                 alert('You don`t have enough permission to perform this action')
                 return res.status(401).redirect('/')
             }
