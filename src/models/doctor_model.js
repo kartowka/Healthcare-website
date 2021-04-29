@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 const Scheme = mongoose.Schema
 
 const doctorDetails = new Scheme({
+    bio: {
+        type: String,
+    },
     working_days: {
         type: [String],
         enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -27,7 +30,6 @@ const doctorDetails = new Scheme({
     clinic_phone_number: {
         type: String
     }
-
 })
 
 const Doctor = mongoose.model('doctor_details', doctorDetails)
