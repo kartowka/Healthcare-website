@@ -47,29 +47,13 @@
                                                             <label for="clinic"><strong>Clinic</strong></label>
                                                             <select name="clinic" class="form-control form-control-user"
                                                                 placeholder="Select Clinic" id="clinic" style="
-                                                                height: 65px" value="<%= data.clinic%>"  selected= value  required >
-                                                                 <option value="<%= data.clinic%>"><%= data.clinic%></option>
-                                                                <% if(data.clinic == "Clalit") {%>
-                                                                    <option value="Meuhedet">Meuhedet</option>
-                                                                    <option value="Macabi">Macabi</option>
-                                                                    <option value="Leumit">Leumit</option>
-                                                                    <% } %>
-                                                                <% if(data.clinic == "Meuhedet") {%>
-                                                                    <option value="Clalit">Clalit</option>
-                                                                    <option value="Macabi">Macabi</option>
-                                                                    <option value="Leumit">Leumit</option>
-                                                                    <% } %>
-                                                                <% if(data.clinic == "Macabi") {%>
-                                                                    <option value="Clalit">Clalit</option>
-                                                                    <option value="Meuhedet">Meuhedet</option>
-                                                                    <option value="Leumit">Leumit</option>
-                                                                    <% } %>
-                                                                <% if(data.clinic == "Leumit") {%>
-                                                                    <option value="Clalit">Clalit</option>
-                                                                    <option value="Meuhedet">Meuhedet</option>
-                                                                    <option value="Macabi">Macabi</option>
-                                                                    <% } %>
-                                                                    
+                                                                height: 65px" value="<%= data.clinic%>"  selected= value required >
+                                                                 <% hmo = ["Clalit", "Meuhedet", "Macabi", "Leumit"]
+                                                                    hmo = hmo.filter(e => e != data.clinic) %>
+                                                                <option ><%= data.clinic%></option>
+                                                                <option ><%= hmo[0] %></option>
+                                                                <option ><%= hmo[1] %></option>
+                                                                <option ><%= hmo[2] %></option>        
                                                             </select>
                                                         </div>
                                                     </div>
