@@ -24,7 +24,7 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <%- include('partials/header'); %>
                 <div id="content">
-                    <% if (data.role=='doctor' ) {%>
+                    <% if (data.id == userID || userRole == 'admin') {%>
                         <%- include('doctor_partials/header'); %>
                         <%}%>
                             <div class="container-fluid">
