@@ -60,7 +60,7 @@ profile
 profile
     .route('/doctor_profile/doctor_settings/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readAny', 'doctor_settings'),
+        user_controller.grantAccess('readOwn', 'doctor_settings'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_settings', { data: req.user })
         })
@@ -83,15 +83,6 @@ profile
         user_controller.grantAccess('readAny', 'doctor_profile'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_previous_appointments', { data: req.user })
-        })
-
-// doctor opinions    
-profile
-    .route('/doctor_profile/doctor_opinions/:id')
-    .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readAny', 'doctor_profile'),
-        user_controller.getUser, (req, res) => {
-            res.render('doctor_opinions', { data: req.user })
         })
 
 // doctor Appointment summary   
