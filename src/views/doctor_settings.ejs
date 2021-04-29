@@ -130,7 +130,7 @@
                                             <p class="text-primary m-0 font-weight-bold">User Settings</p>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form  method="POST">
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="<%=data.first_name%>" name="first_name" value="<%=data.first_name%>"></div>
@@ -151,17 +151,20 @@
                                                 <div class="form-row">
                                             
                                                     <div class="col">
+                                                        
                                                         <div class="form-group"><label for="Clinic"><strong>HMO's</strong></label><br>
-                                                            <form>
-                                                                <input type="checkbox" name="Clalit" value="Clalit">
-                                                                <label for="Clalit"> Clalit</label><br>
-                                                                <input type="checkbox" name="Macabi" value="Macabi">
-                                                                <label for="Macabi"> Macabi</label><br>
-                                                                <input type="checkbox" name="Meuhedet" value="Meuhedet">
-                                                                <label for="Meuhedet">Meuhedet</label><br>
-                                                                <input type="checkbox" name="Leumit" value="Leumit">
-                                                                <label for="Leumit">Leumit</label><br><br>
-                                                              </form>
+                                                            <form >
+                                                                <input type="checkbox" name="doctor_related_clinics[]" value="Clalit">
+                                                                <label for="clinic1"> Clalit</label><br>
+                                                                <input type="checkbox" name="doctor_related_clinics[]" value="Meuhedet">
+                                                                <label for="clinic2"> Meuhedet</label><br>
+                                                                <input type="checkbox" name="doctor_related_clinics[]" value="Macabi">
+                                                                <label for="clinic3"> Macabi</label><br>
+                                                                <input type="checkbox" name="doctor_related_clinics[]" value="Leumit">
+                                                                <label for="clinic4"> Leumit</label><br><br>
+                                                                <input class="form-control form-control-user" type="text"
+                                                                    name="medical_license_id" placeholder="Medical Licence No." id="ml_ID">
+                                                            </form>
                                                             </div>
                                                     </div>
 
