@@ -131,9 +131,14 @@ exports.updateUser = async (req, res, next) => {
         const update = req.body
         const userId = req.params.id
         await User.findByIdAndUpdate(userId, update)
-        const user = await User.findById(userId)
-        alert('User has been updated')
-        res.status(200).redirect(req.get('referer'))
+        if(update.first_name && update.last_name){
+            const user = await User.findById(userId)
+            alert('User has been updated')
+            res.status(200).redirect(req.get('referer'))
+        }
+        else
+            alert('No updated, missing data in one of the fields')
+
     } catch (error) {
         next(error)
     }
