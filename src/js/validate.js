@@ -1,3 +1,4 @@
+//var bottom_ma
 $(document).ready(function () {
     // set initially button state hidden
     $('#btn').attr('disabled', true)
@@ -6,12 +7,18 @@ $(document).ready(function () {
         if (validateEmail()) {
             // if the email is validated
             // set input email border green
-            $('#email').css('border', '2px solid green')
+            $('#email').css('border-top', '2px solid green')
+            $('#email').css('border-bottom', '2px solid green')
+            $('#email').css('border-left', '2px solid green')
+            $('#email').css('border-right', '2px solid green')
             // and set label 
         } else {
             // if the email is not validated
             // set border red
-            $('#email').css('border', '2px solid red')
+            $('#email').css('border-top', '2px solid red')
+            $('#email').css('border-bottom', '2px solid red')
+            $('#email').css('border-left', '2px solid red')
+            $('#email').css('border-right', '2px solid red')
         }
         buttonState()
     })
@@ -26,13 +33,25 @@ $(document).ready(function () {
         // check
         if (validatePasswordPairLength()) {
             // set input password border green
-            $('#pwd_main').css('border', '2px solid green')
-            $('#pwd_rep').css('border', '2px solid green')
+            $('#pwd_main').css('border-top', '2px solid green')
+            $('#pwd_main').css('border-bottom', '2px solid green')
+            $('#pwd_main').css('border-left', '2px solid green')
+            $('#pwd_main').css('border-right', '2px solid green')
+            $('#pwd_rep').css('border-top', '2px solid green')
+            $('#pwd_rep').css('border-bottom', '2px solid green')
+            $('#pwd_rep').css('border-left', '2px solid green')
+            $('#pwd_rep').css('border-right', '2px solid green')
             //set passMsg 
         } else {
             // set input password border red
-            $('#pwd_main').css('border', '2px solid red')
-            $('#pwd_rep').css('border', '2px solid red')
+            $('#pwd_main').css('border-top', '2px solid red')
+            $('#pwd_main').css('border-bottom', '2px solid red')
+            $('#pwd_main').css('border-left', '2px solid red')
+            $('#pwd_main').css('border-right', '2px solid red')
+            $('#pwd_rep').css('border-top', '2px solid red')
+            $('#pwd_rep').css('border-bottom', '2px solid red')
+            $('#pwd_rep').css('border-left', '2px solid red')
+            $('#pwd_rep').css('border-right', '2px solid red')
             //set passMsg 
         }
         buttonState()
