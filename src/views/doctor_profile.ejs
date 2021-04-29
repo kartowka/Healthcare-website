@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -15,100 +16,120 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
 </head>
+
 <body id="page-top">
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
-        <%- include('partials/header'); %>
-            <div id="content">
-                <%- include('doctor_partials/header'); %>
- 
-                <div class="container-fluid">
-                    <div class="card shadow mb-4">
-                        <div class="row mr-8">
-                            <div class="col-lg-12">
-                               <div class="card mb-2">
-                                <div class="card-header py-3">
-                                    <h6 class="text-primary font-weight-bold m-1">Profile</h6>
-                                </div>
-                                <table class="mr-8"id="t01">
-                                    <tr>
-                                        <th>&nbsp;&nbsp;Firstname:</th>
-                                              <td><%=data.first_name%> <br></td>
-                                            </tr>
+            <%- include('partials/header'); %>
+                <div id="content">
+                    <% if (data.role=='doctor' ) {%>
+                        <%- include('doctor_partials/header'); %>
+                        <%}%>
+                            <div class="container-fluid">
+                                <div class="card shadow mb-4">
+                                    <div class="row mr-8">
+                                        <div class="col-lg-12">
+                                            <div class="card mb-2">
+                                                <div class="card-header py-3">
+                                                    <h6 class="text-primary font-weight-bold m-1">Profile</h6>
+                                                </div>
+                                                <table class="mr-8" id="t01">
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;Firstname:</th>
+                                                        <td>
+                                                            <%=data.first_name%> <br>
+                                                        </td>
+                                                    </tr>
 
-                                            <tr>
-                                                <th>&nbsp;&nbsp;Lastname:</th> 
-                                                <td><%=data.last_name%> <br></td> 
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;Lastname:</th>
+                                                        <td>
+                                                            <%=data.last_name%> <br>
+                                                        </td>
 
-                                            </tr>
+                                                    </tr>
 
-                                            <tr>
-                                                <th>&nbsp;&nbsp;License number:</th>
-                                                <td><%=data.medical_license_id%> <br></td>
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;License number:</th>
+                                                        <td>
+                                                            <%=data.medical_license_id%> <br>
+                                                        </td>
 
-                                            </tr>
-
-
-                                            <tr>
-                                                <th>&nbsp;&nbsp;Email:</th>
-                                                <td><%=data.email%><br></td>
-                                              </tr>
+                                                    </tr>
 
 
-                                              <tr>
-                                                <th>&nbsp;&nbsp;HMO's I work:</th>
-                                                <td>
-                                                    <%=data.doctor_related_clinics%> <br>
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;Email:</th>
+                                                        <td>
+                                                            <%=data.email%><br>
+                                                        </td>
+                                                    </tr>
 
-                                                </td>
-                                              </tr>
 
-                                              <tr>
-                                                <th>&nbsp;&nbsp;Work Days:</th>
-                                                <td><%=data.start_day%>-<%=data.end_day%> <br></td>
-                                            </tr>
-                                            <tr>
-                                                <th>&nbsp;&nbsp;Reception hours:</th>
-                                                    <td><%=data.start_time%>-<%=data.end_time%> <br></td>
-                                                </tr>
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;HMO's I work:</th>
+                                                        <td>
+                                                            <%=data.doctor_related_clinics%> <br>
 
-                                                <tr>
-                                                    <th>&nbsp;&nbsp;Clinic address:</th>
-                                                    <td><%=data.clinic_address%> <br></td>
+                                                        </td>
+                                                    </tr>
 
-                                                </tr>
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;Work Days:</th>
+                                                        <td>
+                                                            <%=data.start_day%>-<%=data.end_day%> <br>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;Reception hours:</th>
+                                                        <td>
+                                                            <%=data.start_time%>-<%=data.end_time%> <br>
+                                                        </td>
+                                                    </tr>
 
-                                                <tr>
-                                                    <th>&nbsp;&nbsp;Languages:</th>
-                                                    <td><%=data.spoken_languages%> <br></td>
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;Clinic address:</th>
+                                                        <td>
+                                                            <%=data.clinic_address%> <br>
+                                                        </td>
 
-                                                </tr>
+                                                    </tr>
 
-                                                <tr>
-                                                    <th>&nbsp;&nbsp;Phone number:</th>
-                                                    <td><%=data.clinic_phone_number%><br></td>
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;Languages:</th>
+                                                        <td>
+                                                            <%=data.spoken_languages%> <br>
+                                                        </td>
 
-                                                </tr>
-                                          </table>
-                                          <br>
-                                    </div>
+                                                    </tr>
 
-                                    <div class="card shadow mb-4" id="General_Rating">
-                                        <div class="card-header py-3">
-                                            <h6 class="text-primary font-weight-bold m-1">General Rating</h6>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star "></span>
+                                                    <tr>
+                                                        <th>&nbsp;&nbsp;Phone number:</th>
+                                                        <td>
+                                                            <%=data.clinic_phone_number%><br>
+                                                        </td>
+
+                                                    </tr>
+                                                </table>
+                                                <br>
+                                            </div>
+
+                                            <div class="card shadow mb-4" id="General_Rating">
+                                                <div class="card-header py-3">
+                                                    <h6 class="text-primary font-weight-bold m-1">General Rating</h6>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star "></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- footer starts here -->
                 <%- include('partials/footer'); %>
