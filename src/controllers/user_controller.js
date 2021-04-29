@@ -8,12 +8,17 @@ const alert = require('alert')
 exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
         try {
-                const permission = roles.can(req.user.role)[action](resource)
-                if (!permission.granted) {
-                    alert('You don`t have enough permission to perform this action')
-                    return res.status(401).redirect('/')
-                }
-                next()
+            console.log(req.user.id)
+            console.log(req.params.id)
+            var permission = roles.can(req.user.role)[action](resource)
+            if (action == 'readOwn' && req.user.id != req.params.id){
+                permission = roles.deny(req.user.role).readAny(resource)
+            }
+            if (!permission.granted) {
+                alert('You don`t have enough permission to perform this action')
+                return res.status(401).redirect('/')
+            }
+            next()
         } catch (error) {
             next(error)
         }
