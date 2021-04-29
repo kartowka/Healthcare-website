@@ -39,7 +39,7 @@ profile
 profile
     .route('/patient_profile/patient_future_appointments/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readAny', 'doctor_profile'),
+        user_controller.grantAccess('readOwn', 'patient_future_appointments'),
         user_controller.getUser, (req, res) => {
             res.render('patient_future_appointments', { data: req.user })
         })
@@ -52,9 +52,6 @@ profile
         user_controller.getUser, (req, res) => {
             res.render('doctor_profile', { data: req.user })
         })
-    .post(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('updateOwn', 'doctor_profile'),
-        user_controller.updateUser)
 
 //doctor settings
 profile
@@ -65,14 +62,14 @@ profile
             res.render('doctor_settings', { data: req.user })
         })
     .post(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('updateOwn', 'doctor_profile'),
+        user_controller.grantAccess('updateOwn', 'doctor_settings'),
         user_controller.updateUser)
 
 //previous and future appointments
 profile
     .route('/doctor_profile/doctor_future_appointments/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readAny', 'doctor_profile'),
+        user_controller.grantAccess('readOwn', 'doctor_future_appointments'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_future_appointments', { data: req.user })
         })
@@ -80,7 +77,7 @@ profile
 profile
     .route('/doctor_profile/doctor_previous_appointments/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readAny', 'doctor_profile'),
+        user_controller.grantAccess('readOwn', 'doctor_previous_appointments'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_previous_appointments', { data: req.user })
         })
@@ -89,18 +86,18 @@ profile
 profile
     .route('/doctor_profile/doctor_appointment_summary/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readAny', 'doctor_appointment_summary'),
+        user_controller.grantAccess('readOwn', 'doctor_appointment_summary'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_appointment_summary', { data: req.user })
         })
 
 // doctor Reviwe   
 profile
-    .route('/doctor_profile/Review/:id')
+    .route('/doctor_profile/doctor_Review/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readAny', 'doctor_profile'),
+        user_controller.grantAccess('readOwn', 'doctor_Review'),
         user_controller.getUser, (req, res) => {
-            res.render('Review', { data: req.user })
+            res.render('doctor_Review', { data: req.user })
         })
 
 module.exports = profile
