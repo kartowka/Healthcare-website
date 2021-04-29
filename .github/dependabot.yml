@@ -1,0 +1,12 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  target-branch: Sprint_3-pt1
+  ignore:
+  - dependency-name: eslint
+    versions:
+    - 7.22.0
