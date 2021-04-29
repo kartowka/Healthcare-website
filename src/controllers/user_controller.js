@@ -100,7 +100,7 @@ exports.login = async (req, res, next) => {
         if (user.role == 'patient') {
             res.redirect(`/patient_profile/${user._id}`)
         } else if (user.role == 'doctor') {
-            res.redirect(`/doctor_profile/${user._id}`)
+            res.redirect(`/doctor_profile/doctor_settings/${user._id}`)
         } else { res.redirect('/') }
     } catch (error) {
         next(error)
