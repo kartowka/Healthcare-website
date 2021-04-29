@@ -8,12 +8,12 @@ const alert = require('alert')
 exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
         try {
-            const permission = roles.can(req.user.role)[action](resource)
-            if (!permission.granted) {
-                alert('You don`t have enough permission to perform this action')
-                return res.status(401).redirect('/')
-            }
-            next()
+                const permission = roles.can(req.user.role)[action](resource)
+                if (!permission.granted) {
+                    alert('You don`t have enough permission to perform this action')
+                    return res.status(401).redirect('/')
+                }
+                next()
         } catch (error) {
             next(error)
         }
@@ -118,6 +118,7 @@ exports.getUser = async (req, res, next) => {
             alert('An admin sill hasn`t authorized you yet, please wait patiently')
             return res.status(401).redirect('/')
         }
+        req.user = user
         next()
 
     } catch (error) {
@@ -130,7 +131,7 @@ exports.updateUser = async (req, res, next) => {
         const update = req.body
         const userId = req.params.id
         await User.findByIdAndUpdate(userId, update)
-        if(update.first_name && update.last_name){
+        if (update.first_name && update.last_name) {
             const user = await User.findById(userId)
             alert('User has been updated')
             res.status(200).redirect(req.get('referer'))
@@ -193,7 +194,7 @@ exports.verifyUser = (req, res, next) => {
 exports.verifyDoctor = (req, res, next) => {
 
     User.findOne({ _id: req.params.id })
-        .then(async(user) => {
+        .then(async (user) => {
             nodemailer.sendAuthenticationApprovalToDoctor(
                 user.last_name,
                 user.email,
