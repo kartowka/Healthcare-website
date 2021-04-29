@@ -16,23 +16,23 @@ profile
 profile
     .route('/patient_profile/patient_settings/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readOwn', 'patient_profile'), //check
+        user_controller.grantAccess('readOwn', 'patient_settings'), //check
         user_controller.getUser, (req, res) => {
             res.render('patient_settings', { data: req.user })
         })
     .post(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('updateOwn', 'patient_profile'),
+        user_controller.grantAccess('updateOwn', 'patient_settings'),
         user_controller.updateUser)
 
 profile
     .route('/patient_profile/patient_previous_appointments/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readOwn', 'patient_profile'),
+        user_controller.grantAccess('readOwn', 'patient_previous_appointments'),
         user_controller.getUser, (req, res) => {
             res.render('patient_previous_appointments', { data: req.user })
         })
     .post(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('updateOwn', 'patient_profile'),
+        user_controller.grantAccess('updateOwn', 'patient_previous_appointments'),
         user_controller.updateUser)
 
 //previous and future appointments
