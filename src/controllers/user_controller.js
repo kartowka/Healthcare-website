@@ -105,6 +105,7 @@ exports.login = async (req, res, next) => {
 
 exports.getUsers = async (req, res, next) => {
     const users = await User.find({})
+    req.params.users = users
     next()
 }
 

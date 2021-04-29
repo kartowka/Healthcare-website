@@ -61,7 +61,9 @@ router.use(profile_router)
 //admin interface
 router
     .route('/admin_interface/:id')
-    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'admin_interface'), user_controller.getUsers)
+    .get(user_controller.allowIfLoggedin, user_controller.grantAccess('readAny', 'admin_interface'), user_controller.getUsers,(req,res)=>{
+        res.render('admin_interface',{users:req.params.users})
+    })
     //admin edit user
     //.put(user_controller.allowIfLoggedin, user_controller.grantAccess('updateAny', 'admin_interface'), user_controller.updateUser) 
 
@@ -76,7 +78,9 @@ router
 
 router
     .route('/search')
-    .get(user_controller.allowIfLoggedin,user_controller.getUsers)
+    .get(user_controller.allowIfLoggedin,user_controller.getUsers,(req,res)=>{
+        res.render('search',{users:req.params.users})
+    })
 router.use(function (req, res, next) {
 
     // you can do what ever you want here
