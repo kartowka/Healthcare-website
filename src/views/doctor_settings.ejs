@@ -24,18 +24,15 @@
         <div class="d-flex flex-column" id="content-wrapper">
 
         <%- include('partials/header'); %>
-
             <div id="content">
- 
                 <%- include('doctor_partials/header'); %>
 
                 <div class="container-fluid">
                     <div class="card shadow mb-4">
                              <div class="row mb-3">
                                  <div class="col-lg-4">
-                                  
-                                 
-                            <div class="card shadow mb-4">
+        
+                            <div class="card shadow mb-1">
                                 <div class="card-header py-3">
                                     <h6 class="text-primary font-weight-bold m-0">Work Days Settings</h6>
                                 </div>
@@ -73,7 +70,7 @@
                                     
                                 </div>
 
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-1">
                                 <div class="card-header py-3">
                                     <h6 class="text-primary font-weight-bold m-0">Reception hours</h6>
                                 </div>
@@ -87,6 +84,24 @@
 
                                     </fieldset>
                                 </div>
+                                </div>
+                                 
+                                         <div class="card shadow mb-4">
+                                             <div class="card-header py-3">
+                                        <p class="text-primary m-0 font-weight-bold">About Me</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <form>
+                                                    <div class="form-group"><textarea class="form-control" id="signature" rows="4" name="signature"></textarea></div>
+                                                    <div class="form-group">
+                                                    </div>
+                                                    <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                         </div>
                        
@@ -125,7 +140,7 @@
                             </div>
                             <div class="row">
                                 <div class="col" >
-                                    <div class="card shadow mb-3"  id="User_Settings">
+                                    <div class="card shadow mb-1"  id="User_Settings">
                                         <div class="card-header py-3" >
                                             <p class="text-primary m-0 font-weight-bold">User Settings</p>
                                         </div>
@@ -149,9 +164,7 @@
                                      
                                         
                                                 <div class="form-row">
-                                            
                                                     <div class="col">
-                                                        
                                                         <div class="form-group"><label for="Clinic"><strong>HMO's</strong></label><br>
                                                             <form >
                                                                 <input type="checkbox" name="doctor_related_clinics[]" value="Clalit">
@@ -198,6 +211,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
 
