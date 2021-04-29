@@ -98,7 +98,7 @@ profile
 profile
     .route('/doctor_profile/doctor_appointment_summary/:id')
     .get(user_controller.allowIfLoggedin,
-        user_controller.grantAccess('readAny', 'doctor_profile'),
+        user_controller.grantAccess('readAny', 'doctor_appointment_summary'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_appointment_summary', { data: req.user })
         })
