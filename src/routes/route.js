@@ -9,6 +9,12 @@ router
     .get((req, res) => {
         res.render('index')
     })
+//our team
+router
+    .route('/our_team')
+    .get((req, res) => {
+        res.render('our_team')
+    })
 //login
 router
     .route('/login')
