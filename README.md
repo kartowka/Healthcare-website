@@ -17,19 +17,35 @@ The log-in page has a syntax authentication Email & Password fields.
 In this sprint, we mainly wrote system requirements & test cases accordingly while covering (hopefully) at least 95% of our to-be-built system. All requirements were uploaded to our project management workplace at [Clubhouse](https://clubhouse.io/) to their respective Epic.
 
 We changed the website stub from Sprint 1 to one that resembles more a health care system.
+
+#### Sprint Nº 3
+In this sprint, we were tasked to implement 60% of the system requirements we wrote in the previous sprint, we divided the work among us and managed to achieve around 99% of the logic we were trying to achieve, some requirements were pushed back to the next sprint and one got deleted because of security reasons.
+
+We chose to use [MongoDB](https://www.mongodb.com/) as our project database and we implemented our system around it.
+
+As for communication, we started using [Slack](https://slack.com/) for cross-notification convenience, we integrated Github, CircleCI & Clubhouse notifications to it which resulted in a really smooth and simple system where especially in things related to development because now we know who pushed what commits and because of it we minimized merge conflicts & requests.
  
 ### Requirements
 Have `npm` & `node.js` installed.
 
 Our dependencies list:
 ```
-"devDependencies": {
-    "@types/chai": "^4.2.15",
-    "@types/mocha": "^8.2.2",
-    "chai": "^4.3.4",
-    "eslint": "^7.23.0",
-    "mocha": "^8.3.2",
-    "nodemon": "^2.0.7"
+  "dependencies": {
+    "accesscontrol": "^2.2.1",
+    "accessibility": "^3.0.13",
+    "alert": "^5.0.10",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.7",
+    "node-gyp": "^8.0.0",
+    "node-pre-gyp": "^0.17.0",
+    "nodemailer": "^6.5.0"
   }
 ```
 ## Installation
@@ -52,8 +68,16 @@ Optionally, you can run our `heroku` [deployed](https://projectmanagmentsce.hero
 - [CircleCI](https://circleci.com/)
 ### Deployment
 - [Heroku](https://www.heroku.com/)
+### DataBase
+- [MongoDB](https://www.mongodb.com/)
 ### Development Environment
 - [VS Code](https://code.visualstudio.com/)
+
+## Communications & Management
+### Communication
+- [Slack](https://slack.com/)
+### Project Management
+- [Clubhouse](https://clubhouse.io/)
 ## Known Bugs
 No known bugs at this time.
 ## Authors
