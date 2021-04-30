@@ -59,7 +59,7 @@ $(document).ready(function () {
     $('#ml_ID').keyup(function () {
         buttonState()
     })
-    $('#clinic').click(function() {
+    $('#clinic').on('click',function() {
         buttonState()
     })
     $('#role').click(function () {
