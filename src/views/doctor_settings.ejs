@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Doctor's Profile</title>
+
+
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/profile.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+
+            <%- include('partials/header'); %>
+                <div id="content">
+                    <%- include('doctor_partials/header'); %>
+
+                        <div class="container-fluid">
+                            <div class="card shadow mb-4">
+                                <div class="row mb-3">
+                                    <div class="col-lg-4">
+                                        <div class="card shadow mb-1">
+                                            <div class="card-header py-3">
+                                                <h6 class="text-primary font-weight-bold m-0">Work Days Settings
+                                                </h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <form method="POST">
+                                                    <label for="Work Days"><strong>From:</strong></label>
+                                                    <select name="working_days[]" id="start_day"
+                                                        value="<%=data.start_day%>" selected=value>
+                                                        <option value=""></option>
+                                                        <option value="Sunday">Sunday</option>
+                                                        <option value="Monday">Monday</option>
+                                                        <option value="Tuesday">Tuesday</option>
+                                                        <option value="Wednesday">Wednesday</option>
+                                                        <option value="Thursday">Thursday</option>
+                                                        <option value="Friday">Friday</option>
+                                                        <option value="Saturday">Saturday</option>
+                                                    </select>
+                                                    <br><br>
+
+                                                    <label
+                                                        for="Work Days"><strong>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
+                                                    <select name="working_days[]" id="end_day" value="<%=data.end_day%>"
+                                                        selected=value>
+                                                        <option value=""></option>
+                                                        <option value="Sunday">Sunday</option>
+                                                        <option value="Monday">Monday</option>
+                                                        <option value="Tuesday">Tuesday</option>
+                                                        <option value="Wednesday">Wednesday</option>
+                                                        <option value="Thursday">Thursday</option>
+                                                        <option value="Friday">Friday</option>
+                                                        <option value="Saturday">Saturday</option>
+                                                    </select>
+                                                    <br><br>
+
+                                                    <div class="form-group"><button class="btn btn-primary btn-sm"
+                                                            type="submit">Save Settings</button></div>
+
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card shadow mb-1">
+                                            <div class="card-header py-3">
+                                                <h6 class="text-primary font-weight-bold m-0">Reception hours</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <form method="POST">
+                                                    <fieldset>
+                                                        <label for="from"><strong>From:</strong></label><input
+                                                            class="form-control" type="time" id="reception_hours_from"
+                                                            placeholder="<%= data.start_time%>" name="start_time"
+                                                            value="<%= data.start_time%>">
+                                                        </label>
+                                                        <label for="to:"><strong>To:</strong></label><input
+                                                            class="form-control" type="time" id="reception_hours_to"
+                                                            placeholder="<%= data.end_time%>" name="end_time"
+                                                            value="<%data.end_time%>">
+                                                        <br>
+                                                        <div class="form-group"><button class="btn btn-primary btn-sm"
+                                                                type="submit">Save Settings</button></div>
+
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <p class="text-primary m-0 font-weight-bold">About Me</p>
+                                            </div>
+                                            <div class="card-body">
+                                                <form method="POST">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <form>
+                                                                <div class="form-group"><textarea class="form-control"
+                                                                        id="signature" rows="4" name="bio"></textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                </div>
+                                                                <div class="form-group"><button
+                                                                        class="btn btn-primary btn-sm"
+                                                                        type="submit">Save Settings</button></div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <div class="row mb-3 d-none">
+                                            <div class="col">
+                                                <div class="card text-white bg-primary shadow">
+                                                    <div class="card-body">
+                                                        <div class="row mb-2">
+                                                            <div class="col">
+                                                                <p class="m-0">Peformance</p>
+                                                                <p class="m-0"><strong>65.2%</strong></p>
+                                                            </div>
+                                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i>
+                                                            </div>
+                                                        </div>
+                                                        <p class="text-white-50 small m-0"><i
+                                                                class="fas fa-arrow-up"></i>&nbsp;5% since last month
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="card text-white bg-success shadow">
+                                                    <div class="card-body">
+                                                        <div class="row mb-2">
+                                                            <div class="col">
+                                                                <p class="m-0">Peformance ????</p>
+                                                                <p class="m-0"><strong>65.2%</strong></p>
+                                                            </div>
+                                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i>
+                                                            </div>
+                                                        </div>
+                                                        <p class="text-white-50 small m-0"><i
+                                                                class="fas fa-arrow-up"></i>&nbsp;5% since last month
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="card shadow mb-1" id="User_Settings">
+                                                    <div class="card-header py-3">
+                                                        <p class="text-primary m-0 font-weight-bold">User Settings</p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <form method="POST">
+                                                            <div class="form-row">
+                                                                <div class="col">
+                                                                    <div class="form-group"><label
+                                                                            for="first_name"><strong>First
+                                                                                Name</strong></label><input
+                                                                            class="form-control" type="text"
+                                                                            id="first_name"
+                                                                            placeholder="<%=data.first_name%>"
+                                                                            name="first_name"
+                                                                            value="<%=data.first_name%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="form-group"><label
+                                                                            for="last_name"><strong>Last
+                                                                                Name</strong></label><input
+                                                                            class="form-control" type="text"
+                                                                            id="last_name"
+                                                                            placeholder="<%= data.last_name%>"
+                                                                            name="last_name"
+                                                                            value="<%=data.last_name%>">
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="col">
+                                                                    <div class="form-group"><label
+                                                                            for="specialization"><strong>Specialization</strong></label><input
+                                                                            class="form-control" type="text"
+                                                                            id="specialization"
+                                                                            placeholder="<%=data.specialization%>"
+                                                                            name="specialization"
+                                                                            value="<%= data.specialization%>"></div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-row">
+                                                                <div class="col">
+                                                                    <div class="form-group"><label
+                                                                            for="Clinic"><strong>HMO's</strong></label><br>
+                                                                        
+                                                                            <input type="checkbox"
+                                                                                name="doctor_related_clinics[]"
+                                                                                value="Clalit">
+                                                                            <label for="clinic1"> Clalit</label><br>
+                                                                            <input type="checkbox"
+                                                                                name="doctor_related_clinics[]"
+                                                                                value="Meuhedet">
+                                                                            <label for="clinic2"> Meuhedet</label><br>
+                                                                            <input type="checkbox"
+                                                                                name="doctor_related_clinics[]"
+                                                                                value="Macabi">
+                                                                            <label for="clinic3"> Macabi</label><br>
+                                                                            <input type="checkbox"
+                                                                                name="doctor_related_clinics[]"
+                                                                                value="Leumit">
+                                                                            <label for="clinic4"> Leumit</label><br><br>
+                                                                            <input
+                                                                                class="form-control form-control-user"
+                                                                                type="text" name="medical_license_id"
+                                                                                placeholder="Medical Licence No."
+                                                                                id="ml_ID">
+                                                                      
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group"><button
+                                                                    class="btn btn-primary btn-sm" type="submit">Save
+                                                                    Settings</button></div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="card shadow">
+                                                    <form method="POST">
+                                                        <div class="card-header py-3">
+                                                            <p class="text-primary m-0 font-weight-bold">Contact
+                                                                Settings
+                                                            </p>
+                                                        </div>
+                                                        <div class="card-body">
+                                                                <div class="form-group"><label
+                                                                        for="address"><strong>Address</strong></label><input
+                                                                        class="form-control" type="text" id="address"
+                                                                        placeholder="<%=data.clinic_address%>"
+                                                                        name="clinic_address"
+                                                                        value="<%=data.clinic_address%>">
+                                                                </div>
+                                                                <div class="form-group"><label
+                                                                        for="languages"><strong>Languages</strong></label><input
+                                                                        class="form-control" type="text" id="languages"
+                                                                        placeholder="<%=data.spoken_languages%>"
+                                                                        name="spoken_languages"
+                                                                        value="<%=data.spoken_languages%>"></div>
+                                                                <div class="form-row">
+                                                                    <div class="col">
+                                                                        <div class="form-group"><label
+                                                                                for="city"><strong>City</strong></label><input
+                                                                                class="form-control" type="text"
+                                                                                id="city"
+                                                                                placeholder="<%= data.clinic_city %>"
+                                                                                name="clinic_city"
+                                                                                value="<%= data.clinic_city%>">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-group"><label
+                                                                                for="Phone number"><strong>Phone
+                                                                                    number</strong></label><input
+                                                                                class="form-control" type="tel"
+                                                                                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                                                                                id="phone _number"
+                                                                                placeholder="<%=data.clinic_phone_number%>"
+                                                                                name="linic_phone_number"
+                                                                                value="<%=data.clinic_phone_number%>">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group"><button
+                                                                        class="btn btn-primary btn-sm"
+                                                                        type="submit">Save
+                                                                        Settings</button></div>
+                                                    </form>   
+                                                 </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- footer starts here -->
+                            <%- include('partials/footer'); %>
+                        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i
+                                class="fas fa-angle-up"></i></a>
+                </div>
+
+                <script src="/assets/js/jquery.min.js"></script>
+                <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+                <script src="/assets/js/chart.min.js"></script>
+                <script src="/assets/js/bs-init.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+                <script src="/assets/js/theme.js"></script>
+
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+  slack: circleci/slack@4.4.0
 jobs:
   build-and-test:
     executor:
@@ -12,6 +13,19 @@ jobs:
             - run: npm install
             - run: npm run test
             - run: npm run lint
+            - slack/notify:
+                channel: full-stuck
+                event: fail
+                template: basic_fail_1
+            - slack/notify:
+                channel: full-stuck
+                event: pass
+                template: basic_success_1
+            - slack/notify:
+                channel: full-stuck
+                branch_pattern: master
+                event: pass
+                template: success_tagged_deploy_1
 workflows:
     build-and-test:
       jobs:

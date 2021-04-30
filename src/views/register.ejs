@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register - JSAS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/js/validate.js"></script>
+
+</head>
+
+<body class="bg-gradient-primary" style="background: #fff">
+    <%- include('partials/header'); %>
+        <div class="text-monospace container" style="max-width: 1140px;">
+            <div class="card shadow-lg o-hidden border-0 my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-flex">
+                            <div class="flex-grow-1 bg-register-image"
+                                style="background-image: url(&quot;../assets/img/dogs/iu.png&quot;);transform-style: preserve-3d;">
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h4 class="text-dark mb-4">Create an Account!</h4>
+                                </div>
+                                <form class="user" action="/register" method="POST">
+                                    <div class="form-group">
+                                        <select name="role" class="form-control form-control-user"
+                                            placeholder="Select Role" id="role" onchange="showDiv('role_select', this)"
+                                            style="
+                                            height: 65px" required>
+                                            <option value="" disabled="" selected="">Select Role</option>
+                                            <option value="doctor">Dr.</option>
+                                            <option value="patient">Patient</option>
+                                        </select>
+                                    </div>
+                                    <div id='role_select' class="form-group">
+                                        <input type="checkbox" name="doctor_related_clinics[]" value="Clalit">
+                                        <label for="clinic1"> Clalit</label><br>
+                                        <input type="checkbox" name="doctor_related_clinics[]" value="Meuhedet">
+                                        <label for="clinic2"> Meuhedet</label><br>
+                                        <input type="checkbox" name="doctor_related_clinics[]" value="Macabi">
+                                        <label for="clinic3"> Macabi</label><br>
+                                        <input type="checkbox" name="doctor_related_clinics[]" value="Leumit">
+                                        <label for="clinic4"> Leumit</label><br><br>
+                                        <input class="form-control form-control-user" type="text"
+                                            name="medical_license_id" placeholder="Medical Licence No." id="ml_ID">
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
+                                                type="text" id="firstname" placeholder="First Name" name="first_name">
+                                        </div>
+                                        <div class="col-sm-6"><input class="form-control form-control-user" type="text"
+                                                id="lastname" placeholder="Last Name" name="last_name"></div>
+                                    </div>
+                                    <div class="form-group"><input class="form-control form-control-user" type="email"
+                                            id="email" aria-describedby="emailHelp" placeholder="Email Address"
+                                            name="email"></div>
+
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
+                                                type="password" id="pwd_main" placeholder="Password" name="password"
+                                                onKeyUp="checkPassStrength()">
+                                        </div>
+                                        <div class="col-sm-6"><input class="form-control form-control-user"
+                                                type="password" id="pwd_rep" placeholder="Repeat Password"
+                                                name="password_repeat">
+                                        </div>
+
+                                    </div>
+                                    <div id="pwd_main-strength-status" align='center'></div>
+
+                                    <div class="form-group">
+                                        <select name="clinic" class="form-control form-control-user"
+                                            placeholder="Select Clinic" id="clinic" style="
+                                            height: 65px" required>
+                                            <option value="" disabled="" selected="">Select Clinic</option>
+                                            <option value="Clalit">Clalit</option>
+                                            <option value="Meuhedet">Meuhedet</option>
+                                            <option value="Macabi">Macabi</option>
+                                            <option value="Leumit">Leumit</option>
+                                        </select>
+                                    </div>
+
+                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit"
+                                        onclick="validate()" id="btn">Register
+                                        Account</button>
+                                    <hr>
+                                </form>
+                                <div class="text-center"><a class="small" href="forgot_password">Forgot
+                                        Password?</a>
+                                </div>
+                                <div class="text-center"><a class="small" href="login">Already have an account?
+                                        Login!</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('partials/footer'); %>
+            <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+            <script src="/assets/js/theme.js"></script>
+
+</body>
+
+</html>

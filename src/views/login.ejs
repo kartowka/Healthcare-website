@@ -1,124 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet'
-        type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login - JSAS</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/css/FontAwesome.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
 </head>
 
-<body>
-
-    <!-- ====================================================
-	header section -->
-    <header class="top-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-5 header-logo">
-                    <br>
-                    <a href="/"><img src="img/JSAS.png" alt="" class="img-responsive logo"></a>
-                </div>
-
-                <div class="col-md-7">
-                    <nav class="navbar navbar-default">
-                        <div class="container-fluid nav-bar">
-                            <!-- Brand and toggle get grouped for better mobile display -->
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                    data-target="#bs-example-navbar-collapse-1">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li><a class="menu" href="/">Home</a></li>
-                                    <li><a class="menu active" a href="login">Login</a></li>
-                                    <li><a class="menu" href="/#about">about us</a></li>
-                                    <li><a class="menu" href="/#service">our services </a></li>
-                                    <li><a class="menu" href="/#team">our team</a></li>
-                                    <li><a class="menu" href="/#contact"> contact us</a></li>
-                                </ul>
-                            </div><!-- /navbar-collapse -->
-                        </div><!-- / .container-fluid -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header> <!-- end of header area -->
-    <section class="slider" id="home">
-        <div class="container-fluid">
-            <div class="row">
-                <div id="carouselHacked" class="carousel slide carousel-fade" data-ride="carousel">
-                    <div class="header-backup"></div>
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="img/slide-three.jpg" alt="">
-                            <div class="carousel-caption">
-                                <p class="sign" align="left">SIGN IN</p>
-                                <form class="form1">
-                                    <div class="form-group">
-                                        <input class="email " type="email" align="left" placeholder="Email" id="email">
+<body class="bg-gradient-primary"  style="background: #fff">
+    <%- include('partials/header'); %>
+        <div class="text-monospace container">
+            <div class="row justify-content-center">
+                <div class="col-md-9 col-lg-12 col-xl-10">
+                    <div class="card shadow-lg o-hidden border-0 my-5">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-lg-6 d-none d-lg-flex">
+                                    <div class="flex-grow-1 bg-login-image"
+                                        style="background-image: url(&quot;../assets/img/dogs/iu.png&quot;);"></div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h4 class="text-monospace text-dark mb-4">Welcome Back!</h4>
+                                        </div>
+                                        <form class="user" method='POST'>
+                                            <div class="form-group"><input class="form-control form-control-user"
+                                                    type="email" id="email" aria-describedby="emailHelp"
+                                                    placeholder="Enter Email Address..." name="email"></div>
+                                            <div class="form-group"><input class="form-control form-control-user"
+                                                    type="password" id="pwd" placeholder="Password" name="password">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox small">
+                                                    <div class="form-check"><input
+                                                            class="form-check-input custom-control-input"
+                                                            type="checkbox" id="formcheck"><label
+                                                            class="form-check-label custom-control-label"
+                                                            for="formCheck-1">Remember Me</label></div>
+                                                </div>
+                                            </div><button class="btn btn-primary btn-block text-white btn-user"
+                                                type="submit">Login</button>
+                                            <hr>
+                                        </form>
+                                        <div class="text-center"><a class="small" href="forgot_password">Forgot
+                                                Password?</a></div>
+                                        <div class="text-center"><a class="small" href="register">Create an
+                                                Account!</a></div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <input class="pass" type="password" align="left" placeholder="Password"
-                                            id="pwd">
-                                    </div>
-
-                                    <button type="submit" class="submit" align="center" onclick="validate()"
-                                        id="submit">SIGN IN</button>
-                                    <p class="forgot" align="left"><a href="password_reset">Forgot Password?</p>
-                                    <p class="register" align="left"><a href="register">SIGN UP</p>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-    </section><!-- end of slider section -->
-
-
-    <!-- footer starts here -->
-    <footer class="footer clearfix">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-6 footer-para">
-                    <p>&copy;JSAS All right reserved</p>
-                </div>
-                <div class="col-xs-6 text-right">
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-skype"></i></a>
                 </div>
             </div>
         </div>
-    </footer>
+        <%- include('partials/footer'); %>
+        
+            <script src="/assets/js/jquery.min.js"></script>
+            <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+            <script src="/assets/js/chart.min.js"></script>
+            <script src="/assets/js/bs-init.js"></script>
+            <script src="/assets/js/custom.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+            <script src="/assets/js/jquery.min.js"></script>
+            <script src="/assets/js/smoothscroll.js"></script>
+            <script src="/assets/js/theme.js"></script>
 
-    <!-- script tags
-	============================================================= -->
-    <script src="https://code.jquery.com/jquery-2.2.1.js"
-        integrity="sha256-eNcUzO3jsv0XlJLveFEkbB8bA7/CroNpNVk3XpmnwHc=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-    <script src="js/smoothscroll.js"></script>
-    <script src="js/custom.js"></script>
 </body>
 
 </html>
