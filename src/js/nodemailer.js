@@ -6,6 +6,7 @@ const config = require('dotenv').config({
 
 const user = config.parsed.EMAILUSERNAME
 const pass = config.parsed.EMAILPASS
+var link = config.parsed.WEBSITEURL
 
 const transport = nodemailer.createTransport({
     service: 'gmail',
@@ -24,7 +25,7 @@ module.exports.sendConfirmationEmail = (first_name,last_name, email, confirmatio
             html: `<h1>Email Confirmation</h1>
         <h2>Hello Dr.${last_name}</h2>
         <p>Thank you for registering to our HealthCare system. Please confirm your email by clicking on the following link</p>
-        <a href=http://127.0.0.1:4000/confirm/${confirmationCode}> Click here</a>
+        <a href=${link}/confirm/${confirmationCode}> Click here</a>
         <p>Please wait for an Admin to authenticate your credentials afterwards</p>
         </div>`,
         }).catch(err => console.log(err))
@@ -36,7 +37,7 @@ module.exports.sendConfirmationEmail = (first_name,last_name, email, confirmatio
             html: `<h1>Email Confirmation</h1>
         <h2>Hello ${first_name} ${last_name}</h2>
         <p>Thank you for registering to our HealthCare system. Please confirm your email by clicking on the following link</p>
-        <a href=http://127.0.0.1:4000/confirm/${confirmationCode}> Click here</a>
+        <a href=${link}/confirm/${confirmationCode}> Click here</a>
         </div>`,
         }).catch(err => console.log(err))
     }
@@ -50,7 +51,7 @@ module.exports.sendAuthenticationApprovalToDoctor = (last_name, email, user_id) 
         html: `<h1>Email Confirmation</h1>
         <h2>Hello Dr.${last_name}</h2>
         <p>You have been authenticated by our admin, you can keep using our system with full doctor privileges</p>
-        <a href=http://127.0.0.1:4000/> Click here</a>
+        <a href=${link}> Click here</a>
         </div>`,
     }).catch(err => console.log(err))
 }
@@ -63,7 +64,7 @@ module.exports.sendResetPassword = (first_name,last_name, email, confirmationCod
         html: `<h1>Reset Password</h1>
         <h2>Hello ${first_name} ${last_name}</h2>
         <p>To reset your password, complete this form:</p>
-        <a href=http://127.0.0.1:4000/reset_password/${confirmationCode}> Click here</a>
+        <a href=${link}/reset_password/${confirmationCode}> Click here</a>
         </div>`,
     }).catch(err => console.log(err))
 }
