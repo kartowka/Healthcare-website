@@ -21,17 +21,17 @@
     <%- include('partials/header'); %>
         <div class="container-fluid">
             <div class="text-center mt-5">
-                <div class="error mx-auto" data-text="404">
-                    <p class="m-0">404</p>
+                <div class="error mx-auto" data-text="401">
+                    <p class="m-0">401</p>
                 </div>
-                <p class="text-dark mb-5 lead">Page Not Found</p>
+                <p class="text-dark mb-5 lead"><%=alert[0]%></p>
                 <p class="text-black-50 mb-0">It looks like you found a glitch in the matrix...</p><a
                     class="text-black-50 mb-0" href="/" ">← Back to Home</a>
                     </div>
                 </div>
             </div>
             <%- include('partials/footer'); %>
-                    <script src="/assets/js/jquery.min.js"></script>
+                    <script src=" /assets/js/jquery.min.js"></script>
                     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
                     <script src="/assets/js/chart.min.js"></script>
                     <script src="/assets/js/bs-init.js"></script>

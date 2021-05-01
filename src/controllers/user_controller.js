@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../roles/roles')
 const nodemailer = require('../js/nodemailer')
-const alert = require('alert')
 
 exports.grantAccess = function (action, resource) {
     return async (req, res, next) => {
@@ -14,12 +13,13 @@ exports.grantAccess = function (action, resource) {
             else if (req.user.id != user.id && user.role == 'doctor' && req.user.role == 'doctor' && resource != 'doctor_profile') granted = false
             var permission = roles.can(req.user.role)[action](resource)
             if (!permission.granted || !granted) {
-                alert('You don`t have enough permission to perform this action')
-                return res.status(401).redirect('/')
+                throw new Error('You are not allowed to perform this action.')
+                
             }
             next()
         } catch (error) {
-            next(error)
+            req.app.locals.errors.push(error)
+            return res.status(401).redirect('/restricted')
         }
     }
 }
@@ -69,23 +69,20 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
     try {
-
         const { email, password } = req.body
         const lowerCasedEmail = await lowerCaseEmail(email)
         const user = await User.findOne({ email: lowerCasedEmail })
         if (!user) {
-            alert('Email does not exists!')
-            return res.status(401).redirect(req.get('referer'))
+            throw new Error('Email does not exists!')
         }
         const validPassword = await validatePassword(password, user.password)
         if (!validPassword) {
-            alert('Password is not correct')
-            return res.status(401).redirect(req.get('referer'))
+            throw new Error('Password is not correct.')
         }
-        if (user.status != 'Active' && user.status != 'Waiting for Admin Approval') {
-            alert('Pending Account. Please Verify Your Email!')
-            return res.status(401).redirect(req.get('referer'))
+        if (user.status != 'Active') {
+            throw new Error('Pending Account. Please Verify Your Email!')
         }
+
         const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
         })
@@ -103,7 +100,8 @@ exports.login = async (req, res, next) => {
             res.redirect(`/doctor_profile/doctor_settings/${user._id}`)
         } else { res.redirect('/') }
     } catch (error) {
-        next(error)
+        req.app.locals.errors.push(error)
+        next()
     }
 }
 
@@ -118,10 +116,6 @@ exports.getUser = async (req, res, next) => {
         const userId = req.params.id
         const user = await User.findById(userId)
         if (!user) return next
-        if (res.locals.loggedInUser.status == 'Waiting for Admin Approval') {
-            alert('An admin sill hasn`t authorized you yet, please wait patiently')
-            return res.status(401).redirect('/')
-        }
         req.user = user
         next()
 
@@ -137,11 +131,11 @@ exports.updateUser = async (req, res, next) => {
         await User.findByIdAndUpdate(userId, update)
         if (update.first_name && update.last_name) {
             const user = await User.findById(userId)
-            alert('User has been updated')
+            req.locals.errors('User has been updated')
             res.status(200).redirect(req.get('referer'))
         }
         else
-            alert('No updated, missing data in one of the fields')
+            req.locals.errors('No updated, missing data in one of the fields')
 
     } catch (error) {
         next(error)
@@ -162,13 +156,14 @@ exports.allowIfLoggedin = async (req, res, next) => {
     try {
         const user = res.locals.loggedInUser
         if (!user) {
-            alert('You need to be logged in to access this route')
-            return res.status(401).redirect(req.get('referer'))
+            throw new Error('You need to be logged in to access this route')
+            
         }
         req.user = user
         next()
     } catch (error) {
-        next(error)
+        req.app.locals.errors.push(error)
+        return res.status(401).redirect('/restricted')
     }
 }
 
@@ -176,8 +171,7 @@ exports.verifyUser = (req, res, next) => {
     User.findOne({ accessToken: req.params.confirmationCode })
         .then((user) => {
             if (!user) {
-                alert('User not found!')
-                return res.status(404).redirect(req.get('referer'))
+                throw new Error('User not found!')
             }
 
             if (user.role == 'doctor') {
@@ -192,7 +186,9 @@ exports.verifyUser = (req, res, next) => {
                 }
             })
         })
-        .catch((e) => console.log('error', e))
+        .catch((e) => {req.app.locals.errors.push(e)
+            return res.status(401).redirect('/restricted')
+        })
 }
 
 exports.verifyDoctor = (req, res, next) => {
@@ -208,7 +204,9 @@ exports.verifyDoctor = (req, res, next) => {
             //console.log(req)
             res.redirect(req.get('referer'))
         })
-        .catch((e) => console.log('error', e))
+        .catch((e) => {req.app.locals.errors.push(e)
+            return res.status(401).redirect('/restricted')
+        })
 }
 
 exports.forgotPassword = async (req, res) => {
@@ -216,8 +214,7 @@ exports.forgotPassword = async (req, res) => {
     const user = await User.findOne({ email })
         .then((user) => {
             if (!user) {
-                alert('User not found')
-                return res.status(404).redirect(req.get('referer'))
+                throw new Error('User not found')
             }
             const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '20m' })
             nodemailer.sendResetPassword(
@@ -234,7 +231,9 @@ exports.forgotPassword = async (req, res) => {
                 }
             })
         })
-        .catch((e) => console.log('error', e))
+        .catch((e) => {req.app.locals.errors.push(e)
+            return res.status(401).redirect('/restricted')
+        })
 }
 exports.passwordReset = async (req, res) => {
     try {
@@ -247,22 +246,18 @@ exports.passwordReset = async (req, res) => {
                 if (newPassword === confirmPassword) {
                     const hashedPassword = await hashPassword(newPassword)
                     await User.updateOne({ _id: user._id }, { $set: { password: hashedPassword } }, { new: true })
-                    alert('Password changed successfully')
-                    res.status(201).redirect(req.get('referer'))
+                    throw new Error('Password changed successfully')
                 } else {
-                    alert('Confirm password does not match')
-                    res.status(401).redirect(req.get('referer'))
+                    throw new Error('Confirm password does not match')
                 }
             } else {
-                alert('Invalid accessToken')
-                res.status(401).redirect(req.get('referer'))
+                throw new Error('Invalid accessToken')
             }
         } else {
-            alert('accessToken not found')
-            res.status(401).redirect(req.get('referer'))
+            throw new Error('accessToken not found')
         }
     } catch (error) {
-        alert(error.message)
-        res.status(401).redirect(req.get('referer'))
+        req.app.locals.errors.push(error)
+        return res.status(401).redirect('/restricted')
     }
 }
