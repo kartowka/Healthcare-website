@@ -10,72 +10,107 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
-  
+
 </head>
 
 <body id="page-top">
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
 
-        <%- include('partials/header'); %>
+            <%- include('partials/header'); %>
 
-            <div id="content">
-                <%- include('patient_partials/header'); %>
+                <div id="content">
+                    <%- include('patient_partials/header'); %>
+                        <% if(typeof alert !='undefined' ) { %>
+                            <% alert.forEach(function(alert,index) { %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= alert %>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                </div>
+                                <% }) %>
+                                    <% } %>
+                                        <div class="container-fluid">
 
-                <div class="container-fluid">
-                    
-                    
-                            <div class="row">
-                                <div class="col" >
-                                    <div class="card shadow mb-3"  id="User_Settings">
-                                        <div class="card-header py-3" >
-                                            <p class="text-primary m-0 font-weight-bold">User Settings</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <form method="POST" >
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" name="first_name" value="<%= data.first_name %>"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" name="last_name" value="<%= data.last_name %>"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="clinic"><strong>Clinic</strong></label>
-                                                            <select name="clinic" class="form-control form-control-user"
-                                                                placeholder="Select Clinic" id="clinic" style="
-                                                                height: 65px" value="<%= data.clinic%>"  selected= value required >
-                                                                 <% hmo = ["Clalit", "Meuhedet", "Macabi", "Leumit"]
-                                                                    hmo = hmo.filter(e => e != data.clinic) %>
-                                                                <option ><%= data.clinic%></option>
-                                                                <option ><%= hmo[0] %></option>
-                                                                <option ><%= hmo[1] %></option>
-                                                                <option ><%= hmo[2] %></option>        
-                                                            </select>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card shadow mb-3" id="User_Settings">
+                                                        <div class="card-header py-3">
+                                                            <p class="text-primary m-0 font-weight-bold">User Settings
+                                                            </p>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <form method="POST">
+                                                                <div class="form-row">
+                                                                    <div class="col">
+                                                                        <div class="form-group"><label
+                                                                                for="first_name"><strong>First
+                                                                                    Name</strong></label><input
+                                                                                class="form-control" type="text"
+                                                                                id="first_name" name="first_name"
+                                                                                value="<%= data.first_name %>"></div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="form-group"><label
+                                                                                for="last_name"><strong>Last
+                                                                                    Name</strong></label><input
+                                                                                class="form-control" type="text"
+                                                                                id="last_name" name="last_name"
+                                                                                value="<%= data.last_name %>"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                    <div class="col">
+                                                                        <div class="form-group">
+                                                                            <label
+                                                                                for="clinic"><strong>Clinic</strong></label>
+                                                                            <select name="clinic"
+                                                                                class="form-control form-control-user"
+                                                                                placeholder="Select Clinic" id="clinic"
+                                                                                style="
+                                                                height: 65px" value="<%= data.clinic%>" selected=value
+                                                                                required>
+                                                                                <% hmo=["Clalit", "Meuhedet" , "Macabi"
+                                                                                    , "Leumit" ] hmo=hmo.filter(e=> e !=
+                                                                                    data.clinic) %>
+                                                                                    <option>
+                                                                                        <%= data.clinic%>
+                                                                                    </option>
+                                                                                    <option>
+                                                                                        <%= hmo[0] %>
+                                                                                    </option>
+                                                                                    <option>
+                                                                                        <%= hmo[1] %>
+                                                                                    </option>
+                                                                                    <option>
+                                                                                        <%= hmo[2] %>
+                                                                                    </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col"></div>
+                                                                </div>
+                                                                <div class="form-group"><button
+                                                                        class="btn btn-primary btn-sm"
+                                                                        type="submit">Save Settings</button></div>
+                                                            </form>
                                                         </div>
                                                     </div>
-                                                    <div class="col"></div>
-                                                </div>
-                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" >Save Settings</button></div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                 
-                                </div>
-                            </div>
-                    
-                 
-                </div>
-            </div>
 
-            <!-- footer starts here -->
-            <%- include('partials/footer'); %>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                </div>
+
+                <!-- footer starts here -->
+                <%- include('partials/footer'); %>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-   
+
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/chart.min.js"></script>
