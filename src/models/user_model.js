@@ -30,6 +30,14 @@ const UserSchema = new Schema({
         default: '',
         required: true
     },
+    status: {
+        type: String,
+        enum: ['Pending', 'Active', 'Waiting for Admin Approval'],
+        default: 'Pending'
+    },
+    accessToken: {
+        type: String
+    },
     medical_license_id: {
         type: String,
         default: null,
@@ -38,14 +46,6 @@ const UserSchema = new Schema({
         type: [String],
         enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
     },
-    status: {
-        type: String,
-        enum: ['Pending', 'Active', 'Waiting for Admin Approval'],
-        default: 'Pending'
-    },
-    accessToken: {
-        type: String
-    }
 })
 
 const User = mongoose.model('user', UserSchema)
