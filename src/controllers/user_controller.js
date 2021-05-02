@@ -1,4 +1,5 @@
 const User = require('../models/user_model')
+const Doctor = require('../models/doctor_model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../roles/roles')
@@ -40,7 +41,12 @@ exports.signup = async (req, res, next) => {
         const { first_name, last_name, email, password, role, clinic, medical_license_id, doctor_related_clinics } = req.body
         const hashedPassword = await hashPassword(password)
         const lowerCasedEmail = await lowerCaseEmail(email)
-        const newUser = new User({ first_name, last_name, email: lowerCasedEmail, password: hashedPassword, role: role || 'patient', clinic, medical_license_id, doctor_related_clinics })
+        var doctor
+        const newUser = new User({ first_name, last_name, email: lowerCasedEmail, password: hashedPassword, role: role || 'patient', clinic,medical_license_id,doctor_related_clinics})
+        // if(newUser.role == 'doctor'){
+        //     doctor = new Doctor({medical_license_id,doctor_related_clinics})
+        //     await doctor.save()
+        // }    //sprint4          
         const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
         })
@@ -48,10 +54,10 @@ exports.signup = async (req, res, next) => {
         newUser.accessToken = accessToken
         await newUser.save((err) => {
             if (err) {
-                res.status(500).send({ message: err })
-                return
+                req.app.locals.errors.push('user already exist in the system')
+                return res.status(401).redirect('/restricted')
             }
-
+            
             nodemailer.sendConfirmationEmail(
                 newUser.first_name,
                 newUser.last_name,
@@ -59,7 +65,8 @@ exports.signup = async (req, res, next) => {
                 newUser.accessToken,
                 newUser.role
             )
-            res.redirect('/')
+            req.app.locals.errors.push('Email confirmation has been sent.')
+            next()
         })
 
     } catch (error) {
@@ -115,12 +122,15 @@ exports.getUser = async (req, res, next) => {
     try {
         const userId = req.params.id
         const user = await User.findById(userId)
-        if (!user) return next
+        if (!user){
+            throw new Error('User does not exist')
+        }
         req.user = user
         next()
 
     } catch (error) {
-        next(new Error('User does not exist'))
+        req.app.locals.errors.push(error)
+        next()
     }
 }
 
@@ -131,14 +141,14 @@ exports.updateUser = async (req, res, next) => {
         await User.findByIdAndUpdate(userId, update)
         if (update.first_name && update.last_name) {
             const user = await User.findById(userId)
-            req.locals.errors('User has been updated')
-            res.status(200).redirect(req.get('referer'))
+            throw('User has been updated')
         }
         else
-            req.locals.errors('No updated, missing data in one of the fields')
+            throw new Error('No updated, missing data in one of the fields')
 
     } catch (error) {
-        next(error)
+        req.app.locals.errors.push(error)
+        next()
     }
 }
 
@@ -178,7 +188,7 @@ exports.verifyUser = (req, res, next) => {
                 user.status = 'Waiting for Admin Approval'
             } else user.status = 'Active'
 
-            res.redirect('/')
+            res.redirect('/login')
             user.save((err) => {
                 if (err) {
                     res.status(500).send({ message: err })
@@ -186,7 +196,8 @@ exports.verifyUser = (req, res, next) => {
                 }
             })
         })
-        .catch((e) => {req.app.locals.errors.push(e)
+        .catch((e) => {
+            req.app.locals.errors.push(e)
             return res.status(401).redirect('/restricted')
         })
 }
@@ -246,7 +257,7 @@ exports.passwordReset = async (req, res) => {
                 if (newPassword === confirmPassword) {
                     const hashedPassword = await hashPassword(newPassword)
                     await User.updateOne({ _id: user._id }, { $set: { password: hashedPassword } }, { new: true })
-                    throw new Error('Password changed successfully')
+                    throw('Password changed successfully')
                 } else {
                     throw new Error('Confirm password does not match')
                 }
