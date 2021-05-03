@@ -29,7 +29,15 @@ const doctorDetails = new Scheme({
     },
     clinic_phone_number: {
         type: String
-    }
+    },
+    // medical_license_id: {
+    //     type: String,
+    //     default: null,
+    // },
+    // doctor_related_clinics: {
+    //     type: [String],
+    //     enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
+    // }, sprint4
 })
 
 const Doctor = mongoose.model('doctor_details', doctorDetails)

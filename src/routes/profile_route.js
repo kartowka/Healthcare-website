@@ -10,7 +10,7 @@ profile
         user_controller.grantAccess('readOwn', 'patient_profile'),
         user_controller.getUser, (req, res) => {
             res.render('patient_profile', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
 
@@ -21,12 +21,15 @@ profile
         user_controller.grantAccess('readOwn', 'patient_settings'), //check
         user_controller.getUser, (req, res) => {
             res.render('patient_settings', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
     .post(user_controller.allowIfLoggedin,
         user_controller.grantAccess('updateOwn', 'patient_settings'),
-        user_controller.updateUser)
+        user_controller.updateUser,(req, res) => {
+            res.render('patient_settings', { data:req.user,alert: req.app.locals.errors })
+            req.app.locals.errors = []
+        })
 
 profile
     .route('/patient_profile/patient_previous_appointments/:id')
@@ -34,7 +37,7 @@ profile
         user_controller.grantAccess('readOwn', 'patient_previous_appointments'),
         user_controller.getUser, (req, res) => {
             res.render('patient_previous_appointments', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
     .post(user_controller.allowIfLoggedin,
@@ -48,7 +51,7 @@ profile
         user_controller.grantAccess('readOwn', 'patient_future_appointments'),
         user_controller.getUser, (req, res) => {
             res.render('patient_future_appointments', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
 
@@ -59,7 +62,7 @@ profile
         user_controller.grantAccess('readAny', 'doctor_profile'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_profile', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
 
@@ -69,13 +72,14 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'doctor_settings'),
         user_controller.getUser, (req, res) => {
-            res.render('doctor_settings', { data: req.user })
-            req.app.locals.errors=[]
-
+            res.render('doctor_settings', { data: req.user, })
         })
     .post(user_controller.allowIfLoggedin,
         user_controller.grantAccess('updateOwn', 'doctor_settings'),
-        user_controller.updateUser)
+        user_controller.updateUser, (req, res) => {
+            res.render('doctor_settings', { data:req.user,alert: req.app.locals.errors })
+            req.app.locals.errors = []
+        })
 
 //previous and future appointments
 profile
@@ -84,7 +88,7 @@ profile
         user_controller.grantAccess('readOwn', 'doctor_future_appointments'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_future_appointments', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
 
@@ -94,7 +98,7 @@ profile
         user_controller.grantAccess('readOwn', 'doctor_previous_appointments'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_previous_appointments', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
 
@@ -105,7 +109,7 @@ profile
         user_controller.grantAccess('readOwn', 'doctor_appointment_summary'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_appointment_summary', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
 
@@ -116,7 +120,7 @@ profile
         user_controller.grantAccess('readOwn', 'doctor_Review'),
         user_controller.getUser, (req, res) => {
             res.render('doctor_Review', { data: req.user })
-            req.app.locals.errors=[]
+            req.app.locals.errors = []
 
         })
 

@@ -45,7 +45,10 @@ router
     .get((req, res) => {
         res.render('register')
     })
-    .post(user_controller.signup)
+    .post(user_controller.signup,(req, res) => {
+        res.render('login', { alert: req.app.locals.errors })
+        req.app.locals.errors=[]
+    })
 
 //forgot password
 router
