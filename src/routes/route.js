@@ -20,7 +20,7 @@ router
     .route('/restricted')
     .get((req, res) => {
         res.render('restricted', { alert: req.app.locals.errors })
-        req.app.locals.errors=[]
+        req.app.locals.errors = []
     })
 //login
 router
@@ -30,7 +30,7 @@ router
     })
     .post(user_controller.login, (req, res) => {
         res.render('login', { alert: req.app.locals.errors })
-        req.app.locals.errors=[]
+        req.app.locals.errors = []
     })
 //logout
 router
@@ -45,9 +45,20 @@ router
     .get((req, res) => {
         res.render('register')
     })
-    .post(user_controller.signup,(req, res) => {
+    .post(user_controller.signup, (req, res) => {
         res.render('login', { alert: req.app.locals.errors })
-        req.app.locals.errors=[]
+        req.app.locals.errors = []
+    })
+
+//signup
+router
+    .route('/travel_insurance')
+    .get((req, res) => {
+        res.render('travel_insurance')
+    })
+    .post((req,res)=>{
+        res.status(200).send(req.body)
+        console.log(req.body)
     })
 
 //forgot password
