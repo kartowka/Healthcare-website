@@ -310,63 +310,63 @@ exports.passwordReset = async (req, res) => {
   }
 }
 //TODO getInsurancePolicy && paymentConfirm //
-exports.getInsurancePolicy = async (req, res, next) => {
-  try {
-    const {
-      plan,
-      country,
-      daterange,
-      first_name,
-      last_name,
-      email,
-      id,
-      card_holder_name,
-      card_holder_number,
-      card_holder_card_expiredate,
-      card_holder_card_security_code,
-    } = req.body
-    const lowerCasedEmail = await lowerCaseEmail(email)
-    await this.paymentConfirmation(card_holder_name,card_holder_number,card_holder_card_expiredate,card_holder_card_security_code)
-    const newInsurace = new User({
-      first_name,
-      last_name,
-      email: lowerCasedEmail,
-      password: hashedPassword,
-      role: role || 'patient',
-      clinic,
-      medical_license_id,
-      doctor_related_clinics,
-    })
-    const accessToken = jwt.sign(
-      { userId: newUser._id },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: '1d',
-      }
-    )
+// exports.getInsurancePolicy = async (req, res, next) => {
+//   try {
+//     const {
+//       plan,
+//       country,
+//       daterange,
+//       first_name,
+//       last_name,
+//       email,
+//       id,
+//       card_holder_name,
+//       card_holder_number,
+//       card_holder_card_expiredate,
+//       card_holder_card_security_code,
+//     } = req.body
+//     const lowerCasedEmail = await lowerCaseEmail(email)
+//     await this.paymentConfirmation(card_holder_name,card_holder_number,card_holder_card_expiredate,card_holder_card_security_code)
+//     const newInsurace = new User({
+//       first_name,
+//       last_name,
+//       email: lowerCasedEmail,
+//       password: hashedPassword,
+//       role: role || 'patient',
+//       clinic,
+//       medical_license_id,
+//       doctor_related_clinics,
+//     })
+//     const accessToken = jwt.sign(
+//       { userId: newUser._id },
+//       process.env.JWT_SECRET,
+//       {
+//         expiresIn: '1d',
+//       }
+//     )
 
-    newUser.accessToken = accessToken
-    await newUser.save((err) => {
-      if (err) {
-        req.app.locals.errors.push('user already exist in the system')
-        return res.status(401).redirect('/restricted')
-      }
+//     newUser.accessToken = accessToken
+//     await newUser.save((err) => {
+//       if (err) {
+//         req.app.locals.errors.push('user already exist in the system')
+//         return res.status(401).redirect('/restricted')
+//       }
 
-      nodemailer.sendConfirmationEmail(
-        newUser.first_name,
-        newUser.last_name,
-        newUser.email,
-        newUser.accessToken,
-        newUser.role
-      )
-      req.app.locals.errors.push('Email confirmation has been sent.')
-      next()
-    })
-  } catch (error) {
-    next(error)
-  }
-}
-async function paymentConfirmation(name,card_number,card_expiredate,card_securitycode) {
+//       nodemailer.sendConfirmationEmail(
+//         newUser.first_name,
+//         newUser.last_name,
+//         newUser.email,
+//         newUser.accessToken,
+//         newUser.role
+//       )
+//       req.app.locals.errors.push('Email confirmation has been sent.')
+//       next()
+//     })
+//   } catch (error) {
+//     next(error)
+//   }
+// }
+// async function paymentConfirmation(name,card_number,card_expiredate,card_securitycode) {
   
-  return true
-}
+//   return true
+// }
