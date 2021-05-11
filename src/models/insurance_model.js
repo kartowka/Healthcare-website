@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 const Scheme = mongoose.Schema
 
+const DateSchema = mongoose.Schema({
+    start_date: String,
+    end_date: String,
+})
 
 const InsuranceSchema = new Scheme({
     first_name: {
@@ -30,8 +34,7 @@ const InsuranceSchema = new Scheme({
         required: true,
     },
     dates: {
-        start_date: String,
-        end_date: String,
+        type: DateSchema,
         required: true,
     }
 })
