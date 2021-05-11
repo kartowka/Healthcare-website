@@ -6,7 +6,7 @@ const AddressSchema = mongoose.Schema({
     street: String,
 })
 
-const doctorDetails = new Scheme({
+const doctorDetailsSchema = new Scheme({
     _doctor_id: {
         type: mongoose.Schema.Types.ObjectId,
     },
@@ -47,6 +47,6 @@ const doctorDetails = new Scheme({
     },
 })
 
-const Doctor = mongoose.model('doctor_details', doctorDetails)
+const DoctorDetails = mongoose.model('doctor_details', doctorDetailsSchema)
 
-module.exports = Doctor
+module.exports = DoctorDetails
