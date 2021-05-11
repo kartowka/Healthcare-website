@@ -410,7 +410,7 @@ exports.getInsurancePolicy = async (req, res, next) => {
     )
     newInsurace.insurance_reference = insurance_reference
     await newInsurace.save()
-    nodemailer.sendConfirmationEmail(
+    nodemailer.sendConfirmationEmailInsurancePolicy(
       newInsurace.first_name,
       newInsurace.last_name,
       newInsurace.email,
