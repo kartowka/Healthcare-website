@@ -1,7 +1,25 @@
 const mongoose = require('mongoose')
 const Scheme = mongoose.Schema
 
+const AddressSchema = mongoose.Schema({
+    city: String,
+    street: String,
+})
+
 const doctorDetails = new Scheme({
+    _doctor_id: {
+        type: mongoose.Schema.Types.ObjectId,
+    },
+    medical_license_id: {
+        type: String,
+        unique: true,
+        required: true,
+    },
+    doctor_related_clinics: {
+        type: [String],
+        enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
+        required: true,
+    },
     bio: {
         type: String,
     },
@@ -15,14 +33,11 @@ const doctorDetails = new Scheme({
     end_time: {
         type: String
     },
-    clinic_address: {
-        type: String
-    },
-    clinic_city: {
-        type: String
-    },
     specialization: {
         type: [String]
+    },
+    clinic_address: {
+        type: AddressSchema
     },
     spoken_languages: {
         type: [String]
@@ -30,14 +45,6 @@ const doctorDetails = new Scheme({
     clinic_phone_number: {
         type: String
     },
-    // medical_license_id: {
-    //     type: String,
-    //     default: null,
-    // },
-    // doctor_related_clinics: {
-    //     type: [String],
-    //     enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
-    // }, sprint4
 })
 
 const Doctor = mongoose.model('doctor_details', doctorDetails)
