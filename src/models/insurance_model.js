@@ -36,7 +36,10 @@ const InsuranceSchema = new Scheme({
     dates: {
         type: DateSchema,
         required: true,
-    }
+    },
+    insurance_reference: {
+        type: String
+    },
 })
 
 const Insurance = mongoose.model('insurance_details', InsuranceSchema)
