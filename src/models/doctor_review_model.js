@@ -22,6 +22,15 @@ const ReviewSchema = new Schema({
         type: Date,
         required: true,
     },
+    rating: {
+        type: Number,
+        enum: [1, 2, 3, 4, 5],
+        required: true,
+    },
+    reviewer_by: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
 })
 
 const Review = mongoose.model('user', ReviewSchema)
