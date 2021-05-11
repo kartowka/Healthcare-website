@@ -24,6 +24,14 @@
               <div class="card-header py-3">
                 <p class="text-primary m-0 font-weight-bold">All integral User Data</p>
               </div>
+              <% if(typeof alert != 'undefined') { %>
+                <div class="alert alert-warning alert-dismissible fade show" id="alert_message" role="alert">
+                    <%=alert['Message']%>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+        <% } %>
               <div class="card-body">
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                   <table class="table my-0" id="dataTable">
@@ -69,14 +77,19 @@
                             <%=data.status %>
                           </td>
                           <td>
-                            <form action="/admin_interface/<%= data.id %>" method="POST">
+                            <form method="POST">
+                            <button class="btn btn-primary" type="submit"
+                                        onclick="" id="edit_btn">Edit</button>
+                            <!-- <form action="/admin_interface/<%= data.id %>" method="POST">
                               <input type="submit" value="Edit">
-                            </form>
+                            </form> -->
                           </td>
                           <td>
-                            <form action="/admin_interface/delete/<%= data.id %>" method="POST">
+                            <button class="btn btn-primary" type="submit"
+                            onclick="" id="btn" name= "delete_ID" value="<%=data.id%>" >Delete</button>
+                            <!-- <form action="/admin_interface/delete/<%= data.id %>" method="POST">
                               <input type="submit" value="Delete">
-                            </form>
+                            </form> -->
                           </td>
                         </tr>
                         <% }) %>
@@ -129,9 +142,8 @@
                               <%=data.status %>
                             </td>
                             <td>
-                              <form action="/admin_interface/approve/<%= data.id %>" method="POST">
-                                <input type="submit" value="Approve">
-                              </form>
+                              <button class="btn btn-primary" type="submit"
+                              id="btn" name= "approve_ID" value="<%=data.id%>" >Approve</button>
                             </td>
                           </tr>
                           <% } %>
@@ -142,6 +154,7 @@
                                 </tr>
                                 <% } %>
                                   </tbody>
+                                </form>
                   </table>
                 </div>
               </div>
@@ -163,6 +176,7 @@
       <script src="/assets/js/jquery.min.js"></script>
       <script src="/assets/js/smoothscroll.js"></script>
       <script src="/assets/js/theme.js"></script>
+      
 </body>
 
 </html>
