@@ -1,10 +1,10 @@
 const User = require('../models/user_model')
-const Doctor = require('../models/doctor_model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../roles/roles')
 const nodemailer = require('../js/nodemailer')
 const DoctorDetails = require('../models/doctor_model')
+const Insurance = require('../models/insurance_model')
 
 exports.grantAccess = function (action, resource) {
   return async (req, res, next) => {
@@ -58,7 +58,7 @@ exports.signup = async (req, res, next) => {
       role,
       clinic,
       medical_license_id,
-      doctor_related_clinics
+      doctor_related_clinics,
     } = req.body
 
     const hashedPassword = await hashPassword(password)
@@ -83,7 +83,9 @@ exports.signup = async (req, res, next) => {
     newUser.save(async (err) => {
       var msg
       if (err) {
-        if (await DoctorDetails.exists({ medical_license_id: medical_license_id })){
+        if (
+          await DoctorDetails.exists({ medical_license_id: medical_license_id })
+        ) {
           msg = 'User & License ID already exist in the database'
         } else {
           msg = 'User already exists in the database'
@@ -94,13 +96,12 @@ exports.signup = async (req, res, next) => {
         }
         res.status(401)
         next()
-      }
-      else {
+      } else {
         if (newUser.role == 'doctor') {
           const doctor_details = new DoctorDetails({
             _doctor_id: newUser._id,
             medical_license_id,
-            doctor_related_clinics
+            doctor_related_clinics,
           })
           await doctor_details.save()
         }
@@ -196,10 +197,8 @@ exports.updateUser = async (req, res, next) => {
       if (update.first_name && update.last_name) {
         const updateUser = await User.findByIdAndUpdate(userId, update)
         throw 'User has been updated'
-      }
-      else throw new Error('No updated, missing data in one of the fields')
-    }
-    else if (user.role == 'doctor') {
+      } else throw new Error('No updated, missing data in one of the fields')
+    } else if (user.role == 'doctor') {
       /**
               console.log(user)
         if (update.first_name && update.last_name) {
@@ -215,7 +214,6 @@ exports.updateUser = async (req, res, next) => {
       const updateUser = await User.findByIdAndUpdate(userId, update)
       throw 'User has been updated'
     }
-
   } catch (error) {
     req.error = { Message: error, statusCode: '200' }
     res.status(200)
@@ -372,63 +370,71 @@ exports.passwordReset = async (req, res, next) => {
   }
 }
 //TODO getInsurancePolicy && paymentConfirm //
-// exports.getInsurancePolicy = async (req, res, next) => {
-//   try {
-//     const {
-//       plan,
-//       country,
-//       daterange,
-//       first_name,
-//       last_name,
-//       email,
-//       id,
-//       card_holder_name,
-//       card_holder_number,
-//       card_holder_card_expiredate,
-//       card_holder_card_security_code,
-//     } = req.body
-//     const lowerCasedEmail = await lowerCaseEmail(email)
-//     await this.paymentConfirmation(card_holder_name,card_holder_number,card_holder_card_expiredate,card_holder_card_security_code)
-//     const newInsurace = new User({
-//       first_name,
-//       last_name,
-//       email: lowerCasedEmail,
-//       password: hashedPassword,
-//       role: role || 'patient',
-//       clinic,
-//       medical_license_id,
-//       doctor_related_clinics,
-//     })
-//     const accessToken = jwt.sign(
-//       { userId: newUser._id },
-//       process.env.JWT_SECRET,
-//       {
-//         expiresIn: '1d',
-//       }
-//     )
-
-//     newUser.accessToken = accessToken
-//     await newUser.save((err) => {
-//       if (err) {
-//         req.app.locals.errors.push('user already exist in the system')
-//         return res.status(401).redirect('/restricted')
-//       }
-
-//       nodemailer.sendConfirmationEmail(
-//         newUser.first_name,
-//         newUser.last_name,
-//         newUser.email,
-//         newUser.accessToken,
-//         newUser.role
-//       )
-//       req.app.locals.errors.push('Email confirmation has been sent.')
-//       next()
-//     })
-//   } catch (error) {
-//     next(error)
-//   }
-// }
-// async function paymentConfirmation(name,card_number,card_expiredate,card_securitycode) {
-
-//   return true
-// }
+exports.getInsurancePolicy = async (req, res, next) => {
+  try {
+    const {
+      insurance_type,
+      destination,
+      first_name,
+      last_name,
+      email,
+      ID,
+      card_holder_name,
+      card_holder_number,
+      card_holder_card_expiredate,
+      card_holder_card_security_code,
+    } = req.body
+    var daterange = req.body.daterange.replace(/\s+/g, '').split('-')
+    const lowerCasedEmail = await lowerCaseEmail(email)
+    await paymentConfirmation(
+      card_holder_name,
+      card_holder_number,
+      card_holder_card_expiredate,
+      card_holder_card_security_code
+    )
+    const newInsurace = new Insurance({
+      first_name,
+      last_name,
+      email,
+      ID,
+      insurance_type,
+      destination,
+      dates: {
+        start_date: daterange[0],
+        end_date: daterange[1],
+      },
+    })
+    const insurance_reference = jwt.sign(
+      { userId: newInsurace._id },
+      process.env.JWT_SECRET
+    )
+    newInsurace.insurance_reference = insurance_reference
+    await newInsurace.save()
+    nodemailer.sendConfirmationEmail(
+      newInsurace.first_name,
+      newInsurace.last_name,
+      newInsurace.email,
+      newInsurace.ID,
+      newInsurace.insurance_type,
+      newInsurace.dates,
+      newInsurace.insurance_reference
+    )
+    req.error = {
+      Message: 'Email Confirmation has been sent.',
+      statusCode: '200',
+    }
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+async function paymentConfirmation(
+  name,
+  card_number,
+  card_expiredate,
+  card_securitycode
+) {
+  //No logic should be here because its a test website, and no need to require a payment.
+  //dummy confirmantion
+  return true
+}
