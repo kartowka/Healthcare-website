@@ -55,9 +55,8 @@ router
   .get((req, res) => {
     res.render('travel_insurance')
   })
-  .post((req, res) => {
-    res.status(200).send(req.body)
-    console.log(req.body)
+  .post(user_controller.getInsurancePolicy,(req, res) => {
+    res.render('travel_insurance',{alert:req.error})
   })
 
 //forgot password
