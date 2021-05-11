@@ -170,11 +170,31 @@ exports.updateUser = async (req, res, next) => {
   try {
     const update = req.body
     const userId = req.params.id
-    await User.findByIdAndUpdate(userId, update)
-    if (update.first_name && update.last_name) {
-      const user = await User.findById(userId)
+    const user = await User.findById(userId)
+    if(user.role == 'patient'){
+      if (update.first_name && update.last_name) {
+        const updateUser = await User.findByIdAndUpdate(userId, update)
+        throw 'User has been updated'
+      } 
+      else throw new Error('No updated, missing data in one of the fields')
+    }
+    else if(user.role == 'doctor'){
+    /**
+            console.log(user)
+      if (update.first_name && update.last_name) {
+        const updateUser = await User.findByIdAndUpdate(userId, update)
+        throw 'User has been updated'
+      } 
+      else if(update.working_days) {
+        const updateUser = await User.findByIdAndUpdate(userId, update)
+        throw 'User has been updated'
+      } 
+    
+     */
+      const updateUser = await User.findByIdAndUpdate(userId, update)
       throw 'User has been updated'
-    } else throw new Error('No updated, missing data in one of the fields')
+    }
+
   } catch (error) {
     req.app.locals.errors.push(error)
     next()
