@@ -24,6 +24,14 @@
 <body class="bg-gradient-primary" style="background: #fff">
     <%- include('partials/header'); %>
         <div class="text-monospace container" style="max-width: 1140px;">
+            <% if(typeof alert != 'undefined') { %>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <%=alert['Message']%>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+        <% } %>
             <div class="card shadow-lg o-hidden border-0 my-5">
                 <div class="card-body p-0">
                     <div class="row">
@@ -41,7 +49,7 @@
                                     <div class="form-group">
                                         <label for="plan">Select Plan: </label><span
                                             style="color: red !important; display: inline; float: none;"> *</span>
-                                        <select name="plan" class="form-control form-control-user"
+                                        <select name="insurance_type" class="form-control form-control-user"
                                             placeholder="Select Plan" id="plan" style="height: 65px" required>
                                             <option value="" disabled="" selected="">Select Plan</option>
                                             <option value="standard">Standard 10₪ per day</option>
@@ -51,7 +59,7 @@
                                     </div>
                                     <div class="form-group"><label for="country">Select Country: </label><span
                                             style="color: red !important; display: inline; float: none;"> *</span>
-                                        <select id="country" name="country" class="form-control form-control-user"
+                                        <select id="country" name="destination" class="form-control form-control-user"
                                             style="height: 65px" required>
                                             <option value="" disabled="" selected="">Select Country</option>
                                             <option value="Afghanistan">Afghanistan</option>
@@ -347,7 +355,7 @@
                                             name="email">
                                     </div>
                                     <div class="form-group"><input class="form-control form-control-user" type="text"
-                                            id="id" aria-describedby="id" placeholder="ID" name="id"></div>
+                                            id="id" aria-describedby="id" placeholder="ID" name="ID"></div>
                                     <label for="credit_card_info">Credit Card Section: </label>
                                     <span style="color: red !important; display: inline; float: none;">*</span>
                                     <div class="form-group row">
