@@ -224,6 +224,10 @@ exports.updateUser = async (req, res, next) => {
 exports.deleteUser = async (req, res) => {
   try {
     const userId = req.body.delete_ID
+    const user = await User.findById((userId))
+    if (user.role == 'doctor'){
+      await DoctorDetails.findOneAndDelete({_doctor_id: userId})
+    }
     await User.findByIdAndDelete(userId)
     throw 'User has been deleted.'
   } catch (error) {
