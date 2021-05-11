@@ -21,10 +21,10 @@
     <%- include('partials/header'); %>
         <div class="container-fluid">
             <div class="text-center mt-5">
-                <div class="error mx-auto" data-text="401">
-                    <p class="m-0">401</p>
+                <div class="error mx-auto" data-text= "<%=alert['statusCode']%>">
+                    <p class="m-0"><%=alert['statusCode']%></p>
                 </div>
-                <p class="text-dark mb-5 lead"><%=alert[0]%></p>
+                <p class="text-dark mb-5 lead"><%=alert['Message']%></p>
                 <p class="text-black-50 mb-0">It looks like you found a glitch in the matrix...</p><a
                     class="text-black-50 mb-0" href="/" ">← Back to Home</a>
                     </div>
