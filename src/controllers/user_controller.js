@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../roles/roles')
 const nodemailer = require('../js/nodemailer')
+const DoctorDetails = require('../models/doctor_model')
 
 exports.grantAccess = function (action, resource) {
   return async (req, res, next) => {
@@ -57,11 +58,11 @@ exports.signup = async (req, res, next) => {
       role,
       clinic,
       medical_license_id,
-      doctor_related_clinics,
+      doctor_related_clinics
     } = req.body
+
     const hashedPassword = await hashPassword(password)
     const lowerCasedEmail = await lowerCaseEmail(email)
-    var doctor
     const newUser = new User({
       first_name,
       last_name,
@@ -69,13 +70,7 @@ exports.signup = async (req, res, next) => {
       password: hashedPassword,
       role: role || 'patient',
       clinic,
-      medical_license_id,
-      doctor_related_clinics,
     })
-    // if(newUser.role == 'doctor'){
-    //     doctor = new Doctor({medical_license_id,doctor_related_clinics})
-    //     await doctor.save()
-    // }    //sprint4
     const accessToken = jwt.sign(
       { userId: newUser._id },
       process.env.JWT_SECRET,
@@ -85,15 +80,30 @@ exports.signup = async (req, res, next) => {
     )
 
     newUser.accessToken = accessToken
-    await newUser.save((err) => {
+    newUser.save(async (err) => {
+      var msg
       if (err) {
+        if (await DoctorDetails.exists({ medical_license_id: medical_license_id })){
+          msg = 'User & License ID already exist in the database'
+        } else {
+          msg = 'User already exists in the database'
+        }
         req.error = {
-          Message: 'user already exist in the system',
+          Message: msg,
           statusCode: '401',
         }
         res.status(401)
         next()
-      } else {
+      }
+      else {
+        if (newUser.role == 'doctor') {
+          const doctor_details = new DoctorDetails({
+            _doctor_id: newUser._id,
+            medical_license_id,
+            doctor_related_clinics
+          })
+          await doctor_details.save()
+        }
         nodemailer.sendConfirmationEmail(
           newUser.first_name,
           newUser.last_name,
@@ -182,26 +192,26 @@ exports.updateUser = async (req, res, next) => {
     const update = req.body
     const userId = req.params.id
     const user = await User.findById(userId)
-    if(user.role == 'patient'){
+    if (user.role == 'patient') {
       if (update.first_name && update.last_name) {
         const updateUser = await User.findByIdAndUpdate(userId, update)
         throw 'User has been updated'
-      } 
+      }
       else throw new Error('No updated, missing data in one of the fields')
     }
-    else if(user.role == 'doctor'){
-    /**
-            console.log(user)
-      if (update.first_name && update.last_name) {
-        const updateUser = await User.findByIdAndUpdate(userId, update)
-        throw 'User has been updated'
-      } 
-      else if(update.working_days) {
-        const updateUser = await User.findByIdAndUpdate(userId, update)
-        throw 'User has been updated'
-      } 
-    
-     */
+    else if (user.role == 'doctor') {
+      /**
+              console.log(user)
+        if (update.first_name && update.last_name) {
+          const updateUser = await User.findByIdAndUpdate(userId, update)
+          throw 'User has been updated'
+        } 
+        else if(update.working_days) {
+          const updateUser = await User.findByIdAndUpdate(userId, update)
+          throw 'User has been updated'
+        } 
+      
+       */
       const updateUser = await User.findByIdAndUpdate(userId, update)
       throw 'User has been updated'
     }
