@@ -29,8 +29,9 @@ exports.grantAccess = function (action, resource) {
       }
       next()
     } catch (error) {
-      req.app.locals.errors.push(error)
-      return res.status(401).redirect('/restricted')
+      res.status(401)
+      req.error = { Message: error, statusCode: '401' }
+      next()
     }
   }
 }
@@ -86,19 +87,27 @@ exports.signup = async (req, res, next) => {
     newUser.accessToken = accessToken
     await newUser.save((err) => {
       if (err) {
-        req.app.locals.errors.push('user already exist in the system')
-        return res.status(401).redirect('/restricted')
+        req.error = {
+          Message: 'user already exist in the system',
+          statusCode: '401',
+        }
+        res.status(401)
+        next()
+      } else {
+        nodemailer.sendConfirmationEmail(
+          newUser.first_name,
+          newUser.last_name,
+          newUser.email,
+          newUser.accessToken,
+          newUser.role
+        )
+        req.error = {
+          Message: 'Email confirmation has been sent.',
+          statusCode: '200',
+        }
+        res.status(200)
+        next()
       }
-
-      nodemailer.sendConfirmationEmail(
-        newUser.first_name,
-        newUser.last_name,
-        newUser.email,
-        newUser.accessToken,
-        newUser.role
-      )
-      req.app.locals.errors.push('Email confirmation has been sent.')
-      next()
     })
   } catch (error) {
     next(error)
@@ -140,7 +149,8 @@ exports.login = async (req, res, next) => {
       res.redirect('/')
     }
   } catch (error) {
-    req.app.locals.errors.push(error)
+    req.error = { Message: error, statusCode: '401' }
+    res.status(401)
     next()
   }
 }
@@ -161,7 +171,8 @@ exports.getUser = async (req, res, next) => {
     req.user = user
     next()
   } catch (error) {
-    req.app.locals.errors.push(error)
+    req.error = { Message: error, statusCode: '401' }
+    res.status(401)
     next()
   }
 }
@@ -196,18 +207,21 @@ exports.updateUser = async (req, res, next) => {
     }
 
   } catch (error) {
-    req.app.locals.errors.push(error)
+    req.error = { Message: error, statusCode: '200' }
+    res.status(200)
     next()
   }
 }
 
-exports.deleteUser = async (req, res, next) => {
+exports.deleteUser = async (req, res) => {
   try {
-    const userId = req.params.id
+    const userId = req.body.delete_ID
     await User.findByIdAndDelete(userId)
-    res.status(200).redirect(req.get('referer'))
+    throw 'User has been deleted.'
   } catch (error) {
-    next(error)
+    req.error = { Message: error, statusCode: '200' }
+    res.status(200)
+    res.redirect(req.get('referer'))
   }
 }
 
@@ -220,8 +234,24 @@ exports.allowIfLoggedin = async (req, res, next) => {
     req.user = user
     next()
   } catch (error) {
-    req.app.locals.errors.push(error)
-    return res.status(401).redirect('/restricted')
+    req.error = { Message: error, statusCode: '401' }
+    res.status(401)
+    next()
+  }
+}
+
+exports.denyIfLoggedin = async (req, res, next) => {
+  try {
+    const user = res.locals.loggedInUser
+    if (user) {
+      throw new Error('You already loggedin.')
+    } else {
+      next()
+    }
+  } catch (error) {
+    res.status(401)
+    req.error = { Message: error, statusCode: '401' }
+    next()
   }
 }
 
@@ -235,7 +265,6 @@ exports.verifyUser = (req, res, next) => {
       if (user.role == 'doctor') {
         user.status = 'Waiting for Admin Approval'
       } else user.status = 'Active'
-
       res.redirect('/login')
       user.save((err) => {
         if (err) {
@@ -244,31 +273,32 @@ exports.verifyUser = (req, res, next) => {
         }
       })
     })
-    .catch((e) => {
-      req.app.locals.errors.push(e)
-      return res.status(401).redirect('/restricted')
+    .catch((error) => {
+      req.error = { Message: error, statusCode: '401' }
+      res.status(401)
+      next()
     })
 }
 
-exports.verifyDoctor = (req, res, next) => {
-  User.findOne({ _id: req.params.id })
-    .then(async (user) => {
+exports.verifyDoctor = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.body.approve_ID })
+    if (user) {
       nodemailer.sendAuthenticationApprovalToDoctor(
         user.last_name,
         user.email,
         user._id
       )
-      await User.updateOne({ _id: user._id }, { $set: { status: 'Active' } })
-      //console.log(req)
-      res.redirect(req.get('referer'))
-    })
-    .catch((e) => {
-      req.app.locals.errors.push(e)
-      return res.status(401).redirect('/restricted')
-    })
+    }
+    await User.updateOne({ _id: user._id }, { $set: { status: 'Active' } })
+    throw 'Doctor has been approved.'
+  } catch (error) {
+    req.error = { Message: error, statusCode: '200' }
+    res.status(200)
+  }
 }
 
-exports.forgotPassword = async (req, res) => {
+exports.forgotPassword = async (req, res, next) => {
   const { email } = req.body
   const user = await User.findOne({ email })
     .then((user) => {
@@ -294,12 +324,13 @@ exports.forgotPassword = async (req, res) => {
         }
       })
     })
-    .catch((e) => {
-      req.app.locals.errors.push(e)
-      return res.status(401).redirect('/restricted')
+    .catch((error) => {
+      req.error = { Message: error, statusCode: '401' }
+      res.status(401)
+      next()
     })
 }
-exports.passwordReset = async (req, res) => {
+exports.passwordReset = async (req, res, next) => {
   try {
     const { accessToken } = req.params
     if (accessToken) {
@@ -325,8 +356,9 @@ exports.passwordReset = async (req, res) => {
       throw new Error('accessToken not found')
     }
   } catch (error) {
-    req.app.locals.errors.push(error)
-    return res.status(401).redirect('/restricted')
+    req.error = { Message: error, statusCode: '401' }
+    res.status(401)
+    next()
   }
 }
 //TODO getInsurancePolicy && paymentConfirm //
@@ -387,6 +419,6 @@ exports.passwordReset = async (req, res) => {
 //   }
 // }
 // async function paymentConfirmation(name,card_number,card_expiredate,card_securitycode) {
-  
+
 //   return true
 // }
