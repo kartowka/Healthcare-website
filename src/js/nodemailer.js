@@ -68,3 +68,17 @@ module.exports.sendResetPassword = (first_name,last_name, email, confirmationCod
         </div>`,
     }).catch(err => console.log(err))
 }
+module.exports.sendConfirmationEmailInsurancePolicy = (first_name,last_name,email,id,Insurance_type,dates,insurance_reference) => {
+    transport.sendMail({
+        from: user,
+        to: email,
+        subject: `Confirmation Mail for ${id}`,
+        html: `<h1>Confirmation Mail - Insurance Policy</h1>
+        <h2>Hello ${first_name} ${last_name}</h2>
+        <p>this is a confirmation email about your insurance policy for <strong> ${dates.start_date} - ${dates.end_date} </strong>,</p>
+        <p>insurance type <strong> ${Insurance_type} </strong>,</p>
+        <p>this is your reference <strong> ${insurance_reference} </strong>,</p>
+        <p>safe flight!</p>
+        </div>`,
+    }).catch(err => console.log(err))
+}
