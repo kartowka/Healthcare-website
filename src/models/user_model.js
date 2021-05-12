@@ -38,14 +38,6 @@ const UserSchema = new Schema({
     accessToken: {
         type: String
     },
-    medical_license_id: {
-        type: String,
-        default: null,
-    },
-    doctor_related_clinics: {
-        type: [String],
-        enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
-    },
 })
 
 const User = mongoose.model('user', UserSchema)
