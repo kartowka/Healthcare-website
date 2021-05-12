@@ -1,5 +1,6 @@
 const express = require('express')
 const Forum = require('./../models/forum_model')
+const User = require('./../models/user_model')
 const router = express.Router()
 
 router.get('/new', (req, res) => {
@@ -37,7 +38,8 @@ function saveforumAndRedirect(path) {
     let forum = req.forum
     forum.title = req.body.title
     forum.description = req.body.description
-    //forum.markdown = req.body.markdown
+    forum.created_by = 'Dr.' + res.locals.loggedInUser.last_name
+    forum._doctor_id = res.locals.loggedInUser._id
     try {
       forum = await forum.save()
       res.redirect(`/forum/${forum.slug}`)
