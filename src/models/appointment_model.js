@@ -36,6 +36,6 @@ const appointmentSchema = new Schema({
     },
 })
 
-const appointmentRecord = mongoose.model('user', appointmentSchema)
+const appointmentRecord = mongoose.model('appointment', appointmentSchema)
 
 module.exports = appointmentRecord
