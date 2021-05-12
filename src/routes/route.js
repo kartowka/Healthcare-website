@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const user_controller = require('../controllers/user_controller')
 const profile_router = require('./profile_route')
+const Forum = require('../models/forum_model')
+const forumRouter = require('./forum_route')
 
 //homepage
 router.route('/').get((req, res) => {
@@ -24,10 +26,8 @@ router
   .get(user_controller.denyIfLoggedin, (req, res) => {
     if (res.statusCode != 200) {
       res.render('restricted', { alert: req.error })
-    } else
-    console.log(req.error) 
-    res.render('login',{alert:req.error})
-
+    } else console.log(req.error)
+    res.render('login', { alert: req.error })
   })
   .post(user_controller.login, (req, res) => {
     res.render('login', { alert: req.error })
@@ -46,7 +46,7 @@ router
     } else res.render('register')
   })
   .post(user_controller.signup, (req, res) => {
-    res.render('register',{alert: req.error})
+    res.render('register', { alert: req.error })
   })
 
 //signup
@@ -55,8 +55,8 @@ router
   .get((req, res) => {
     res.render('travel_insurance')
   })
-  .post(user_controller.getInsurancePolicy,(req, res) => {
-    res.render('travel_insurance',{alert:req.error})
+  .post(user_controller.getInsurancePolicy, (req, res) => {
+    res.render('travel_insurance', { alert: req.error })
   })
 
 //forgot password
@@ -87,7 +87,6 @@ router.route('/confirm/:confirmationCode').get(user_controller.verifyUser)
 
 router.use(profile_router)
 
-
 //admin interface
 router
   .route('/admin_interface/:id')
@@ -96,17 +95,24 @@ router
     user_controller.grantAccess('readAny', 'admin_interface'),
     user_controller.getUsers,
     (req, res) => {
-      res.render('admin_interface', { users: req.params.users,alert:req.error})
+      res.render('admin_interface', {
+        users: req.params.users,
+        alert: req.error,
+      })
     }
   )
-  .post(user_controller.getUsers,async (req, res) => {
-      if (Object.keys(req.body)[0] === 'delete_ID')
-        await user_controller.deleteUser(req, res)
-      if (Object.keys(req.body)[0] === 'approve_ID')
-        await user_controller.verifyDoctor(req, res)
+  .post(user_controller.getUsers, async (req, res) => {
+    if (Object.keys(req.body)[0] === 'delete_ID')
+      await user_controller.deleteUser(req, res)
+    if (Object.keys(req.body)[0] === 'approve_ID')
+      await user_controller.verifyDoctor(req, res)
     //res.render('admin_interface', { users: req.params.users, alert: req.error })
   })
-
+router.get('/forum', async (req, res) => {
+  const forum = await Forum.find().sort({ createdAt: 'desc' })
+  res.render('forum/forum', { forums: forum })
+})
+router.use('/forum', forumRouter)
 router
   .route('/search')
   .get(
@@ -122,4 +128,5 @@ router.use(function (req, res, next) {
   res.status(404)
   res.render('404', { error: 'Not Found' })
 })
+
 module.exports = router
