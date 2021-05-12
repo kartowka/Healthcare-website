@@ -8,10 +8,13 @@ router.get('/', async (req, res) => {
   const forum = await Forum.find().sort({ createdAt: 'desc' })
   res.render('forum/forum', { forums: forum })
 })
-router.use('/sub_forum',subForumRouter)
+
+router.use('/:slug',subForumRouter)
+
 router.get('/new', (req, res) => {
   res.render('forum/new', { forum: new Forum() })
 })
+
 router.get('/edit/:id', async (req, res) => {
   const forum = await Forum.findById(req.params.id)
   res.render('forum/edit', { forum: forum })
@@ -20,8 +23,9 @@ router.get('/edit/:id', async (req, res) => {
 router.get('/:slug', async (req, res) => {
   const forum = await Forum.findOne({ slug: req.params.slug })
   if (forum == null) res.redirect('/forum')
-  res.render('forum/show', { forum: forum })
+  res.render('forum/sub_forum', { forums: forum })
 })
+
 router.post('/', async (req, res, next) => {
   req.forum = new Forum()
   next()
