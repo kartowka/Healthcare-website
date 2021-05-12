@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 const { roles } = require('../roles/roles')
 const nodemailer = require('../js/nodemailer')
 const DoctorDetails = require('../models/doctor_model')
-const Insurance = require('../models/insurance_model')
 
 exports.grantAccess = function (action, resource) {
   return async (req, res, next) => {
