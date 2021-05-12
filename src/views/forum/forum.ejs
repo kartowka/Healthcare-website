@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>forum main - JSAS</title>
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/assets/css/FontAwesome.css">
+  <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+  <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <%- include('../partials/header'); %>
+  <div class="container">
+    <h1 class="mb-4">HealthCare forum JSAS</h1>
+      <% if(userRole=='doctor' || userRole=='admin' ) { %>
+    <a href="/forum/new" class="btn btn-success">Create New Forum</a>
+    <% } %>
+    <% forums.forEach(forum => { %>
+      <div class="card mt-4">
+        <div class="card-body">
+          <h4 class="card-title"><%= forum.title %></h4>
+          <div class="card-subtitle text-muted mb-2">
+            <%= forum.createdAt.toLocaleDateString('en-IL') %>
+          </div>
+          <div class="card-text mb-2"><%= forum.description %></div>
+          <a href="forum/<%= forum.slug %>" class="btn btn-primary">Read More</a>
+          <% if(userRole=='doctor' || userRole=='admin' ) { %>
+          <a href="forum/edit/<%= forum.id %>" class="btn btn-info">Edit</a>
+          <% } %>
+          <% if(userRole=='admin' ) { %>
+          <form action="/forum/<%= forum.id %>?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <%- include('../partials/footer'); %>
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/js/chart.min.js"></script>
+  <script src="/assets/js/bs-init.js"></script>
+  <script src="/assets/js/custom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/js/smoothscroll.js"></script>
+  <script src="/assets/js/theme.js"></script>
+</body>
+</html>
