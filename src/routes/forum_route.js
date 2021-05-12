@@ -2,11 +2,16 @@ const express = require('express')
 const Forum = require('./../models/forum_model')
 const User = require('./../models/user_model')
 const router = express.Router()
+const subForumRouter = require('./sub_forum_route')
 
+router.get('/', async (req, res) => {
+  const forum = await Forum.find().sort({ createdAt: 'desc' })
+  res.render('forum/forum', { forums: forum })
+})
+router.use('/sub_forum',subForumRouter)
 router.get('/new', (req, res) => {
   res.render('forum/new', { forum: new Forum() })
 })
-
 router.get('/edit/:id', async (req, res) => {
   const forum = await Forum.findById(req.params.id)
   res.render('forum/edit', { forum: forum })
@@ -17,7 +22,6 @@ router.get('/:slug', async (req, res) => {
   if (forum == null) res.redirect('/forum')
   res.render('forum/show', { forum: forum })
 })
-
 router.post('/', async (req, res, next) => {
   req.forum = new Forum()
   next()
@@ -32,6 +36,7 @@ router.delete('/:id', async (req, res) => {
   await Forum.findByIdAndDelete(req.params.id)
   res.redirect('/forum')
 })
+
 
 function saveforumAndRedirect(path) {
   return async (req, res) => {
@@ -48,5 +53,4 @@ function saveforumAndRedirect(path) {
     }
   }
 }
-
 module.exports = router
