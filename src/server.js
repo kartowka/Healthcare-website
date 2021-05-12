@@ -14,7 +14,6 @@ app.use(cookieParser())
 app.locals.userLoggedIn = 0
 app.locals.userID = ''
 app.locals.userRole = ''
-app.locals.errors = []
 
 //.env
 require('dotenv').config({
