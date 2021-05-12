@@ -5,6 +5,7 @@ const { roles } = require('../roles/roles')
 const nodemailer = require('../js/nodemailer')
 const DoctorDetails = require('../models/doctor_model')
 const Insurance = require('../models/insurance_model')
+const Forum = require('../models/forum_model')
 
 exports.grantAccess = function (action, resource) {
   return async (req, res, next) => {
@@ -225,8 +226,8 @@ exports.deleteUser = async (req, res) => {
   try {
     const userId = req.body.delete_ID
     const user = await User.findById((userId))
-    if (user.role == 'doctor'){
-      await DoctorDetails.findOneAndDelete({_doctor_id: userId})
+    if (user.role == 'doctor') {
+      await DoctorDetails.findOneAndDelete({ _doctor_id: userId })
     }
     await User.findByIdAndDelete(userId)
     throw 'User has been deleted.'
@@ -307,8 +308,39 @@ exports.verifyDoctor = async (req, res) => {
   } catch (error) {
     req.error = { Message: error, statusCode: '200' }
     res.status(200)
+    res.redirect(req.get('referer'))
+      //TODO maybe delete
   }
 }
+
+exports.getForums = async (req, res, next) => {
+  const forums = await Forum.find({})
+  req.params.forums = forums
+  next()
+}
+
+exports.authForum = async (req, res, next) => {
+  try {
+    const forum = await Forum.findOne({ _id: req.body.auth_forum })
+    const user = await User.findById(forum._doctor_id)
+    if (forum) {
+      nodemailer.sendConfirmationEmailForumAuth(
+        user.email,
+        forum.created_by,
+        forum.title,
+      )
+      await Forum.updateOne({ _id: forum._id }, { $set: { approved: 'Active' } })
+      throw 'Forum has been authorized.'
+    }
+  } catch (error) {
+      req.error = { Message: error, statusCode: '200' }
+      res.status(200)
+      res.redirect(req.get('referer'))
+      //TODO maybe delete
+    }
+}
+
+
 
 exports.forgotPassword = async (req, res, next) => {
   const { email } = req.body
@@ -373,7 +405,6 @@ exports.passwordReset = async (req, res, next) => {
     next()
   }
 }
-//TODO getInsurancePolicy && paymentConfirm //
 exports.getInsurancePolicy = async (req, res, next) => {
   try {
     const {
