@@ -5,8 +5,10 @@ const path = require('path')
 const User = require('./models/user_model')
 const routes = require('./routes/route')
 const appPort = process.env.PORT
+const methodOverride = require('method-override')
 const app = express()
 const cookieParser = require('cookie-parser')
+
 
 app.use(cookieParser())
 app.locals.userLoggedIn = 0
@@ -26,6 +28,7 @@ mongoose.connect(process.env.dbURI, { useNewUrlParser: true, useUnifiedTopology:
   .catch((err) => console.log(err))
 
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 app.use(async (req, res, next) => {
   if (req.cookies['x-access-token']) {
@@ -66,7 +69,6 @@ app.use('/img', express.static(__dirname + '/img'))
 app.use('/assets', express.static(__dirname + '/assets'))
 app.use('/scripts', express.static(path.join(__dirname, '..', 'node_modules/accessibility/')))
 app.use('/', routes)
-
 
 
 //Creating a connection
