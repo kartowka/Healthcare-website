@@ -5,12 +5,12 @@
   "engines": {
     "node": "16.0.0"
   },
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon src/server.js",
     "test": "mocha test/*.spec.js --color",
     "lint": "eslint src/**/*.js --color",
-    "start": "node src/index.js"
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
