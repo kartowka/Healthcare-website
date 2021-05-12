@@ -44,6 +44,11 @@ const forumSchema = new Schema({
         type: commentSchema,
         required: true,
     },
+    approved: {
+        type: String,
+        enum: ['Pending', 'Active'],
+        default: 'Pending',
+    },
 })
 
 const Forum = mongoose.model('user', forumSchema)
