@@ -94,9 +94,11 @@ router
     user_controller.allowIfLoggedin,
     user_controller.grantAccess('readAny', 'admin_interface'),
     user_controller.getUsers,
+    user_controller.getForums,
     (req, res) => {
       res.render('admin_interface', {
         users: req.params.users,
+        forums: req.params.forums,
         alert: req.error,
       })
     }
@@ -106,6 +108,8 @@ router
       await user_controller.deleteUser(req, res)
     if (Object.keys(req.body)[0] === 'approve_ID')
       await user_controller.verifyDoctor(req, res)
+    if (Object.keys(req.body)[0] === 'auth_forum')
+      await user_controller.authForum(req, res)
     //res.render('admin_interface', { users: req.params.users, alert: req.error })
   })
 router.get('/forum', async (req, res) => {
