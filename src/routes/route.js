@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const user_controller = require('../controllers/user_controller')
+const forum_controller = require('../controllers/forum_controller')
+const password_controller = require('../controllers/recover_pass_controller')
+const insurance_controller = require('../controllers/insurance_controller')
 const profile_router = require('./profile_route')
 const Forum = require('../models/forum_model')
 const forumRouter = require('./forum_route')
@@ -26,8 +29,7 @@ router
   .get(user_controller.denyIfLoggedin, (req, res) => {
     if (res.statusCode != 200) {
       res.render('restricted', { alert: req.error })
-    } else console.log(req.error)
-    res.render('login', { alert: req.error })
+    } else res.render('login', { alert: req.error })
   })
   .post(user_controller.login, (req, res) => {
     res.render('login', { alert: req.error })
@@ -55,7 +57,7 @@ router
   .get((req, res) => {
     res.render('travel_insurance')
   })
-  .post(user_controller.getInsurancePolicy, (req, res) => {
+  .post(insurance_controller.getInsurancePolicy, (req, res) => {
     res.render('travel_insurance', { alert: req.error })
   })
 
@@ -67,7 +69,7 @@ router
       res.render('restricted', { alert: req.error })
     } else res.render('forgot_password')
   })
-  .post(user_controller.forgotPassword)
+  .post(password_controller.forgotPassword)
 
 //password reset
 router
@@ -80,7 +82,7 @@ router
       res.render('reset_password')
     }
   })
-  .post(user_controller.passwordReset)
+  .post(password_controller.passwordReset)
 
 //confirmation code
 router.route('/confirm/:confirmationCode').get(user_controller.verifyUser)
@@ -94,7 +96,7 @@ router
     user_controller.allowIfLoggedin,
     user_controller.grantAccess('readAny', 'admin_interface'),
     user_controller.getUsers,
-    user_controller.getForums,
+    forum_controller.getForums,
     (req, res) => {
       res.render('admin_interface', {
         users: req.params.users,
@@ -109,7 +111,7 @@ router
     if (Object.keys(req.body)[0] === 'approve_ID')
       await user_controller.verifyDoctor(req, res)
     if (Object.keys(req.body)[0] === 'auth_forum')
-      await user_controller.authForum(req, res)
+      await forum_controller.authForum(req, res)
     //res.render('admin_interface', { users: req.params.users, alert: req.error })
   })
 router.get('/forum', async (req, res) => {
