@@ -41,6 +41,9 @@ const commentSchema = new Schema({
 })
 
 const forumSchema = new Schema({
+  _doctor_id: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   title: {
     type: String,
     required: true,
@@ -62,6 +65,9 @@ const forumSchema = new Schema({
   },
   comment: {
     type: commentSchema,
+  },
+  created_by: {
+    type: String,
   },
   approved: {
     type: String,
