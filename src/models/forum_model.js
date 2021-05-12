@@ -61,10 +61,10 @@ const forumSchema = new Schema({
     unique: true,
   },
   question: {
-    type: questionSchema,
+    type: [questionSchema],
   },
   comment: {
-    type: commentSchema,
+    type: [commentSchema],
   },
   created_by: {
     type: String,
