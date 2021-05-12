@@ -175,6 +175,10 @@ exports.getUser = async (req, res, next) => {
   try {
     const userId = req.params.id
     const user = await User.findById(userId)
+    if(user.role == 'doctor'){
+      let details = await DoctorDetails.find({ _doctor_id : userId })
+      req.doctor_details = details[0]
+    }
     if (!user) {
       throw new Error('User does not exist')
     }
@@ -190,28 +194,26 @@ exports.getUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
   try {
     const update = req.body
+   
     const userId = req.params.id
     const user = await User.findById(userId)
     if (user.role == 'patient') {
       if (update.first_name && update.last_name) {
-        const updateUser = await User.findByIdAndUpdate(userId, update)
+        const userUpdate = await User.findByIdAndUpdate(userId, update)
+        console.log("user")
+        console.log(user)
+        console.log("update")
+        console.log(update)
+        res.redirect(req.get('referer'))
         throw 'User has been updated'
       } else throw new Error('No updated, missing data in one of the fields')
-    } else if (user.role == 'doctor') {
-      /**
-              console.log(user)
-        if (update.first_name && update.last_name) {
-          const updateUser = await User.findByIdAndUpdate(userId, update)
-          throw 'User has been updated'
-        } 
-        else if(update.working_days) {
-          const updateUser = await User.findByIdAndUpdate(userId, update)
-          throw 'User has been updated'
-        } 
-      
-       */
-      const updateUser = await User.findByIdAndUpdate(userId, update)
+    }
+    else if (user.role == 'doctor') {
+
+      const details = await DoctorDetails.find({ _doctor_id : userId })
+      const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
       throw 'User has been updated'
+
     }
   } catch (error) {
     req.error = { Message: error, statusCode: '200' }
@@ -219,6 +221,7 @@ exports.updateUser = async (req, res, next) => {
     next()
   }
 }
+
 
 exports.deleteUser = async (req, res) => {
   try {
