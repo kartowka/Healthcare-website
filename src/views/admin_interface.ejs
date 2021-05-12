@@ -19,114 +19,40 @@
   <%- include('partials/header'); %>
     <div id="wrapper">
       <div class="d-flex flex-column" id="content-wrapper">
-          <div class="container-fluid">
-            <div class="card shadow">
-              <div class="card-header py-3">
-                <p class="text-primary m-0 font-weight-bold">All integral User Data</p>
-              </div>
-              <% if(typeof alert != 'undefined') { %>
-                <div class="alert alert-warning alert-dismissible fade show" id="alert_message" role="alert">
-                    <%=alert['Message']%>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-        <% } %>
-              <div class="card-body">
-                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                  <table class="table my-0" id="dataTable">
-                    <thead>
-                      <tr>
-                        <th>S.N</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email Address</th>
-                        <th>Role</th>
-                        <th>Clinic</th>
-                        <th>License ID</th>
-                        <th>Status</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% if(users.length!=0){users.forEach(function(data, index){ %>
-                        <tr>
-                          <td>
-                            <%=index+1 %>
-                          </td>
-                          <td>
-                            <%=data.first_name %>
-                          </td>
-                          <td>
-                            <%=data.last_name %>
-                          </td>
-                          <td>
-                            <%=data.email %>
-                          </td>
-                          <td>
-                            <%=data.role %>
-                          </td>
-                          <td>
-                            <%=data.clinic %>
-                          </td>
-                          <td>
-                            <%=data.medical_license_id %>
-                          </td>
-                          <td>
-                            <%=data.status %>
-                          </td>
-                          <td>
-                            <form method="POST">
-                            <button class="btn btn-primary" type="submit"
-                                        onclick="" id="edit_btn">Edit</button>
-                            <!-- <form action="/admin_interface/<%= data.id %>" method="POST">
-                              <input type="submit" value="Edit">
-                            </form> -->
-                          </td>
-                          <td>
-                            <button class="btn btn-primary" type="submit"
-                            onclick="" id="btn" name= "delete_ID" value="<%=data.id%>" >Delete</button>
-                            <!-- <form action="/admin_interface/delete/<%= data.id %>" method="POST">
-                              <input type="submit" value="Delete">
-                            </form> -->
-                          </td>
-                        </tr>
-                        <% }) %>
-                          <% } else{ %>
-                            <tr>
-                              <td colspan="7">No Data Found</td>
-                            </tr>
-                            <% } %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+        <div class="container-fluid">
+          <div class="card shadow">
+            <div class="card-header py-3">
+              <p class="text-primary m-0 font-weight-bold">All integral User Data</p>
             </div>
-          </div>
-          <br>
-          <br>
-          <div class="container-fluid">
-            <div class="card shadow">
-              <div class="card-header py-3">
-                <p class="text-primary m-0 font-weight-bold">Doctor Validation</p>
+            <% if(typeof alert !='undefined' ) { %>
+              <div class="alert alert-warning alert-dismissible fade show" id="alert_message" role="alert">
+                <%=alert['Message']%>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
               </div>
-              <div class="card-body">
-                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                  <table class="table my-0" id="dataTable">
-                    <thead>
-                      <tr>
-                        <th>S.N</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>License ID</th>
-                        <th>Approved?</th>
-                        <th>Approve</th>
-                      </tr>
-                      <% if(users.length!=0){users.forEach(function(data, index){ %>
-                        <% if(data.role=='doctor' && data.status=='Waiting for Admin Approval' ) { %>
+              <% } %>
+                <div class="card-body">
+                  <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                      <thead>
+                        <tr>
+                          <th>S.N</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email Address</th>
+                          <th>Role</th>
+                          <th>Clinic</th>
+                          <th>License ID</th>
+                          <th>Status</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if(users.length!=0){users.forEach(function(data, index){ %>
                           <tr>
-                            <td contenteditable='true'>
+                            <td>
                               <%=index+1 %>
                             </td>
                             <td>
@@ -136,34 +62,155 @@
                               <%=data.last_name %>
                             </td>
                             <td>
+                              <%=data.email %>
+                            </td>
+                            <td>
+                              <%=data.role %>
+                            </td>
+                            <td>
+                              <%=data.clinic %>
+                            </td>
+                            <td>
                               <%=data.medical_license_id %>
                             </td>
                             <td>
                               <%=data.status %>
                             </td>
                             <td>
-                              <button class="btn btn-primary" type="submit"
-                              id="btn" name= "approve_ID" value="<%=data.id%>" >Approve</button>
+                              <form method="POST">
+                                <button class="btn btn-primary" type="submit" onclick="" id="edit_btn">Edit</button>
+                                <!-- <form action="/admin_interface/<%= data.id %>" method="POST">
+                              <input type="submit" value="Edit">
+                            </form> -->
+                            </td>
+                            <td>
+                              <button class="btn btn-primary" type="submit" id="btn" name="delete_ID"
+                                value="<%=data.id%>">Delete</button>
                             </td>
                           </tr>
-                          <% } %>
-                            <% }) %>
-                              <% } else{ %>
-                                <tr>
-                                  <td colspan="7">No Data Found</td>
-                                </tr>
-                                <% } %>
-                                  </tbody>
-                                </form>
-                  </table>
+                          <% }) %>
+                            <% } else{ %>
+                              <tr>
+                                <td colspan="7">No Data Found</td>
+                              </tr>
+                              <% } %>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="container-fluid">
+          <div class="card shadow">
+            <div class="card-header py-3">
+              <p class="text-primary m-0 font-weight-bold">Doctor Validation</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                  <thead>
+                    <tr>
+                      <th>S.N</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>License ID</th>
+                      <th>Approved?</th>
+                      <th>Approve</th>
+                    </tr>
+                    <% if(users.length!=0){users.forEach(function(data, index){ %>
+                      <% if(data.role=='doctor' && data.status=='Waiting for Admin Approval' ) { %>
+                        <tr>
+                          <td contenteditable='true'>
+                            <%=index+1 %>
+                          </td>
+                          <td>
+                            <%=data.first_name %>
+                          </td>
+                          <td>
+                            <%=data.last_name %>
+                          </td>
+                          <td>
+                            <%=data.medical_license_id %>
+                          </td>
+                          <td>
+                            <%=data.status %>
+                          </td>
+                          <td>
+                            <button class="btn btn-primary" type="submit" id="btn" name="approve_ID"
+                              value="<%=data.id%>">Approve</button>
+                          </td>
+                        </tr>
+                        <% } %>
+                          <% }) %>
+                            <% } else{ %>
+                              <tr>
+                                <td colspan="7">No Data Found</td>
+                              </tr>
+                              <% } %>
+                                </tbody>
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="container-fluid">
+          <div class="card shadow">
+            <div class="card-header py-3">
+              <p class="text-primary m-0 font-weight-bold">Forum Authorization</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                  <thead>
+                    <tr>
+                      <th>S.N</th>
+                      <th>Doctor's Last Name</th>
+                      <th>Forum Subject</th>
+                      <th>Authorized?</th>
+                      <th>Authorize</th>
+                    </tr>
+                    <% if(forums.length!=0){forums.forEach(function(data, index){ %>
+                      <% if (data.approved !='Active' ) { %>
+                        <tr>
+                          <td contenteditable='true'>
+                            <%=index+1 %>
+                          </td>
+                          <td>
+                            <%=data.created_by %>
+                          </td>
+                          <td>
+                            <%=data.title %>
+                          </td>
+                          <td>
+                            <%=data.approved %>
+                          </td>
+                          <td>
+                            <button class="btn btn-primary" type="submit" id="btn" name="auth_forum"
+                              value="<%=data.id%>">Authorize</button>
+                          </td>
+                        </tr>
+                        <% } %>
+                          <% }) %>
+                            <% } else{ %>
+                              <tr>
+                                <td colspan="7">No Data Found</td>
+                              </tr>
+                              <% } %>
+                                </tbody>
+                                </form>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
 
     <%- include('partials/footer'); %>
@@ -176,7 +223,7 @@
       <script src="/assets/js/jquery.min.js"></script>
       <script src="/assets/js/smoothscroll.js"></script>
       <script src="/assets/js/theme.js"></script>
-      
+
 </body>
 
 </html>
