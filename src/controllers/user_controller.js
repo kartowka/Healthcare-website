@@ -200,10 +200,6 @@ exports.updateUser = async (req, res, next) => {
     if (user.role == 'patient') {
       if (update.first_name && update.last_name) {
         const userUpdate = await User.findByIdAndUpdate(userId, update)
-        console.log("user")
-        console.log(user)
-        console.log("update")
-        console.log(update)
         res.redirect(req.get('referer'))
         throw 'User has been updated'
       } else throw new Error('No updated, missing data in one of the fields')

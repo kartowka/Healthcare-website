@@ -58,7 +58,7 @@ profile
         user_controller.grantAccess('readAny', 'doctor_profile'),
         user_controller.getUser, (req, res) => {
             if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('doctor_profile', { data: req.user })
+            else res.render('doctor_profile', { data: req.user, doctor_details: req.doctor_details })
         })
 
 //doctor settings
