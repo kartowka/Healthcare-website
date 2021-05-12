@@ -1,56 +1,80 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const marked = require('marked')
+const slugify = require('slugify')
+const createDomPurify = require('dompurify')
+const { JSDOM } = require('jsdom')
+const dompurify = createDomPurify(new JSDOM().window)
 
 const questionSchema = new Schema({
-    topic: {
-        type: String,
-        required: true,
-    },
-    date: {
-        type: Date,
-        required: true,
-    },
-    question_body: {
-        type: String,
-        required: true,
-    },
-    asked_by: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    },
+  topic: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  question_body: {
+    type: String,
+    required: true,
+  },
+  asked_by: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 })
 
 const commentSchema = new Schema({
-    date: {
-        type: Date,
-        required: true,
-    },
-    comment_body: {
-        type: String,
-        required: true,
-    },
-    commented_by: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    },
+  date: {
+    type: Date,
+    required: true,
+  },
+  comment_body: {
+    type: String,
+    required: true,
+  },
+  commented_by: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 })
 
 const forumSchema = new Schema({
-    question: {
-        type: questionSchema,
-        required: true,
-    },
-    comment: {
-        type: commentSchema,
-        required: true,
-    },
-    approved: {
-        type: String,
-        enum: ['Pending', 'Active'],
-        default: 'Pending',
-    },
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  question: {
+    type: questionSchema,
+  },
+  comment: {
+    type: commentSchema,
+  },
+  approved: {
+    type: String,
+    enum: ['Pending', 'Active'],
+    default: 'Pending',
+  },
 })
-
-const Forum = mongoose.model('user', forumSchema)
+forumSchema.pre('validate', function (next) {
+    if (this.title) {
+      this.slug = slugify(this.title, { lower: true, strict: true })
+    }
+    next()
+  })
+const Forum = mongoose.model('forum', forumSchema)
 
 module.exports = Forum
