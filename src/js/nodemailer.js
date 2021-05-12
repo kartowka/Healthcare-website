@@ -82,3 +82,16 @@ module.exports.sendConfirmationEmailInsurancePolicy = (first_name,last_name,emai
         </div>`,
     }).catch(err => console.log(err))
 }
+
+module.exports.sendConfirmationEmailForumAuth = (email, last_name, forum_subject) => {
+    transport.sendMail({
+        from: user,
+        to: email,
+        subject: 'Your Forum Have Been Authenticated',
+        html: `<h1>Email Confirmation</h1>
+        <h2>Hello ${last_name}</h2>
+        <p>Your forum: ${forum_subject} has been authorized!</p>
+        <a href=${link}> Click here</a>
+        </div>`,
+    }).catch(err => console.log(err))
+}
