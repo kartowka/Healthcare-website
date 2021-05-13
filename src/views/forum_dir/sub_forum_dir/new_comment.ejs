@@ -15,15 +15,15 @@
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-  <%- include('../partials/header'); %>
+  <%- include('../../partials/header'); %>
   <div class="container">
-    <h1 class="mb-4">New Forum</h1>
+    <h1 class="mb-4">New Comment</h1>
 
-    <form action="/forum" method="POST">
-      <%- include('_form_fields') %>
+    <form action="/forum/<%= subForumSlug %>/<%= question %>/conversation" method="POST">
+      <%- include('comment_form_fields') %>
     </form>
   </div>
-  <%- include('../partials/footer'); %>
+  <%- include('../../partials/footer'); %>
   <script src="/assets/js/jquery.min.js"></script>
   <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="/assets/js/chart.min.js"></script>

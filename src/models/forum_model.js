@@ -1,10 +1,25 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const marked = require('marked')
 const slugify = require('slugify')
-const createDomPurify = require('dompurify')
-const { JSDOM } = require('jsdom')
-const dompurify = createDomPurify(new JSDOM().window)
+
+const commentSchema = new Schema({
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  comment_body: {
+    type: String,
+    required: true,
+  },
+  commented_by: {
+    type: String,
+    required: true,
+  },
+  commented_by_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+})
 
 const questionSchema = new Schema({
   topic: {
@@ -26,20 +41,8 @@ const questionSchema = new Schema({
   asked_by: {
     type: String,
   },
-})
-
-const commentSchema = new Schema({
-  date: {
-    type: Date,
-    required: true,
-  },
-  comment_body: {
-    type: String,
-    required: true,
-  },
-  commented_by: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
+  comment: {
+    type: [commentSchema],
   },
 })
 
@@ -65,9 +68,6 @@ const forumSchema = new Schema({
   },
   question: {
     type: [questionSchema],
-  },
-  comment: {
-    type: [commentSchema],
   },
   created_by: {
     type: String,
