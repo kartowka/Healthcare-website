@@ -194,9 +194,10 @@ exports.getUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
   try {
     const update = req.body
-   
     const userId = req.params.id
     const user = await User.findById(userId)
+
+    
     if (user.role == 'patient') {
       if (update.first_name && update.last_name) {
         const userUpdate = await User.findByIdAndUpdate(userId, update)
@@ -204,29 +205,39 @@ exports.updateUser = async (req, res, next) => {
         throw 'User has been updated'
       } else throw new Error('No updated, missing data in one of the fields')
     }
+    
     else if (user.role == 'doctor') {
-      if(update.clinic_address != []){
-        const details = await DoctorDetails.find({ _doctor_id : userId })
-        details[0]._id.updateOne(
-          {
-            $set: {
-              'clinic_address': {
-                'city': update.clinic_address[0],
-                'street':update.clinic_address[1]
-              }
-              //'clinic_address.city': update.clinic_address[0],
-              //'clinic_address.street':update.clinic_address[1],
-            },
-          }
-        )
-      }
-      else{
+      if(update.working_days != undefined){
         const details = await DoctorDetails.find({ _doctor_id : userId })
         const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
         throw 'User has been updated'
       }
+      if(update.start_time != undefined && update.end_time != undefined){
+        const details = await DoctorDetails.find({ _doctor_id : userId })
+        const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
+        throw 'User has been updated'
+      }
+      if(update.clinic_address != undefined){
+        const details = await DoctorDetails.find({ _doctor_id : userId })
+        details[0]._id.updateOne(
+          {
+            $set: {
+              'clinic_address.city': update.clinic_address[0],
+              'clinic_address.street':update.clinic_address[1],
+            },
+          }
+        )
+      }
+      if (update.first_name != undefined && update.last_name != undefined) {
+        const userUpdate = await User.findByIdAndUpdate(userId, update)
+        const details = await DoctorDetails.find({ _doctor_id : userId })
+        const userUpdateDoctor = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
+        throw 'User has been updated'
+      }
+      //else throw new Error('No updated, missing data in one of the fields')
 
-
+      console.log(update.first_name != undefined && update.last_name != undefined)
+ 
     }
   } catch (error) {
     req.error = { Message: error, statusCode: '200' }
