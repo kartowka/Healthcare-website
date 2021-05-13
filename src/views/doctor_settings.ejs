@@ -317,11 +317,11 @@
                                                                             </div>
                                                                             <div class="card-body">
                                                                                 <div class="form-group"><label
-                                                                                        for="address"><strong>Address</strong></label><input
+                                                                                        for="address"><strong>City</strong></label><input
                                                                                         class="form-control" type="text"
                                                                                         id="address"
                                                                                         placeholder="<%=data.clinic_address%>"
-                                                                                        name="clinic_address"
+                                                                                        name="clinic_address[]"
                                                                                         value="<%=data.clinic_address%>">
                                                                                 </div>
                                                                                 <div class="form-group"><label
@@ -335,12 +335,12 @@
                                                                                 <div class="form-row">
                                                                                     <div class="col">
                                                                                         <div class="form-group"><label
-                                                                                                for="city"><strong>City</strong></label><input
+                                                                                                for="city"><strong>Street</strong></label><input
                                                                                                 class="form-control"
                                                                                                 type="text" id="city"
-                                                                                                placeholder="<%= data.clinic_city %>"
-                                                                                                name="clinic_city"
-                                                                                                value="<%= data.clinic_city%>">
+                                                                                                placeholder="<%=data.clinic_address%>"
+                                                                                                name="clinic_address[]"
+                                                                                                value="">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col">
@@ -352,8 +352,7 @@
                                                                                                 pattern="0[1-9]{1,2}-[0-9]{7}"
                                                                                                 id="phone_number"
                                                                                                 name="clinic_phone_number"
-                                                                                                value="<%=data.clinic_phone_number%>"
-                                                                                                >
+                                                                                                value="<%=data.clinic_phone_number%>">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
