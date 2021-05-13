@@ -18,34 +18,47 @@
 <body>
   <%- include('../../partials/header'); %>
     <div class="container">
-      <h1 class="mb-4">Forum Title : <span style="color: black;"><%= subForumName %></h1></span>
+      <h1 class="mb-4">Forum Title : <span style="color: black;">
+          <%= subForumName %>
+      </h1></span>
       <a href="/forum/<%=subForumSlug%>/new_question" class="btn btn-success">Ask new Question</a>
       <% questions.forEach(question=> { %>
         <% if (question.length!=0) { %>
           <div class="card mt-4">
             <div class="card-body">
               <h2 class="card-title">
-                Question: <span style="color: black;"><%= question.topic %></span>
+                Question: <span style="color: black;"><a href="/forum/<%=subForumSlug%>/<%=question._id%>/conversation">
+                    <%= question.topic %>
+                  </a></span>
               </h2>
               <div class="card-subtitle text-muted mb-2">
-                Created At: <span style="color: black;"><%= question.date %></span>
+                Created At: <span style="color: black;">
+                  <%= question.date %>
+                </span>
               </div>
               <div class="card-text mb-2">
-                asked by: <span style="color: black;"><%= question.asked_by %></span>
+                asked by: <span style="color: black;">
+                  <%= question.asked_by %>
+                </span>
               </div>
               <div class="card-text mb-2">
-                <h5>question description: <span style="color: black;"><%= question.question_body %></span></h5>
+                <h5>question description: <span style="color: black;">
+                    <%= question.question_body %>
+                  </span></h5>
               </div>
-
+              <% if (userID==question.asked_by_id || userRole == 'admin') { %>
                 <a href="/forum/<%=subForumSlug%>/edit/<%= question.id %>" class="btn btn-info">Edit</a>
-                    <form action="/forum/<%=subForumSlug%>/<%= question.id %>?_method=DELETE" method="POST" class="d-inline">
-                      <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                <% } %>
+                <% if (userRole != 'patient') { %>
+                <form action="/forum/<%=subForumSlug%>/<%= question.id %>?_method=DELETE" method="POST" class="d-inline">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                <% } %>
+                  </form>
             </div>
           </div>
-        <% } %>
-              
-                <% }) %>
+          <% } %>
+
+            <% }) %>
     </div>
     <%- include('../../partials/footer'); %>
       <script src="/assets/js/jquery.min.js"></script>
