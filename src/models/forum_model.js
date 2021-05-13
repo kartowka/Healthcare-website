@@ -13,15 +13,18 @@ const questionSchema = new Schema({
   },
   date: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
   question_body: {
     type: String,
     required: true,
   },
-  asked_by: {
+  asked_by_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
+  },
+  asked_by: {
+    type: String,
   },
 })
 
@@ -84,3 +87,5 @@ forumSchema.pre('validate', function (next) {
 const Forum = mongoose.model('forum', forumSchema)
 
 module.exports = Forum
+
+
