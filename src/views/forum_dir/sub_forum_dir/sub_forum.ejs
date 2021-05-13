@@ -18,34 +18,33 @@
 <body>
   <%- include('../../partials/header'); %>
     <div class="container">
-      <h1 class="mb-4">HealthCare forum JSAS</h1>
-      <% if(userRole=='doctor' || userRole=='admin' ) { %>
-        <a href="/forum/new" class="btn btn-success">Create New Forum</a>
-        <% } %>
-          <% forums.forEach(forum=> { %>
-            <% if (forum.approved=='Active' || (forum.approved !='Active' && userRole=='admin' )) { %>
-              <div class="card mt-4">
-                <div class="card-body">
-                  <h4 class="card-title">
-                    Forum: <a href="forum/<%= forum.slug %>"><%= forum.title %></a>
-                  </h4>
-                  <div class="card-subtitle text-muted mb-2">
-                    Created At: <%= forum.createdAt.toLocaleDateString('en-IL') %>
-                  </div>
-                  <div class="card-text mb-2">
-                    <h5>Forum description: <span style="color: black;"><%= forum.description %></span></h5>
-                  </div>
-                  <% if(userRole=='doctor' || userRole=='admin' ) { %>
-                    <a href="forum/edit/<%= forum.id %>" class="btn btn-info">Edit</a>
-                    <% } %>
-                      <% if(userRole=='admin' ) { %>
-                        <form action="/forum/<%= forum.id %>?_method=DELETE" method="POST" class="d-inline">
-                          <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                        <% } %>
-                </div>
+      <h1 class="mb-4">Forum Title : <span style="color: black;"><%= subForumName %></h1></span>
+      <a href="/forum/<%=subForumSlug%>/new_question" class="btn btn-success">Ask new Question</a>
+      <% questions.forEach(question=> { %>
+        <% if (question.length!=0) { %>
+          <div class="card mt-4">
+            <div class="card-body">
+              <h2 class="card-title">
+                Question: <span style="color: black;"><%= question.topic %></span>
+              </h2>
+              <div class="card-subtitle text-muted mb-2">
+                Created At: <span style="color: black;"><%= question.date %></span>
               </div>
-              <% } %>
+              <div class="card-text mb-2">
+                asked by: <span style="color: black;"><%= question.asked_by %></span>
+              </div>
+              <div class="card-text mb-2">
+                <h5>question description: <span style="color: black;"><%= question.question_body %></span></h5>
+              </div>
+
+                <a href="/forum/<%=subForumSlug%>/edit/<%= question.id %>" class="btn btn-info">Edit</a>
+                    <form action="/forum/<%=subForumSlug%>/<%= question.id %>?_method=DELETE" method="POST" class="d-inline">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+            </div>
+          </div>
+        <% } %>
+              
                 <% }) %>
     </div>
     <%- include('../../partials/footer'); %>
