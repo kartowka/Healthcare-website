@@ -193,10 +193,9 @@ exports.getUser = async (req, res, next) => {
 
 exports.updateUser = async (req, res, next) => {
   try {
-    const update = req.body
-    const userId = req.params.id
-    const user = await User.findById(userId)
-
+    let update = req.body
+    let userId = req.params.id
+    let user = await User.findById(userId)
     
     if (user.role == 'patient') {
       if (update.first_name && update.last_name) {
@@ -207,7 +206,7 @@ exports.updateUser = async (req, res, next) => {
     }
     
     else if (user.role == 'doctor') {
-      const details = await DoctorDetails.find({ _doctor_id : userId })
+      let details = await DoctorDetails.find({ _doctor_id : userId })
       if(update.working_days != undefined){
         const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
         throw 'User has been updated'
@@ -216,26 +215,28 @@ exports.updateUser = async (req, res, next) => {
         const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
         throw 'User has been updated'
       }
-      if(update.clinic_address != undefined){
+      if(update.city != undefined && update.street != undefined){
         if(details[0].clinic_address != undefined){
+          await DoctorDetails.findOneAndUpdate(
+            { 'clinic_address._id': details[0].clinic_address[0]._id },
+            {
+              $set: {
+                'clinic_address.$.city': update.city,
+                'clinic_address.$.street': update.street,
+              },
+            },
+          )
+        }
+        else{
           await DoctorDetails.findByIdAndUpdate(details[0]._id,{
             $push: {
               clinic_address: {
-                city: update.clinic_address[0],
-                street: update.clinic_address[1],
+                city: update.city,
+                street: update.street,
               },
-            },
-          })
-        }
-        else{
-          await DoctorDetails.findOneAndUpdate(
-            { 'clinic_address._id': details[0].clinic_address._id },
-            {
-              $set: {
-                'clinic_address.$.city': update.clinic_address[0],
-                'clinic_address.$.street': update.clinic_address[1],
-              },
-            },
+            }
+          },
+            {upsert: true, new : true},
           )
         }
       }
