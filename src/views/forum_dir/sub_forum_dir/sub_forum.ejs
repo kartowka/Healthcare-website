@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>forum main - JSAS</title>
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/assets/css/FontAwesome.css">
+  <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+  <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+  <%- include('../../partials/header'); %>
+    <div class="container">
+      <h1 class="mb-4">Forum Title : <span style="color: black;"><%= subForumName %></h1></span>
+      <a href="/forum/<%=subForumSlug%>/new_question" class="btn btn-success">Ask new Question</a>
+      <% questions.forEach(question=> { %>
+        <% if (question.length!=0) { %>
+          <div class="card mt-4">
+            <div class="card-body">
+              <h2 class="card-title">
+                Question: <span style="color: black;"><%= question.topic %></span>
+              </h2>
+              <div class="card-subtitle text-muted mb-2">
+                Created At: <span style="color: black;"><%= question.date %></span>
+              </div>
+              <div class="card-text mb-2">
+                asked by: <span style="color: black;"><%= question.asked_by %></span>
+              </div>
+              <div class="card-text mb-2">
+                <h5>question description: <span style="color: black;"><%= question.question_body %></span></h5>
+              </div>
+
+                <a href="/forum/<%=subForumSlug%>/edit/<%= question.id %>" class="btn btn-info">Edit</a>
+                    <form action="/forum/<%=subForumSlug%>/<%= question.id %>?_method=DELETE" method="POST" class="d-inline">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+            </div>
+          </div>
+        <% } %>
+              
+                <% }) %>
+    </div>
+    <%- include('../../partials/footer'); %>
+      <script src="/assets/js/jquery.min.js"></script>
+      <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+      <script src="/assets/js/chart.min.js"></script>
+      <script src="/assets/js/bs-init.js"></script>
+      <script src="/assets/js/custom.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+      <script src="/assets/js/jquery.min.js"></script>
+      <script src="/assets/js/smoothscroll.js"></script>
+      <script src="/assets/js/theme.js"></script>
+</body>
+
+</html>
