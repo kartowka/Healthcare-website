@@ -2,7 +2,6 @@ const express = require('express')
 const Forum = require('./../models/forum_model')
 const User = require('./../models/user_model')
 const router = express.Router()
-const subForumRouter = require('./sub_forum_route')
 
 router.get('/', async (req, res) => {
   const forum = await Forum.find().sort({ createdAt: 'desc' })
