@@ -218,7 +218,7 @@ exports.updateUser = async (req, res, next) => {
               //'clinic_address.street':update.clinic_address[1],
             },
           }
-        );
+        )
       }
       else{
         const details = await DoctorDetails.find({ _doctor_id : userId })
