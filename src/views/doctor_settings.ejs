@@ -110,19 +110,24 @@
                                                                         <fieldset>
                                                                             <label
                                                                                 for="from"><strong>From:</strong></label><input
-                                                                                class="form-control" type="time"
+                                                                                class="form-control" 
                                                                                 id="reception_hours_from"
-                                                                                placeholder="<%= data.start_time%>"
                                                                                 name="start_time"
-                                                                                value="<%= data.start_time%>">
+                                                                                value="<%= data.start_time%>"
+                                                                                type="time"
+                                                                                pattern="[0-9]{2}:[0-9]{2}"
+                                                                                >
                                                                             </label>
                                                                             <label
                                                                                 for="to:"><strong>To:</strong></label><input
-                                                                                class="form-control" type="time"
+                                                                                class="form-control" 
                                                                                 id="reception_hours_to"
                                                                                 placeholder="<%= data.end_time%>"
                                                                                 name="end_time"
-                                                                                value="<%data.end_time%>">
+                                                                                value="<%data.end_time%>"
+                                                                                type="time"
+                                                                                pattern="[0-9]{2}:[0-9]{2}"
+                                                                                >
                                                                             <br>
                                                                             <div class="form-group"><button
                                                                                     class="btn btn-primary btn-sm"
@@ -343,19 +348,20 @@
                                                                                                 for="Phone number"><strong>Phone
                                                                                                     number</strong></label><input
                                                                                                 class="form-control"
-                                                                                                //type="tel"
-                                                                                                //pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                                                                                                //id="phone _number"
-                                                                                                placeholder="<%=data.clinic_phone_number%>"
-                                                                                                name="linic_phone_number"
-                                                                                                value="<%=data.clinic_phone_number%>">
+                                                                                                type="tel"
+                                                                                                pattern="0[1-9]{1,2}-[0-9]{7}"
+                                                                                                id="phone_number"
+                                                                                                name="clinic_phone_number"
+                                                                                                value="<%=data.clinic_phone_number%>"
+                                                                                                >
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group"><button
                                                                                         class="btn btn-primary btn-sm"
                                                                                         type="submit">Save
-                                                                                        Settings</button></div>
+                                                                                        Settings</button>
+                                                                                </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
