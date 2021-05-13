@@ -207,26 +207,37 @@ exports.updateUser = async (req, res, next) => {
     }
     
     else if (user.role == 'doctor') {
+      const details = await DoctorDetails.find({ _doctor_id : userId })
       if(update.working_days != undefined){
-        const details = await DoctorDetails.find({ _doctor_id : userId })
         const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
         throw 'User has been updated'
       }
       if(update.start_time != undefined && update.end_time != undefined){
-        const details = await DoctorDetails.find({ _doctor_id : userId })
         const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
         throw 'User has been updated'
       }
       if(update.clinic_address != undefined){
-        const details = await DoctorDetails.find({ _doctor_id : userId })
-        details[0]._id.updateOne(
-          {
-            $set: {
-              'clinic_address.city': update.clinic_address[0],
-              'clinic_address.street':update.clinic_address[1],
+        if(details[0].clinic_address != undefined){
+          await DoctorDetails.findByIdAndUpdate(details[0]._id,{
+            $push: {
+              clinic_address: {
+                city: update.clinic_address[0],
+                street: update.clinic_address[1],
+              },
             },
-          }
-        )
+          })
+        }
+        else{
+          await DoctorDetails.findOneAndUpdate(
+            { 'clinic_address._id': details[0].clinic_address._id },
+            {
+              $set: {
+                'clinic_address.$.city': update.clinic_address[0],
+                'clinic_address.$.street': update.clinic_address[1],
+              },
+            },
+          )
+        }
       }
       if (update.first_name != undefined && update.last_name != undefined) {
         const userUpdate = await User.findByIdAndUpdate(userId, update)
@@ -236,7 +247,6 @@ exports.updateUser = async (req, res, next) => {
       }
       //else throw new Error('No updated, missing data in one of the fields')
 
-      console.log(update.first_name != undefined && update.last_name != undefined)
  
     }
   } catch (error) {
