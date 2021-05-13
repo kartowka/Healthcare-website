@@ -49,34 +49,46 @@
                                                                 <div class="card-body">
                                                                     <form method="POST">
                                                                         <label
-                                                                            for="Work Days"><strong>From:</strong></label>
-                                                                        <select name="working_days[]" id="start_day"
-                                                                            value="<%=data.start_day%>" selected=value>
-                                                                            <option value=""></option>
-                                                                            <option value="Sunday">Sunday</option>
-                                                                            <option value="Monday">Monday</option>
-                                                                            <option value="Tuesday">Tuesday</option>
-                                                                            <option value="Wednesday">Wednesday</option>
-                                                                            <option value="Thursday">Thursday</option>
-                                                                            <option value="Friday">Friday</option>
-                                                                            <option value="Saturday">Saturday</option>
-                                                                        </select>
-                                                                        <br><br>
+                                                                            for="Work Days"><strong>Choose your work days:</strong></label>
+                                                                            
+                                                                        <br>
 
-                                                                        <label
-                                                                            for="Work Days"><strong>To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></label>
-                                                                        <select name="working_days[]" id="end_day"
-                                                                            value="<%=data.end_day%>" selected=value>
-                                                                            <option value=""></option>
-                                                                            <option value="Sunday">Sunday</option>
-                                                                            <option value="Monday">Monday</option>
-                                                                            <option value="Tuesday">Tuesday</option>
-                                                                            <option value="Wednesday">Wednesday</option>
-                                                                            <option value="Thursday">Thursday</option>
-                                                                            <option value="Friday">Friday</option>
-                                                                            <option value="Saturday">Saturday</option>
-                                                                        </select>
-                                                                        <br><br>
+                                                                        <input type="checkbox"
+                                                                            name="working_days[]"
+                                                                            value="Sunday">
+                                                                        <label for="Sunday">
+                                                                            Sunday</label><br>
+                                                                        <input type="checkbox"
+                                                                            name="working_days[]"
+                                                                            value="Monday">
+                                                                        <label for="Monday">
+                                                                            Monday</label><br>
+                                                                        <input type="checkbox"
+                                                                            name="working_days[]"
+                                                                            value="Tuesday">
+                                                                        <label for="Tuesday">
+                                                                            Tuesday</label><br>
+                                                                        <input type="checkbox"
+                                                                            name="working_days[]"
+                                                                            value="Wednesday">
+                                                                        <label for="Wednesday">
+                                                                            Wednesday</label><br>
+                                                                            <input type="checkbox"
+                                                                            name="working_days[]"
+                                                                            value="Tuesday">
+                                                                        <label for="Tuesday">
+                                                                            Thursday</label><br>
+                                                                            <input type="checkbox"
+                                                                            name="working_days[]"
+                                                                            value="Friday">
+                                                                        <label for="Friday">
+                                                                            Friday</label><br>
+                                                                            <input type="checkbox"
+                                                                            name="working_days[]"
+                                                                            value="Saturday">
+                                                                        <label for="Saturday">
+                                                                            Saturday</label><br><br>
+
 
                                                                         <div class="form-group"><button
                                                                                 class="btn btn-primary btn-sm"
@@ -331,9 +343,9 @@
                                                                                                 for="Phone number"><strong>Phone
                                                                                                     number</strong></label><input
                                                                                                 class="form-control"
-                                                                                                type="tel"
-                                                                                                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                                                                                                id="phone _number"
+                                                                                                //type="tel"
+                                                                                                //pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                                                                                                //id="phone _number"
                                                                                                 placeholder="<%=data.clinic_phone_number%>"
                                                                                                 name="linic_phone_number"
                                                                                                 value="<%=data.clinic_phone_number%>">
