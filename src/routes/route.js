@@ -114,11 +114,7 @@ router
       await forum_controller.authForum(req, res)
     //res.render('admin_interface', { users: req.params.users, alert: req.error })
   })
-router.get('/forum', async (req, res) => {
-  const forum = await Forum.find().sort({ createdAt: 'desc' })
-  res.render('forum/forum', { forums: forum })
-})
-router.use('/forum', forumRouter)
+router.use('/forum',forumRouter)
 router
   .route('/search')
   .get(

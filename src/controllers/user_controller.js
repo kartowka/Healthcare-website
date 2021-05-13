@@ -205,10 +205,27 @@ exports.updateUser = async (req, res, next) => {
       } else throw new Error('No updated, missing data in one of the fields')
     }
     else if (user.role == 'doctor') {
+      if(update.clinic_address != []){
+        const details = await DoctorDetails.find({ _doctor_id : userId })
+        details[0]._id.updateOne(
+          {
+            $set: {
+              'clinic_address': {
+                'city': update.clinic_address[0],
+                'street':update.clinic_address[1]
+              }
+              //'clinic_address.city': update.clinic_address[0],
+              //'clinic_address.street':update.clinic_address[1],
+            },
+          }
+        )
+      }
+      else{
+        const details = await DoctorDetails.find({ _doctor_id : userId })
+        const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
+        throw 'User has been updated'
+      }
 
-      const details = await DoctorDetails.find({ _doctor_id : userId })
-      const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
-      throw 'User has been updated'
 
     }
   } catch (error) {

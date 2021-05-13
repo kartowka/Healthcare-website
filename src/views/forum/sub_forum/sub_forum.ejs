@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <%- include('../partials/header'); %>
+  <%- include('../../partials/header'); %>
     <div class="container">
       <h1 class="mb-4">HealthCare forum JSAS</h1>
       <% if(userRole=='doctor' || userRole=='admin' ) { %>
@@ -48,7 +48,7 @@
               <% } %>
                 <% }) %>
     </div>
-    <%- include('../partials/footer'); %>
+    <%- include('../../partials/footer'); %>
       <script src="/assets/js/jquery.min.js"></script>
       <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
       <script src="/assets/js/chart.min.js"></script>
