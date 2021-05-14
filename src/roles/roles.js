@@ -14,8 +14,6 @@ exports.roles = (function () {
         .readOwn(patient_paths)
         .readOwn(sub_forum_action_paths)
         .readAny(forum_pages_paths)
-        .updateOwn(sub_forum_action_paths)
-        .updateOwn(patient_paths)
         .readAny('doctor_profile')       
     
     ac.grant('doctor')
@@ -24,19 +22,14 @@ exports.roles = (function () {
         .readAny(forum_pages_paths)
         .readOwn(forum_action_paths)
         .readOwn(doctor_paths)
-        .updateOwn(forum_action_paths)
-        .updateAny(sub_forum_action_paths)
-        .updateOwn(doctor_paths)
         .readOwn('patient_profile')
 
     ac.grant('admin')
         .extend('patient')
         .extend('doctor')
-        .updateAny(forum_action_paths)
         .readAny(admin_paths)
         .updateAny(admin_paths)
         .deleteAny(admin_paths)
      
-    
     return ac
 })()
