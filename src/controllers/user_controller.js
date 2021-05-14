@@ -197,15 +197,17 @@ exports.updateUser = async (req, res, next) => {
     let userId = req.params.id
     let user = await User.findById(userId)
     
-    if (user.role == 'patient') {
+    if (update.first_name != undefined) {
       if (update.first_name && update.last_name) {
-        const userUpdate = await User.findByIdAndUpdate(userId, update)
-        res.redirect(req.get('referer'))
+        let userUpdate = await User.findByIdAndUpdate(userId, update)
+        if (user.role == 'doctor'){
+          let details = await DoctorDetails.findOne({ _doctor_id : userId })
+          let userUpdateDoctor = await DoctorDetails.findByIdAndUpdate(details._id, update)
+        }
         throw 'User has been updated'
       } else throw new Error('No updated, missing data in one of the fields')
     }
-    
-    else if (user.role == 'doctor') {
+    if (user.role == 'doctor') {
       let details = await DoctorDetails.findOne({ _doctor_id : userId })
       if(update.working_days != undefined || update.bio != undefined){
         const userUpdate = await DoctorDetails.findByIdAndUpdate(details._id, update)
