@@ -37,7 +37,7 @@ const doctorDetailsSchema = new Scheme({
         type: [String]
     },
     clinic_address: {
-        type: [AddressSchema]
+        type: AddressSchema
     },
     spoken_languages: {
         type: [String]
