@@ -92,7 +92,10 @@
                                                     <tr>
                                                         <th>&nbsp;&nbsp;Clinic address:</th>
                                                         <td>
-                                                            <%=doctor_details.clinic_address[0].city%>,<%=doctor_details.clinic_address[0].street%> <br>
+                                                            <% if (doctor_details.clinic_address) {%>
+                                                                <%=doctor_details.clinic_address.city%>,<%=doctor_details.clinic_address.street%> 
+                                                            <%}%>
+                                                             <br>
                                                         </td> 
 
                                                     </tr>

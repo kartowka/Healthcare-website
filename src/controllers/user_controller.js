@@ -225,20 +225,22 @@ exports.updateUser = async (req, res, next) => {
                 'clinic_address.$.street': update.street,
               },
             },
+            { new: true }
           )
         }
         else{
           await DoctorDetails.findByIdAndUpdate(details[0]._id,{
-            $push: {
+            $set: {
               clinic_address: {
                 city: update.city,
                 street: update.street,
-              },
+              }
             }
           },
-            {upsert: true, new : true},
+            {new : true}
           )
         }
+        throw 'User has been updated'
       }
       if (update.first_name != undefined && update.last_name != undefined) {
         const userUpdate = await User.findByIdAndUpdate(userId, update)
