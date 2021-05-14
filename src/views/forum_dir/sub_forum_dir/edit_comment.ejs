@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>new forum - JSAS</title>
+  <title>subforum edit - JSAS</title>
   <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/assets/css/FontAwesome.css">
@@ -14,12 +14,13 @@
   <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
+
 <body>
   <%- include('../../partials/header'); %>
   <div class="container">
-    <h1 class="mb-4">New Comment</h1>
+    <h1 class="mb-4">Edit Comment</h1>
 
-    <form action="/forum/<%= subForumSlug %>/<%= question %>" method="POST">
+    <form action="/forum/<%=subForumSlug%>/<%= question %>/<%=commentID%>?_method=PUT" method="POST">
       <%- include('comment_form_fields') %>
     </form>
   </div>

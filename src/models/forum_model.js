@@ -30,10 +30,6 @@ const questionSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  question_body: {
-    type: String,
-    required: true,
-  },
   asked_by_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -64,7 +60,7 @@ const forumSchema = new Schema({
   slug: {
     type: String,
     required: true,
-    unique: true,
+    
   },
   question: {
     type: [questionSchema],

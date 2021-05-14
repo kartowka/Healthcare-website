@@ -24,17 +24,20 @@
         <% } %>
           <% forums.forEach(forum=> { %>
             <% if (forum.approved=='Active' || (forum.approved !='Active' && userRole=='admin' )) { %>
-              <div class="card mt-4">
-                <div class="card-body">
-                  <h4 class="card-title">
-                    Forum: <a href="forum/<%= forum.slug %>"><%= forum.title %></a>
-                  </h4>
-                  <div class="card-subtitle text-muted mb-2">
-                    Created At: <%= forum.createdAt.toLocaleDateString('en-IL') %>
-                  </div>
-                  <div class="card-text mb-2">
-                    <h5>Forum description: <span style="color: black;"><%= forum.description %></span></h5>
-                  </div>
+              <div class="card bg-light mt-4">
+                <div class="card-header">
+                    <h3><a href="forum/<%= forum.slug %>"><%= forum.title %></a></h3>
+                </div>
+                    <div class="card-body">
+                      <h5 style="color: black;"><%= forum.description %></h5>
+                        Created At: <span style="color: black;">
+                          <%= forum.createdAt.toLocaleDateString('en-IL') %>
+                        </span>
+                        <br>
+                        Created By: <span style="color: black;">
+                          <%= forum.created_by %>
+                        </span>
+                        <br>
                   <% if(userRole=='doctor' || userRole=='admin' ) { %>
                     <a href="forum/edit/<%= forum.id %>" class="btn btn-info">Edit</a>
                     <% } %>
