@@ -207,7 +207,6 @@ exports.updateUser = async (req, res, next) => {
     
     else if (user.role == 'doctor') {
       let details = await DoctorDetails.find({ _doctor_id : userId })
-      console.log(details)
       if(update.working_days != undefined){
         const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
         throw 'User has been updated'
@@ -217,7 +216,6 @@ exports.updateUser = async (req, res, next) => {
         throw 'User has been updated'
       }
       if(update.city != undefined && update.street != undefined){
-        console.log(details[0].clinic_address != undefined)
         if(details[0].clinic_address != undefined){
           await DoctorDetails.findOneAndUpdate(
             { 'clinic_address._id': details[0].clinic_address[0]._id },
@@ -231,7 +229,6 @@ exports.updateUser = async (req, res, next) => {
           )
         }
         else{
-          console.log('?????')
           await DoctorDetails.findByIdAndUpdate(details[0]._id,{
             $set: {
               clinic_address: {
