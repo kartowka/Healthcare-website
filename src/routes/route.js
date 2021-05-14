@@ -17,12 +17,11 @@ router.route('/our_team').get((req, res) => {
   res.render('our_team')
 })
 // restricted
-// router
-//     .route('/restricted')
-//     .get((req, res) => {
-//         res.render('restricted', { alert: req.sharon})
-//         req.app.locals.errors = []
-//     })
+router
+    .route('/restricted/:error/:statusCode')
+    .get((req, res) => {
+        res.render('restricted', { alert: req.params.error,statusCode:req.params.statusCode})
+    })
 //login
 router
   .route('/login')
