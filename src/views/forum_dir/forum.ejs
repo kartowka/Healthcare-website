@@ -20,7 +20,7 @@
     <div class="container">
       <h1 class="mb-4">HealthCare forum JSAS</h1>
       <% if(userRole=='doctor' || userRole=='admin' ) { %>
-        <a href="/forum/new" class="btn btn-success">Create New Forum</a>
+        <a href="/forum/new_forum" class="btn btn-success">Create New Forum</a>
         <% } %>
           <% forums.forEach(forum=> { %>
             <% if (forum.approved=='Active' || (forum.approved !='Active' && userRole=='admin' )) { %>
@@ -38,10 +38,10 @@
                           <%= forum.created_by %>
                         </span>
                         <br>
-                  <% if(userRole=='doctor' || userRole=='admin' ) { %>
-                    <a href="forum/edit/<%= forum.id %>" class="btn btn-info">Edit</a>
+                  <% if(userID==forum._doctor_id || userRole == 'admin') { %>
+                    <a href="forum/edit_forum/<%= forum.id %>" class="btn btn-info">Edit</a>
                     <% } %>
-                      <% if(userRole=='admin' ) { %>
+                      <% if(userRole=='admin') { %>
                         <form action="/forum/<%= forum.id %>?_method=DELETE" method="POST" class="d-inline">
                           <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
