@@ -228,12 +228,7 @@ exports.updateUser = async (req, res, next) => {
                 'clinic_address.street': update.street,
               },
             },
-            { new: true },
-            (err) =>{
-              if(err){
-                console.log(err)
-              }
-            }
+            { new: true }
           )
         }
         else{
@@ -266,6 +261,7 @@ exports.updateUser = async (req, res, next) => {
     next()
   }
 }
+
 
 
 exports.deleteUser = async (req, res) => {
