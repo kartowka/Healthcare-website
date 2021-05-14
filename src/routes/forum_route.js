@@ -1,13 +1,13 @@
 const express = require('express')
 const Forum = require('./../models/forum_model')
 const User = require('./../models/user_model')
+const user_controller = require('../controllers/user_controller')
 const slugify = require('slugify')
 const router = express.Router()
 
-
 //!----------- FORUM ------------ //
 
-router.get('/', async (req, res) => {
+router.get('/', user_controller.allowIfLoggedin, async (req, res) => {
   const forum = await Forum.find().sort({ createdAt: 'desc' })
   res.render('forum_dir/forum', { forums: forum })
 })
@@ -43,7 +43,6 @@ router.delete('/:id', async (req, res) => {
   res.redirect('/forum')
 })
 
-
 function saveforumAndRedirect(path) {
   return async (req, res) => {
     let forum = req.forum
@@ -73,10 +72,7 @@ function saveforumAndRedirect(path) {
   }
 }
 
-
-//! ------------------ END OF FORUM MAIN PAGE SECTION ------------------------------ // 
-
-
+//! ------------------ END OF FORUM MAIN PAGE SECTION ------------------------------ //
 
 //!----------- QUESTIONS ------------ //
 router.get('/:slug', async (req, res) => {
@@ -175,8 +171,7 @@ function saveQuestionAndRedirect(path) {
   }
 }
 
-//! ------------------ END OF QUESTION SECTION ------------------------------ // 
-
+//! ------------------ END OF QUESTION SECTION ------------------------------ //
 
 // !---------- COMMENTS ----------------//
 
@@ -243,7 +238,7 @@ router.delete('/:slug/:questionID/:commentID', async (req, res) => {
     forum._id,
     {
       $pull: {
-        'question.$[i].comment': { '_id': req.params.commentID }, //[i] == questionID
+        'question.$[i].comment': { _id: req.params.commentID }, //[i] == questionID
       },
     },
     {
@@ -273,7 +268,8 @@ function saveCommentAndRedirect(path) {
           forum._id,
           {
             $push: {
-              'question.$[i].comment': { //[i] == question._id
+              'question.$[i].comment': {
+                //[i] == question._id
                 comment_body: comment.comment_body,
                 commented_by: full_name,
                 commented_by_id: user._id,
@@ -294,7 +290,8 @@ function saveCommentAndRedirect(path) {
           forum._id,
           {
             $set: {
-              'question.$[i].comment.$[j]': { //[i] == question.ID, [j] == comment.ID
+              'question.$[i].comment.$[j]': {
+                //[i] == question.ID, [j] == comment.ID
                 comment_body: comment.comment_body,
                 commented_by: full_name,
                 commented_by_id: user._id,
@@ -325,6 +322,5 @@ function saveCommentAndRedirect(path) {
   }
 }
 //! ------------------ END OF COMMENT SECTION ------------------------------ //
-
 
 module.exports = router
