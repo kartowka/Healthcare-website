@@ -26,9 +26,7 @@ router
 router
   .route('/login')
   .get(user_controller.denyIfLoggedin, (req, res) => {
-    if (res.statusCode != 200) {
-      res.render('restricted', { alert: req.error })
-    } else res.render('login', { alert: req.error })
+    res.render('login', { alert: req.error })
   })
   .post(user_controller.login, (req, res) => {
     res.render('login', { alert: req.error })
@@ -42,9 +40,7 @@ router.route('/logout').get((req, res) => {
 router
   .route('/register')
   .get(user_controller.denyIfLoggedin, (req, res) => {
-    if (res.statusCode != 200) {
-      res.render('restricted', { alert: req.error })
-    } else res.render('register')
+    res.render('register')
   })
   .post(user_controller.signup, (req, res) => {
     res.render('register', { alert: req.error })
@@ -64,9 +60,7 @@ router
 router
   .route('/forgot_password')
   .get(user_controller.denyIfLoggedin, (req, res) => {
-    if (res.statusCode != 200) {
-      res.render('restricted', { alert: req.error })
-    } else res.render('forgot_password')
+    res.render('forgot_password')
   })
   .post(password_controller.forgotPassword)
 
@@ -74,12 +68,8 @@ router
 router
   .route('/reset_password/:accessToken')
   .get(user_controller.denyIfLoggedin, async (req, res) => {
-    if (res.statusCode != 200) {
-      res.render('restricted', { alert: req.error })
-    } else {
       const { accessToken } = req.params
       res.render('reset_password')
-    }
   })
   .post(password_controller.passwordReset)
 
