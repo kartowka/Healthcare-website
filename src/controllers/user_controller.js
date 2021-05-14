@@ -29,9 +29,8 @@ exports.grantAccess = function (action, resource) {
       }
       next()
     } catch (error) {
-      res.status(401)
-      req.error = { Message: error, statusCode: '401' }
-      next()
+      let statusCode = '401'
+      res.redirect(`/restricted/${error}/${statusCode}`)
     }
   }
 }
@@ -89,12 +88,9 @@ exports.signup = async (req, res, next) => {
         } else {
           msg = 'User already exists in the database'
         }
-        req.error = {
-          Message: msg,
-          statusCode: '401',
-        }
-        res.status(401)
-        next()
+        let error = msg
+        let statusCode = '401'
+        res.redirect(`/restricted/${error}/${statusCode}`)
       } else {
         if (newUser.role == 'doctor') {
           const doctor_details = new DoctorDetails({
@@ -159,9 +155,8 @@ exports.login = async (req, res, next) => {
       res.redirect('/')
     }
   } catch (error) {
-    req.error = { Message: error, statusCode: '401' }
-    res.status(401)
-    next()
+    let statusCode = '401'
+    res.redirect(`/restricted/${error}/${statusCode}`)
   }
 }
 
@@ -185,9 +180,8 @@ exports.getUser = async (req, res, next) => {
     req.user = user
     next()
   } catch (error) {
-    req.error = { Message: error, statusCode: '401' }
-    res.status(401)
-    next()
+    let statusCode = '401'
+    res.redirect(`/restricted/${error}/${statusCode}`)
   }
 }
 
@@ -258,7 +252,7 @@ exports.updateUser = async (req, res, next) => {
   } catch (error) {
     req.error = { Message: error, statusCode: '200' }
     res.status(200)
-    next()
+    res.redirect(req.get('referer'))
   }
 }
 
@@ -289,9 +283,8 @@ exports.allowIfLoggedin = async (req, res, next) => {
     req.user = user
     next()
   } catch (error) {
-    req.error = { Message: error, statusCode: '401' }
-    res.status(401)
-    next()
+    let statusCode = '401'
+    res.redirect(`/restricted/${error}/${statusCode}`)
   }
 }
 
@@ -304,9 +297,8 @@ exports.denyIfLoggedin = async (req, res, next) => {
       next()
     }
   } catch (error) {
-    res.status(401)
-    req.error = { Message: error, statusCode: '401' }
-    next()
+    let statusCode = '401'
+    res.redirect(`/restricted/${error}/${statusCode}`)
   }
 }
 
@@ -329,9 +321,8 @@ exports.verifyUser = (req, res, next) => {
       })
     })
     .catch((error) => {
-      req.error = { Message: error, statusCode: '401' }
-      res.status(401)
-      next()
+      let statusCode = '401'
+      res.redirect(`/restricted/${error}/${statusCode}`)
     })
 }
 
