@@ -8,7 +8,6 @@ const DoctorDetails = require('../models/doctor_model')
 exports.grantAccess = function (action, resource) {
   return async (req, res, next) => {
     try {
-      req.params.id = res.locals.loggedInUser._id
       var granted = true
       const user = await User.findById(req.params.id)
       if (
