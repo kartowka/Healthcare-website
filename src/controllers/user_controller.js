@@ -216,10 +216,8 @@ exports.updateUser = async (req, res, next) => {
         throw 'User has been updated'
       }
       if(update.city != undefined && update.street != undefined){
-        console.log(details)
-        console.log(details.clinic_address != undefined)
-        console.log(details.clinic_address._id )
         if(details.clinic_address != undefined){
+          console.log('!!!!')
           await DoctorDetails.findOneAndUpdate(
             { '_id': details._id,'clinic_address._id': details.clinic_address._id },
             {
