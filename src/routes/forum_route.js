@@ -7,16 +7,19 @@ const router = express.Router()
 
 //!----------- FORUM ------------ //
 
-router.get('/', user_controller.allowIfLoggedin, async (req, res) => {
-  const forum = await Forum.find().sort({ createdAt: 'desc' })
-  res.render('forum_dir/forum', { forums: forum })
-})
+router.get('/', user_controller.allowIfLoggedin,
+  user_controller.grantAccess('readAny', 'forum'), async (req, res) => {
+    const forum = await Forum.find().sort({ createdAt: 'desc' })
+    res.render('forum_dir/forum', { forums: forum })
+  })
 
-router.get('/new_forum', (req, res) => {
+router.get('/new_forum',user_controller.allowIfLoggedin,
+  user_controller.grantAccess('readOwn', 'new_forum'), (req, res) => {
   res.render('forum_dir/new_forum', { forum: new Forum(), button: 'new' })
 })
 
-router.get('/edit_forum/:id', async (req, res) => {
+router.get('/edit_forum/:id',user_controller.allowIfLoggedin,
+  user_controller.grantAccess('readOwn', 'edit_forum'), async (req, res) => {
   const forum = await Forum.findById(req.params.id)
   res.render('forum_dir/edit_forum', { forum: forum, button: 'edit' })
 })
