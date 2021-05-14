@@ -197,39 +197,42 @@ exports.updateUser = async (req, res, next) => {
     let userId = req.params.id
     let user = await User.findById(userId)
     
-    if (user.role == 'patient') {
+    if (update.first_name != undefined) {
       if (update.first_name && update.last_name) {
-        const userUpdate = await User.findByIdAndUpdate(userId, update)
-        res.redirect(req.get('referer'))
+        let userUpdate = await User.findByIdAndUpdate(userId, update)
+        if (user.role == 'doctor'){
+          let details = await DoctorDetails.findOne({ _doctor_id : userId })
+          let userUpdateDoctor = await DoctorDetails.findByIdAndUpdate(details._id, update)
+        }
         throw 'User has been updated'
       } else throw new Error('No updated, missing data in one of the fields')
     }
-    
-    else if (user.role == 'doctor') {
-      let details = await DoctorDetails.find({ _doctor_id : userId })
-      if(update.working_days != undefined){
-        const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
+    if (user.role == 'doctor') {
+      let details = await DoctorDetails.findOne({ _doctor_id : userId })
+      if(update.working_days != undefined || update.bio != undefined){
+        const userUpdate = await DoctorDetails.findByIdAndUpdate(details._id, update)
         throw 'User has been updated'
       }
       if(update.start_time != undefined && update.end_time != undefined){
-        const userUpdate = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
+        const userUpdate = await DoctorDetails.findByIdAndUpdate(details._id, update)
         throw 'User has been updated'
       }
       if(update.city != undefined && update.street != undefined){
-        if(details[0].clinic_address != undefined){
+        if(details.clinic_address != undefined){
+          console.log('!!!!')
           await DoctorDetails.findOneAndUpdate(
-            { 'clinic_address._id': details[0].clinic_address[0]._id },
+            { '_id': details._id,'clinic_address._id': details.clinic_address._id },
             {
               $set: {
-                'clinic_address.$.city': update.city,
-                'clinic_address.$.street': update.street,
+                'clinic_address.city': update.city,
+                'clinic_address.street': update.street,
               },
             },
             { new: true }
           )
         }
         else{
-          await DoctorDetails.findByIdAndUpdate(details[0]._id,{
+          await DoctorDetails.findByIdAndUpdate(details._id,{
             $set: {
               clinic_address: {
                 city: update.city,
@@ -245,7 +248,7 @@ exports.updateUser = async (req, res, next) => {
       if (update.first_name != undefined && update.last_name != undefined) {
         const userUpdate = await User.findByIdAndUpdate(userId, update)
         const details = await DoctorDetails.find({ _doctor_id : userId })
-        const userUpdateDoctor = await DoctorDetails.findByIdAndUpdate(details[0]._id, update)
+        const userUpdateDoctor = await DoctorDetails.findByIdAndUpdate(details._id, update)
         throw 'User has been updated'
       }
       //else throw new Error('No updated, missing data in one of the fields')
@@ -258,6 +261,7 @@ exports.updateUser = async (req, res, next) => {
     next()
   }
 }
+
 
 
 exports.deleteUser = async (req, res) => {
