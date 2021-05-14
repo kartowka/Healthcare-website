@@ -1,7 +1,11 @@
 const express = require('express')
 const Forum = require('./../models/forum_model')
 const User = require('./../models/user_model')
+const slugify = require('slugify')
 const router = express.Router()
+
+
+//!----------- FORUM ------------ //
 
 router.get('/', async (req, res) => {
   const forum = await Forum.find().sort({ createdAt: 'desc' })
@@ -39,7 +43,39 @@ router.delete('/:id', async (req, res) => {
   res.redirect('/forum')
 })
 
-// ----------- SUBFORUM ------------ //
+
+function saveforumAndRedirect(path) {
+  return async (req, res) => {
+    let forum = req.forum
+    forum.title = req.body.title
+    forum.description = req.body.description
+    forum.created_by = 'Dr.' + res.locals.loggedInUser.last_name
+    forum._doctor_id = res.locals.loggedInUser._id
+    forum.slug = slugify(forum.title, { lower: true, strict: true })
+    try {
+      if (path == 'new') forum = await forum.save()
+      if (path == 'edit') {
+        await Forum.findByIdAndUpdate(forum._id, {
+          $set: {
+            title: forum.title,
+            description: forum.description,
+            slug: forum.slug,
+          },
+        })
+      }
+      res.redirect(`/forum/${forum.slug}`)
+    } catch (e) {
+      res.render(`forum_dir/${path}`, { forum: forum })
+    }
+  }
+}
+
+
+//! ------------------ END OF FORUM MAIN PAGE SECTION ------------------------------ // 
+
+
+
+//!----------- QUESTIONS ------------ //
 router.get('/:slug', async (req, res) => {
   const subForum = await Forum.findOne({ slug: req.params.slug })
   //subForum.question={topic:'1',question_body:'test',asked_by:subForum._id}
@@ -92,38 +128,6 @@ router.delete('/:slug/:id', async (req, res) => {
   res.redirect(`/forum/${req.params.slug}`)
 })
 
-router.get('/:slug/:id/conversation', async (req, res) => {
-  let forum = await Forum.findOne({ slug: req.params.slug })
-  const question = forum.question.id(req.params.id)
-  //console.log(question)
-  res.render('forum_dir/sub_forum_dir/conversation', {
-    question: question,
-    subForumSlug: req.params.slug,
-    comments: question.comment,
-  })
-})
-
-router.get('/:slug/:id/new_comment', async (req, res) => {
-  const forum = await Forum.findOne({ slug: req.params.slug })
-  res.render('forum_dir/sub_forum_dir/new_comment', {
-    subForumSlug: forum.slug,
-    question: req.params.id
-  })
-})
-
-router.post(
-  '/:slug/:id/conversation',
-  async (req, res, next) => {
-    const forum = await Forum.findOne({ slug: req.params.slug })
-    req.comment = req.body
-    req.forum = forum
-    req.questionID = req.params.id
-    next()
-  },
-  saveCommentAndRedirect('new_comment')
-)
-// ------------------------------------------------ //
-
 function saveQuestionAndRedirect(path) {
   return async (req, res) => {
     let question = req.question
@@ -136,7 +140,6 @@ function saveQuestionAndRedirect(path) {
           $push: {
             question: {
               topic: question.topic,
-              question_body: question.question_body,
               asked_by_id: user._id,
               asked_by: full_name,
             },
@@ -149,7 +152,6 @@ function saveQuestionAndRedirect(path) {
           {
             $set: {
               'question.$.topic': req.body.topic,
-              'question.$.question_body': req.body.question_body,
               'question.$.asked_by_id': user._id,
               'question.$.asked_by': full_name,
             },
@@ -167,6 +169,83 @@ function saveQuestionAndRedirect(path) {
   }
 }
 
+//! ------------------ END OF QUESTION SECTION ------------------------------ // 
+
+
+// !---------- COMMENTS ----------------//
+
+router.get('/:slug/:id', async (req, res) => {
+  let forum = await Forum.findOne({ slug: req.params.slug })
+  const question = forum.question.id(req.params.id)
+  const comments = question.comment
+  res.render('forum_dir/sub_forum_dir/conversation', {
+    question: question,
+    subForumSlug: req.params.slug,
+    comments: comments,
+  })
+})
+
+router.get('/:slug/:id/new_comment', async (req, res) => {
+  const forum = await Forum.findOne({ slug: req.params.slug })
+  res.render('forum_dir/sub_forum_dir/new_comment', {
+    subForumSlug: forum.slug,
+    question: req.params.id,
+  })
+})
+router.post(
+  '/:slug/:id',
+  async (req, res, next) => {
+    const forum = await Forum.findOne({ slug: req.params.slug })
+    req.comment = req.body
+    req.forum = forum
+    req.questionID = req.params.id
+    next()
+  },
+  saveCommentAndRedirect('new_comment')
+)
+
+router.get('/:slug/:questionID/edit/:commentID', async (req, res) => {
+  let forum = await Forum.findOne({ slug: req.params.slug })
+  const question = forum.question.id(req.params.questionID)
+  res.render('forum_dir/sub_forum_dir/edit_comment', {
+    question: req.params.questionID,
+    subForumSlug: forum.slug,
+    commentID: req.params.commentID,
+  })
+})
+router.put(
+  '/:slug/:questionID/:commentID',
+  async (req, res, next) => {
+    let forum = await Forum.findOne({ slug: req.params.slug })
+    req.forum = forum
+    req.questionID = req.params.questionID
+    req.commentID = req.params.commentID
+    req.comment = req.body
+    next()
+  },
+  saveCommentAndRedirect('edit_comment')
+)
+router.delete('/:slug/:questionID/:commentID', async (req, res) => {
+  let forum = await Forum.findOne({ slug: req.params.slug })
+  let questionID = req.params.questionID
+  await Forum.findByIdAndUpdate(
+    forum._id,
+    {
+      $pull: {
+        'question.$[i].comment': { '_id': req.params.commentID },
+      },
+    },
+    {
+      arrayFilters: [
+        {
+          'i._id': req.params.questionID,
+        },
+      ],
+    }
+  )
+  res.redirect(`/forum/${req.params.slug}/${questionID}`)
+})
+
 function saveCommentAndRedirect(path) {
   return async (req, res) => {
     let comment = req.comment
@@ -176,60 +255,62 @@ function saveCommentAndRedirect(path) {
     let full_name = user.first_name + ' ' + user.last_name
     try {
       if (path == 'new_comment') {
-        await Forum.findByIdAndUpdate(forum._id,
+        await Forum.findByIdAndUpdate(
+          forum._id,
           {
-            '$push': {
+            $push: {
               'question.$[question].comment': {
-                'comment_body': comment.comment_body,
-                'commented_by': full_name,
-                'commeted_by_id': user._id,
-              }
-            }
-          },
-          {
-            'arrayFilters': [
-              {
-                'question._id': question._id
+                comment_body: comment.comment_body,
+                commented_by: full_name,
+                commeted_by_id: user._id,
               },
-            ]
-          })
-      }
-      if (path == 'edit_comment') {
-        await Forum.findOneAndUpdate(
-          { 'question._id': req.questionID },
-          {
-            $set: {
-              'question.$.topic': req.body.topic,
-              'question.$.question_body': req.body.question_body,
-              'question.$.asked_by_id': user._id,
-              'question.$.asked_by': full_name,
             },
           },
-          { new: true }
+          {
+            arrayFilters: [
+              {
+                'question._id': question._id,
+              },
+            ],
+          }
         )
       }
-      res.redirect(`/forum/${forum.slug}/${req.questionID}/conversation`)
+      if (path == 'edit_comment') {
+        await Forum.findByIdAndUpdate(
+          forum._id,
+          {
+            $set: {
+              'question.$[i].comment.$[j]': {
+                comment_body: comment.comment_body,
+                commented_by: full_name,
+                commeted_by_id: user._id,
+              },
+            },
+          },
+          {
+            arrayFilters: [
+              {
+                'i._id': req.params.questionID,
+              },
+              {
+                'j._id': req.params.commentID,
+              },
+            ],
+          }
+        )
+      }
+      res.redirect(`/forum/${forum.slug}/${req.questionID}`)
     } catch (e) {
+      console.log(e)
       res.render(`forum_dir/sub_forum_dir/${path}`, {
+        subForumSlug: req.params.slug,
+        question: req.params.questionID,
+        commentID: req.params.commentID,
       })
     }
   }
 }
+//! ------------------ END OF COMMENT SECTION ------------------------------ //
 
-function saveforumAndRedirect(path) {
-  return async (req, res) => {
-    let forum = req.forum
-    forum.title = req.body.title
-    forum.description = req.body.description
-    forum.created_by = 'Dr.' + res.locals.loggedInUser.last_name
-    forum._doctor_id = res.locals.loggedInUser._id
-    try {
-      forum = await forum.save()
-      res.redirect(`/forum/${forum.slug}`)
-    } catch (e) {
-      res.render(`forum_dir/${path}`, { forum: forum })
-    }
-  }
-}
 
 module.exports = router
