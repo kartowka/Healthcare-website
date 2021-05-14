@@ -196,7 +196,7 @@ exports.updateUser = async (req, res, next) => {
         let userUpdate = await User.findByIdAndUpdate(userId, update)
         if (user.role == 'doctor'){
           let details = await DoctorDetails.findOne({ _doctor_id : userId })
-          let userUpdateDoctor = await DoctorDetails.findByIdAndUpdate(details._id, update)
+          await DoctorDetails.findByIdAndUpdate(details._id, update)
         }
         throw 'User has been updated'
       } else throw new Error('No updated, missing data in one of the fields')
@@ -204,16 +204,15 @@ exports.updateUser = async (req, res, next) => {
     if (user.role == 'doctor') {
       let details = await DoctorDetails.findOne({ _doctor_id : userId })
       if(update.working_days != undefined || update.bio != undefined){
-        const userUpdate = await DoctorDetails.findByIdAndUpdate(details._id, update)
+        await DoctorDetails.findByIdAndUpdate(details._id, update)
         throw 'User has been updated'
       }
       if(update.start_time != undefined && update.end_time != undefined){
-        const userUpdate = await DoctorDetails.findByIdAndUpdate(details._id, update)
+        await DoctorDetails.findByIdAndUpdate(details._id, update)
         throw 'User has been updated'
       }
       if(update.city != undefined && update.street != undefined){
         if(details.clinic_address != undefined){
-          console.log('!!!!')
           await DoctorDetails.findOneAndUpdate(
             { '_id': details._id,'clinic_address._id': details.clinic_address._id },
             {
@@ -237,12 +236,6 @@ exports.updateUser = async (req, res, next) => {
             {new : true}
           )
         }
-        throw 'User has been updated'
-      }
-      if (update.first_name != undefined && update.last_name != undefined) {
-        const userUpdate = await User.findByIdAndUpdate(userId, update)
-        const details = await DoctorDetails.find({ _doctor_id : userId })
-        const userUpdateDoctor = await DoctorDetails.findByIdAndUpdate(details._id, update)
         throw 'User has been updated'
       }
       //else throw new Error('No updated, missing data in one of the fields')
