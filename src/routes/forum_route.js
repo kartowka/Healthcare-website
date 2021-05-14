@@ -49,9 +49,12 @@ function saveforumAndRedirect(path) {
     let forum = req.forum
     forum.title = req.body.title
     forum.description = req.body.description
-    forum.created_by = 'Dr.' + res.locals.loggedInUser.last_name
+    forum.created_by = res.locals.loggedInUser.first_name + ' ' + res.locals.loggedInUser.last_name
     forum._doctor_id = res.locals.loggedInUser._id
     forum.slug = slugify(forum.title, { lower: true, strict: true })
+    if (res.locals.loggedInUser.role == 'doctor') {
+      forum.created_by = 'Dr.' + ' ' + res.locals.loggedInUser.last_name
+    }
     try {
       if (path == 'new_forum') forum = await forum.save()
       if (path == 'edit_forum') {
@@ -134,6 +137,9 @@ function saveQuestionAndRedirect(path) {
     let forum = req.forum
     let user = await User.findById(res.locals.loggedInUser._id)
     let full_name = user.first_name + ' ' + user.last_name
+    if (user.role == 'doctor') {
+      full_name = 'Dr.' + ' ' + user.last_name
+    }
     try {
       if (path == 'new_question') {
         await Forum.findByIdAndUpdate(forum._id, {
