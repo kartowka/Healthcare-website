@@ -7,6 +7,8 @@ const insurance_controller = require('../controllers/insurance_controller')
 const profile_router = require('./profile_route')
 const Forum = require('../models/forum_model')
 const forumRouter = require('./forum_route')
+const searchRouter = require('./search_route')
+
 
 //homepage
 router.route('/').get((req, res) => {
@@ -109,15 +111,8 @@ router
     //res.render('admin_interface', { users: req.params.users, alert: req.error })
   })
 router.use('/forum',forumRouter)
-router
-  .route('/search')
-  .get(
-    user_controller.allowIfLoggedin,
-    user_controller.getUsers,
-    (req, res) => {
-      res.render('search', { users: req.params.users })
-    }
-  )
+router.use('/search',searchRouter)
+
 router.use(function (req, res, next) {
   // you can do what ever you want here
   // for example rendering a page with '404 Not Found'
