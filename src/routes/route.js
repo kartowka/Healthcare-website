@@ -16,6 +16,11 @@ router.route('/').get((req, res) => {
 router.route('/our_team').get((req, res) => {
   res.render('our_team')
 })
+//appointment management test button
+router.route('/appointment_management').get((req, res) => {
+  res.render('appointment_management')
+})
+
 // restricted
 router
     .route('/restricted/:error/:statusCode')
