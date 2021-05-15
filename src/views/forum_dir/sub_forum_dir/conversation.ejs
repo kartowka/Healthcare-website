@@ -40,14 +40,16 @@
                                     </span>
                                     <br>
                                 
-                                <% if (userID==comment.commented_by_id || userRole!='patient' ) { %>
+                                <% if (userID==comment.commented_by_id || userRole=='admin' ) { %>
                                     <a href="/forum/<%=subForumSlug%>/<%=question.id%>/edit/<%= comment.id %>"
                                         class="btn btn-info">Edit</a>
+                                        <% } %>
+                                        <% if (userRole!='patient') { %>
                                             <form action="/forum/<%=subForumSlug%>/<%= question.id %>/<%=comment.id%>?_method=DELETE"
                                                 method="POST" class="d-inline">
                                                 <button type="submit" class="btn btn-danger">Delete</button>
-                                                <% } %>
                                             </form>
+                                            <% } %>
                             </div>
                             </div>
                         <% } %>

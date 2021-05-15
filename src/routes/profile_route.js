@@ -9,8 +9,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'patient_profile'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('patient_profile', { data: req.user })
+            res.render('patient_profile', { data: req.user })
         })
 
 //settings patient profile
@@ -19,14 +18,12 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'patient_settings'), //check
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('patient_settings', { data: req.user })
+            res.render('patient_settings', { data: req.user })
         })
     .post(user_controller.allowIfLoggedin,
         user_controller.grantAccess('updateOwn', 'patient_settings'),
         user_controller.updateUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('patient_settings', { data: req.user })
+            res.render('patient_settings', { data: req.user })
         })
 
 profile
@@ -34,8 +31,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'patient_previous_appointments'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('patient_previous_appointments', { data: req.user })
+            res.render('patient_previous_appointments', { data: req.user })
         })
     .post(user_controller.allowIfLoggedin,
         user_controller.grantAccess('updateOwn', 'patient_previous_appointments'),
@@ -47,8 +43,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'patient_future_appointments'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('patient_future_appointments', { data: req.user })
+            res.render('patient_future_appointments', { data: req.user })
         })
 
 //doctor profile
@@ -57,8 +52,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readAny', 'doctor_profile'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('doctor_profile', { data: req.user, doctor_details: req.doctor_details })
+            res.render('doctor_profile', { data: req.user, doctor_details: req.doctor_details })
         })
 
 //doctor settings
@@ -67,14 +61,12 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'doctor_settings'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('doctor_settings', { data: req.user, })
+            res.render('doctor_settings', { data: req.user, })
         })
     .post(user_controller.allowIfLoggedin,
         user_controller.grantAccess('updateOwn', 'doctor_settings'),
         user_controller.updateUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('doctor_settings', { data: req.user, alert: req.app.locals.errors })
+            res.render('doctor_settings', { data: req.user, alert: req.app.locals.errors })
         })
 
 //previous and future appointments
@@ -83,8 +75,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'doctor_future_appointments'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('doctor_future_appointments', { data: req.user })
+            res.render('doctor_future_appointments', { data: req.user })
         })
 
 profile
@@ -92,8 +83,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'doctor_previous_appointments'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('doctor_previous_appointments', { data: req.user })
+            res.render('doctor_previous_appointments', { data: req.user })
         })
 
 // doctor Appointment summary   
@@ -102,8 +92,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'doctor_appointment_summary'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('doctor_appointment_summary', { data: req.user })
+            res.render('doctor_appointment_summary', { data: req.user })
         })
 
 // doctor Reviwe   
@@ -112,8 +101,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'doctor_Review'),
         user_controller.getUser, (req, res) => {
-            if (res.statusCode != 200) res.render('restricted', { alert: req.error })
-            else res.render('doctor_Review', { data: req.user })
+            res.render('doctor_Review', { data: req.user })
         })
 
 module.exports = profile
