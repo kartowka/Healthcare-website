@@ -38,7 +38,13 @@
                                             <option value="doctor_related_clinics">Related Clinics</option>
                                         </select>
                                     </div>
-                                    <div class="input-group-append">
+                                    <div class="input-group">
+                                        <select class="form-control form-control-user" data-trigger="" name="sort_order">
+                                            <option value="ascending">ascending</option>
+                                            <option value="descending">descending</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
                                         <input class="bg-light form-control border-0 small" type="search" size="200"
                                             placeholder="Search for doctor by last name" name="term">
                                         <div class="input-group-append">
@@ -112,8 +118,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
         </div>
         <%- include('partials/footer'); %>
             <script src="/assets/js/jquery.min.js"></script>
