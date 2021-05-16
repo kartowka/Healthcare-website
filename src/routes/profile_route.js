@@ -171,8 +171,8 @@ profile
 		user_controller.getUser,
 		(req, res) => {
 			res.render('appointment_management', {
-                 data: req.user,
-			    doctor_details: req.doctor_details 
+                data: req.user,
+			    doctor_details: req.doctor_details,
             })
 		}
 	)
