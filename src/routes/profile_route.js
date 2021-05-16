@@ -162,4 +162,19 @@ profile
 		}
 	)
 
+// Make an Appointment
+profile
+	.route('/appointment_management/:id')
+	.get(
+		user_controller.allowIfLoggedin,
+		user_controller.grantAccess('updateOwn', 'appointment_management'),
+		user_controller.getUser,
+		(req, res) => {
+			res.render('appointment_management', {
+                 data: req.user,
+			    doctor_details: req.doctor_details 
+            })
+		}
+	)
+
 module.exports = profile
