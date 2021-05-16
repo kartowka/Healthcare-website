@@ -61,7 +61,7 @@ profile
     .get(user_controller.allowIfLoggedin,
         user_controller.grantAccess('readOwn', 'doctor_settings'),
         user_controller.getUser, (req, res) => {
-            res.render('doctor_settings', { data: req.user, })
+            res.render('doctor_settings', { data: req.user, doctor_details: req.doctor_details })
         })
     .post(user_controller.allowIfLoggedin,
         user_controller.grantAccess('updateOwn', 'doctor_settings'),

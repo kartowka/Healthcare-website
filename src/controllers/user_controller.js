@@ -211,14 +211,17 @@ exports.updateUser = async (req, res, next) => {
         await DoctorDetails.findByIdAndUpdate(details._id, update)
         throw 'User has been updated'
       }
+
       if(update.city != undefined && update.street != undefined){
         if(details.clinic_address != undefined){
           await DoctorDetails.findOneAndUpdate(
-            { '_id': details._id,'clinic_address._id': details.clinic_address._id },
+            { '_id': details._id, 'clinic_address._id': details.clinic_address._id },
             {
               $set: {
                 'clinic_address.city': update.city,
+                'spoken_languages': update.spoken_languages,
                 'clinic_address.street': update.street,
+                'clinic_phone_number':update.clinic_phone_number
               },
             },
             { new: true }

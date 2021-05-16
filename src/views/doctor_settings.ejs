@@ -42,53 +42,32 @@
                                                         <div class="col-lg-4">
                                                             <div class="card shadow mb-1">
                                                                 <div class="card-header py-3">
-                                                                    <h6 class="text-primary font-weight-bold m-0">Work
-                                                                        Days Settings
+                                                                    <h6 class="text-primary font-weight-bold m-0">Workdays Settings
                                                                     </h6>
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <form method="POST">
                                                                         <label
-                                                                            for="Work Days"><strong>Choose your work days:</strong></label>
-                                                                            
+                                                                            for="Work Days"><strong>Choose your workdays:</strong></label>
                                                                         <br>
-
+                                                                        <% 
+                                                                        days = ["Sunday",
+                                                                                "Monday",
+                                                                                "Tuesday",
+                                                                                "Wednesday",
+                                                                                "Thursday",
+                                                                                "Friday",
+                                                                                "Saturday"]
+                                                                        
+                                                                        days.forEach((day) => {
+                                                                        %>
                                                                         <input type="checkbox"
                                                                             name="working_days[]"
-                                                                            value="Sunday">
-                                                                        <label for="Sunday">
-                                                                            Sunday</label><br>
-                                                                        <input type="checkbox"
-                                                                            name="working_days[]"
-                                                                            value="Monday">
-                                                                        <label for="Monday">
-                                                                            Monday</label><br>
-                                                                        <input type="checkbox"
-                                                                            name="working_days[]"
-                                                                            value="Tuesday">
-                                                                        <label for="Tuesday">
-                                                                            Tuesday</label><br>
-                                                                        <input type="checkbox"
-                                                                            name="working_days[]"
-                                                                            value="Wednesday">
-                                                                        <label for="Wednesday">
-                                                                            Wednesday</label><br>
-                                                                            <input type="checkbox"
-                                                                            name="working_days[]"
-                                                                            value="Tuesday">
-                                                                        <label for="Tuesday">
-                                                                            Thursday</label><br>
-                                                                            <input type="checkbox"
-                                                                            name="working_days[]"
-                                                                            value="Friday">
-                                                                        <label for="Friday">
-                                                                            Friday</label><br>
-                                                                            <input type="checkbox"
-                                                                            name="working_days[]"
-                                                                            value="Saturday">
-                                                                        <label for="Saturday">
-                                                                            Saturday</label><br><br>
-
+                                                                            value="<%=day%>"
+                                                                            <% if(doctor_details.working_days.includes(day)) { %>checked<% } %>>
+                                                                        <label for="<%=day%>">
+                                                                            <%=day%></label><br>
+                                                                        <% }) %>
 
                                                                         <div class="form-group"><button
                                                                                 class="btn btn-primary btn-sm"
@@ -113,18 +92,18 @@
                                                                                 class="form-control" 
                                                                                 id="reception_hours_from"
                                                                                 name="start_time"
-                                                                                value="<%= data.start_time%>"
+                                                                                value="<%=doctor_details.start_time%>"
                                                                                 type="time"
                                                                                 pattern="[0-9]{2}:[0-9]{2}"
+                                                                            
                                                                                 >
                                                                             </label>
                                                                             <label
                                                                                 for="to:"><strong>To:</strong></label><input
                                                                                 class="form-control" 
                                                                                 id="reception_hours_to"
-                                                                                placeholder="<%= data.end_time%>"
                                                                                 name="end_time"
-                                                                                value="<%data.end_time%>"
+                                                                                value="<%=doctor_details.end_time%>"
                                                                                 type="time"
                                                                                 pattern="[0-9]{2}:[0-9]{2}"
                                                                                 >
@@ -149,10 +128,13 @@
                                                                         <div class="row">
                                                                             <div class="col">
                                                                                 <form>
-                                                                                    <div class="form-group"><textarea
+                                                                                    <div class="form-group">
+                                                                                        <textarea
                                                                                             class="form-control"
                                                                                             id="signature" rows="4"
-                                                                                            name="bio"></textarea>
+                                                                                            name="bio"><%= doctor_details.bio %></textarea>
+                                                                                            
+                                                                                        
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                     </div>
@@ -170,44 +152,6 @@
                                                         <div class="col-lg-8">
                                                             <div class="row mb-3 d-none">
                                                                 <div class="col">
-                                                                    <div class="card text-white bg-primary shadow">
-                                                                        <div class="card-body">
-                                                                            <div class="row mb-2">
-                                                                                <div class="col">
-                                                                                    <p class="m-0">Peformance</p>
-                                                                                    <p class="m-0">
-                                                                                        <strong>65.2%</strong></p>
-                                                                                </div>
-                                                                                <div class="col-auto"><i
-                                                                                        class="fas fa-rocket fa-2x"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="text-white-50 small m-0"><i
-                                                                                    class="fas fa-arrow-up"></i>&nbsp;5%
-                                                                                since last month
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <div class="card text-white bg-success shadow">
-                                                                        <div class="card-body">
-                                                                            <div class="row mb-2">
-                                                                                <div class="col">
-                                                                                    <p class="m-0">Peformance ????</p>
-                                                                                    <p class="m-0">
-                                                                                        <strong>65.2%</strong></p>
-                                                                                </div>
-                                                                                <div class="col-auto"><i
-                                                                                        class="fas fa-rocket fa-2x"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="text-white-50 small m-0"><i
-                                                                                    class="fas fa-arrow-up"></i>&nbsp;5%
-                                                                                since last month
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -246,52 +190,40 @@
 
 
                                                                                 </div>
-                                                                                <div class="form-row">
-                                                                                    <div class="col">
-                                                                                        <div class="form-group"><label
-                                                                                                for="specialization"><strong>Specialization</strong></label><input
-                                                                                                class="form-control"
-                                                                                                type="text"
-                                                                                                id="specialization"
-                                                                                                placeholder="<%=data.specialization%>"
-                                                                                                name="specialization[]"
-                                                                                                value="<%= data.specialization%>">
+
+                                                                                <label for="specialization"><strong>Specialization</strong></label>
+                                                                                <% doctor_details.specialization.forEach((s) => { %>
+                                                                                    <div class="form-row">
+                                                                                        <div class="col">
+                                                                                            <div class="form-group"><input
+                                                                                                    class="form-control"
+                                                                                                    type="text"
+                                                                                                    id="specialization"
+                                                                                                    name="specialization[]"
+                                                                                                    value="<%=s%>">
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
+                                                                                <% }) %>
 
 
                                                                                 <div class="form-row">
                                                                                     <div class="col">
                                                                                         <div class="form-group"><label
                                                                                                 for="Clinic"><strong>HMO's</strong></label><br>
-
-                                                                                            <input type="checkbox"
-                                                                                                name="doctor_related_clinics[]"
-                                                                                                value="Clalit">
-                                                                                            <label for="clinic1">
-                                                                                                Clalit</label><br>
-                                                                                            <input type="checkbox"
-                                                                                                name="doctor_related_clinics[]"
-                                                                                                value="Meuhedet">
-                                                                                            <label for="clinic2">
-                                                                                                Meuhedet</label><br>
-                                                                                            <input type="checkbox"
-                                                                                                name="doctor_related_clinics[]"
-                                                                                                value="Macabi">
-                                                                                            <label for="clinic3">
-                                                                                                Macabi</label><br>
-                                                                                            <input type="checkbox"
-                                                                                                name="doctor_related_clinics[]"
-                                                                                                value="Leumit">
-                                                                                            <label for="clinic4">
-                                                                                                Leumit</label><br><br>
-                                                                                            <!-- <input
-                                                                                class="form-control form-control-user"
-                                                                                type="text" name="medical_license_id"
-                                                                                placeholder="Medical Licence No."
-                                                                                id="ml_ID"> -->
-
+                                                                                                <% 
+                                                                                                doctor_clinic = ['Clalit', 'Meuhedet', 'Macabi', 'Leumit']
+                                                                                                
+                                                                                                doctor_clinic.forEach((doctor_clinic) => {
+                                                                                                %>
+                                                                                                <input type="checkbox"
+                                                                                                    name="doctor_related_clinics[]"
+                                                                                                    value="<%=doctor_clinic%>"
+                                                                                                    <% if(doctor_details.doctor_related_clinics.includes(doctor_clinic)) { %>checked<% } %>>
+                                                                                                <label for="<%=doctor_clinic%>">
+                                                                                                    <%=doctor_clinic%></label><br>
+                                                                                                <% }) %>
+                                                                                            <br>
                                                                                         </div>
                                                                                     </div>
 
@@ -317,27 +249,30 @@
                                                                                 <div class="form-group"><label
                                                                                         for="address"><strong>City</strong></label><input
                                                                                         class="form-control" type="text"
-                                                                                        id="address"
-                                                                                        
+                                                                                        id="city"
+                                                                                        value="<%=doctor_details.clinic_address.city%>"
                                                                                         name="city"
                                                                                         >
                                                                                 </div>
-                                                                                <div class="form-group"><label
-                                                                                        for="languages"><strong>Languages</strong></label><input
-                                                                                        class="form-control" type="text"
-                                                                                        id="languages"
-                                                                                        placeholder="<%=data.spoken_languages%>"
-                                                                                        name="spoken_languages"
-                                                                                        value="<%=data.spoken_languages%>">
-                                                                                </div>
+
+                                                                                <label for="languages"><strong>Languages</strong></label>
+                                                                                <% doctor_details.spoken_languages.forEach((language) => { %>
+                                                                                    <div class="form-group">
+                                                                                        <input
+                                                                                            class="form-control" type="text"
+                                                                                            id="languages"
+                                                                                            name="spoken_languages[]"
+                                                                                            value="<%= language %>">
+                                                                                    </div>
+                                                                                <% }) %>
                                                                                 <div class="form-row">
                                                                                     <div class="col">
                                                                                         <div class="form-group"><label
                                                                                                 for="city"><strong>Street</strong></label><input
                                                                                                 class="form-control"
-                                                                                                type="text" id="city"
-                                                                                            
+                                                                                                type="text" id="street"
                                                                                                 name="street"
+                                                                                                value="<%=doctor_details.clinic_address.street%>"
                                                                                                 >
                                                                                         </div>
                                                                                     </div>
@@ -347,10 +282,11 @@
                                                                                                     number</strong></label><input
                                                                                                 class="form-control"
                                                                                                 type="tel"
-                                                                                                pattern="0[1-9]{1,2}-[0-9]{7}"
+                                                                                                pattern="0[1-9]{1,2}[0-9]{7}"
                                                                                                 id="phone_number"
                                                                                                 name="clinic_phone_number"
-                                                                                                value="<%=data.clinic_phone_number%>">
+                                                                                                value="<%=doctor_details.clinic_phone_number%>">
+                                                                                                
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
