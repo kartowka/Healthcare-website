@@ -260,9 +260,7 @@ exports.deleteUser = async (req, res) => {
     await User.findByIdAndDelete(userId)
     throw 'User has been deleted.'
   } catch (error) {
-    req.error = { Message: error, statusCode: '200' }
-    res.status(200)
-    res.redirect(req.get('referer'))
+    req.error = error
   }
 }
 
@@ -331,9 +329,6 @@ exports.verifyDoctor = async (req, res) => {
     await User.updateOne({ _id: user._id }, { $set: { status: 'Active' } })
     throw 'Doctor has been approved.'
   } catch (error) {
-    req.error = { Message: error, statusCode: '200' }
-    res.status(200)
-    res.redirect(req.get('referer'))
-    //TODO maybe delete
+    req.error = error
   }
 }
