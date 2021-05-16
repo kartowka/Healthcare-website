@@ -47,7 +47,7 @@ exports.getForums = async (req, res, next) => {
   next()
 }
 
-exports.authForum = async (req, res, next) => {
+exports.authForum = async (req, res) => {
   try {
     const forum = await Forum.findOne({
       _id: req.body.auth_forum
@@ -69,13 +69,7 @@ exports.authForum = async (req, res, next) => {
       throw 'Forum has been authorized.'
     }
   } catch (error) {
-    req.error = {
-      Message: error,
-      statusCode: '200'
-    }
-    res.status(200)
-    res.redirect(req.get('referer'))
-    //TODO maybe delete
+    req.error = error
   }
 }
 exports.saveforumAndRedirect = function (path) {
