@@ -11,7 +11,7 @@ router
 		user_controller.getUsers,
 		async (req, res) => {
 			try {
-				const { sort_by, term } = req.query
+				const { sort_by, term,sort_order } = req.query
 				const users = await User.find({
 					last_name: { $regex: term, $options: 'i' },
 				})
@@ -33,7 +33,7 @@ router
 					}
 					doctors.push(doctor)
 				}
-				if (sort_by != '') sortBy(sort_by, doctors)
+				if (sort_by != '') sortBy(sort_by, doctors,sort_order)
 				res.render('search', { doctors: doctors })
 			} catch (e) {
 				//console.log(e)
@@ -42,7 +42,7 @@ router
 		}
 	)
 
-function sortBy(sort_by, doctors) {
+function sortBy(sort_by, doctors,sort_order) {
 	if (sort_by == 'working_days') {
 		let days = {
 			Sunday: '0',
@@ -78,5 +78,6 @@ function sortBy(sort_by, doctors) {
 			if (first_parm > second_parm) return 1
 			return 0
 		})
+	if(sort_order=='descending') doctors.reverse()
 }
 module.exports = router
