@@ -11,9 +11,9 @@ router
 		user_controller.getUsers,
 		async (req, res) => {
 			try {
-				const { term } = req.query
+				const { sort_by, term } = req.query
 				const users = await User.find({
-					first_name: { $regex: term, $options: 'i' },
+					last_name: { $regex: term, $options: 'i' },
 				})
 					.where('role')
 					.equals('doctor')
@@ -33,11 +33,39 @@ router
 					}
 					doctors.push(doctor)
 				}
+				if (sort_by != '') sortBy(sort_by, doctors)
 				res.render('search', { doctors: doctors })
 			} catch (e) {
-				console.log(e)
+				//console.log(e)
 				res.render('search', { doctors: '' })
 			}
 		}
 	)
+
+function sortBy(sort_by, doctors) {
+	if (sort_by == 'working_days') {
+		let days = { Sunday: '0', Monday: '1', Tuesday: '2', Wednsday: '3', Thursday: '4', Friday: '5', Saturday: '6' }
+		doctors.sort((first, second) => {
+			first = days[first[sort_by][0]]
+			second = days[second[sort_by][0]]
+			return first < second ? 0 : 1
+		})
+	}
+	else if (sort_by == 'spoken_languages'){
+		console.log(doctors)
+		doctors.sort((first, second) => {
+			console.log(first)
+			first = first[sort_by][0].toUpperCase()
+			second = second[sort_by][0].toUpperCase()
+			return first < second ? 0 : 1
+		})
+	}
+	else doctors.sort((first, second) => {
+		var first_parm = first[sort_by].toUpperCase()
+		var second_parm = second[sort_by].toUpperCase()
+		if (first_parm < second_parm) return -1
+		if (first_parm > second_parm) return 1
+		return 0
+	})
+}
 module.exports = router
