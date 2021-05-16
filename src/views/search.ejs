@@ -66,43 +66,41 @@
                                     <table class="table my-0" id="dataTable">
                                         <thead>
                                             <tr>
-                                                <th>Doctor Name</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>City</th>
                                                 <th>Specilization</th>
-                                                <th>Clinic Working With</th>
-                                                <th>Address</th>
                                                 <th>Work Days</th>
-                                                <th>Work Hours</th>
                                                 <th>Spoken Languages</th>
+                                                <th>Related Clinics</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% if(users!=undefined){ %>
-                                                <% if(users.length!=0){users.forEach(function(data, index){ %>
+                                                <% if(doctors.length!=0){doctors.forEach(function(data, index){ %>
                                                     <tr>
+                                                        <td>
+                                                            <%=data.first_name %>
+                                                        </td>
                                                         <td>
                                                             <%=data.last_name %>
                                                         </td>
                                                         <td>
-                                                            TBD
+                                                            <%=data.city %>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.specialization %>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.working_days %>
+                                                        </td>
+                                                        <td>
+                                                            <%=data.spoken_languages %>
                                                         </td>
                                                         <td>
                                                             <%=data.doctor_related_clinics %>
                                                         </td>
-                                                        <td>
-                                                            TBD
-                                                        </td>
-                                                        <td>
-                                                            TBD
-                                                        </td>
-                                                        <td>
-                                                            TBD
-                                                        </td>
-                                                        <td>
-                                                            TBD
-                                                        </td>
                                                         <% }) %>
                                                             <% } %>
-                                                                <% } %>
 
 
 
