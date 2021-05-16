@@ -2,8 +2,14 @@ const mongoose = require('mongoose')
 const Scheme = mongoose.Schema
 
 const AddressSchema = mongoose.Schema({
-    city: String,
-    street: String,
+    city: {
+        type: String,
+        default: '',
+    },
+    street: {
+        type: String,
+        default: '',
+    }
 })
 
 const doctorDetailsSchema = new Scheme({
@@ -22,6 +28,7 @@ const doctorDetailsSchema = new Scheme({
     },
     bio: {
         type: String,
+        default: '',
     },
     working_days: {
         type: [String],
@@ -34,16 +41,20 @@ const doctorDetailsSchema = new Scheme({
         type: String
     },
     specialization: {
-        type: [String]
+        type: [String],
+        default: [''],
     },
     clinic_address: {
-        type: AddressSchema
+        type: AddressSchema,
+        default: () => ({}),
     },
     spoken_languages: {
-        type: [String]
+        type: [String],
+        default: ['']
     },
     clinic_phone_number: {
-        type: String
+        type: String,
+        default: '',
     },
 })
 
