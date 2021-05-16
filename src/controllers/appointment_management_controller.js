@@ -14,7 +14,7 @@ exports.make_an_Appointment = async (req, res, next) => {
         if(user.role == 'doctor'){
             let details = await DoctorDetails.findOne({ _doctor_id : userId })
             let appointment_list = []
-            let start = details.start_day.replace(':', '');
+            let start = details.start_day.replace(':', '')
             let end = details.end_day
 
 
