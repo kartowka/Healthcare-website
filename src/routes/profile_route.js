@@ -23,7 +23,7 @@ profile
 		user_controller.grantAccess('readOwn', 'patient_settings'), //check
 		user_controller.getUser,
 		(req, res) => {
-			res.render('patient_settings', { data: req.user ,alert:req.query.Message})
+			res.render('patient_settings', { data: req.user, alert: req.query.Message })
 		}
 	)
 	.post(
@@ -171,9 +171,9 @@ profile
 		user_controller.getUser,
 		(req, res) => {
 			res.render('appointment_management', {
-                data: req.user,
-			    doctor_details: req.doctor_details,
-            })
+				data: req.user,
+				doctor_details: req.doctor_details,
+			})
 		}
 	)
 
