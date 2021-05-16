@@ -107,16 +107,13 @@ exports.signup = async (req, res, next) => {
           newUser.accessToken,
           newUser.role
         )
-        req.error = {
-          Message: 'Email confirmation has been sent.',
-          statusCode: '200',
-        }
+        req.error = 'Email confirmation has been sent.'
         res.status(200)
         next()
       }
     })
   } catch (error) {
-    next(error)
+    next()
   }
 }
 
@@ -126,14 +123,14 @@ exports.login = async (req, res, next) => {
     const lowerCasedEmail = await lowerCaseEmail(email)
     const user = await User.findOne({ email: lowerCasedEmail })
     if (!user) {
-      throw new Error('Email does not exists!')
+      throw 'Email does not exists!'
     }
     const validPassword = await validatePassword(password, user.password)
     if (!validPassword) {
-      throw new Error('Password is not correct.')
+      throw 'Password is not correct.'
     }
     if (user.status != 'Active') {
-      throw new Error('Pending Account. Please Verify Your Email!')
+      throw 'Pending Account. Please Verify Your Email!'
     }
 
     const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
@@ -155,8 +152,8 @@ exports.login = async (req, res, next) => {
       res.redirect('/')
     }
   } catch (error) {
-    let statusCode = '401'
-    res.redirect(`/restricted/${error}/${statusCode}`)
+    req.error = error
+    next()
   }
 }
 
@@ -246,9 +243,8 @@ exports.updateUser = async (req, res, next) => {
  
     }
   } catch (error) {
-    req.error = { Message: error, statusCode: '200' }
-    res.status(200)
-    res.redirect(req.get('referer'))
+    req.error = error
+    next()
   }
 }
 

@@ -56,7 +56,6 @@ router.post(
 router.put(
   '/:id',
   async (req, res, next) => {
-      console.log(req.params, req.query)
       req.forum = await Forum.findById(req.params.id)
       next()
     },

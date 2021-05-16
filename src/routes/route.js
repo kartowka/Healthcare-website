@@ -5,9 +5,10 @@ const forum_controller = require('../controllers/forum_controller')
 const password_controller = require('../controllers/recover_pass_controller')
 const insurance_controller = require('../controllers/insurance_controller')
 const profile_router = require('./profile_route')
-const Forum = require('../models/forum_model')
 const forumRouter = require('./forum_route')
 const searchRouter = require('./search_route')
+const url = require('url')
+
 
 
 //homepage
@@ -33,10 +34,17 @@ router
 router
   .route('/login')
   .get(user_controller.denyIfLoggedin, (req, res) => {
-    res.render('login', { alert: req.error })
+    res.render('login', { alert: req.query.Message })
   })
   .post(user_controller.login, (req, res) => {
-    res.render('login', { alert: req.error })
+    res.redirect(
+      url.format({
+        pathname: '/login',
+        query: {
+          Message: req.error,
+        },
+      })
+    )
   })
 //logout
 router.route('/logout').get((req, res) => {
@@ -50,7 +58,14 @@ router
     res.render('register')
   })
   .post(user_controller.signup, (req, res) => {
-    res.render('register', { alert: req.error })
+    res.redirect(
+      url.format({
+        pathname: '/login',
+        query: {
+          Message: req.error,
+        },
+      })
+    )
   })
 
 //signup

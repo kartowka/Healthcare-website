@@ -27,14 +27,12 @@
                 <div id="content">
                     <%- include('doctor_partials/header'); %>
                             <% if(typeof alert !='undefined' ) { %>
-                                <% alert.forEach(function(alert,index) { %>
                                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                         <%= alert %>
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
                                     </div>
-                                    <% }) %>
                                         <% } %>
                                             <div class="container-fluid">
                                                 <div class="card shadow mb-4">

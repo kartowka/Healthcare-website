@@ -1,9 +1,9 @@
 const AccessControl = require('accesscontrol')
 const ac = new AccessControl()
 
-const doctor_paths = ['doctor_settings', 'doctor_appointment_summary', 'doctor_future_appointments','doctor_Review']
-const patient_paths = ['patient_settings', 'patient_appointment_summary', 'patient_future_appointments', 'patient_previous_appointments']
-const admin_paths = ['doctor_settings', 'doctor_appointment_summary', 'doctor_future_appointments','doctor_Review','patient_settings', 'patient_appointment_summary', 'patient_future_appointments', 'patient_previous_appointments','admin_interface']
+const doctor_paths = ['doctor_settings', 'doctor_appointment_summary', 'doctor_future_appointments','doctor_Review', 'appointment_management']
+const patient_paths = ['patient_settings', 'patient_appointment_summary', 'patient_future_appointments', 'patient_previous_appointments', 'appointment_management']
+const admin_paths = ['doctor_settings', 'doctor_appointment_summary', 'doctor_future_appointments','doctor_Review','patient_settings', 'patient_appointment_summary', 'patient_future_appointments', 'patient_previous_appointments','admin_interface', 'appointment_management']
 const forum_pages_paths = ['forum', 'sub_forum', 'conversation']
 const forum_action_paths = ['new_forum', 'edit_forum']
 const sub_forum_action_paths = ['new_question', 'edit_question','new_comment', 'edit_comment']
