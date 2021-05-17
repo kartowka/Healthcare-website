@@ -8,6 +8,7 @@ const profile_router = require('./profile_route')
 const forumRouter = require('./forum_route')
 const searchRouter = require('./search_route')
 const url = require('url')
+const User = require('../models/user_model')
 
 //homepage
 router.route('/').get((req, res) => {
@@ -71,10 +72,17 @@ router
 router
 	.route('/travel_insurance')
 	.get((req, res) => {
-		res.render('travel_insurance')
+		res.render('travel_insurance', { alert: req.query.Message })
 	})
 	.post(insurance_controller.getInsurancePolicy, (req, res) => {
-		res.render('travel_insurance', { alert: req.error })
+		res.redirect(
+			url.format({
+				pathname: '/travel_insurance',
+				query: {
+					Message: req.error,
+				},
+			})
+		)
 	})
 
 //forgot password
@@ -116,20 +124,33 @@ router
 		}
 	)
 	.post(user_controller.getUsers, async (req, res) => {
-		if (Object.keys(req.body)[0] === 'delete_ID')
+		let user
+		if (Object.keys(req.body)[0] === 'edit_ID') {
+			user = await User.findOne({ _id: req.body.edit_ID })
+		} else if (Object.keys(req.body)[0] === 'delete_ID')
 			await user_controller.deleteUser(req, res)
-		if (Object.keys(req.body)[0] === 'approve_ID')
+		else if (Object.keys(req.body)[0] === 'approve_ID')
 			await user_controller.verifyDoctor(req, res)
-		if (Object.keys(req.body)[0] === 'auth_forum')
+		else if (Object.keys(req.body)[0] === 'auth_forum')
 			await forum_controller.authForum(req, res)
-		res.redirect(
-			url.format({
-				pathname: `/admin_interface/${req.params.id}`,
-				query: {
-					Message: req.error,
-				},
-			})
-		)
+		if (
+			Object.keys(req.body)[0] === 'delete_ID' ||
+			Object.keys(req.body)[0] === 'approve_ID' ||
+			Object.keys(req.body)[0] === 'auth_forum'
+		) {
+			res.redirect(
+				url.format({
+					pathname: `/admin_interface/${req.params.id}`,
+					query: {
+						Message: req.error,
+					},
+				})
+			)
+		} else {
+			if (user.role == 'doctor')
+				res.redirect(`/doctor_profile/doctor_settings/${user._id}`)
+			else res.redirect(`/patient_profile/patient_settings/${user._id}`)
+		}
 	})
 router.use('/forum', forumRouter)
 router.use('/search', searchRouter)
