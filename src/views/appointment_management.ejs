@@ -53,7 +53,19 @@
 								<h1></h1>
 								<div class="row">
 									<div class="col-md-6">
+										<% if (doctor_details.working_days == undefined || doctor_details.start_time == undefined) {%>
+											<p>It is not possible to make an appointment with this doctor</p>
+										  <% } else{ %>
+											<p>Please note, Doctor <%=data.first_name%>
+											  works <%=doctor_details.working_days%>,
+											  <%=doctor_details.start_time%> - <%=doctor_details.end_time%>
+											</p>
+										  <% } %>
+		
 										<input type="text" name="datetimes" />
+										<p id="working_days"><%=doctor_details.working_days%></p>
+										<p id="start_time"><%=doctor_details.start_time%></p>
+										<p id="end_time"><%=doctor_details.end_time%></p>
 									</div>
 									<div class="col-md-6"></div>
 								</div>
@@ -91,19 +103,49 @@
 		></script>
 
 		<script>
-			  $(function() {
-			    $('input[name="datetimes"]').daterangepicker({
-			      timePicker: true,
-			      timePicker24Hour: true,
-			      singleDatePicker: true,
-			      minYear: 2021,
-			      maxYear: parseInt(moment().format('YYYY'),10),
-			      Date: moment(),
-			      locale: {
-			        format: 'DD/M hh:mm'
-			      }
-			    })
-			  })
+			let dic = {
+				'Sunday': 0, 
+				'Monday': 1,
+				'Tuesday': 2, 
+				'Wednesday': 3,
+				'Thursday': 4,
+				'Friday': 5,
+				'Saturday': 6
+			}
+			let working_days = document.getElementById("working_days").textContent;
+			let list = working_days.split(',')
+			var date = new Date();
+			var currentMonth = date.getMonth();
+			var currentDate = date.getDate();
+			var currentYear = date.getFullYear();
+			$(function() {
+				$('input[name="datetimes"]').daterangepicker({
+				minDate: new Date(currentYear, currentMonth, currentDate),
+				maxDate: new Date(currentYear + 5,12,31),
+				timePicker: true,
+				singleDatePicker: true,
+				isInvalidDate: function(date) {
+					if(list){
+					return ( date.day() == dic[list[0]] ||
+							date.day() == dic[list[1]] ||
+							date.day() == dic[list[2]] ||
+							date.day() == dic[list[3]] ||
+							date.day() == dic[list[4]] ||
+							date.day() == dic[list[5]] ||
+							date.day() == dic[list[6]]
+							);
+					}
+				},
+
+				locale: {
+					format: ' YYYY/M/DD  hh:mm A'
+				},
+
+				})
+
+		
+			})
+
 		</script>
 	</body>
 </html>
