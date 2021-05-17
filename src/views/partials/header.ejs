@@ -20,9 +20,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/#about">About Us</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/our_team">Our Team</a>
-                        </li>
                         <li class="nav-item">   
                             <a class="nav-link" href="/travel_insurance">Travel Insurance</a>
                         </li>
@@ -36,15 +33,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/appointment_management">Appointment Management</a>
                                 </li>
-                            <% if(userRole=='patient' ) { %>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/patient_profile/<%=userID %>">Profile</a>
-                                    <% }if(userRole=='doctor') { %>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/doctor_profile/<%=userID %>">Profile</a>
-                                </li>
-                                <% } %>
                                     <% } %>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/our_team">Our Team</a>
+                                    </li>
                     </ul>
                     <span class="navbar-text actions">
                         <ul class="navbar-nav mr-auto">
@@ -66,6 +58,14 @@
                                                 <a class="btn btn-light action-button" role="button"
                                                     href="/logout">Logout</a>
                                             </li>
+                                            <% if(userRole=='patient' || userRole=='admin') { %>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/patient_profile/<%=userID %>"><b><u><%=userFullName %></u></b></a>
+                                                    <% }if(userRole=='doctor') { %>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/doctor_profile/<%=userID %>"><u><%=userFullName %></u></a>
+                                                </li>
+                                                <% } %>
 
                                             <% } %>
                         </ul>
