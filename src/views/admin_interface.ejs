@@ -25,7 +25,7 @@
               <p class="text-primary m-0 font-weight-bold">All integral User Data</p>
             </div>
             <% if(typeof alert !='undefined' ) { %>
-              <div class="alert alert-warning alert-dismissible fade show" id="alert_message" role="alert">
+              <div class="alert alert-success alert-dismissible fade show" id="alert_message" role="alert">
                 <%=alert%>
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -78,7 +78,7 @@
                             </td>
                             <td>
                               <form method="POST">
-                                <button class="btn btn-primary" type="submit" onclick="" id="edit_btn">Edit</button>
+                                <button class="btn btn-primary" type="submit" onclick="" id="edit_btn" value="<%=data.id%>" name="edit_ID">Edit</button>
                                 <!-- <form action="/admin_interface/<%= data.id %>" method="POST">
                               <input type="submit" value="Edit">
                             </form> -->
