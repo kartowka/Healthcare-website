@@ -230,6 +230,34 @@
                                                                                     </div>
 
                                                                                 </div>
+                                                                                <div class="form-row">
+                                                                                    <div class="col">
+                                                                                        <div class="form-group">
+                                                                                            <label for="clinic"><strong>My Clinic</strong></label>
+                                                                                            <select name="clinic" class="form-control form-control-user"
+                                                                                                placeholder="Select Clinic" id="clinic" style="
+                                                                                                    height: 40px" value="<%= data.clinic%>" selected=value
+                                                                                                required>
+                                                                                                <% hmo=["Clalit", "Meuhedet" , "Macabi" , "Leumit" ]
+                                                                                                    hmo=hmo.filter(e=> e !=
+                                                                                                    data.clinic) %>
+                                                                                                    <option>
+                                                                                                        <%= data.clinic%>
+                                                                                                    </option>
+                                                                                                    <option>
+                                                                                                        <%= hmo[0] %>
+                                                                                                    </option>
+                                                                                                    <option>
+                                                                                                        <%= hmo[1] %>
+                                                                                                    </option>
+                                                                                                    <option>
+                                                                                                        <%= hmo[2] %>
+                                                                                                    </option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col"></div>
+                                                                                </div>
 
                                                                                 <div class="form-group"><button
                                                                                         class="btn btn-primary mb-3"
