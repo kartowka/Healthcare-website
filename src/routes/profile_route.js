@@ -24,7 +24,10 @@ profile
 		user_controller.grantAccess('readOwn', 'patient_settings'), //check
 		user_controller.getUser,
 		(req, res) => {
-			res.render('patient_settings', { data: req.user, alert: req.query.Message })
+			res.render('patient_settings', {
+				data: req.user,
+				alert: req.query.Message,
+			})
 		}
 	)
 	.post(
@@ -180,7 +183,6 @@ profile
 	)
 	.post(
 		user_controller.allowIfLoggedin,
-		user_controller.grantAccess('updateOwn', 'appointment_management'),
 		appointment_management_controller.make_an_Appointment,
 		(req, res) => {
 			res.redirect(
