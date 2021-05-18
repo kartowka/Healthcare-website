@@ -168,8 +168,8 @@ exports.getUser = async (req, res, next) => {
 		const userId = req.params.id
 		const user = await User.findById(userId)
 		if (user.role == 'doctor') {
-			let details = await DoctorDetails.find({ _doctor_id: userId })
-			req.doctor_details = details[0]
+			let details = await DoctorDetails.findOne({ _doctor_id: userId })
+			req.doctor_details = details
 		}
 		if (!user) {
 			throw new Error('User does not exist')
