@@ -64,29 +64,45 @@
 								<h1></h1>
 								<div class="row">
 									<div class="col-md-6">
-										<% if (doctor_details.working_days == undefined ||
-										doctor_details.start_time == undefined) {%>
-										<p>
-											It is not possible to make an appointment with this doctor
-										</p>
+
+										<% if (doctor_details.working_days == '' || doctor_details.start_time == '') {%>
+											<p>It is not possible to make an appointment with this doctor</p>
 										<% } else{ %>
-										<p>
-											Please note, Doctor <%=data.first_name%> works
-											<%=doctor_details.working_days%>,
-											<%=doctor_details.start_time%> -
-											<%=doctor_details.end_time%>
-										</p>
+											<p>
+												Please note, Doctor <%=data.first_name%>
+												works <span id="working_days"><%=doctor_details.working_days%></span>,
+												<span id="start_time"><%=doctor_details.start_time%></span> - 
+												<span id="end_time"><%=doctor_details.end_time%></span>
+											</p>
 										<% } %>
-										<input
+									
+
+										<form method="POST">
+
+						
+											<input
 											style="width: fit-content;"
 											type="text"
 											readonly
 											value=""
-											class="form-control form_datetime"
-										/>
-										<p id="working_days"><%=doctor_details.working_days%></p>
-										<p id="start_time"><%=doctor_details.start_time%></p>
-										<p id="end_time"><%=doctor_details.end_time%></p>
+											class="form-control form_datetime"/>
+											
+											<br>
+
+											<p>Please enter the subject of the appointment:</p>
+											<input name="appointment_subject"/><br><br>
+
+											<p>Please select the type of the appointment:</p>
+											<select name="type" class="form-control form-control-user">
+												<option>frontal</option>
+												<option>remote</option>
+											</select><br><br>
+
+											<div class="form-group"><button class="btn btn-primary btn-sm"
+												type="submit">Make an appointment</button></div>
+
+										</form>
+
 									</div>
 									<div class="col-md-6"></div>
 								</div>
@@ -116,6 +132,8 @@
 		<script type="text/javascript">
 			$('.form_datetime').datetimepicker({
 				format: 'dd/mm/yyyy hh:ii',
+				
+			
 
 			})
 		</script>
