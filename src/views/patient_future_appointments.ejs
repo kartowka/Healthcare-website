@@ -25,8 +25,47 @@
                             <p class="text-primary m-0 font-weight-bold"><%= data.first_name %>&nbsp;<%= data.last_name %></p>
                         </div>
                         <div class="card-body">
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>date</th>
+                                        <th>Start Apoointment</th>
+                                        <th>Subject</th>
+                                        <th>Type of Apoointment</th>
+                                    </tr>
+                                </thead>
+                                <%if(appointment_details != []) { %>
+                                
+
+                                    <% appointment_details.forEach(function(appointment) { %>
+                                        
+                                            <%if(appointment.end_time == null){ %>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <%=appointment.start_time%>
+                                                        </td>
+                                                        <td>
+                                                            <%=appointment.date%>
+                                                        </td>
+                                                        <td>
+                                                            <%=appointment.appointment_subject%>
+                                                        </td>
+                                                        <td>
+                                                            <%=appointment.type%>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            <% } %>
+                                    <% }) %>
+                                    
+                                    <% } else { %>
+                                        <h1>You don't have Future Appointments</h1>
+                                    <% } %>
+
+                            </table>
                             
-                            <h1>Page in process</h1>
+ 
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
                                 </div>

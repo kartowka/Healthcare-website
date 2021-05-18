@@ -1,3 +1,4 @@
+const User = require('../models/user_model')
 const DoctorDetails = require('../models/doctor_model')
 const Appointment = require('../models/appointment_model')
 
@@ -32,3 +33,25 @@ exports.make_an_Appointment = async (req, res, next) => {
 		res.redirect(`/restricted/${error}/${statusCode}`)
 	}
 }
+
+exports.getAppointments = async (req, res, next) => {
+
+	try {
+		const userId = req.params.id
+		const user = await User.findById(userId)
+		if (!user) {
+			throw new Error('User does not exist')
+		}
+		const appointment_details = await Appointment.find({ patient: userId })
+		req.appointment_details = appointment_details
+		next()
+				
+	} catch (error) {
+		let statusCode = '401'
+		console.log(error)
+		res.redirect(`/restricted/${error}/${statusCode}`)
+	}
+
+
+}
+

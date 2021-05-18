@@ -69,8 +69,12 @@ profile
 		user_controller.allowIfLoggedin,
 		user_controller.grantAccess('readOwn', 'patient_future_appointments'),
 		user_controller.getUser,
+		appointment_management_controller.getAppointments,
 		(req, res) => {
-			res.render('patient_future_appointments', { data: req.user })
+			res.render('patient_future_appointments', {
+				 data: req.user,
+				 appointment_details: req.appointment_details,
+				})
 		}
 	)
 
