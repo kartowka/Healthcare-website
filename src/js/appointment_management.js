@@ -1,5 +1,4 @@
-let working_days = document.getElementById("working_days").textContent;
-let enabel_day = working_days.split(',')
+let enabel_day = document.getElementById('working_days').textContent.split(',')
 let dic = {
    'Sunday': 0, 
    'Monday': 1,
