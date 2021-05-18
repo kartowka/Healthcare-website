@@ -12,17 +12,14 @@
 		<link
 			href="https://fonts.googleapis.com/css?family=BenchNine:300,400,700"
 			rel="stylesheet"
-			type="text/css"
-		/>
+			type="text/css"/>
 		<link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css" />
 		<link rel="stylesheet" href="/assets/fonts/font-awesome.min.css" />
 		<link
 			rel="stylesheet"
 			href="/assets/fonts/fontawesome5-overrides.min.css"
 		/>
-		<link rel="stylesheet" href="/assets/bootstrap/css/profile.css" />
 		<link rel="stylesheet" href="/assets/css/style.css" />
-		<link rel="stylesheet" href="/css/profile.css" />
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -33,6 +30,7 @@
 			type="text/css"
 			href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
 		/>
+
 	</head>
 
 	<body id="page-top">
@@ -53,19 +51,36 @@
 								<h1></h1>
 								<div class="row">
 									<div class="col-md-6">
-										<% if (doctor_details.working_days == undefined || doctor_details.start_time == undefined) {%>
-											<p>It is not possible to make an appointment with this doctor</p>
-										  <% } else{ %>
-											<p>Please note, Doctor <%=data.first_name%>
-											  works <%=doctor_details.working_days%>,
-											  <%=doctor_details.start_time%> - <%=doctor_details.end_time%>
-											</p>
-										  <% } %>
-		
-										<input type="text" name="datetimes" />
-										<p id="working_days"><%=doctor_details.working_days%></p>
-										<p id="start_time"><%=doctor_details.start_time%></p>
-										<p id="end_time"><%=doctor_details.end_time%></p>
+
+										<form method="POST">
+									
+											<% if (doctor_details.working_days == undefined || doctor_details.start_time == undefined) {%>
+												<p>It is not possible to make an appointment with this doctor</p>
+											<% } else{ %>
+												<p>Please note, Doctor <%=data.first_name%>
+												works <span id="working_days"><%=doctor_details.working_days%></span>,
+												<span id="start_time"><%=doctor_details.start_time%></span> - <span id="end_time"><%=doctor_details.end_time%></span>
+												</p>
+											<% } %>
+			
+											<input type="text" name="datetimes" /><br><br><br>
+
+											<p>Please enter the subject of the appointment:</p>
+											<input name="appointment_subject"/><br><br>
+											
+											<p>Please select the type of the appointment:</p>
+											<select name="type" class="form-control form-control-user">
+												<option>frontal</option>
+												<option>remote</option>
+											</select><br><br>
+
+											<div class="form-group"><button class="btn btn-primary btn-sm"
+												type="submit">Make an appointment</button></div>
+
+										</form>
+										
+
+									
 									</div>
 									<div class="col-md-6"></div>
 								</div>
@@ -112,39 +127,73 @@
 				'Friday': 5,
 				'Saturday': 6
 			}
+			
+			let starttime1 = document.getElementById("start_time").textContent;
+			let start_time_list = starttime1.split(':')
+			let endtime1 = document.getElementById("end_time").textContent;
+			let end_time_list = endtime1.split(':')
 			let working_days = document.getElementById("working_days").textContent;
 			let list = working_days.split(',')
 			var date = new Date();
 			var currentMonth = date.getMonth();
 			var currentDate = date.getDate();
 			var currentYear = date.getFullYear();
+			var currentHour = date.getHours();
+			var currentMinutes = date.getMinutes();
+	
+
 			$(function() {
 				$('input[name="datetimes"]').daterangepicker({
-				minDate: new Date(currentYear, currentMonth, currentDate),
-				maxDate: new Date(currentYear + 5,12,31),
-				timePicker: true,
-				singleDatePicker: true,
-				isInvalidDate: function(date) {
-					if(list){
-					return ( date.day() == dic[list[0]] ||
-							date.day() == dic[list[1]] ||
-							date.day() == dic[list[2]] ||
-							date.day() == dic[list[3]] ||
-							date.day() == dic[list[4]] ||
-							date.day() == dic[list[5]] ||
-							date.day() == dic[list[6]]
-							);
-					}
-				},
+					minDate: new Date(currentYear, currentMonth, currentDate, currentHour, currentMinutes),
+					maxDate: new Date(currentYear + 5,12,31, end_time_list[0],end_time_list[1]),
+					Date: moment(),
+					timePicker: true,
+					timePicker24Hour: true,
+					singleDatePicker: true,
+					timePickerIncrement: 15,
+					showDropdowns: true,
+					//startDate: moment().startOf('day').add(1,'day').add(8, 'hours'),
+					
+					isInvalidDate: function(date) {
+						
+						if(list){
+						return ( date.day() == dic[list[0]] ||
+								date.day() == dic[list[1]] ||
+								date.day() == dic[list[2]] ||
+								date.day() == dic[list[3]] ||
+								date.day() == dic[list[4]] ||
+								date.day() == dic[list[5]] ||
+								date.day() == dic[list[6]] 	
+								);
+						}
+					},
 
-				locale: {
-					format: ' YYYY/M/DD  hh:mm A'
-				},
+					locale: {
+						format:  '  DD/M/YYYY   hh:mm',
+						
+					},
+					
+	
+				});
 
-				})
+			
+				$('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+					var startDate = picker.startDate;
+					var endDate = picker.endDate;
+					alert("New date range selected: '" + startDate.format('YYYY-MM-DD') + "' to '" + endDate.format('YYYY-MM-DD') + "'");
+				});
 
-		
+				// $('input[name="datetimes"]').on('show.daterangepicker', function(ev, picker) {
+				// 	var $hours = picker.container.find('.hourselect').children();
+
+				// 	$hours.filter(':gt(17)').remove();    
+				// 	$hours.filter(':lt(8)').remove();
+				// });
+
+
 			})
+
+
 
 		</script>
 	</body>
