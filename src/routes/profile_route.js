@@ -1,6 +1,7 @@
 const express = require('express')
 const profile = express.Router()
 const user_controller = require('../controllers/user_controller')
+const appointment_management_controller = require('../controllers/appointment_management_controller')
 const url = require('url')
 
 //pateint profile
@@ -175,6 +176,21 @@ profile
 				data: req.user,
 				doctor_details: req.doctor_details,
 			})
+		}
+	)
+	.post(
+		user_controller.allowIfLoggedin,
+		user_controller.grantAccess('updateOwn', 'appointment_management'),
+		appointment_management_controller.make_an_Appointment,
+		(req, res) => {
+			res.redirect(
+				url.format({
+					pathname: `/appointment_management/${req.params.id}`,
+					query: {
+						Message: req.error,
+					},
+				})
+			)
 		}
 	)
 
