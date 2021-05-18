@@ -63,19 +63,28 @@
 							<div class="card-body">
 								<h1></h1>
 								<div class="row">
-									<div class="col-md-6">
 
-										<% if (doctor_details.working_days == '' || doctor_details.start_time == '') {%>
-											<p>It is not possible to make an appointment with this doctor</p>
-										<% } else{ %>
-											<p>
-												Please note, Doctor <%=data.first_name%>
-												works <span id="working_days"><%=doctor_details.working_days%></span>,
-												<span id="start_time"><%=doctor_details.start_time%></span> - 
-												<span id="end_time"><%=doctor_details.end_time%></span>
-											</p>
-										<% } %>
+									<% if(!(doctor_details.doctor_related_clinics.includes(patient.clinic))){ %>
+										<p class="dis" style="color: #3a9ecb; font-size: 22px;">
+											Please note, you can't make an appointment with doctor 
+											<%=data.first_name%> <%=data.last_name%>,
+											because he does not service the health insurance fund where you are. 
+										</p >
+									<% } else if (doctor_details.working_days == [] || !(doctor_details.start_time)) {%>
+										<p class="dis" style="color: #3a9ecb; font-size: 22px;">
+											It is not possible to make an appointment with this doctor
+										</p>
+									<% } else{ %>
+										<p class="ena">
+											Please note, Doctor <%=data.first_name%>
+											works <span id="working_days"><%=doctor_details.working_days%></span>,
+											<span id="start_time"><%=doctor_details.start_time%></span> - 
+											<span id="end_time"><%=doctor_details.end_time%></span>
+										</p>
 									
+									<% } %>
+
+									<div class="col-md-6">
 
 										<form method="POST">
 
@@ -107,7 +116,7 @@
 											</select><br><br>
 
 											<div class="form-group"><button class="btn btn-primary btn-sm"
-												type="submit">Make an appointment</button></div>
+												type="submit" >Make an appointment</button></div>
 
 										</form>
 

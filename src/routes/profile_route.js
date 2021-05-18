@@ -184,6 +184,7 @@ profile
 			res.render('appointment_management', {
 				data: req.user,
 				doctor_details: req.doctor_details,
+				patient: res.locals.loggedInUser,
 			})
 		}
 	)
