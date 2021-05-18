@@ -28,36 +28,48 @@
                             <table class="table my-0" id="dataTable">
                                 <thead>
                                     <tr>
+                                        <th>Doctor Name</th>
+                                        <th>Subject</th>
                                         <th>date</th>
                                         <th>Start Apoointment</th>
-                                        <th>Subject</th>
                                         <th>Type of Apoointment</th>
+                                        <th>Clinic Address</th>
                                     </tr>
                                 </thead>
                                 <%if(appointment_details != []) { %>
                                 
 
-                                    <% appointment_details.forEach(function(appointment) { %>
+                                    <% for(let i = 0; i < appointment_details.length; ++i){ %>
                                         
-                                            <%if(appointment.end_time == null){ %>
+                                            <%if(appointment_details[i].end_time == null){ %>
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <%=appointment.start_time%>
+                                                            <%=user_doctor[i].first_name%>
+                                                            &nbsp;
+                                                            <%=user_doctor[i].last_name%>
                                                         </td>
                                                         <td>
-                                                            <%=appointment.date%>
+                                                            <%=appointment_details[i].appointment_subject%>
                                                         </td>
                                                         <td>
-                                                            <%=appointment.appointment_subject%>
+                                                            <%=appointment_details[i].date%>
                                                         </td>
                                                         <td>
-                                                            <%=appointment.type%>
+                                                            <%=appointment_details[i].start_time%>
+                                                        </td>
+                                                        <td>
+                                                            <%=appointment_details[i].type%>
+                                                        </td>
+                                                        <td>
+                                                            <%=doctor_details[i].clinic_address.city%>
+                                                            &nbsp;
+                                                            <%=doctor_details[i].clinic_address.street%>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             <% } %>
-                                    <% }) %>
+                                    <% } %>
                                     
                                     <% } else { %>
                                         <h1>You don't have Future Appointments</h1>

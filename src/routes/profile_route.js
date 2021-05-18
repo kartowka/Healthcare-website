@@ -74,6 +74,8 @@ profile
 			res.render('patient_future_appointments', {
 				data: req.user,
 				appointment_details: req.appointment_details,
+				doctor_details: req.doctor_details,
+				user_doctor: req.user_doctor,
 			})
 		}
 	)
