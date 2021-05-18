@@ -8,9 +8,10 @@ const appointmentSchema = new Schema({
     },
     end_time: {
         type: String,
+        default: null,
     },
     date: {
-        type: Date,
+        type: String,
         required: true,
     },
     appointment_subject:{
