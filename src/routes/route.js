@@ -20,7 +20,7 @@ router.route('/our_team').get((req, res) => {
 })
 //appointment management test button
 router.route('/appointment_management').get((req, res) => {
-	res.render('appointment_management')
+	res.render('appointment_management', { doctor_details: NaN })
 })
 
 // restricted
