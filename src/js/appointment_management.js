@@ -1,6 +1,6 @@
 let enabel_day = document.getElementById('working_days').textContent.split(',')
-let start_time = document.getElementById("start_time").textContent.split(':')
-let end_time = document.getElementById("end_time").textContent.split(':')
+let start_time = document.getElementById('start_time').textContent.split(':')
+let end_time = document.getElementById('end_time').textContent.split(':')
 let dic = {
    'Sunday': 0, 
    'Monday': 1,
