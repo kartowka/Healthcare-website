@@ -72,9 +72,9 @@ profile
 		appointment_management_controller.getAppointments,
 		(req, res) => {
 			res.render('patient_future_appointments', {
-				 data: req.user,
-				 appointment_details: req.appointment_details,
-				})
+				data: req.user,
+				appointment_details: req.appointment_details,
+			})
 		}
 	)
 
