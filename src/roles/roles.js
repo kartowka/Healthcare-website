@@ -1,8 +1,8 @@
 const AccessControl = require('accesscontrol')
 const ac = new AccessControl()
 
-const doctor_paths = ['doctor_settings', 'doctor_appointment_summary', 'doctor_future_appointments','doctor_Review', 'appointment_management']
-const patient_paths = ['patient_settings', 'patient_appointment_summary', 'patient_future_appointments', 'patient_previous_appointments', 'appointment_management']
+const doctor_paths = ['doctor_settings', 'doctor_appointment_summary', 'doctor_future_appointments','doctor_Review']
+const patient_paths = ['patient_settings', 'patient_appointment_summary', 'patient_future_appointments', 'patient_previous_appointments']
 const admin_paths = ['doctor_settings', 'doctor_appointment_summary', 'doctor_future_appointments','doctor_Review','patient_settings', 'patient_appointment_summary', 'patient_future_appointments', 'patient_previous_appointments','admin_interface', 'appointment_management']
 const forum_pages_paths = ['forum', 'sub_forum', 'conversation']
 const forum_action_paths = ['new_forum', 'edit_forum']
@@ -15,7 +15,9 @@ exports.roles = (function () {
         .readOwn(sub_forum_action_paths)
         .readAny(forum_pages_paths)
         .updateOwn(patient_paths)
-        .readAny('doctor_profile')       
+        .readAny('doctor_profile')
+        .readAny('appointment_management')   
+        .updateAny('appointment_management')    
     
     ac.grant('doctor')
         .readAny('doctor_profile')
@@ -25,6 +27,8 @@ exports.roles = (function () {
         .readOwn(doctor_paths)
         .updateOwn(doctor_paths)
         .readOwn('patient_profile')
+        .readAny('appointment_management')   
+        .updateAny('appointment_management')   
 
     ac.grant('admin')
         .extend('patient')
