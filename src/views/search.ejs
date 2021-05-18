@@ -98,6 +98,7 @@
                                                 <th>Work Days</th>
                                                 <th>Spoken Languages</th>
                                                 <th>Related Clinics</th>
+                                                <th>Make an appointment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -123,6 +124,9 @@
                                                     </td>
                                                     <td>
                                                         <%=data.doctor_related_clinics %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/appointment_management/<%=data._id%>"> Make an appointment </a>
                                                     </td>
                                                     <% }) %>
                                                         <% } %>
