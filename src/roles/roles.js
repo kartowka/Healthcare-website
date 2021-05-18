@@ -17,7 +17,7 @@ exports.roles = (function () {
         .updateOwn(patient_paths)
         .readAny('doctor_profile')
         .readAny('appointment_management')   
-        .updateAny('appointment_management')    
+        .updateOwn('appointment_management')    
     
     ac.grant('doctor')
         .readAny('doctor_profile')
@@ -28,7 +28,7 @@ exports.roles = (function () {
         .updateOwn(doctor_paths)
         .readOwn('patient_profile')
         .readAny('appointment_management')   
-        .updateAny('appointment_management')   
+        .updateOwn('appointment_management')   
 
     ac.grant('admin')
         .extend('patient')
