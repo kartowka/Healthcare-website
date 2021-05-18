@@ -22,7 +22,6 @@
 <body id="page-top">
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
-
             <%- include('partials/header'); %>
                 <div id="content">
                     <%- include('doctor_partials/header'); %>
@@ -34,14 +33,14 @@
                                             </button>
                                     </div>
                                         <% } %>
-                                            <div class="container-fluid">
+                                            <div class="container-fluid ">
                                                 <div class="card shadow mb-4">
                                                     <div class="row mb-3">
                                                         <div class="col-lg-4">
                                                             <div class="card shadow mb-1">
                                                                 <div class="card-header py-3">
-                                                                    <h6 class="text-primary font-weight-bold m-0">Workdays Settings
-                                                                    </h6>
+                                                                    <h5 class="text-primary font-weight-bold m-0">Workdays Settings
+                                                                    </h5>
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <form method="POST">
@@ -66,9 +65,10 @@
                                                                         <label for="<%=day%>">
                                                                             <%=day%></label><br>
                                                                         <% }) %>
+                                                                    <br>
 
                                                                         <div class="form-group"><button
-                                                                                class="btn btn-primary btn-sm"
+                                                                                class="btn btn-primary mb-3"
                                                                                 type="submit">Save Settings</button>
                                                                         </div>
 
@@ -79,8 +79,8 @@
 
                                                             <div class="card shadow mb-1">
                                                                 <div class="card-header py-3">
-                                                                    <h6 class="text-primary font-weight-bold m-0">
-                                                                        Reception hours</h6>
+                                                                    <h5 class="text-primary font-weight-bold m-0">
+                                                                        Reception hours</h5>
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <form method="POST">
@@ -107,7 +107,7 @@
                                                                                 >
                                                                             <br>
                                                                             <div class="form-group"><button
-                                                                                    class="btn btn-primary btn-sm"
+                                                                                    class="btn btn-primary mb-3"
                                                                                     type="submit">Save Settings</button>
                                                                             </div>
 
@@ -118,8 +118,8 @@
 
                                                             <div class="card shadow mb-4">
                                                                 <div class="card-header py-3">
-                                                                    <p class="text-primary m-0 font-weight-bold">About
-                                                                        Me</p>
+                                                                    <h5 class="text-primary m-0 font-weight-bold">About
+                                                                        Me</h5>
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <form method="POST">
@@ -130,14 +130,15 @@
                                                                                         <textarea
                                                                                             class="form-control"
                                                                                             id="signature" rows="4"
-                                                                                            name="bio"><%= doctor_details.bio %></textarea>
+                                                                                            name="bio"><%= doctor_details.bio %>
+                                                                                        </textarea>
                                                                                             
                                                                                         
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                     </div>
                                                                                     <div class="form-group"><button
-                                                                                            class="btn btn-primary btn-sm"
+                                                                                            class="btn btn-primary mb-3"
                                                                                             type="submit">Save
                                                                                             Settings</button></div>
                                                                                 </form>
@@ -156,9 +157,9 @@
                                                                 <div class="col">
                                                                     <div class="card shadow mb-1" id="User_Settings">
                                                                         <div class="card-header py-3">
-                                                                            <p
+                                                                            <h5
                                                                                 class="text-primary m-0 font-weight-bold">
-                                                                                User Settings</p>
+                                                                                User Settings</h5>
                                                                         </div>
                                                                         <div class="card-body">
                                                                             <form method="POST">
@@ -188,23 +189,26 @@
 
 
                                                                                 </div>
-
+<br>
                                                                                 <label for="specialization"><strong>Specialization</strong></label>
                                                                                 <% doctor_details.specialization.forEach((s) => { %>
                                                                                     <div class="form-row">
                                                                                         <div class="col">
-                                                                                            <div class="form-group"><input
+                                                                                            <div class="input-group">
+                                                                                                <input
                                                                                                     class="form-control"
                                                                                                     type="text"
                                                                                                     id="specialization"
                                                                                                     name="specialization[]"
                                                                                                     value="<%=s%>">
+                                                                                                    <button type="input" id="delete_specialization" class="btn btn-primary mb-3 ">Delete</button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
+                                                                                    
                                                                                 <% }) %>
-
-
+                                                                                <button type="input" id="add_specialization" class="btn btn-primary mb-3">Add more specialization </button>
+<br><br>
                                                                                 <div class="form-row">
                                                                                     <div class="col">
                                                                                         <div class="form-group"><label
@@ -221,14 +225,14 @@
                                                                                                 <label for="<%=doctor_clinic%>">
                                                                                                     <%=doctor_clinic%></label><br>
                                                                                                 <% }) %>
-                                                                                            <br>
+                                                                                            
                                                                                         </div>
                                                                                     </div>
 
                                                                                 </div>
 
                                                                                 <div class="form-group"><button
-                                                                                        class="btn btn-primary btn-sm"
+                                                                                        class="btn btn-primary mb-3"
                                                                                         type="submit">Save
                                                                                         Settings</button></div>
                                                                             </form>
@@ -237,11 +241,11 @@
                                                                     <div class="card shadow">
                                                                         <form method="POST">
                                                                             <div class="card-header py-3">
-                                                                                <p
+                                                                                <h5
                                                                                     class="text-primary m-0 font-weight-bold">
                                                                                     Contact
                                                                                     Settings
-                                                                                </p>
+                                                                            </h5>
                                                                             </div>
                                                                             <div class="card-body">
                                                                                 <div class="form-group"><label
@@ -289,7 +293,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group"><button
-                                                                                        class="btn btn-primary btn-sm"
+                                                                                        class="btn btn-primary mb-3"
                                                                                         type="submit">Save
                                                                                         Settings</button>
                                                                                 </div>
