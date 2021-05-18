@@ -29,7 +29,6 @@ exports.make_an_Appointment = async (req, res, next) => {
 		
 	} catch (error) {
 		let statusCode = '401'
-		console.log(error)
 		res.redirect(`/restricted/${error}/${statusCode}`)
 	}
 }
@@ -60,7 +59,6 @@ exports.getAppointments = async (req, res, next) => {
 				
 	} catch (error) {
 		let statusCode = '401'
-		console.log(error)
 		res.redirect(`/restricted/${error}/${statusCode}`)
 	}
 
