@@ -3,13 +3,13 @@ const DoctorDetails = require('../models/doctor_model')
 const Appointment = require('../models/appointment_model')
 
 exports.make_an_Appointment = async (req, res, next) => {
-	
 	try {
 		let appointment_details = req.body
+		//var x = new Date(req.body.date + 'Z')
 		let doctor = await DoctorDetails.findOne({ _doctor_id: req.params.id })
 		let full_date = appointment_details.date.split(' ')
-		
-		if(doctor._doctor_id == res.locals.loggedInUser._id){
+
+		if (doctor._doctor_id == res.locals.loggedInUser._id) {
 			throw 'A doctor cannot make an appointment for himself!'
 		}
 
@@ -23,7 +23,6 @@ exports.make_an_Appointment = async (req, res, next) => {
 		})
 		await newAppointment.save()
 		next()
-		
 	} catch (error) {
 		let statusCode = '401'
 		res.redirect(`/restricted/${error}/${statusCode}`)
@@ -31,7 +30,6 @@ exports.make_an_Appointment = async (req, res, next) => {
 }
 
 exports.getAppointments = async (req, res, next) => {
-
 	try {
 		const userId = req.params.id
 		const user = await User.findById(userId)
@@ -42,12 +40,16 @@ exports.getAppointments = async (req, res, next) => {
 		req.appointment_details = appointment_details
 		let doctor_details = []
 		let user_doctor = []
-		let user_patient =[]
-		if(appointment_details != []){
-			for(let i = 0; i < appointment_details.length; ++i){
-				let doctor = await DoctorDetails.findOne({ _id: appointment_details[i].doctor })
-				let  user = await User.findOne({ _id: doctor._doctor_id })
-				let patient = await User.findOne({ _id: appointment_details[i].patient })
+		let user_patient = []
+		if (appointment_details != []) {
+			for (let i = 0; i < appointment_details.length; ++i) {
+				let doctor = await DoctorDetails.findOne({
+					_id: appointment_details[i].doctor,
+				})
+				let user = await User.findOne({ _id: doctor._doctor_id })
+				let patient = await User.findOne({
+					_id: appointment_details[i].patient,
+				})
 				doctor_details.push(doctor)
 				user_doctor.push(user)
 				user_patient.push(user)
@@ -57,12 +59,8 @@ exports.getAppointments = async (req, res, next) => {
 		req.user_doctor = user_doctor
 		req.patient = user_patient
 		next()
-				
 	} catch (error) {
 		let statusCode = '401'
 		res.redirect(`/restricted/${error}/${statusCode}`)
 	}
-
-
 }
-
