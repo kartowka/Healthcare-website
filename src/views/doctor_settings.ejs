@@ -189,26 +189,25 @@
 
 
                                                                                 </div>
-<br>
+                                                                                <br>
                                                                                 <label for="specialization"><strong>Specialization</strong></label>
-                                                                                <% doctor_details.specialization.forEach((s) => { %>
                                                                                     <div class="form-row">
-                                                                                        <div class="col">
+                                                                                        <div class="col-lg-6">   
                                                                                             <div class="input-group">
                                                                                                 <input
                                                                                                     class="form-control"
                                                                                                     type="text"
                                                                                                     id="specialization"
                                                                                                     name="specialization[]"
-                                                                                                    value="<%=s%>">
+                                                                                                    value="<%=doctor_details.specialization%>">
                                                                                                     <button type="input" id="delete_specialization" class="btn btn-primary mb-3 ">Delete</button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    
-                                                                                <% }) %>
                                                                                 <button type="input" id="add_specialization" class="btn btn-primary mb-3">Add more specialization </button>
-<br><br>
+<br>
+                                                                                    
+                                                                                <br><br>
                                                                                 <div class="form-row">
                                                                                     <div class="col">
                                                                                         <div class="form-group"><label
@@ -228,8 +227,8 @@
                                                                                             
                                                                                         </div>
                                                                                     </div>
-
                                                                                 </div>
+                                                                                <br>
                                                                                 <div class="form-row">
                                                                                     <div class="col">
                                                                                         <div class="form-group">
@@ -286,15 +285,14 @@
                                                                                 </div>
 
                                                                                 <label for="languages"><strong>Languages</strong></label>
-                                                                                <% doctor_details.spoken_languages.forEach((language) => { %>
                                                                                     <div class="form-group">
                                                                                         <input
                                                                                             class="form-control" type="text"
                                                                                             id="languages"
                                                                                             name="spoken_languages[]"
-                                                                                            value="<%= language %>">
+                                                                                            value="<%=doctor_details.spoken_languages%>">
                                                                                     </div>
-                                                                                <% }) %>
+                                                                               
                                                                                 <div class="form-row">
                                                                                     <div class="col">
                                                                                         <div class="form-group"><label
@@ -347,6 +345,11 @@
         <script src="/assets/js/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
         <script src="/assets/js/theme.js"></script>
+        <script src="../js/doctor_settings.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        
+
 
 </body>
 
