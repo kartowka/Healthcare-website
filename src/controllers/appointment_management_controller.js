@@ -106,7 +106,7 @@ exports.oldAppointment = async (req, res, next) => {
 
 	try {
 
-		let appointment_details = await getAppointments(req)
+		let appointment_details = await allAppointmentsOfUser(req)
 		let date_today = new Date()
 
 		appointment_details.filter(appointment =>  appointment.date < date_today)
