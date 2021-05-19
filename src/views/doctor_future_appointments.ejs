@@ -38,9 +38,54 @@
                         </div>
                         <div class="card-body">
                             
-                            
-                            <h1>Page in process</h1>
                             <div class="row">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Patient Name</th>
+                                            <th>Subject</th>
+                                            <th>date</th>
+                                            <th>Start Apoointment</th>
+                                            <th>Type of Apoointment</th>
+                                        </tr>
+                                    </thead>
+                                    <%if(appointment_details != []) { %>
+                                    
+                                        <% for(let i = 0; i < appointment_details.length; ++i){ %>
+                                            
+                                                <%if(appointment_details[i].end_time == null){ %>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <%=user_patient[i].first_name%>
+                                                                &nbsp;
+                                                                <%=user_patient[i].last_name%>
+                                                            </td>
+                                                            <td>
+                                                                <%=appointment_details[i].appointment_subject%>
+                                                            </td>
+                                                            <td>
+                                                                <%=appointment_details[i].date%>
+                                                            </td>
+                                                            <td>
+                                                                <%=appointment_details[i].start_time%>
+                                                            </td>
+                                                            <td>
+                                                                <%=appointment_details[i].type%>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                <% } %>
+                                        <% } %>
+                                        
+                                        <% } else { %>
+                                            <h1>You don't have Future Appointments</h1>
+                                        <% } %>
+    
+                                </table>
+                                
+     
+
                                
                                 <div class="col-md-6">
                                 

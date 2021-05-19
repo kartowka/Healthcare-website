@@ -40,18 +40,22 @@ exports.getAppointments = async (req, res, next) => {
 		}
 		const appointment_details = await Appointment.find({ patient: userId })
 		req.appointment_details = appointment_details
-		const doctor_details = []
-		const user_doctor = []
+		let doctor_details = []
+		let user_doctor = []
+		let user_patient =[]
 		if(appointment_details != []){
 			for(let i = 0; i < appointment_details.length; ++i){
 				let doctor = await DoctorDetails.findOne({ _id: appointment_details[i].doctor })
 				let  user = await User.findOne({ _id: doctor._doctor_id })
+				let patient = await User.findOne({ _id: appointment_details[i].patient })
 				doctor_details.push(doctor)
 				user_doctor.push(user)
+				user_patient.push(user)
 			}
 		}
 		req.doctor_details = doctor_details
 		req.user_doctor = user_doctor
+		req.patient = user_patient
 		next()
 				
 	} catch (error) {
