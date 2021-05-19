@@ -11,7 +11,7 @@ const appointmentSchema = new Schema({
         default: null,
     },
     date: {
-        type: String,
+        type: Date,
         required: true,
     },
     appointment_subject:{
