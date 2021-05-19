@@ -1,21 +1,30 @@
 const User = require('../models/user_model')
 const DoctorDetails = require('../models/doctor_model')
 const Appointment = require('../models/appointment_model')
+const { update } = require('../models/user_model')
 
 exports.make_an_Appointment = async (req, res, next) => {
 	try {
 		let appointment_details = req.body
-		//var x = new Date(req.body.date + 'Z')
-		let doctor = await DoctorDetails.findOne({ _doctor_id: req.params.id })
-		let full_date = appointment_details.date.split(' ')
+		let appointment_date = new Date(req.body.date + 'Z')
+		let minutes = appointment_date.getUTCMinutes()
+		let hours = appointment_date.getUTCHours()
+		if(minutes < 10){
+			minutes = '0'+ minutes
+		}
+		if(hours < 10){
+			hours = '0'+ hours
+		}
 
-		if (doctor._doctor_id == res.locals.loggedInUser._id) {
+		let doctor = await DoctorDetails.findOne({ _doctor_id: req.params.id })
+		
+		if(doctor._doctor_id == res.locals.loggedInUser._id){
 			throw 'A doctor cannot make an appointment for himself!'
 		}
 
 		const newAppointment = new Appointment({
-			start_time: full_date[1],
-			date: full_date[0],
+			start_time: hours +':'+ minutes,
+			date: appointment_date,
 			appointment_subject: appointment_details.appointment_subject,
 			doctor: doctor._id,
 			patient: res.locals.loggedInUser._id,
@@ -29,38 +38,84 @@ exports.make_an_Appointment = async (req, res, next) => {
 	}
 }
 
-exports.getAppointments = async (req, res, next) => {
+
+async function allAppointmentsOfUser(req){
+
 	try {
 		const userId = req.params.id
 		const user = await User.findById(userId)
 		if (!user) {
 			throw new Error('User does not exist')
 		}
-		const appointment_details = await Appointment.find({ patient: userId })
-		req.appointment_details = appointment_details
-		let doctor_details = []
-		let user_doctor = []
-		let user_patient = []
-		if (appointment_details != []) {
-			for (let i = 0; i < appointment_details.length; ++i) {
-				let doctor = await DoctorDetails.findOne({
-					_id: appointment_details[i].doctor,
-				})
-				let user = await User.findOne({ _id: doctor._doctor_id })
-				let patient = await User.findOne({
-					_id: appointment_details[i].patient,
-				})
+		
+		let appointment_details = []
+
+		if(user.role == 'patient'){
+			appointment_details = await Appointment.find({ patient: userId })
+			
+		} 
+		else if(user.role == 'doctor'){
+			let doctor = await DoctorDetails.findOne({ _doctor_id: userId })
+			appointment_details = await Appointment.find({ doctor: doctor._id })
+		}
+
+		return appointment_details
+				
+	} catch (error) {
+		let statusCode = '401'
+		res.redirect(`/restricted/${error}/${statusCode}`)
+	}
+
+}
+
+
+exports.getAppointments = async (req, res, next) => {
+
+	try {
+
+		let appointment_details = await allAppointmentsOfUser(req)
+		
+		if(appointment_details != []){
+
+			let doctor_details = []
+			let user_doctor = []
+			let user_patient =[]
+
+			for(let i = 0; i < appointment_details.length; ++i){
+				let doctor = await DoctorDetails.findOne({ _id: appointment_details[i].doctor })
+				let  user = await User.findOne({ _id: doctor._doctor_id })
+				let patient = await User.findOne({ _id: appointment_details[i].patient })
 				doctor_details.push(doctor)
 				user_doctor.push(user)
-				user_patient.push(user)
+				user_patient.push(patient)
 			}
+			req.appointment_details = appointment_details
+			req.doctor_details = doctor_details
+			req.user_doctor = user_doctor
+			req.patient = user_patient
+
 		}
-		req.doctor_details = doctor_details
-		req.user_doctor = user_doctor
-		req.patient = user_patient
 		next()
 	} catch (error) {
 		let statusCode = '401'
 		res.redirect(`/restricted/${error}/${statusCode}`)
 	}
+}
+
+
+exports.oldAppointment = async (req, res, next) => {
+
+	try {
+
+		let appointment_details = await getAppointments(req)
+		let date_today = new Date();
+
+		appointment_details.filter(appointment =>  appointment.date < date_today)
+		req.appointment_details = appointment_details
+
+	} catch (error) {
+		let statusCode = '401'
+		res.redirect(`/restricted/${error}/${statusCode}`)
+	}
+
 }
