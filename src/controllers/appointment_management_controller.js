@@ -63,9 +63,11 @@ async function allAppointmentsOfUser(req){
 				
 	} catch (error) {
 		let statusCode = '401'
+		res.redirect(`/restricted/${error}/${statusCode}`)
 	}
 
 }
+
 
 
 exports.getAppointments = async (req, res, next) => {
@@ -73,6 +75,7 @@ exports.getAppointments = async (req, res, next) => {
 	try {
 
 		let appointment_details = await allAppointmentsOfUser(req)
+		
 		
 		if(appointment_details != []){
 
@@ -88,6 +91,7 @@ exports.getAppointments = async (req, res, next) => {
 				user_doctor.push(user)
 				user_patient.push(patient)
 			}
+
 			req.appointment_details = appointment_details
 			req.doctor_details = doctor_details
 			req.user_doctor = user_doctor
@@ -96,25 +100,74 @@ exports.getAppointments = async (req, res, next) => {
 		}
 		next()
 	} catch (error) {
-		let statusCode = '401'
-		res.redirect(`/restricted/${error}/${statusCode}`)
+		req.error = error
 	}
 }
 
 
-exports.oldAppointment = async (req, res, next) => {
+exports.previousAppointment = async (req, res, next) => {
+
+	try {
+		
+		let appointment_details = await allAppointmentsOfUser(req)
+		let doctor_details = await DoctorDetails.findOne({ _doctor_id: req.params.id })
+		let date_today = new Date()
+		let user_patient =[]
+	
+		for(let i = 0; i < appointment_details.length; ++i){
+			let patient = await User.findOne({ _id: appointment_details[i].patient })
+			user_patient.push(patient)
+		}
+		
+		appointment_details.filter(appointment =>  appointment.date < date_today)
+		req.appointment_details = appointment_details
+		req.patient = user_patient
+		req.doctor_details = doctor_details
+
+
+		next()
+	} catch (error) {
+		req.error = error
+		console.log(error)
+	}
+
+}
+
+
+exports.editAppointment = async (req, res, next) => {
 
 	try {
 
-		let appointment_details = await allAppointmentsOfUser(req)
-		let date_today = new Date()
-
-		appointment_details.filter(appointment =>  appointment.date < date_today)
-		req.appointment_details = appointment_details
-
+		let update = req.body
+		let appointment =  await Appointment.findOne({_id: update._id})
+		let date = new Date (appointment.date)
+		date.setMinutes ( date.getMinutes() + 30 )
+		let minutes = date.getUTCMinutes()
+		let hours = date.getUTCHours()
+		if(minutes < 10){
+			minutes = '0'+ minutes
+		}
+		if(hours < 10){
+			hours = '0'+ hours
+		}
+		
+		await Appointment.findOneAndUpdate(
+			{
+				_id: update._id,
+			},
+			{
+				$set: {
+					appointment_summary: update.appointment_summary,
+					end_time: hours + ':' + minutes
+				},
+			},
+			{ new: true }
+		)
+	
+		next()
 	} catch (error) {
-		let statusCode = '401'
-		res.redirect(`/restricted/${error}/${statusCode}`)
+		req.error = error
+		console.log(error)
 	}
 
 }

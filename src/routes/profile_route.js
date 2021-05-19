@@ -162,11 +162,32 @@ profile
 		user_controller.allowIfLoggedin,
 		user_controller.grantAccess('readOwn', 'doctor_appointment_summary'),
 		user_controller.getUser,
+		appointment_management_controller.previousAppointment,
 		(req, res) => {
-			res.render('doctor_appointment_summary', { data: req.user })
+			res.render('doctor_appointment_summary', { 
+				data: req.user,
+				appointment_details: req.appointment_details,
+				doctor_details: req.doctor_details,
+				user_patient : req.patient,
+			})
+		}
+	)
+	.post(
+		user_controller.allowIfLoggedin,
+		appointment_management_controller.editAppointment,
+		(req, res) => {
+			res.redirect(
+				url.format({
+					pathname: `/appointment_management/${req.params.id}`,
+					query: {
+						Message: req.error,
+					},
+				})
+			)
 		}
 	)
 
+	
 // doctor Reviwe
 profile
 	.route('/doctor_profile/doctor_Review/:id')
