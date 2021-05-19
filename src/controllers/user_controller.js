@@ -190,7 +190,6 @@ exports.updateUser = async (req, res, next) => {
 
 		if (update.first_name != undefined) {
 			if (update.first_name && update.last_name) {
-				let userUpdate = await User.findByIdAndUpdate(userId, update)
 				if (user.role == 'doctor') {
 					let details = await DoctorDetails.findOne({ _doctor_id: userId })
 					await DoctorDetails.findByIdAndUpdate(details._id, update)
@@ -198,16 +197,36 @@ exports.updateUser = async (req, res, next) => {
 				throw `${user.first_name} ${user.last_name} has been updated`
 			} else throw 'No updated, missing data in one of the fields'
 		}
+
 		if (user.role == 'doctor') {
+			if(update.specialization != undefined)
+				update.specialization = update.specialization.filter(s => s.trim() != '')
+
 			let details = await DoctorDetails.findOne({ _doctor_id: userId })
 			if (update.working_days != undefined || update.bio != undefined) {
 				await DoctorDetails.findByIdAndUpdate(details._id, update)
 				throw `${user.first_name} ${user.last_name} has been updated`
 			}
-			if (update.start_time != undefined && update.end_time != undefined) {
+
+
+			if (update.start_time != undefined && update.end_time != undefined) 
+			{
+				var start =update.start_time
+				var end = update.end_time
+				var dtStart = new Date('1.1.2000 '+start)
+				var dtEnd = new Date('1.1.2000 '+ end)
+				console.log(start)
+				console.log(end)
+				console.log(dtStart)
+				console.log(dtEnd)
+				var difference_in_milliseconds = dtEnd - dtStart
+				console.log(difference_in_milliseconds)
+				if (difference_in_milliseconds<0)
+					throw 'start time should be less than end time.'
 				await DoctorDetails.findByIdAndUpdate(details._id, update)
 				throw `${user.first_name} ${user.last_name} has been updated`
 			}
+			
 
 			if (update.city != undefined && update.street != undefined) {
 				if (details.clinic_address != undefined) {

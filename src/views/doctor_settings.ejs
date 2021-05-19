@@ -86,24 +86,22 @@
                                                                     <form method="POST">
                                                                         <fieldset>
                                                                             <label
-                                                                                for="from"><strong>From:</strong></label><input
+                                                                                for="from"><strong>From:</strong></label>
+                                                                                <input
                                                                                 class="form-control" 
                                                                                 id="reception_hours_from"
-                                                                                name="start_time"
-                                                                                value="<%=doctor_details.start_time%>"
                                                                                 type="time"
-                                                                                pattern="[0-9]{2}:[0-9]{2}"
-                                                                            
-                                                                                >
+                                                                                value="<%=doctor_details.start_time%>"
+                                                                                name="start_time">
                                                                             </label>
                                                                             <label
-                                                                                for="to:"><strong>To:</strong></label><input
+                                                                                for="to:"><strong>To:</strong></label>
+                                                                                <input
                                                                                 class="form-control" 
                                                                                 id="reception_hours_to"
                                                                                 name="end_time"
                                                                                 value="<%=doctor_details.end_time%>"
                                                                                 type="time"
-                                                                                pattern="[0-9]{2}:[0-9]{2}"
                                                                                 >
                                                                             <br>
                                                                             <div class="form-group"><button
@@ -191,22 +189,30 @@
                                                                                 </div>
                                                                                 <br>
                                                                                 <label for="specialization"><strong>Specialization</strong></label>
+                                                                                <div class="specializations">
+                                                                                    <% doctor_details.specialization.forEach((s) => { %>
                                                                                     <div class="form-row">
-                                                                                        <div class="col-lg-6">   
+                                                                                        <div class="col-lg-6 ">   
                                                                                             <div class="input-group">
                                                                                                 <input
                                                                                                     class="form-control"
                                                                                                     type="text"
                                                                                                     id="specialization"
                                                                                                     name="specialization[]"
-                                                                                                    value="<%=doctor_details.specialization%>">
-                                                                                                    <button type="input" id="delete_specialization" class="btn btn-primary mb-3 ">Delete</button>
+                                                                                                    pattern="{1}[A-Za-z]"
+                                                                                                    value="<%=s%>">
+                                                                                                <div class="input-group-append">
+                                                                                                    <a href="javascript:void(0);" id="delete_specialization" class="btn btn-danger">Delete</a>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                <button type="input" id="add_specialization" class="btn btn-primary mb-3">Add more specialization </button>
-<br>
-                                                                                    
+                                                                                    <% }) %>
+                                                                                </div>
+
+                                                                                <br />
+                                                                                <a href="javascript:void(0);" id="add_specialization" class="btn btn-primary mb-3">Add more specialization</a>
+                                                                                           
                                                                                 <br><br>
                                                                                 <div class="form-row">
                                                                                     <div class="col">
@@ -279,6 +285,7 @@
                                                                                         for="address"><strong>City</strong></label><input
                                                                                         class="form-control" type="text"
                                                                                         id="city"
+                                                                                        pattern="{1}[A-Za-z]"
                                                                                         value="<%=doctor_details.clinic_address.city%>"
                                                                                         name="city"
                                                                                         >
@@ -290,6 +297,7 @@
                                                                                             class="form-control" type="text"
                                                                                             id="languages"
                                                                                             name="spoken_languages[]"
+                                                                                            pattern="{1}[A-Za-z]"
                                                                                             value="<%=doctor_details.spoken_languages%>">
                                                                                     </div>
                                                                                
@@ -299,6 +307,7 @@
                                                                                                 for="city"><strong>Street</strong></label><input
                                                                                                 class="form-control"
                                                                                                 type="text" id="street"
+                                                                                                pattern="{1}[A-Za-z]"
                                                                                                 name="street"
                                                                                                 value="<%=doctor_details.clinic_address.street%>"
                                                                                                 >
@@ -345,7 +354,7 @@
         <script src="/assets/js/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
         <script src="/assets/js/theme.js"></script>
-        <script src="../js/doctor_settings.js"></script>
+        <script src="../../js/doctor_settings.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         
