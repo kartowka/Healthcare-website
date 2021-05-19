@@ -187,7 +187,6 @@ exports.updateUser = async (req, res, next) => {
 		let update = req.body
 		let userId = req.params.id
 		let user = await User.findById(userId)
-
 		if (update.first_name != undefined) {
 			if (update.first_name && update.last_name) {
 				if (user.role == 'doctor') {
@@ -238,7 +237,7 @@ exports.updateUser = async (req, res, next) => {
 						{
 							$set: {
 								'clinic_address.city': update.city,
-								spoken_languages: update.spoken_languages,
+								spoken_languages: update.spoken_languages.split(','),
 								'clinic_address.street': update.street,
 								clinic_phone_number: update.clinic_phone_number,
 							},

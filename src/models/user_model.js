@@ -2,43 +2,44 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
-    first_name: {
-        type: String,
-        required: true,
-    },
-    last_name: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    role: {
-        type: String,
-        default: 'patient',
-        enum: ['admin', 'doctor', 'patient']
-    },
-    clinic: {
-        type: String,
-        enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
-        default: '',
-        required: true
-    },
-    status: {
-        type: String,
-        enum: ['Pending', 'Active', 'Waiting for Admin Approval'],
-        default: 'Pending'
-    },
-    accessToken: {
-        type: String
-    },
+	first_name: {
+		type: String,
+		required: true,
+	},
+	last_name: {
+		type: String,
+		required: true,
+	},
+	email: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	password: {
+		type: String,
+		required: true,
+	},
+	role: {
+		type: String,
+		default: 'patient',
+		enum: ['admin', 'doctor', 'patient'],
+	},
+	clinic: {
+		type: String,
+		enum: ['Clalit', 'Meuhedet', 'Macabi', 'Leumit'],
+		default: '',
+		required: true,
+	},
+	status: {
+		type: String,
+		enum: ['Pending', 'Active', 'Waiting for Admin Approval'],
+		default: 'Pending',
+	},
+	accessToken: {
+		type: String,
+	},
 })
+UserSchema.index({ first_name: 'text', last_name: 'text' })
 
 const User = mongoose.model('user', UserSchema)
 

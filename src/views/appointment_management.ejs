@@ -62,13 +62,12 @@
 							</div>
 							<div class="card-body">
 								<h1></h1>
-								<div class="row">
 
 									<% if(!(doctor_details.doctor_related_clinics.includes(patient.clinic))){ %>
 										<p class="dis" style="color: #3a9ecb; font-size: 22px;">
 											Please note, you can't make an appointment with doctor 
 											<%=data.first_name%> <%=data.last_name%>,
-											because he does not service the health insurance fund where you are. 
+											because he does not offer services for your clinic. 
 										</p >
 									<% } else if (doctor_details.working_days == [] || !(doctor_details.start_time)) {%>
 										<p class="dis" style="color: #3a9ecb; font-size: 22px;">
@@ -83,7 +82,6 @@
 										</p>
 									
 									<% } %>
-
 									<div class="col-md-6">
 
 										<form method="POST">
@@ -91,33 +89,30 @@
 						
 											<input
 											style="width: 40%;"
-											type="text"
+											type='text'
 											readonly
 											value=""
 											name="date"
-											class="form-control form_datetime"/>
-											
+											class="form-control form_datetime"/>	
 											<br>
-
-											<p>Please enter the subject of the appointment:</p>
-											<textarea 
+											<label for="appointment_subject">Please enter the subject of the appointment:</label>
+											<textarea
+											id='1' 
 											class="form-control" 
 											style="width: 40%;"
-											id="signature" 
-											rows="2" 
-											name="appointment_subject">
-											</textarea>
-											<br><br>
-
-											<p>Please select the type of the appointment:</p>
+											rows="2"
+											cols="50" 
+											name="appointment_subject" placeholder="Place your text here"></textarea>
+											<br>
+											<label for="type">Please select the type of the appointment:</label>
 											<select name="type" class="form-control form-control-user" style="width: 40%;">
 												<option>frontal</option>
 												<option>remote</option>
 											</select><br><br>
-
+											<% if((doctor_details.doctor_related_clinics.includes(patient.clinic)) && (doctor_details.working_days == [] || (doctor_details.start_time))){ %>
 											<div class="form-group"><button class="btn btn-primary btn-sm"
-												type="submit" >Make an appointment</button></div>
-
+												type="submit" id="btn" >Make an appointment</button></div>
+												<% } %> 
 										</form>
 
 									</div>
@@ -147,6 +142,8 @@
 		></script>
 		<script src="/assets/js/bootstrap-datetimepicker.js"></script>
 		<script src="/js/appointment_management.js"></script>
+		
+
 
 	</body>
 </html>

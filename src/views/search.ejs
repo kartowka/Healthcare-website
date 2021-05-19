@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -27,26 +34,8 @@
                                 class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search d-inline w-100">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <select class="form-control form-control-user" data-trigger="" name="sort_by">
-                                            <option value="" disabled="" selected="">Sort By</option>
-                                            <option value="first_name">First Name</option>
-                                            <option value="last_name">Last Name</option>
-                                            <option value="city">City</option>
-                                            <option value="specialization">Specialization</option>
-                                            <option value="working_days">Working days</option>
-                                            <option value="spoken_languages">Spoken Language</option>
-                                            <option value="doctor_related_clinics">Related Clinics</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group">
-                                        <select class="form-control form-control-user" data-trigger="" name="sort_order">
-                                            <option value="ascending">Ascending</option>
-                                            <option value="descending">Descending</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group">
                                         <input class="bg-light form-control border-0 small" type="search" size="200"
-                                            placeholder="Search for doctor by last name" name="term">
+                                            placeholder="search for a doctor" name="term">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary py-0" type="submit">
                                                 <i class="fas fa-search">
@@ -55,28 +44,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select class="form-control form-control-user" data-trigger="" id="filter_order">
-                                            <option value="" disabled="" selected="">Filter By</option>
-                                            <option value="0">First Name</option>
-                                            <option value="1">Last Name</option>
-                                            <option value="2">City</option>
-                                            <option value="3">Specialization</option>
-                                            <option value="4">Working days</option>
-                                            <option value="5">Spoken Language</option>
-                                            <option value="6">Related Clinics</option>
-                                        </select>
-                                    </div>
-                                <div class="input-group">
-                                    <input class="bg-light form-control border-0 small" type="text" size="200" id="filter"
-                                        placeholder="filter your serach results" onkeyup="filter_results(document.getElementById('filter_order').value)" onkeypress="return event.keyCode != 13;">
-                                    <div class="input-group-append">
-                                    </div>
-                                </div>
-                                </div>
+                                </div>       
                             </form>
                         </div>
                     </nav>
@@ -88,7 +56,8 @@
                             <div class="card-body">
                                 <div class="table-responsive table mt-2" id="dataTable" role="grid"
                                     aria-describedby="dataTable_info">
-                                    <table class="table my-0" id="dataTable">
+                                    <table id="sortTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        
                                         <thead>
                                             <tr>
                                                 <th>First Name</th>
@@ -144,16 +113,17 @@
             </div>
         </div>
         <%- include('partials/footer'); %>
-            <script src="/assets/js/jquery.min.js"></script>
-            <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-            <script src="/assets/js/chart.min.js"></script>
-            <script src="/assets/js/bs-init.js"></script>
-            <script src="/assets/js/custom.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-            <script src="/assets/js/jquery.min.js"></script>
-            <script src="/assets/js/smoothscroll.js"></script>
-            <script src="/assets/js/theme.js"></script>
-            <script src="/js/filter_results.js"></script>
+            <script>
+                $('#sortTable').DataTable({
+                    columnDefs: [{
+                    orderable: false,
+                    targets: 7
+                    }],
+                    "language": {
+                    "search": "Filter records:"
+                    }
+                });
+                </script>
 
 </body>
 
