@@ -65,7 +65,8 @@
                                                                 <%=appointment_details[i].appointment_subject%>
                                                             </td>
                                                             <td>
-                                                                <%=appointment_details[i].date%>
+                                                                <%let date = new Date(appointment_details[i].date)%>
+                                                                <%=date.getDate()%>/<%=date.getMonth()%>/<%=date.getFullYear()%>
                                                             </td>
                                                             <td>
                                                                 <%=appointment_details[i].start_time%>
