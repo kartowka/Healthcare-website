@@ -16,10 +16,14 @@ let hoursEnable = hours.filter(value => start_time[0] <= value  && value <= end_
 let disablehour = hours.filter(n => !hoursEnable.includes(n))
 day_of_week = day_of_week.filter(n => !enabel_day.includes(n))
 day_of_week = day_of_week.map(n => dic[n])
+let date = new Date();
+let currentMonth = date.getMonth();
+let currentDate = date.getDate();
+let currentYear = date.getFullYear();
 $('.form_datetime').datetimepicker({
    format: 'dd/mm/yyyy hh:ii',
    daysOfWeekDisabled: day_of_week,
    hoursDisabled: disablehour,
-
+   startDate: new Date(currentYear, currentMonth, currentDate),
  
 })
