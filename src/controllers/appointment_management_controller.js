@@ -62,8 +62,7 @@ async function allAppointmentsOfUser(req){
 		return appointment_details
 				
 	} catch (error) {
-		let statusCode = '401'
-		res.redirect(`/restricted/${error}/${statusCode}`)
+		req.error = error
 	}
 
 }
