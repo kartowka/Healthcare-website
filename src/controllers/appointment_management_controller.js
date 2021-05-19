@@ -63,7 +63,6 @@ async function allAppointmentsOfUser(req){
 				
 	} catch (error) {
 		let statusCode = '401'
-		res.redirect(`/restricted/${error}/${statusCode}`)
 	}
 
 }
@@ -108,7 +107,7 @@ exports.oldAppointment = async (req, res, next) => {
 	try {
 
 		let appointment_details = await getAppointments(req)
-		let date_today = new Date();
+		let date_today = new Date()
 
 		appointment_details.filter(appointment =>  appointment.date < date_today)
 		req.appointment_details = appointment_details
