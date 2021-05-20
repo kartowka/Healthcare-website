@@ -34,7 +34,7 @@ exports.grantAccess = function (action, resource) {
 		}
 	}
 }
-async function hashPassword(password) {
+exports.hashPassword = async (password) => {
 	return await bcrypt.hash(password, 10)
 }
 
@@ -59,7 +59,7 @@ exports.signup = async (req, res, next) => {
 			doctor_related_clinics,
 		} = req.body
 
-		const hashedPassword = await hashPassword(password)
+		const hashedPassword = await this.hashPassword(password)
 		const lowerCasedEmail = await this.lowerCaseEmail(email)
 		const newUser = new User({
 			first_name,
@@ -198,8 +198,10 @@ exports.updateUser = async (req, res, next) => {
 		}
 
 		if (user.role == 'doctor') {
-			if(update.specialization != undefined)
-				update.specialization = update.specialization.filter(s => s.trim() != '')
+			if (update.specialization != undefined)
+				update.specialization = update.specialization.filter(
+					(s) => s.trim() != ''
+				)
 
 			let details = await DoctorDetails.findOne({ _doctor_id: userId })
 			if (update.working_days != undefined || update.bio != undefined) {
@@ -207,25 +209,22 @@ exports.updateUser = async (req, res, next) => {
 				throw `${user.first_name} ${user.last_name} has been updated`
 			}
 
-
-			if (update.start_time != undefined && update.end_time != undefined) 
-			{
-				var start =update.start_time
+			if (update.start_time != undefined && update.end_time != undefined) {
+				var start = update.start_time
 				var end = update.end_time
-				var dtStart = new Date('1.1.2000 '+start)
-				var dtEnd = new Date('1.1.2000 '+ end)
+				var dtStart = new Date('1.1.2000 ' + start)
+				var dtEnd = new Date('1.1.2000 ' + end)
 				console.log(start)
 				console.log(end)
 				console.log(dtStart)
 				console.log(dtEnd)
 				var difference_in_milliseconds = dtEnd - dtStart
 				console.log(difference_in_milliseconds)
-				if (difference_in_milliseconds<0)
+				if (difference_in_milliseconds < 0)
 					throw 'start time should be less than end time.'
 				await DoctorDetails.findByIdAndUpdate(details._id, update)
 				throw `${user.first_name} ${user.last_name} has been updated`
 			}
-			
 
 			if (update.city != undefined && update.street != undefined) {
 				if (details.clinic_address != undefined) {
