@@ -41,7 +41,7 @@
 
                                     <% for(let i = 0; i < appointment_details.length; ++i){ %>
                                         
-                                            <%if(appointment_details[i].end_time == null){ %>
+                                            <%if(appointment_details[i].end_time == null && new Date(appointment_details[i].date) > new Date()){ %>
                                                 <tbody>
                                                     <tr>
                                                         <td>

@@ -38,6 +38,7 @@
                                         <th>end Appointment</th>
                                         <th>Type of Appointment</th>
                                         <th>Clinic Address</th>
+                                        <th>Summary</th>
                                     </tr>
                                 </thead>
                                 <%if(appointment_details != []) { %>
@@ -45,7 +46,7 @@
 
                                     <% for(let i = 0; i < appointment_details.length; ++i){ %>
                                         
-                                            <%if(appointment_details[i].end_time != null){ %>
+                                            <%if(appointment_details[i].end_time != null || new Date() > new Date(appointment_details[i].date) ){ %>
                                                 <tbody>
                                                     <tr>
                                                         <td>
@@ -73,6 +74,13 @@
                                                             <%=doctor_details[i].clinic_address.city%>
                                                             &nbsp;
                                                             <%=doctor_details[i].clinic_address.street%>
+                                                        </td>
+                                                        <td>
+                                                            <% if(appointment_details[i].appointment_summary) { %>
+                                                                <%=appointment_details[i].appointment_summary%>
+                                                            <% } else { %>
+                                                                The doctor has not yet updated the summary of the appointment
+                                                            <% }%> 
                                                         </td>
                                                     </tr>
                                                 </tbody>
