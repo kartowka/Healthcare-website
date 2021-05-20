@@ -36,91 +36,82 @@
                             <p class="text-primary m-0 font-weight-bold"><%= data.first_name %>&nbsp;<%= data.last_name %></p>
                         </div>
                         <div class="card-body">
-                          
-                            <div class="row">
 
-
-                                <table class="table my-0" id="dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Patient Name</th>
-                                            <th>Subject</th>
-                                            <th>date</th>
-                                            <th>Type of Apoointment</th>
-                                            <th>Start Apoointment</th>
-                                            <th>End Apoointment</th>
-                                            <th>Summary</th>
-                                        </tr>
-                                    </thead>
-                                    <%if(appointment_details != []) { %>
-                                    
-                                        <% for(let i = 0; i < appointment_details.length; ++i){ %>
-                                            
-                                                <%if(appointment_details[i].end_time == null){ %>
-                                                    <form method="POST">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <%=user_patient[i].first_name%>
-                                                                    &nbsp;
-                                                                    <%=user_patient[i].last_name%>
-                                                                </td>
-                                                                <td>
-                                                                    <%=appointment_details[i].appointment_subject%>
-                                                                </td>
-                                                                <td>
-                                                                    <%let date = new Date(appointment_details[i].date)%>
-                                                                    <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
-                                                                </td>
-                                                                <td>
-                                                                    <%=appointment_details[i].type%>
-                                                                </td>
-                                                                <td>
-                                                                    <%=appointment_details[i].start_time%>
-                                                                </td>
-                                                                <td>
-                                                                    <input
-                                                                    class="form-control"
-                                                                    id="reception_hours_from"
-                                                                    type="time"
-                                                                    name="end_time">
-                                                                </td>
-                                                                <td>
-                                                                    <textarea
-                                                                    class="form-control" 
-                                                                    style="width: 90%;"
-                                                                    rows="4"
-                                                                    cols="50" 
-                                                                    name="appointment_summary" placeholder="Place your text here"></textarea>
-                                                                </td>
-                                                                <td>
-                                                                    <button
-                                                                        class="btn btn-primary mb-3"
-                                                                        type="submit"
-                                                                        name="_id"
-                                                                        value=<%=appointment_details[i]._id%>
-                                                                        >Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </form>
-                                                   
-                                                <% } %>
-                                        <% } %>
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>Subject</th>
+                                        <th>date</th>
+                                        <th>Type of Appointment</th>
+                                        <th>Start Appointment</th>
+                                        <th>End Appointment</th>
+                                        <th>Summary</th>
+                                    </tr>
+                                </thead>
+                                <%if(appointment_details != []) { %>
+                                
+                                    <% for(let i = 0; i < appointment_details.length; ++i){ %>
                                         
-                                        <% } else { %>
-                                            <h1>You don't have Appointments</h1>
-                                        <% } %>
-    
-                                </table>
-                                
-     
-                               
-                                <div class="col-md-6">
-                                
-                                </div>
-                            </div>
+                                            <%if(appointment_details[i].end_time == null){ %>
+                                                <form method="POST">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <%=user_patient[i].first_name%>
+                                                                &nbsp;
+                                                                <%=user_patient[i].last_name%>
+                                                            </td>
+                                                            <td>
+                                                                <%=appointment_details[i].appointment_subject%>
+                                                            </td>
+                                                            <td>
+                                                                <%let date = new Date(appointment_details[i].date)%>
+                                                                <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
+                                                            </td>
+                                                            <td>
+                                                                <%=appointment_details[i].type%>
+                                                            </td>
+                                                            <td>
+                                                                <%=appointment_details[i].start_time%>
+                                                            </td>
+                                                            <td>
+                                                                <input
+                                                                class="form-control"
+                                                                id="reception_hours_from"
+                                                                type="time"
+                                                                name="end_time">
+                                                            </td>
+                                                            <td>
+                                                                <textarea
+                                                                class="form-control" 
+                                                                style="width: 90%;"
+                                                                rows="4"
+                                                                cols="50" 
+                                                                name="appointment_summary" placeholder="Place your text here"></textarea>
+                                                            </td>
+                                                            <td>
+                                                                <button
+                                                                    class="btn btn-primary mb-3"
+                                                                    type="submit"
+                                                                    name="_id"
+                                                                    value=<%=appointment_details[i]._id%>
+                                                                    >Edit
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </form>
+                                                
+                                            <% } %>
+                                    <% } %>
+                                    
+                                    <% } else { %>
+                                        <h1>You don't have Appointments</h1>
+                                    <% } %>
+
+                            </table>
+                        
                         </div>
                     </div>
                 </div>
