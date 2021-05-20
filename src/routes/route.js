@@ -94,9 +94,18 @@ router
 	.route('/reset_password/:accessToken')
 	.get(user_controller.denyIfLoggedin, async (req, res) => {
 		const { accessToken } = req.params
-		res.render('reset_password')
+		res.render('reset_password', { alert: req.query.Message })
 	})
-	.post(password_controller.passwordReset)
+	.post(password_controller.passwordReset, (req, res) => {
+		res.redirect(
+			url.format({
+				pathname: `/reset_password/${req.params.accessToken}`,
+				query: {
+					Message: req.error,
+				},
+			})
+		)
+	})
 
 //confirmation code
 router.route('/confirm/:confirmationCode').get(user_controller.verifyUser)
