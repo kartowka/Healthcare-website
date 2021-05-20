@@ -2,14 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const ReviewSchema = new Schema({
-    reviewer_first_name: {
-        type: String,
-        required: true,
-    },
-    reviewer_last_name: {
-        type: String,
-        required: true,
-    },
     subject: {
         type: String,
         required: true,
@@ -28,6 +20,10 @@ const ReviewSchema = new Schema({
         required: true,
     },
     reviewer_by: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    doctor: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
