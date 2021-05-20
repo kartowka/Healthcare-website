@@ -28,15 +28,63 @@
                             <p class="text-primary m-0 font-weight-bold"><%= data.first_name %>&nbsp;<%= data.last_name %></p>
                         </div>
                         <div class="card-body">
-                            
-                            
-                            <h1>Page in process</h1>
-                            <div class="row">
-                               
-                                <div class="col-md-6">
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Doctor Name</th>
+                                        <th>Subject</th>
+                                        <th>date</th>
+                                        <th>Start Apoointment</th>
+                                        <th>end Apoointment</th>
+                                        <th>Type of Apoointment</th>
+                                        <th>Clinic Address</th>
+                                    </tr>
+                                </thead>
+                                <%if(appointment_details != []) { %>
                                 
-                                </div>
-                            </div>
+
+                                    <% for(let i = 0; i < appointment_details.length; ++i){ %>
+                                        
+                                            <%if(appointment_details[i].end_time != null){ %>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <%=user_doctor[i].first_name%>
+                                                            &nbsp;
+                                                            <%=user_doctor[i].last_name%>
+                                                        </td>
+                                                        <td>
+                                                            <%=appointment_details[i].appointment_subject%>
+                                                        </td>
+                                                        <td>
+                                                            <%let date = new Date(appointment_details[i].date)%>
+                                                            <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
+                                                        </td>
+                                                        <td>
+                                                            <%=appointment_details[i].start_time%>
+                                                        </td>
+                                                        <td>
+                                                            <%=appointment_details[i].end_time%>
+                                                        </td>
+                                                        <td>
+                                                            <%=appointment_details[i].type%>
+                                                        </td>
+                                                        <td>
+                                                            <%=doctor_details[i].clinic_address.city%>
+                                                            &nbsp;
+                                                            <%=doctor_details[i].clinic_address.street%>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            <% } %>
+                                    <% } %>
+                                    
+                                    <% } else { %>
+                                        <h1>You don't have Previous Appointments</h1>
+                                    <% } %>
+
+                            </table>
+                            
                         </div>
                     </div>
                 </div>

@@ -127,7 +127,6 @@ exports.previousAppointment = async (req, res, next) => {
 		next()
 	} catch (error) {
 		req.error = error
-		console.log(error)
 	}
 
 }
@@ -138,17 +137,6 @@ exports.editAppointment = async (req, res, next) => {
 	try {
 
 		let update = req.body
-		let appointment =  await Appointment.findOne({_id: update._id})
-		let date = new Date (appointment.date)
-		date.setMinutes ( date.getMinutes() + 30 )
-		let minutes = date.getUTCMinutes()
-		let hours = date.getUTCHours()
-		if(minutes < 10){
-			minutes = '0'+ minutes
-		}
-		if(hours < 10){
-			hours = '0'+ hours
-		}
 		
 		await Appointment.findOneAndUpdate(
 			{
@@ -157,7 +145,7 @@ exports.editAppointment = async (req, res, next) => {
 			{
 				$set: {
 					appointment_summary: update.appointment_summary,
-					end_time: hours + ':' + minutes
+					end_time: update.end_time
 				},
 			},
 			{ new: true }
@@ -166,7 +154,6 @@ exports.editAppointment = async (req, res, next) => {
 		next()
 	} catch (error) {
 		req.error = error
-		console.log(error)
 	}
 
 }

@@ -54,7 +54,7 @@
                                                         </td>
                                                         <td>
                                                             <%let date = new Date(appointment_details[i].date)%>
-                                                            <%=date.getDate()%>/<%=date.getMonth()%>/<%=date.getFullYear()%>
+                                                            <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
                                                         </td>
                                                         <td>
                                                             <%=appointment_details[i].start_time%>
@@ -79,13 +79,6 @@
                             </table>
                             
  
-                            <div class="row">
-                                <div class="col-md-6 align-self-center">
-                                </div>
-                                <div class="col-md-6">
-                                
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
