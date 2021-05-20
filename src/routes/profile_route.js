@@ -59,7 +59,7 @@ profile
 				appointment_details: req.appointment_details,
 				doctor_details: req.doctor_details,
 				user_doctor: req.user_doctor,
-			 })
+			})
 		}
 	)
 	.post(
