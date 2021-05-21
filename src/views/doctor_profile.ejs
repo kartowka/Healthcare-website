@@ -164,15 +164,141 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <% if(user._id != data.id) { %>
                                 
-                                            <div class="card shadow">
-                                                <div class="card-header py-3">
-                                                    <h5 class="text-primary m-0 font-weight-bold">Reviews</h5>
-                                                </div>
-                                                <div class="card-body">
+                                                <div class="card shadow">
+                                                    <div class="card-header py-3">
+                                                        <h5 class="text-primary m-0 font-weight-bold">Reviews</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table my-0" id="dataTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Reviewer Name</th>
+                                                                    <th>Subject</th>
+                                                                    <th>Review</th>
+                                                                    <th>Rating</th>
+                                                                    <th>Date</th>
+                                                                </tr>
+                                                            </thead>
+
+
+                                                            <tbody>
+
+                                                                <% for( let i = 0; i < review_details.length; ++i) { %>
+                                                                
+
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%=review_details[i].reviewer_name %>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <%=review_details[i].subject %>
+                                                                        </td>
+
+                                                                        <td>
+                                                                             <%=review_details[i].review %>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <% for( let j = 0; j < review_details[i].rating; ++j) {%>
+                                                                                <span class="fa fa-star checked"></span>
+                                                                            <% } %>
+                                                                            <% for( let j = review_details[i].rating; j < 5; ++j) {%>
+                                                                                <span class="fa fa-star "></span>
+                                                                            <% } %>
+                                                                          
+                                                                       </td>
+
+                                                                       <td>
+                                                                            <%let date = new Date(review_details[i].date)%>
+                                                                            <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
+                                                                        </td>
+                                                                        
+                                                                
+                                                                    </tr>
+                                                                <% } %>
+                                                         
+                                                            </tbody>
+
+                                                        </table>
+
+                                                        <div class="card-body" style=" border: 3px solid #3a9ecb; border-bottom-right-radius: 50px 20px;">
+
+                                                        
+
+                                                            <form method="POST" class="row" style=" display: flex; align-items: center; justify-content: center;">
+
+
+                                                                <div class="col" >
+                                                                    
+                                                                    <label for="type">Reviewer Name:</label>
+                                                                    <select name="name" class="form-control form-control-user" style="width: 40%">
+                                                                        <option>anonymo</option>
+                                                                        <option><%=user.first_name%> <%= user.last_name%></option>
+                                                                    </select><br><br>
+
+                                                                </div>
+
+                                                                <div class="col" >
+                                                                    <label for="type">Please write the review subject:</label>
+                                                                    <input
+                                                                    id='1' 
+                                                                    class="form-control" 
+                                                                    style="width: 40%;"
+                                                                    rows="2"
+                                                                    cols="50" 
+                                                                    name="subject"/>
+                                                                    <br>
+
+                                                                </div>
+
+                                                                <div class="col-6" >
+                                                                    <label for="type">Please write your review here:</label>
+                                                                    <textarea
+                                                                    id='1' 
+                                                                    class="form-control" 
+                                                                    style="width: 80%;"
+                                                                    rows="4"
+                                                                    cols="50" 
+                                                                    name="review" placeholder="Place your text here"></textarea>
+                                                                    <br>
+
+
+                                                                </div>
+
+                                                                <div class="col" >
+                                                                    
+                                                                    <label for="type">Please select your satisfaction with the doctor ( 1 - lowest, 5 - highest ):</label>
+                                                                    <select name="rating" class="form-control form-control-user" style="width: 30%">
+                                                                        <option >1</option>
+                                                                        <option>2</option>
+                                                                        <option>3</option>
+                                                                        <option>4</option>
+                                                                        <option>5</option>
+                                                                    </select><br><br>
+
+                                                                </div>
+
+                                                                <button
+                                                                id="Button"
+                                                                class="btn btn-primary mb-3"
+                                                                type="submit" 
+                                                                style="height: 60px;" > Add Review
+                                                                </button>
+                                                                
+                                                            
+                                                            
+
+                                                            </form>
+
+                                                        </div>
+
+                                                    <% } %>
                                                     
                                                     
-                                                    <h1>Page in process</h1>
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                         
