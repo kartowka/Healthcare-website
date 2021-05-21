@@ -2,6 +2,7 @@ const express = require('express')
 const profile = express.Router()
 const user_controller = require('../controllers/user_controller')
 const appointment_management_controller = require('../controllers/appointment_management_controller')
+const review_controllers = require('../controllers/review_controllers')
 const url = require('url')
 
 //pateint profile
@@ -93,11 +94,28 @@ profile
 		user_controller.allowIfLoggedin,
 		user_controller.grantAccess('readAny', 'doctor_profile'),
 		user_controller.getUser,
+		review_controllers.get_review,
 		(req, res) => {
 			res.render('doctor_profile', {
 				data: req.user,
 				doctor_details: req.doctor_details,
+				user: res.locals.loggedInUser,
+				review_details: req.review_details,
 			})
+		}
+	)
+	.post(
+		user_controller.allowIfLoggedin,
+		review_controllers.new_review,
+		(req, res) => {
+			res.redirect(
+				url.format({
+					pathname: `/appointment_management/${req.params.id}`,
+					query: {
+						Message: req.error,
+					},
+				})
+			)
 		}
 	)
 
@@ -205,6 +223,7 @@ profile
 			res.render('doctor_Review', { data: req.user })
 		}
 	)
+
 
 // Make an Appointment
 profile
