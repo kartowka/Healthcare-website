@@ -10,60 +10,7 @@
     <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
     <link href='https://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
-
-    <style>
-        body {
-          font-family: 'Lato', sans-serif;
-        }
-        
-        .overlay {
-          /* height: 100%;
-          width: 100%; */
-          display: none;
-          z-index: 1;
-          top: 0;
-          left: 0;
-          background-color: rgb(255,255,255);
-        }
-        
-        .overlay-content {
-          position: relative;
-          top: 25%;
-          width: 100%;
-          text-align: center;
-          margin-top: 30px;
-        }
-        
-        .overlay a {
-          padding: 8px;
-          text-decoration: none;
-          font-size: 36px;
-          color: #818181;
-          display: block;
-          transition: 0.3s;
-        }
-        
-        .overlay a:hover, .overlay a:focus {
-          color: #f1f1f1;
-        }
-        
-        .overlay .closebtn {
-          position: absolute;
-          top: 20px;
-          right: 45px;
-          font-size: 60px;
-        }
-        
-        @media screen and (max-height: 450px) {
-          .overlay a {font-size: 20px}
-          .overlay .closebtn {
-          font-size: 40px;
-          top: 15px;
-          right: 35px;
-          }
-        }
-        </style>
-    
+    <link rel="stylesheet" href="/assets/css/patient_previous_appointments.css">
 
 
 </head>
@@ -74,6 +21,14 @@
             <%- include('partials/header'); %>
             <div id="content">
                 <%- include('patient_partials/header'); %>
+                <% if(typeof alert !='undefined' ) { %>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<%= alert %>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+					</div>
+				<% } %>
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Previous Appointments</h3>
                     <div class="card shadow">
@@ -229,17 +184,6 @@
                                     <% } %>
 
                             </table>
-
-
-                            <script>
-                                function openReview() {
-                                  document.getElementById("myReview").style.display = "block";
-                                }
-                                
-                                function closeReview() {
-                                  document.getElementById("myReview").style.display = "none";
-                                }
-                                </script>
                             
                         </div>
                     </div>
@@ -255,6 +199,15 @@
     <script src="/assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="/assets/js/theme.js"></script>
+    <script>
+        function openReview() {
+          document.getElementById("myReview").style.display = "block";
+        }
+        
+        function closeReview() {
+          document.getElementById("myReview").style.display = "none";
+        }
+    </script>
 
 </body>
 
