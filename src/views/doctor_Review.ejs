@@ -31,20 +31,76 @@
 
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Review</h3>
+             
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold"><%= data.first_name %>&nbsp;<%= data.last_name %></p>
+                            <p class=" m-0 font-weight-bold"><%= data.first_name %>&nbsp;<%= data.last_name %> 
+                                <span class=" font-weight-bold m-0">General Rating</span> &nbsp;&nbsp;
+                            
+                                <% for( let j = 0; j < average_rating; ++j) {%>
+                                    <span class="fa fa-star checked"></span>
+                                <% } %>
+                                <% for( let j = average_rating; j < 5; ++j) {%>
+                                    <span class="fa fa-star "></span>
+                                <% } %>
+                            </p>
                         </div>
                         <div class="card-body">
                             
-                            
-                            <h1>Page in process</h1>
-                            <div class="row">
-                               
-                                <div class="col-md-6">
-                                
-                                </div>
-                            </div>
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Reviewer Name</th>
+                                        <th>Subject</th>
+                                        <th>Review</th>
+                                        <th>Rating</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+
+                                    <% for( let i = 0; i < review_details.length; ++i) { %>
+                                    
+
+                                        <tr>
+                                            <td>
+                                                <%=review_details[i].reviewer_name %>
+                                            </td>
+
+                                            <td>
+                                                <%=review_details[i].subject %>
+                                            </td>
+
+                                            <td>
+                                                 <%=review_details[i].review %>
+                                            </td>
+
+                                            <td>
+                                                <% for( let j = 0; j < review_details[i].rating; ++j) {%>
+                                                    <span class="fa fa-star checked"></span>
+                                                <% } %>
+                                                <% for( let j = review_details[i].rating; j < 5; ++j) {%>
+                                                    <span class="fa fa-star "></span>
+                                                <% } %>
+                                              
+                                           </td>
+
+                                           <td>
+                                                <%let date = new Date(review_details[i].date)%>
+                                                <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
+                                            </td>
+                                            
+                                    
+                                        </tr>
+                                    <% } %>
+                             
+                                </tbody>
+
+                            </table>
+                           
+
                         </div>
                     </div>
                 </div>

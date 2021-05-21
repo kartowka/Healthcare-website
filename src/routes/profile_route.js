@@ -101,6 +101,7 @@ profile
 				doctor_details: req.doctor_details,
 				user: res.locals.loggedInUser,
 				review_details: req.review_details,
+				average_rating: req.average_rating,
 			})
 		}
 	)
@@ -219,8 +220,13 @@ profile
 		user_controller.allowIfLoggedin,
 		user_controller.grantAccess('readOwn', 'doctor_Review'),
 		user_controller.getUser,
+		review_controllers.get_review,
 		(req, res) => {
-			res.render('doctor_Review', { data: req.user })
+			res.render('doctor_Review', {
+				data: req.user,
+				review_details: req.review_details,
+				average_rating: req.average_rating,
+			})
 		}
 	)
 

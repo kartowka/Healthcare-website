@@ -32,7 +32,22 @@ exports.get_review = async (req, res, next) => {
 	try {
 
         let review_details = await Review.find({ doctor: req.params.id })
-        req.review_details = review_details 
+        review_details.rating
+
+        let average_rating = 0
+
+        for(let i =0; i< review_details.length; ++i){
+            
+            average_rating+=review_details[i].rating
+
+        }
+        
+        average_rating = average_rating / review_details.length
+
+
+
+        req.review_details = review_details
+        req.average_rating = average_rating
 
 		next()
 	} catch (error) {
