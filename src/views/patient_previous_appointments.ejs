@@ -10,6 +10,59 @@
     <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
     <link href='https://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+          font-family: 'Lato', sans-serif;
+        }
+        
+        .overlay {
+          /* height: 100%;
+          width: 100%; */
+          display: none;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: rgb(255,255,255);
+        }
+        
+        .overlay-content {
+          position: relative;
+          top: 25%;
+          width: 100%;
+          text-align: center;
+          margin-top: 30px;
+        }
+        
+        .overlay a {
+          padding: 8px;
+          text-decoration: none;
+          font-size: 36px;
+          color: #818181;
+          display: block;
+          transition: 0.3s;
+        }
+        
+        .overlay a:hover, .overlay a:focus {
+          color: #f1f1f1;
+        }
+        
+        .overlay .closebtn {
+          position: absolute;
+          top: 20px;
+          right: 45px;
+          font-size: 60px;
+        }
+        
+        @media screen and (max-height: 450px) {
+          .overlay a {font-size: 20px}
+          .overlay .closebtn {
+          font-size: 40px;
+          top: 15px;
+          right: 35px;
+          }
+        }
+        </style>
     
 
 
@@ -39,6 +92,7 @@
                                         <th>Type of Appointment</th>
                                         <th>Clinic Address</th>
                                         <th>Summary</th>
+                                        <th>Review</th>
                                     </tr>
                                 </thead>
                                 <%if(appointment_details != []) { %>
@@ -82,8 +136,91 @@
                                                                 The doctor has not yet updated the summary of the appointment
                                                             <% }%> 
                                                         </td>
+                                                        <td>
+                                                            <button
+                                                            class="btn btn-primary mb-3"
+                                                            onclick="openReview()"
+                                                            type="submit"
+                                                            name="_id"
+                                                            value=<%=appointment_details[i]._id%>>
+                                                                Add Review
+                                                            </button>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
+
+                                                <div id="myReview" class="card-body overlay" style=" border: 3px solid #3a9ecb; border-bottom-right-radius: 50px 20px;">
+
+                                                    <a href="javascript:void(0)" class="closebtn" style="font-size:45px;cursor:pointer" onclick="closeReview()">&times;</a>
+                                     
+                    
+                                                    <form method="POST" class="row" style=" display: flex; align-items: center; justify-content: center;">
+                    
+                                                        <div class="col" >
+                                                            
+                                                            <label for="type">Reviewer Name:</label>
+                                                            <select name="name" class="form-control form-control-user" style="width: 40%">
+                                                                <option>anonymo</option>
+                                                                <option><%=data.first_name%> <%= data.last_name%></option>
+                                                            </select><br><br>
+                    
+                                                        </div>
+                    
+                                                        <div class="col" >
+                                                            <label for="type">Please write the review subject:</label>
+                                                            <input
+                                                            id='1' 
+                                                            class="form-control" 
+                                                            style="width: 40%;"
+                                                            rows="2"
+                                                            cols="50" 
+                                                            name="subject"/>
+                                                            <br>
+                    
+                                                        </div>
+                    
+                                                        <div class="col-6" >
+                                                            <label for="type">Please write your review here:</label>
+                                                            <textarea
+                                                            id='1' 
+                                                            class="form-control" 
+                                                            style="width: 80%;"
+                                                            rows="4"
+                                                            cols="50" 
+                                                            name="review" placeholder="Place your text here"></textarea>
+                                                            <br>
+                    
+                    
+                                                        </div>
+                    
+                                                        <div class="col" >
+                                                            
+                                                            <label for="type">Please select your satisfaction with the doctor ( 1 - lowest, 5 - highest ):</label>
+                                                            <select name="rating" class="form-control form-control-user" style="width: 30%">
+                                                                <option >1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                                <option>4</option>
+                                                                <option>5</option>
+                                                            </select><br><br>
+                    
+                                                        </div>
+                    
+                                                        <button
+                                                        id="Button"
+                                                        class="btn btn-primary mb-3"
+                                                        type="submit"
+                                                        value=<%=appointment_details[i]._id%>
+                                                        style="height: 60px;" > Save Review
+                                                        </button>
+                                                        
+                                                    
+                                                    
+                    
+                                                    </form>
+                    
+                                                </div>
+                    
                                             <% } %>
                                     <% } %>
                                     
@@ -92,6 +229,17 @@
                                     <% } %>
 
                             </table>
+
+
+                            <script>
+                                function openReview() {
+                                  document.getElementById("myReview").style.display = "block";
+                                }
+                                
+                                function closeReview() {
+                                  document.getElementById("myReview").style.display = "none";
+                                }
+                                </script>
                             
                         </div>
                     </div>

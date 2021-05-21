@@ -65,8 +65,17 @@ profile
 	)
 	.post(
 		user_controller.allowIfLoggedin,
-		user_controller.grantAccess('updateOwn', 'patient_previous_appointments'),
-		user_controller.updateUser
+		review_controllers.new_review,
+		(req, res) => {
+			res.redirect(
+				url.format({
+					pathname: `/patient_profile/patient_previous_appointments/${req.params.id}`,
+					query: {
+						Message: req.error,
+					},
+				})
+			)
+		}
 	)
 
 //previous and future appointments
@@ -105,20 +114,7 @@ profile
 			})
 		}
 	)
-	.post(
-		user_controller.allowIfLoggedin,
-		review_controllers.new_review,
-		(req, res) => {
-			res.redirect(
-				url.format({
-					pathname: `/appointment_management/${req.params.id}`,
-					query: {
-						Message: req.error,
-					},
-				})
-			)
-		}
-	)
+
 
 //doctor settings
 profile
@@ -203,7 +199,7 @@ profile
 		(req, res) => {
 			res.redirect(
 				url.format({
-					pathname: `/appointment_management/${req.params.id}`,
+					pathname: `/doctor_profile/doctor_appointment_summary/${req.params.id}`,
 					query: {
 						Message: req.error,
 					},

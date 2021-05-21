@@ -38,4 +38,5 @@ $('.form_datetime').datetimepicker({
 	daysOfWeekDisabled: day_of_week,
 	hoursDisabled: disablehour,
 	startDate: new Date(currentYear, currentMonth, currentDate),
+	minuteStep: 15,
 })
