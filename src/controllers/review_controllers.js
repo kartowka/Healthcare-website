@@ -22,9 +22,11 @@ exports.new_review = async (req, res, next) => {
 
 		})
 		await newReview.save()
-		next()
+        throw 'A new Review has been created.'
+		
 	} catch (error) {
 		req.error = error
+        next()
 	}
 }
 

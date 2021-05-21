@@ -42,10 +42,12 @@ exports.make_an_Appointment = async (req, res, next) => {
 			type: appointment_details.type,
 		})
 		await newAppointment.save()
-		next()
+		throw 'A new appointment has been scheduled.'
+		
 		
 	} catch (error) {
 		req.error = error
+		next()
 		
 	}
 }
@@ -164,9 +166,12 @@ exports.editAppointment = async (req, res, next) => {
 			},
 			{ new: true }
 		)
-		next()
+
+		throw 'The appointment details has been updated.'
+		
 	} catch (error) {
 		req.error = error
+		next()
 		
 	}
 

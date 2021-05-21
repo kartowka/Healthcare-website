@@ -60,6 +60,7 @@ profile
 				appointment_details: req.appointment_details,
 				doctor_details: req.doctor_details,
 				user_doctor: req.user_doctor,
+				alert: req.query.Message,
 			})
 		}
 	)
@@ -190,6 +191,7 @@ profile
 				appointment_details: req.appointment_details,
 				doctor_details: req.doctor_details,
 				user_patient : req.patient,
+				alert: req.query.Message,
 			})
 		}
 	)
@@ -239,6 +241,7 @@ profile
 				data: req.user,
 				doctor_details: req.doctor_details,
 				patient: res.locals.loggedInUser,
+				alert: req.query.Message,
 			})
 		}
 	)
