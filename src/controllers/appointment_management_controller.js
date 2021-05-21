@@ -2,9 +2,11 @@ const User = require('../models/user_model')
 const DoctorDetails = require('../models/doctor_model')
 const Appointment = require('../models/appointment_model')
 const { update } = require('../models/user_model')
+const e = require('express')
 
 exports.make_an_Appointment = async (req, res, next) => {
 	try {
+
 		let appointment_details = req.body
 		let appointment_date = new Date(req.body.date + 'Z')
 		let minutes = appointment_date.getUTCMinutes()
@@ -22,6 +24,15 @@ exports.make_an_Appointment = async (req, res, next) => {
 			throw 'A doctor cannot make an appointment for himself!'
 		}
 
+		
+		let appointment_details_list = await Appointment.find({ doctor: doctor._id })
+		for(let i = 0; i < appointment_details_list.length; ++i){
+			if(appointment_details_list.date === appointment_date){
+				throw 'Please select another date, the time you selected is no longer available.!'
+			}
+
+		}
+
 		const newAppointment = new Appointment({
 			start_time: hours +':'+ minutes,
 			date: appointment_date,
@@ -32,9 +43,10 @@ exports.make_an_Appointment = async (req, res, next) => {
 		})
 		await newAppointment.save()
 		next()
+		
 	} catch (error) {
-		let statusCode = '401'
-		res.redirect(`/restricted/${error}/${statusCode}`)
+		req.error = error
+		
 	}
 }
 
@@ -100,6 +112,7 @@ exports.getAppointments = async (req, res, next) => {
 		next()
 	} catch (error) {
 		req.error = error
+		
 	}
 }
 
@@ -127,6 +140,7 @@ exports.previousAppointment = async (req, res, next) => {
 		next()
 	} catch (error) {
 		req.error = error
+		
 	}
 
 }
@@ -150,10 +164,10 @@ exports.editAppointment = async (req, res, next) => {
 			},
 			{ new: true }
 		)
-	
 		next()
 	} catch (error) {
 		req.error = error
+		
 	}
 
 }
