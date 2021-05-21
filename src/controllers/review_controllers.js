@@ -12,6 +12,7 @@ exports.new_review = async (req, res, next) => {
 
 		const newReview = new Review({
 	
+            reviewer_name: review_details.name,
             subject: review_details.subject,
             review: review_details.review,
             date: new Date(),
@@ -24,6 +25,17 @@ exports.new_review = async (req, res, next) => {
 		next()
 	} catch (error) {
 		req.error = error
-        console.log(error)
+	}
+}
+
+exports.get_review = async (req, res, next) => {
+	try {
+
+        let review_details = await Review.find({ doctor: req.params.id })
+        req.review_details = review_details 
+
+		next()
+	} catch (error) {
+		req.error = error
 	}
 }
