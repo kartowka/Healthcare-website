@@ -27,8 +27,9 @@ exports.make_an_Appointment = async (req, res, next) => {
 		
 		let appointment_details_list = await Appointment.find({ doctor: doctor._id })
 		for(let i = 0; i < appointment_details_list.length; ++i){
-			if(appointment_details_list.date === appointment_date){
-				throw 'Please select another date, the time you selected is no longer available.!'
+
+			if(appointment_details_list[i].date.toString() === appointment_date.toString()){
+				throw 'Please select another date, the time you selected is no longer available.'
 			}
 
 		}
