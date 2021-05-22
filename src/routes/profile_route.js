@@ -12,8 +12,14 @@ profile
 		user_controller.allowIfLoggedin,
 		user_controller.grantAccess('readOwn', 'patient_profile'),
 		user_controller.getUser,
+		appointment_management_controller.getAppointments,
 		(req, res) => {
-			res.render('patient_profile', { data: req.user })
+			res.render('patient_profile', {
+				data: req.user,
+				appointment_details: req.appointment_details,
+				doctor_details: req.doctor_details,
+				user_doctor: req.user_doctor,
+			})
 		}
 	)
 
