@@ -1,0 +1,17 @@
+body {
+    background-color:rgb(3, 3, 3);
+    font-family: 'BenchNine',Arial,Helvetica,Sans-Serif;
+}
+
+.modal-header-info {
+  color:#fff;
+  padding:9px 15px;
+  border-bottom:1px solid rgb(245, 237, 237);
+  background-color: #5bc0de;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}
