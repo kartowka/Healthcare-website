@@ -215,12 +215,7 @@ exports.updateUser = async (req, res, next) => {
 				var end = update.end_time
 				var dtStart = new Date('1.1.2000 ' + start)
 				var dtEnd = new Date('1.1.2000 ' + end)
-				console.log(start)
-				console.log(end)
-				console.log(dtStart)
-				console.log(dtEnd)
 				var difference_in_milliseconds = dtEnd - dtStart
-				console.log(difference_in_milliseconds)
 				if (difference_in_milliseconds < 0)
 					throw 'start time should be less than end time.'
 				await DoctorDetails.findByIdAndUpdate(details._id, update)
