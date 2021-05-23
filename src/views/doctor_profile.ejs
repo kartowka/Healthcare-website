@@ -12,9 +12,7 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="/assets/bootstrap/css/profile.css">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -226,85 +224,8 @@
 
                                                         </table>
 
-                                                        <div class="card-body" style=" border: 3px solid #3a9ecb; border-bottom-right-radius: 50px 20px;">
-
-                                                        
-
-                                                            <form method="POST" class="row" style=" display: flex; align-items: center; justify-content: center;">
-
-
-                                                                <div class="col" >
-                                                                    
-                                                                    <label for="type">Reviewer Name:</label>
-                                                                    <select name="name" class="form-control form-control-user" style="width: 40%">
-                                                                        <option>anonymo</option>
-                                                                        <option><%=user.first_name%> <%= user.last_name%></option>
-                                                                    </select><br><br>
-
-                                                                </div>
-
-                                                                <div class="col" >
-                                                                    <label for="type">Please write the review subject:</label>
-                                                                    <input
-                                                                    id='1' 
-                                                                    class="form-control" 
-                                                                    style="width: 40%;"
-                                                                    rows="2"
-                                                                    cols="50" 
-                                                                    name="subject"/>
-                                                                    <br>
-
-                                                                </div>
-
-                                                                <div class="col-6" >
-                                                                    <label for="type">Please write your review here:</label>
-                                                                    <textarea
-                                                                    id='1' 
-                                                                    class="form-control" 
-                                                                    style="width: 80%;"
-                                                                    rows="4"
-                                                                    cols="50" 
-                                                                    name="review" placeholder="Place your text here"></textarea>
-                                                                    <br>
-
-
-                                                                </div>
-
-                                                                <div class="col" >
-                                                                    
-                                                                    <label for="type">Please select your satisfaction with the doctor ( 1 - lowest, 5 - highest ):</label>
-                                                                    <select name="rating" class="form-control form-control-user" style="width: 30%">
-                                                                        <option >1</option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                        <option>4</option>
-                                                                        <option>5</option>
-                                                                    </select><br><br>
-
-                                                                </div>
-
-                                                                <button
-                                                                id="Button"
-                                                                class="btn btn-primary mb-3"
-                                                                type="submit" 
-                                                                style="height: 60px;" > Add Review
-                                                                </button>
-                                                                
-                                                            
-                                                            
-
-                                                            </form>
-
-                                                        </div>
-
                                                     <% } %>
                                                     
-                                                    
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                        
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                 </div>

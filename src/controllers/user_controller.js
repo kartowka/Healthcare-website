@@ -189,6 +189,7 @@ exports.updateUser = async (req, res, next) => {
 		let user = await User.findById(userId)
 		if (update.first_name != undefined) {
 			if (update.first_name && update.last_name) {
+				await User.findByIdAndUpdate(user, update)
 				if (user.role == 'doctor') {
 					let details = await DoctorDetails.findOne({ _doctor_id: userId })
 					await DoctorDetails.findByIdAndUpdate(details._id, update)

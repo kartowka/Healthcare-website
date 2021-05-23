@@ -113,16 +113,132 @@
                                                         </p>
                                                     </div>
                                                     <div class="card-body">
-                                                        <h1>In Process</h1>
+                                                        <table class="table my-0" id="dataTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Doctor Name</th>
+                                                                    <th>Subject</th>
+                                                                    <th>date</th>
+                                                                    <th>Start Appointment</th>
+                                                                    <th>Type of Appointment</th>
+                                                                    <th>Clinic Address</th>
+                                                                </tr>
+                                                            </thead>
+                                                            
+                                                            <%if(appointment_details != []) { %>
+
+                                                                <% let size = 5
+                                                                if(appointment_details.length < 5){
+                                                                    size = appointment_details.length
+                                                                } %>
+                                                            
+                                                                <% for(let i = 0; i < size && i < appointment_details.length; ++i){ %>
+                                                                    
+                                                                        <%if(new Date(appointment_details[i].date) > new Date()){ %>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <%=user_doctor[i].first_name%>
+                                                                                        &nbsp;
+                                                                                        <%=user_doctor[i].last_name%>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <%=appointment_details[i].appointment_subject%>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <%let date = new Date(appointment_details[i].date)%>
+                                                                                        <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <%=appointment_details[i].start_time%>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <%=appointment_details[i].type%>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <%=doctor_details[i].clinic_address.city%>
+                                                                                        &nbsp;
+                                                                                        <%=doctor_details[i].clinic_address.street%>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        <% } else { %>
+                                                                            <% ++size %>
+                                                                        <% } %>
+                                                                <% } %>
+                                                            
+                                                            <% } else { %>
+                                                                <h1>You don't have Future Appointments</h1>
+                                                            <% } %>
+                        
+                                                        </table>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="card shadow">
                                                     <div class="card-header py-3">
-                                                        <p class="text-primary m-0 font-weight-bold">Previous
-                                                            Appointments</p>
+                                                        <p class="text-primary m-0 font-weight-bold">Previous Appointments</p>
                                                     </div>
                                                     <div class="card-body">
-                                                        <h1>In Process</h1>
+                                                        <table class="table my-0" id="dataTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Doctor Name</th>
+                                                                    <th>Subject</th>
+                                                                    <th>date</th>
+                                                                    <th>Start Appointment</th>
+                                                                    <th>Type of Appointment</th>
+                                                                    <th>Clinic Address</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <%if(appointment_details != []) { %>
+                                                                
+                                                                <% let size = 5
+                                                                if(appointment_details.length < 5){
+                                                                    size = appointment_details.length
+                                                                } %>
+                                                            
+                                                                <% for(let i = 0; i < size && i < appointment_details.length; ++i){ %>
+                                                              
+                                                                    <%if( new Date(appointment_details[i].date) < new Date()){ %>
+                                                                       
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <%=user_doctor[i].first_name%>
+                                                                                    &nbsp;
+                                                                                    <%=user_doctor[i].last_name%>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <%=appointment_details[i].appointment_subject%>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <%let date = new Date(appointment_details[i].date)%>
+                                                                                    <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <%=appointment_details[i].start_time%>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <%=appointment_details[i].type%>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <%=doctor_details[i].clinic_address.city%>
+                                                                                    &nbsp;
+                                                                                    <%=doctor_details[i].clinic_address.street%>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    <% } else { %>
+                                                                        <% ++size %>
+                                                                    <% } %>
+                                                                <% } %>
+                                                            
+                                                            <% } else { %>
+                                                                <h1>You don't have Future Appointments</h1>
+                                                            <% } %>
+                                                            
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>

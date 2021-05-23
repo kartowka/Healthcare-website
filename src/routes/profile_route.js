@@ -12,8 +12,14 @@ profile
 		user_controller.allowIfLoggedin,
 		user_controller.grantAccess('readOwn', 'patient_profile'),
 		user_controller.getUser,
+		appointment_management_controller.getAppointments,
 		(req, res) => {
-			res.render('patient_profile', { data: req.user })
+			res.render('patient_profile', {
+				data: req.user,
+				appointment_details: req.appointment_details,
+				doctor_details: req.doctor_details,
+				user_doctor: req.user_doctor,
+			})
 		}
 	)
 
@@ -60,13 +66,23 @@ profile
 				appointment_details: req.appointment_details,
 				doctor_details: req.doctor_details,
 				user_doctor: req.user_doctor,
+				alert: req.query.Message,
 			})
 		}
 	)
 	.post(
 		user_controller.allowIfLoggedin,
-		user_controller.grantAccess('updateOwn', 'patient_previous_appointments'),
-		user_controller.updateUser
+		review_controllers.new_review,
+		(req, res) => {
+			res.redirect(
+				url.format({
+					pathname: `/patient_profile/patient_previous_appointments/${req.params.id}`,
+					query: {
+						Message: req.error,
+					},
+				})
+			)
+		}
 	)
 
 //previous and future appointments
@@ -105,20 +121,7 @@ profile
 			})
 		}
 	)
-	.post(
-		user_controller.allowIfLoggedin,
-		review_controllers.new_review,
-		(req, res) => {
-			res.redirect(
-				url.format({
-					pathname: `/appointment_management/${req.params.id}`,
-					query: {
-						Message: req.error,
-					},
-				})
-			)
-		}
-	)
+
 
 //doctor settings
 profile
@@ -194,6 +197,7 @@ profile
 				appointment_details: req.appointment_details,
 				doctor_details: req.doctor_details,
 				user_patient : req.patient,
+				alert: req.query.Message,
 			})
 		}
 	)
@@ -203,7 +207,7 @@ profile
 		(req, res) => {
 			res.redirect(
 				url.format({
-					pathname: `/appointment_management/${req.params.id}`,
+					pathname: `/doctor_profile/doctor_appointment_summary/${req.params.id}`,
 					query: {
 						Message: req.error,
 					},
@@ -243,6 +247,7 @@ profile
 				data: req.user,
 				doctor_details: req.doctor_details,
 				patient: res.locals.loggedInUser,
+				alert: req.query.Message,
 			})
 		}
 	)
