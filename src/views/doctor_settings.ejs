@@ -84,32 +84,33 @@
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <form method="POST">
-                                                                        <fieldset>
-                                                                            <label
-                                                                                for="from"><strong>From:</strong></label>
-                                                                                <input
-                                                                                class="form-control" 
-                                                                                id="reception_hours_from"
-                                                                                type="time"
-                                                                                value="<%=doctor_details.start_time%>"
-                                                                                name="start_time">
-                                                                            </label>
-                                                                            <label
-                                                                                for="to:"><strong>To:</strong></label>
-                                                                                <input
-                                                                                class="form-control" 
-                                                                                id="reception_hours_to"
-                                                                                name="end_time"
-                                                                                value="<%=doctor_details.end_time%>"
-                                                                                type="time"
-                                                                                >
-                                                                            <br>
-                                                                            <div class="form-group"><button
-                                                                                    class="btn btn-primary mb-3"
-                                                                                    type="submit">Save Settings</button>
-                                                                            </div>
-
-                                                                        </fieldset>
+                                                                             <fieldset>
+                                                                                <label
+                                                                                    for="from"><strong>From:</strong></label>
+                                                                                    <input
+                                                                                    class="form-control " 
+                                                                                    id="reception_hours_from"
+                                                                                    type="time"
+                                                                                    step="900"
+                                                                                    value="<%=doctor_details.start_time%>"
+                                                                                    name="start_time">
+                                                                                 </label>
+                                                                                <label
+                                                                                    for="to:"><strong>To:</strong></label>
+                                                                                    <input
+                                                                                    class="form-control" 
+                                                                                    id="reception_hours_to"
+                                                                                    name="end_time"
+                                                                                    value="<%=doctor_details.end_time%>"
+                                                                                    type="time"
+                                                                                    step="900"
+                                                                                    >
+                                                                                <br>
+                                                                                <div class="form-group"><button
+                                                                                        class="btn btn-primary mb-3"
+                                                                                        type="submit">Save Settings</button>
+                                                                                </div>
+                                                                           </fieldset>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -296,12 +297,8 @@
                                                                                         <input
                                                                                             class="form-control" type="text"
                                                                                             id="languages"
-<<<<<<< HEAD
-                                                                                            name="spoken_languages[]"
-                                                                                            pattern="{1}[A-Za-z]"
-=======
                                                                                             name="spoken_languages"
->>>>>>> a281682c253c0f35f40a6fbc1c37fea114390a19
+                                                                                            pattern="{1}[A-Za-z]"
                                                                                             value="<%=doctor_details.spoken_languages%>">
                                                                                     </div>
                                                                                
