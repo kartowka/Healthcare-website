@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Register - JSAS</title>
+    <title>Travel Insurance Policy - JSAS</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/assets/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
@@ -45,7 +45,7 @@
                                 <div class="text-center">
                                     <h4 class="text-dark mb-4">Travel Insurance!</h4>
                                 </div>
-                                <form class="user" method="POST">
+                                <form class="user" id = "test_form" method="POST">
                                     <div class="form-group">
                                         <label for="plan">Select Plan: </label><span
                                             style="color: red !important; display: inline; float: none;"> *</span>
@@ -53,7 +53,7 @@
                                             placeholder="Select Plan" id="plan" style="height: 65px" required>
                                             <option value="" disabled="" selected="">Select Plan</option>
                                             <option value="standard">Standard 10₪ per day</option>
-                                            <option value="extreme_sport">Extreme Sports 25₪ per day</option>
+                                            <option value="extreme_sports">Extreme Sports 25₪ per day</option>
                                             <option value="chronic_diseases">Chronic Diseases 35₪ per day</option>
                                         </select>
                                     </div>
@@ -327,7 +327,7 @@
                                         <label for="datepick">Select Dates: </label>
                                         <span style="color: red !important; display: inline; float: none;">*</span>
                                         <input class="form-control form-control-user" type="text" name="daterange"
-                                            id="datepicker">
+                                            id="datepicker" required>
                                         <script>
                                             $(function () {
                                                 $('input[name="daterange"]').daterangepicker({
@@ -345,17 +345,17 @@
                                     <span style="color: red !important; display: inline; float: none;">*</span>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
-                                                type="text" id="firstname" placeholder="First Name" name="first_name">
+                                                type="text" id="firstname" placeholder="First Name" name="first_name" required>
                                         </div>
                                         <div class="col-sm-6"><input class="form-control form-control-user" type="text"
-                                                id="lastname" placeholder="Last Name" name="last_name"></div>
+                                                id="lastname" placeholder="Last Name" name="last_name" required></div>
                                     </div>
                                     <div class="form-group"><input class="form-control form-control-user" type="email"
                                             id="email" aria-describedby="emailHelp" placeholder="Email Address"
-                                            name="email">
+                                            name="email" required>
                                     </div>
-                                    <div class="form-group"><input class="form-control form-control-user" type="text"
-                                            id="id" aria-describedby="id" placeholder="ID" name="ID"></div>
+                                    <div class="form-group"><input class="form-control form-control-user" type="text" pattern="[0-9]{9}" inputmode="numeric"
+                                            id="userID" aria-describedby="id" placeholder="ID" name="ID"  required ></div>
                                     <label for="credit_card_info">Credit Card Section: </label>
                                     <span style="color: red !important; display: inline; float: none;">*</span>
                                     <div class="form-group row">
@@ -502,14 +502,14 @@
                                                 <div class="field-container">
                                                     <label for="name">Name</label>
                                                     <input id="name" class="form-control form-control-user"
-                                                        name="card_holder_name" maxlength="20" type="text">
+                                                        name="card_holder_name" maxlength="20" type="text" required>
                                                 </div>
                                                 <div class="field-container">
                                                     <label for="cardnumber">Card Number</label><span
                                                         id="generatecard">generate example</span>
                                                     <input id="cardnumber" type="text" pattern="[0-9]*"
                                                         inputmode="numeric" name="card_holder_number"
-                                                        class="form-control form-control-user">
+                                                        class="form-control form-control-user" required>
                                                     <svg id="ccicon" class="ccicon" width="750" height="471"
                                                         viewBox="0 0 750 471" version="1.1"
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -521,20 +521,18 @@
                                                     <label for="expirationdate">Expiration (mm/yy)</label>
                                                     <input id="expirationdate" type="text"
                                                         name="card_holder_card_expiredate" inputmode="numeric"
-                                                        class="form-control form-control-user">
+                                                        class="form-control form-control-user" required>
                                                 </div>
                                                 <div class="field-container">
                                                     <label for="securitycode">Security Code</label>
                                                     <input id="securitycode" type="text" pattern="[0-9]*"
                                                         inputmode="numeric" name="card_holder_card_security_code"
-                                                        class="form-control form-control-user">
+                                                        class="form-control form-control-user" required>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit"
-                                        </button>Book
-                                        Insurance</button>
+                                    <button class="btn btn-primary btn-block text-white btn-user" type="submit" id="btn">Book Insurance</button>
                                     <hr>
                                 </form>
                             </div>
@@ -543,13 +541,10 @@
                 </div>
             </div>
             <%- include('partials/footer'); %>
-                <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
                 <script src="/assets/js/theme.js"></script>
                 <script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script>
                 <script src="/assets/js/creditcard_script.js"></script>
-
-
 </body>
 
 </html>
