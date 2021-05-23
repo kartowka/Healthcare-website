@@ -1,73 +1,58 @@
 <!DOCTYPE html>
-<html>
-
+<html >
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Send Message to Doctor</title>
-
-
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <title>Sending E-mail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/email.css">
     <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="/assets/bootstrap/css/profile.css">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/css/profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
 </head>
-
-<body id="page-top">
-    <div id="wrapper">
-        <div class="d-flex flex-column" id="content-wrapper">
-
-        <%- include('partials/header'); %>
-
-            <div id="content">
- 
-                <%- include('doctor_partials/header'); %>
-
-                <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Sending Messages</h3>
-                    <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold"><%= data.first_name %>&nbsp;<%= data.last_name %></p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <form action="mailto:someone@example.com" method="post" enctype="text/plain">
-                                    Name:<br>
-                                    <input type="text" name="name"><br>
-                                    E-mail:<br>
-                                    <input type="text" name="mail"><br>
-                                    Comment:<br>
-                                    <input type="text" name="comment" size="50"><br><br>
-                                    <input type="submit" value="Send">
-                                    <input type="reset" value="Reset">
-                                    </form>
-                                <div class="col-md-6">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<body>
+<!-- /.modal compose message -->
+    <div class="modal show" id="modalCompose">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header modal-header-info">
+            <button type="button" id="close1" class="close" data-dismiss="modal" onclick="closeWin()" aria-hidden="true">x</button>
+            <h3 class="modal-title"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;Send E-mail to Doctor</h3>
+          </div>
+          <div class="modal-body">
+            <form role="form" class="form-horizontal" method="post" action="mailto:email.com?subject=subject&message=message">
+                <div class="form-group">
+                  <label class="col-sm-2" for="inputTo"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;To</label>
+                  <div class="col-sm-10"><input type="email" class="form-control" id="inputTo" placeholder="Doctoremail@gmail.com"></div>
                 </div>
-            </div>
+                <div class="form-group">
+                  <label class="col-sm-2" for="inputFrom"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;From</label>
+                  <div class="col-sm-10"><input type="email" class="form-control" id="inputFrom" placeholder="youremail@gmail.com"></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2" for="inputSubject"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Subject</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="inputSubject" placeholder="subject"></div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-12" for="inputBody"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Message</label>
+                  <div class="col-sm-12"><textarea class="form-control" id="inputBody" rows="8"></textarea></div>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="cancel" class="btn btn-default pull-left btn-danger" data-dismiss="modal">Cancel</button> 
+            <button type="button" id="send" class="btn btn-primary">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+            
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal compose message -->
 
-            <!-- footer starts here -->
-            <%- include('partials/footer'); %>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    </div>
 
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/js/chart.min.js"></script>
-    <script src="/assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="/assets/js/theme.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="../../js/sending_messages.js"></script>
 
 </body>
-
 </html>
