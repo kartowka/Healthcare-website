@@ -11,6 +11,22 @@ exports.make_an_Appointment = async (req, res, next) => {
 		let appointment_date = new Date(req.body.date + 'Z')
 		let minutes = appointment_date.getUTCMinutes()
 		let hours = appointment_date.getUTCHours()
+		let doctor = await DoctorDetails.findOne({ _doctor_id: req.params.id })
+		let appointment_details_list = await Appointment.find({ doctor: doctor._id })
+		let start_time = doctor.start_time.split(':')
+		let end_time = doctor.end_time.split(':')
+
+		let day_of_week = {
+			0 : 'Sunday',
+			1 : 'Monday',
+			2 : 'Tuesday',
+			3 : 'Wednesday',
+			4 : 'Thursday',
+			5 : 'Friday',
+			6 : 'Saturday',
+		}
+		
+		// Add 0 if the number is one digit, to get format: hh:mm
 		if(minutes < 10){
 			minutes = '0'+ minutes
 		}
@@ -18,14 +34,32 @@ exports.make_an_Appointment = async (req, res, next) => {
 			hours = '0'+ hours
 		}
 
-		let doctor = await DoctorDetails.findOne({ _doctor_id: req.params.id })
 		
 		if(doctor._doctor_id == res.locals.loggedInUser._id){
 			throw 'A doctor cannot make an appointment for himself!'
 		}
 
+		// Check if the date has passed
+		if(new Date() > appointment_date){
+			throw 'An appointment cannot be scheduled on this date'
+		}
+
+	
+		//Check according to the doctor's working hours
+		if(!doctor.working_days.includes(day_of_week[appointment_date.getDay()])){
+			throw 'Please select another date, please select a date that the doctor works'
+		}
+
+		//Check according to the doctor's working days
+		if(hours == start_time[0] &&  minutes < start_time[1]
+			||	!(start_time[0] <= hours  && hours <= end_time[0])
+			||	hours == end_time[0] &&  minutes > end_time[1]
+			){
+			throw 'Please select another time, please select a date that the doctor works'
+		}
+
 		
-		let appointment_details_list = await Appointment.find({ doctor: doctor._id })
+		// Check that no appointment is scheduled for the selected date.
 		for(let i = 0; i < appointment_details_list.length; ++i){
 
 			if(appointment_details_list[i].date.toString() === appointment_date.toString()){
