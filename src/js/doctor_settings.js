@@ -28,3 +28,32 @@ $(document).ready(function(){
         }
     })
 })
+$(document).ready(function(){
+    let languages = document.getElementById('Languages')
+    let minFields = 1
+    let addButton = document.getElementById('add_spoken_languages') //Add button selector
+    let wrapper = document.getElementsByClassName('Languages') //Input field wrapper
+    let fieldHTML = '<div class="form-row"><div class="col"><div class="input-group"><input class="form-control" type="text"id="languages" name="spoken_languages" pattern="{1}[A-Za-z]"><div class="input-group-append"><a href="javascript:void(0);" id="delete_spoken_languages" class="btn btn-danger">Delete</a></div> </div></div></div>' //New input field html 
+    let y = $('input[id=\'Languages\']').length
+    
+    //Once add button is clicked
+    $(addButton).click(function()
+    {
+        //Check maximum number of input fields
+        if(y >= minFields)
+        { 
+             y++ //Increment field counter
+            $(wrapper).append(fieldHTML)//Add field html
+          
+        }
+    })
+    //Once remove button is clicked
+    $(wrapper).on('click','#delete_spoken_languages', function(e){
+        e.preventDefault()
+
+        if((y - 1) >= minFields) {
+            $(this).parent('div').parent('div').parent('div').remove() //Remove field html
+            y-- //Decrement field counter
+        }
+    })
+})

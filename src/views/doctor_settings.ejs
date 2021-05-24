@@ -291,17 +291,31 @@
                                                                                         name="city"
                                                                                         >
                                                                                 </div>
-
-                                                                                <label for="languages"><strong>Languages</strong></label>
-                                                                                    <div class="form-group">
-                                                                                        <input
-                                                                                            class="form-control" type="text"
-                                                                                            id="languages"
-                                                                                            name="spoken_languages"
-                                                                                            pattern="{1}[A-Za-z]"
-                                                                                            value="<%=doctor_details.spoken_languages%>">
-                                                                                    </div>
-                                                                               
+                                                                                    <label for="Languages"><strong>Languages</strong></label>
+                                                                                        <div class="Languages">
+                                                                                            <% doctor_details.spoken_languages.forEach((L) => { %>
+                                                                                                <div class="form-row">
+                                                                                                    <div class="col">
+                                                                                                        <div class="input-group">    
+                                                                                                            <input                                                                                          
+                                                                                                                class="form-control" 
+                                                                                                                type="text"
+                                                                                                                id="Languages"
+                                                                                                                name="spoken_languages"
+                                                                                                                pattern="{1}[A-Za-z]"
+                                                                                                                value="<%=L%>">
+                                                                                                            <div class="input-group-append">
+                                                                                                                <a href="javascript:void(0);" id="delete_spoken_languages" class="btn btn-danger">Delete</a>
+                                                                                                             </div> 
+                                                                                                        </div> 
+                                                                                                    </div>    
+                                                                                                </div>    
+                                                                                            <% }) %>
+                                                                                         </div> 
+                                                                                         <br>
+                                                                                         <a href="javascript:void(0);" id="add_spoken_languages" class="btn btn-primary mb-3">Add more languages</a>
+                                                                                
+                                                                                <br>
                                                                                 <div class="form-row">
                                                                                     <div class="col">
                                                                                         <div class="form-group"><label
@@ -310,10 +324,10 @@
                                                                                                 type="text" id="street"
                                                                                                 pattern="{1}[A-Za-z]"
                                                                                                 name="street"
-                                                                                                value="<%=doctor_details.clinic_address.street%>"
-                                                                                                >
+                                                                                                value="<%=doctor_details.clinic_address.street%>">
                                                                                         </div>
                                                                                     </div>
+                                                                                    <br>
                                                                                     <div class="col">
                                                                                         <div class="form-group"><label
                                                                                                 for="Phone number"><strong>Phone

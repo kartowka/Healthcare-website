@@ -232,7 +232,7 @@ exports.updateUser = async (req, res, next) => {
 						{
 							$set: {
 								'clinic_address.city': update.city,
-								spoken_languages: update.spoken_languages.split(','),
+								spoken_languages: update.spoken_languages,
 								'clinic_address.street': update.street,
 								clinic_phone_number: update.clinic_phone_number,
 							},
