@@ -50,16 +50,6 @@ exports.make_an_Appointment = async (req, res, next) => {
 			throw 'Please select another date, please select a date that the doctor works'
 		}
 
-		console.log('start_time[0] <= hours <= end_time[0]')
-		console.log(start_time[0] <= hours  && hours <= end_time[0])
-		console.log('start_time[0]')
-		console.log(parseInt(start_time[0]))
-		console.log('end_time[0]')
-		console.log(parseInt(end_time[0]))
-		console.log('hours')
-		console.log(hours)
-		
-	
 		//Check according to the doctor's working days
 		if(hours == start_time[0] &&  minutes < start_time[1]
 			||	!(start_time[0] <= hours  && hours <= end_time[0])
