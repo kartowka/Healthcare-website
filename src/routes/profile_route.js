@@ -3,6 +3,7 @@ const profile = express.Router()
 const user_controller = require('../controllers/user_controller')
 const appointment_management_controller = require('../controllers/appointment_management_controller')
 const review_controllers = require('../controllers/review_controllers')
+const sending_messages = require('../controllers/sending_messages_controller')
 const url = require('url')
 
 //pateint profile
@@ -119,6 +120,21 @@ profile
 				review_details: req.review_details,
 				average_rating: req.average_rating,
 			})
+		}
+	)
+	.post(
+		user_controller.allowIfLoggedin,
+		// user_controller.grantAccess('updateOwn', 'doctor_settings'),
+		sending_messages.sendMsg,
+		(req, res) => {
+			res.redirect(
+				url.format({
+					pathname: `/doctor_profile/${req.params.id}`,
+					query: {
+						Message: req.error,
+					},
+				})
+			)
 		}
 	)
 
@@ -265,5 +281,23 @@ profile
 			)
 		}
 	)
+
+	profile
+	.route('/doctor_profile/doctor_Review/:id')
+	.get(
+		user_controller.allowIfLoggedin,
+		user_controller.grantAccess('readOwn', 'doctor_Review'),
+		user_controller.getUser,
+		review_controllers.get_review,
+		(req, res) => {
+			res.render('doctor_Review', {
+				data: req.user,
+				review_details: req.review_details,
+				average_rating: req.average_rating,
+			})
+		}
+	)
+
+
 
 module.exports = profile

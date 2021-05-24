@@ -22,9 +22,13 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <%- include('partials/header'); %>
                 <div id="content">
-                    <% if (data.id == userID || userRole == 'admin') {%>
-                        <%- include('doctor_partials/header'); %>
-                        <%}%>
+                    <% if (data.id == userID || userRole == 'admin')
+                     {%>
+                        <%- include('doctor_partials/header');%>
+                    <%} else{ %>
+                        <%- include('patient_partials/header');%> 
+                    <% } %>
+                        
                             <div class="container-fluid">
                                 <div class="card shadow mb-4">
                                     <div class="row mr-8">
@@ -223,23 +227,19 @@
                                                             </tbody>
 
                                                         </table>
-
-                                                    <% } %>
-                                                    
+                                            <% } %>
                                                 </div>
                                             </div>
-                                </div>
-
-                               
-                                                           
-                                                            
+                                </div>       
                             </div>
                 </div>
 
              
                 <!-- footer starts here -->
                 <%- include('partials/footer'); %>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i>
+        </a>
     </div>
 
     <script src="/assets/js/jquery.min.js"></script>
@@ -248,7 +248,8 @@
     <script src="/assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="/assets/js/theme.js"></script>
-
+    <script src="../views/profiles_js.js"></script>
+                                                                            
+                                                             
 </body>
-
 </html>

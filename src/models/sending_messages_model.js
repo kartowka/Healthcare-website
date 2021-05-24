@@ -15,7 +15,7 @@ const MessagesSchema = new Schema({
     conversation_id:
     {
         type:mongoose.Schema.Types.ObjectId,
-        required: true,
+        default:null,
     },
     message:
     {
@@ -33,11 +33,6 @@ const MessagesSchema = new Schema({
 
 const ConversationSchema = new Schema
 ({
-     _id:
-     {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    },
     subject: 
     {
         type: String,
