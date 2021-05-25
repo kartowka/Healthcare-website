@@ -36,3 +36,12 @@ window.onclick = function(event) {
   }
 
 }
+
+function openReview() {
+  document.getElementById("myReview").style.display = "block";
+}
+
+function closeReview() {
+  document.getElementById("myReview").style.display = "none";
+}
+
