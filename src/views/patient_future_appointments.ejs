@@ -19,10 +19,10 @@
             <div id="content">
                 <%- include('patient_partials/header'); %>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Future Appointments</h3>
+               
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold"><%= data.first_name %>&nbsp;<%= data.last_name %></p>
+                            <h4 class="text-primary m-0 font-weight-bold">Future Appointments - <%= data.first_name %>&nbsp;<%= data.last_name %></h4>
                         </div>
                         <div class="card-body">
                             <table class="table my-0" id="dataTable">
@@ -77,12 +77,11 @@
                                     <% } %>
 
                             </table>
-                            
- 
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- footer starts here -->
             <%- include('partials/footer'); %>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

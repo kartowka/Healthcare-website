@@ -18,7 +18,6 @@
         <div class="d-flex flex-column" id="content-wrapper">
 
             <%- include('partials/header'); %>
-
                 <div id="content">
                     <% if (data.id==userID || userRole=='admin') {%>
                         <%- include('patient_partials/header'); %>
@@ -28,19 +27,19 @@
                                     <div class="row mr-8">
                                         <div class="col-lg-12">
                                             <div class="card shadow mb-2">
-                                                <div class="card-header py-3">
+                                                <div class="card-header">
                                                     <h5 class="text-primary font-weight-bold m-0">Profile</h5>
                                                 </div>
                                                     <table id="t01">
                                                         <tr>
-                                                            <th>&nbsp;&nbsp;Firstname:</th>
+                                                            <th>&nbsp;&nbsp;&nbsp;&nbsp;Firstname:</th>
                                                             <td>
                                                                 <%= data.first_name %>
                                                             </td>
 
                                                         </tr>
                                                         <tr>
-                                                            <th>&nbsp;&nbsp;Lastname:</th>
+                                                            <th>&nbsp;&nbsp;&nbsp;&nbsp;Lastname:</th>
                                                             <td>
                                                                 <%= data.last_name %>
                                                             </td>
@@ -48,14 +47,14 @@
                                                         </tr>
 
                                                         <tr>
-                                                            <th>&nbsp;&nbsp;Email:</th>
+                                                            <th>&nbsp;&nbsp;&nbsp;&nbsp;Email:</th>
                                                             <td>
                                                                 <%= data.email %>
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <th>&nbsp;&nbsp;Clinic:</th>
+                                                            <th>&nbsp;&nbsp;&nbsp;&nbsp;Clinic:</th>
                                                             <td>
                                                                 <%= data.clinic %>
                                                             </td>
@@ -68,10 +67,10 @@
                                     <div class="col-lg-12">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="card shadow" id="User_Settings">
-                                                    <div class="card-header py-3">
-                                                        <p class="text-primary m-0 font-weight-bold">Future Appointments
-                                                        </p>
+                                                <div class="card shadow mb-2" id="User_Settings">
+                                                    <div class="card-header">
+                                                        <h5 class="text-primary m-0 font-weight-bold">Future Appointments
+                                                    </h5>
                                                     </div>
                                                     <div class="card-body">
                                                         <table class="table my-0" id="dataTable">
@@ -138,7 +137,7 @@
                                                 </div>
                                                 <div class="card shadow">
                                                     <div class="card-header py-3">
-                                                        <p class="text-primary m-0 font-weight-bold">Previous Appointments</p>
+                                                    <h5 class="text-primary font-weight-bold m-0">Previous Appointments</h5>
                                                     </div>
                                                     <div class="card-body">
                                                         <table class="table my-0" id="dataTable">

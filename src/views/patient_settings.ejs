@@ -17,8 +17,9 @@
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
             <%- include('partials/header'); %>
-                <div id="content"></div>
-                         <% if(typeof alert !='undefined' ) { %>
+            <div id="content">
+                <%- include('patient_partials/header'); %>
+                    <% if(typeof alert !='undefined' ) { %>
                             <div class="alert alert-success alert-dismissible fade show" role="alert"> <%= alert %>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                             </div>
@@ -27,7 +28,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="card shadow mb-3" id="User_Settings">
-                                    <div class="card-header py-3"><p class="text-primary m-0 font-weight-bold">User Settings</p></div>
+                                    <div class="card-header py-3"><h4 class="text-primary m-0 font-weight-bold">User Settings</h4></div>
                                       <div class="card-body">
                                         <form method="POST">
                                             <div class="form-row">
