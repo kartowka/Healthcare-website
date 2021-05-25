@@ -24,90 +24,51 @@
                         <%- include('patient_partials/header'); %>
                         <% } %>
                             <div class="container-fluid">
-                                <h3 class="text-dark mb-4">Profile</h3>
-                                <div class="row mb-3">
-                                    <div class="col-lg-4">
-                                        <div class="card mb-3 ">
-                                            <div class="card-body space-around shadow row">
-                                                <table class="mr-5" id="t01">
-                                                    <tr>
-                                                        <th>Firstname:&nbsp;</th>
-                                                        <td>
-                                                            <%= data.first_name %>
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Lastname:&nbsp;</th>
-                                                        <td>
-                                                            <%= data.last_name %>
-                                                        </td>
-
-                                                    </tr>
-
-                                                </table>
-                                                <table id="t02">
-
-                                                    <tr>
-                                                        <th>Email:&nbsp;</th>
-                                                        <td>
-                                                            <%= data.email %>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>Clinic:&nbsp;</th>
-                                                        <td>
-                                                            <%= data.clinic %>
-                                                        </td>
-                                                    </tr>
-
-
-                                                </table>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="row mb-3 d-none">
-                                            <div class="col">
-                                                <div class="card text-white bg-primary shadow">
-                                                    <div class="card-body">
-                                                        <div class="row mb-2">
-                                                            <div class="col">
-                                                                <p class="m-0">Peformance</p>
-                                                                <p class="m-0"><strong>65.2%</strong></p>
-                                                            </div>
-                                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p class="text-white-50 small m-0"><i
-                                                                class="fas fa-arrow-up"></i>&nbsp;5% since last month
-                                                        </p>
-                                                    </div>
+                                <div class="card shadow mb-4">
+                                    <div class="row mr-8">
+                                        <div class="col-lg-12">
+                                            <div class="card shadow mb-2">
+                                                <div class="card-header py-3">
+                                                    <h5 class="text-primary font-weight-bold m-0">Profile</h5>
                                                 </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card text-white bg-success shadow">
-                                                    <div class="card-body">
-                                                        <div class="row mb-2">
-                                                            <div class="col">
-                                                                <p class="m-0">Peformance</p>
-                                                                <p class="m-0"><strong>65.2%</strong></p>
-                                                            </div>
-                                                            <div class="col-auto"><i class="fas fa-rocket fa-2x"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p class="text-white-50 small m-0"><i
-                                                                class="fas fa-arrow-up"></i>&nbsp;5% since last month
-                                                        </p>
-                                                    </div>
+                                                    <table id="t01">
+                                                        <tr>
+                                                            <th>&nbsp;&nbsp;Firstname:</th>
+                                                            <td>
+                                                                <%= data.first_name %>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th>&nbsp;&nbsp;Lastname:</th>
+                                                            <td>
+                                                                <%= data.last_name %>
+                                                            </td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>&nbsp;&nbsp;Email:</th>
+                                                            <td>
+                                                                <%= data.email %>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th>&nbsp;&nbsp;Clinic:</th>
+                                                            <td>
+                                                                <%= data.clinic %>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
                                                 </div>
-                                            </div>
-                                        </div>
+                                             </div>
+                                 
+                                    <div class="col-lg-12">
                                         <div class="row">
-                                            <div class="col">
-                                                <div class="card shadow mb-3" id="User_Settings">
+                                            <div class="col-lg-12">
+                                                <div class="card shadow" id="User_Settings">
                                                     <div class="card-header py-3">
                                                         <p class="text-primary m-0 font-weight-bold">Future Appointments
                                                         </p>
@@ -247,7 +208,7 @@
                                 </div>
                             </div>
                 </div>
-
+            </div>
         </div>
                                             <!-- footer starts here -->
                                             <%- include('partials/footer'); %>
