@@ -47,19 +47,19 @@ router.get(
 router.post(
   '/',
   async (req, res, next) => {
-      req.forum = new Forum()
-      next()
-    },
-    forum_controller.saveforumAndRedirect('new_forum')
+    req.forum = new Forum()
+    next()
+  },
+  forum_controller.saveforumAndRedirect('new_forum')
 )
 
 router.put(
   '/:id',
   async (req, res, next) => {
-      req.forum = await Forum.findById(req.params.id)
-      next()
-    },
-    forum_controller.saveforumAndRedirect('edit_forum')
+    req.forum = await Forum.findById(req.params.id)
+    next()
+  },
+  forum_controller.saveforumAndRedirect('edit_forum')
 )
 
 router.delete('/:id', async (req, res) => {
@@ -108,14 +108,14 @@ router.get(
 router.post(
   '/:slug',
   async (req, res, next) => {
-      const question = await Forum.findOne({
-        slug: req.params.slug
-      })
-      req.question = req.body
-      req.forum = question
-      next()
-    },
-    forum_controller.saveQuestionAndRedirect('new_question')
+    const question = await Forum.findOne({
+      slug: req.params.slug
+    })
+    req.question = req.body
+    req.forum = question
+    next()
+  },
+  forum_controller.saveQuestionAndRedirect('new_question')
 )
 router.get(
   '/:slug/edit/:id',
@@ -136,19 +136,23 @@ router.get(
 router.put(
   '/:slug/:id',
   async (req, res, next) => {
-      let forum = await Forum.findOne({
-        slug: req.params.slug
-      })
-      req.forum = forum
-      req.questionID = req.params.id
-      next()
-    },
-    forum_controller.saveQuestionAndRedirect('edit_question')
+    let forum = await Forum.findOne({
+      slug: req.params.slug
+    })
+    req.forum = forum
+    req.questionID = req.params.id
+    next()
+  },
+  forum_controller.saveQuestionAndRedirect('edit_question')
 )
 router.delete('/:slug/:id', async (req, res) => {
-  await Forum.updateOne({}, {
+  let forum = await Forum.findOne({
+    slug: req.params.slug
+  })
+  await Forum.findByIdAndUpdate(
+    forum._id, {
     $pull: {
-      question: {
+      'question': {
         _id: req.params.id
       }
     }
@@ -199,15 +203,15 @@ router.get(
 router.post(
   '/:slug/:id',
   async (req, res, next) => {
-      const forum = await Forum.findOne({
-        slug: req.params.slug
-      })
-      req.comment = req.body
-      req.forum = forum
-      req.questionID = req.params.id
-      next()
-    },
-    forum_controller.saveCommentAndRedirect('new_comment')
+    const forum = await Forum.findOne({
+      slug: req.params.slug
+    })
+    req.comment = req.body
+    req.forum = forum
+    req.questionID = req.params.id
+    next()
+  },
+  forum_controller.saveCommentAndRedirect('new_comment')
 )
 
 router.get(
@@ -232,16 +236,16 @@ router.get(
 router.put(
   '/:slug/:questionID/:commentID',
   async (req, res, next) => {
-      let forum = await Forum.findOne({
-        slug: req.params.slug
-      })
-      req.forum = forum
-      req.questionID = req.params.questionID
-      req.commentID = req.params.commentID
-      req.comment = req.body
-      next()
-    },
-    forum_controller.saveCommentAndRedirect('edit_comment')
+    let forum = await Forum.findOne({
+      slug: req.params.slug
+    })
+    req.forum = forum
+    req.questionID = req.params.questionID
+    req.commentID = req.params.commentID
+    req.comment = req.body
+    next()
+  },
+  forum_controller.saveCommentAndRedirect('edit_comment')
 )
 router.delete('/:slug/:questionID/:commentID', async (req, res) => {
   let forum = await Forum.findOne({
@@ -250,16 +254,16 @@ router.delete('/:slug/:questionID/:commentID', async (req, res) => {
   let questionID = req.params.questionID
   await Forum.findByIdAndUpdate(
     forum._id, {
-      $pull: {
-        'question.$[i].comment': {
-          _id: req.params.commentID
-        }, //[i] == questionID
-      },
-    }, {
-      arrayFilters: [{
-        'i._id': req.params.questionID,
-      }, ],
-    }
+    $pull: {
+      'question.$[i].comment': {
+        _id: req.params.commentID
+      }, //[i] == questionID
+    },
+  }, {
+    arrayFilters: [{
+      'i._id': req.params.questionID,
+    },],
+  }
   )
   res.redirect(`/forum/${req.params.slug}/${questionID}`)
 })
