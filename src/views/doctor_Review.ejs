@@ -30,12 +30,11 @@
                 <%- include('doctor_partials/header'); %>
 
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Review</h3>
-             
                     <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class=" m-0 font-weight-bold"><%= data.first_name %>&nbsp;<%= data.last_name %> 
-                                <span class=" font-weight-bold m-0">General Rating</span> &nbsp;&nbsp;
+                        <div class="card-header">
+                            <h4 class="text-primary m-0 font-weight-bold">Review - <%= data.first_name %>&nbsp;<%= data.last_name %> general rating </h4>
+                            <br>
+                               
                             
                                 <% for( let j = 0; j < average_rating; ++j) {%>
                                     <span class="fa fa-star checked"></span>
@@ -105,7 +104,7 @@
                     </div>
                 </div>
             </div>
-
+        </div>
             <!-- footer starts here -->
             <%- include('partials/footer'); %>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
