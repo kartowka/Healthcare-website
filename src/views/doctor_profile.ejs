@@ -136,21 +136,7 @@
                                         </table>
                                         <br>
                                     </div>
-
-                                    <div class="card shadow mb-2" id="General_Rating">
-                                        <div class="card-header py-3">
-                                            <h5 class="text-primary font-weight-bold m-0">General Rating</h5>
-                                            <% for( let j = 0; j < average_rating; ++j) {%>
-                                                <span class="fa fa-star checked"></span>
-                                            <% } %>
-                                            <% for( let j = average_rating; j < 5; ++j) {%>
-                                                <span class="fa fa-star "></span>
-                                            <% } %>
-                                        </div>
-
-                                    </div>
-                                    
-                                    
+  
                                 </div>
                                     <div class="col">
                                         <div class="row">
@@ -166,6 +152,22 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="card shadow mb-2" id="General_Rating">
+                                                <div class="card-header py-3">
+                                                    <h5 class="text-primary font-weight-bold m-0">General Rating</h5>
+                                                    <% if(average_rating == 0){%>
+                                                        <span>The doctor has not yet been rated</span>
+                                                    <% } else {%>
+                                                        <% for( let j = 0; j < average_rating; ++j) {%>
+                                                            <span class="fa fa-star checked"></span>
+                                                        <% } %>
+                                                        <% for( let j = average_rating; j < 5; ++j) {%>
+                                                            <span class="fa fa-star "></span>
+                                                        <% } %>
+                                                    <% } %>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -173,8 +175,8 @@
                                         <div class="card shadow">
                                             <div id="Review" class="card-header py-3">
                                                 <h5 class="text-primary m-0 font-weight-bold">Reviews</h5>
-                                                <% 
-                                                if (data.id != userID && has_appointment && !(has_review) ){ %>
+                                                
+                                                <% if (data.id != userID && has_appointment && !(has_review) ){ %>
                                                     <button
                                                     id="butReview"
                                                     class="btn btn-primary mb-3"
