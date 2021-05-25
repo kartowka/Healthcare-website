@@ -173,7 +173,7 @@
                                             <div class="card-header py-3">
                                                 <h5 class="text-primary m-0 font-weight-bold">Reviews</h5>
                                                 <% 
-                                                if (data.id != userID && has_appointment && has_review ){ %>
+                                                if (data.id != userID && has_appointment && !(has_review) ){ %>
                                                     <button
                                                     id="butReview"
                                                     class="btn btn-primary mb-3"

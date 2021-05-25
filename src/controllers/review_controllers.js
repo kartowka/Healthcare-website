@@ -37,13 +37,13 @@ exports.get_review = async (req, res, next) => {
         review_details.rating
 
         let average_rating = 0
-        let has_review = true
+        let has_review = false
 
         for(let i =0; i< review_details.length; ++i){
-            
+
             average_rating+=review_details[i].rating
-            if( review_details[i].patient == res.locals.loggedInUser._id){
-                has_review  == false
+            if( review_details[i].patient.toString() == res.locals.loggedInUser._id.toString() ){
+                has_review = true
             }
 
         }
