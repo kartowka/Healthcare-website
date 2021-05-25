@@ -28,213 +28,280 @@
                     <%} else{ %>
                         <%- include('patient_partials/header');%> 
                     <% } %>
-                        
-                            <div class="container-fluid">
-                                <div class="card shadow mb-4">
-                                    <div class="row mr-8">
-                                        <div class="col-lg-6">
-                                            <div class="card mb-2">
-                                                <div class="card-header py-3">
-                                                    <h5 class="text-primary font-weight-bold m-0">Profile</h5>
-                                                </div>
-                                                <table class="mr-5" id="t01">
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;Firstname:</th>
-                                                        <td>
-                                                            <%=data.first_name%> <br>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;Lastname:</th>
-                                                        <td>
-                                                            <%=data.last_name%> <br>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;License number:</th>
-                                                        <td>
-                                                            <%=doctor_details.medical_license_id%> <br>
-                                                        </td>
-
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;Email:</th>
-                                                        <td>
-                                                            <%=data.email%><br>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;My clinic:</th>
-                                                        <td>
-                                                            <%=data.clinic%> <br>
-
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;HMO's I work:</th>
-                                                        <td>
-                                                            <%=doctor_details.doctor_related_clinics%> <br>
-
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;Workdays:</th>
-                                                        <td>
-                                                            <%=doctor_details.working_days%> <br>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;Reception hours:</th>
-                                                        <td>
-                                                            <%=doctor_details.start_time%>-<%=doctor_details.end_time%> <br>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;Clinic address:</th>
-                                                        <td>
-                                                            <% if (doctor_details.clinic_address) {%>
-                                                                <%=doctor_details.clinic_address.city%>,<%=doctor_details.clinic_address.street%> 
-                                                            <%}%>
-                                                             <br>
-                                                        </td> 
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;specialization:</th>
-                                                        <td>
-                                                            <%=doctor_details.specialization%> <br>
-                                                        </td> 
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;Languages:</th>
-                                                        <td>
-                                                            <%=doctor_details.spoken_languages%> <br>
-                                                        </td>
-
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th>&nbsp;&nbsp;Phone number:</th>
-                                                        <td>
-                                                            <%=doctor_details.clinic_phone_number%><br>
-                                                        </td>
-
-                                                    </tr>
-                                                </table>
-                                                <br>
-                                            </div>
-
-                                            <div class="card shadow mb-2" id="General_Rating">
-                                                <div class="card-header py-3">
-                                                    <h5 class="text-primary font-weight-bold m-0">General Rating</h5>
-                                                    <% for( let j = 0; j < average_rating; ++j) {%>
-                                                        <span class="fa fa-star checked"></span>
-                                                    <% } %>
-                                                    <% for( let j = average_rating; j < 5; ++j) {%>
-                                                        <span class="fa fa-star "></span>
-                                                    <% } %>
-                                                </div>
-
-                                            </div>
-                                           
-                                            
+                
+                    <div class="container-fluid">
+                        <div class="card shadow mb-4">
+                            <div class="row mr-8">
+                                <div class="col-lg-6">
+                                    <div class="card mb-2">
+                                        <div class="card-header py-3">
+                                            <h5 class="text-primary font-weight-bold m-0">Profile</h5>
                                         </div>
-                                            <div class="col">
-                                                <div class="row">
-                                                    <div class="col" >
-                                                        <div class="card shadow mb-3" >
-                                                            <div class="card-header py-3" >
-                                                                    <h5 class="text-primary font-weight-bold m-0">About Me</h5>
-                                                                </div>
-                                                                <div class="card-body mb-4">
-                                                                    <p> <%=doctor_details.bio%> </p>
-                                                                    
-                                                                </div>
-                                                            </div>
+                                        <table class="mr-5" id="t01">
+                                            <tr>
+                                                <th>&nbsp;&nbsp;Firstname:</th>
+                                                <td>
+                                                    <%=data.first_name%> <br>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;Lastname:</th>
+                                                <td>
+                                                    <%=data.last_name%> <br>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;License number:</th>
+                                                <td>
+                                                    <%=doctor_details.medical_license_id%> <br>
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;Email:</th>
+                                                <td>
+                                                    <%=data.email%><br>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;My clinic:</th>
+                                                <td>
+                                                    <%=data.clinic%> <br>
+
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;HMO's I work:</th>
+                                                <td>
+                                                    <%=doctor_details.doctor_related_clinics%> <br>
+
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;Workdays:</th>
+                                                <td>
+                                                    <%=doctor_details.working_days%> <br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>&nbsp;&nbsp;Reception hours:</th>
+                                                <td>
+                                                    <%=doctor_details.start_time%>-<%=doctor_details.end_time%> <br>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;Clinic address:</th>
+                                                <td>
+                                                    <% if (doctor_details.clinic_address) {%>
+                                                        <%=doctor_details.clinic_address.city%>,<%=doctor_details.clinic_address.street%> 
+                                                    <%}%>
+                                                        <br>
+                                                </td> 
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;specialization:</th>
+                                                <td>
+                                                    <%=doctor_details.specialization%> <br>
+                                                </td> 
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;Languages:</th>
+                                                <td>
+                                                    <%=doctor_details.spoken_languages%> <br>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th>&nbsp;&nbsp;Phone number:</th>
+                                                <td>
+                                                    <%=doctor_details.clinic_phone_number%><br>
+                                                </td>
+
+                                            </tr>
+                                        </table>
+                                        <br>
+                                    </div>
+
+                                    <div class="card shadow mb-2" id="General_Rating">
+                                        <div class="card-header py-3">
+                                            <h5 class="text-primary font-weight-bold m-0">General Rating</h5>
+                                            <% for( let j = 0; j < average_rating; ++j) {%>
+                                                <span class="fa fa-star checked"></span>
+                                            <% } %>
+                                            <% for( let j = average_rating; j < 5; ++j) {%>
+                                                <span class="fa fa-star "></span>
+                                            <% } %>
+                                        </div>
+
+                                    </div>
+                                    
+                                    
+                                </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col" >
+                                                <div class="card shadow mb-3" >
+                                                    <div class="card-header py-3" >
+                                                            <h5 class="text-primary font-weight-bold m-0">About Me</h5>
+                                                        </div>
+                                                        <div class="card-body mb-4">
+                                                            <p> <%=doctor_details.bio%> </p>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <% if(user._id != data.id) { %>
-                                
-                                                <div class="card shadow">
-                                                    <div class="card-header py-3">
-                                                        <h5 class="text-primary m-0 font-weight-bold">Reviews</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table my-0" id="dataTable">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Reviewer Name</th>
-                                                                    <th>Subject</th>
-                                                                    <th>Review</th>
-                                                                    <th>Rating</th>
-                                                                    <th>Date</th>
-                                                                </tr>
-                                                            </thead>
+                                        </div>
+                                    </div>
 
 
-                                                            <tbody>
-
-                                                                <% for( let i = 0; i < review_details.length; ++i) { %>
-                                                                
-
-                                                                    <tr>
-                                                                        <td>
-                                                                            <%=review_details[i].reviewer_name %>
-                                                                        </td>
-
-                                                                        <td>
-                                                                            <%=review_details[i].subject %>
-                                                                        </td>
-
-                                                                        <td>
-                                                                             <%=review_details[i].review %>
-                                                                        </td>
-
-                                                                        <td>
-                                                                            <% for( let j = 0; j < review_details[i].rating; ++j) {%>
-                                                                                <span class="fa fa-star checked"></span>
-                                                                            <% } %>
-                                                                            <% for( let j = review_details[i].rating; j < 5; ++j) {%>
-                                                                                <span class="fa fa-star "></span>
-                                                                            <% } %>
-                                                                          
-                                                                       </td>
-
-                                                                       <td>
-                                                                            <%let date = new Date(review_details[i].date)%>
-                                                                            <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
-                                                                        </td>
-                                                                        
-                                                                
-                                                                    </tr>
-                                                                <% } %>
-                                                         
-                                                            </tbody>
-
-                                                        </table>
-                                            <% } %>
-                                                </div>
+                                        <div class="card shadow">
+                                            <div class="card-header py-3">
+                                                <h5 class="text-primary m-0 font-weight-bold">Reviews</h5>
+                                                <button
+                                                id="butReview"
+                                                class="btn btn-primary mb-3"
+                                                onclick="openReview()"
+                                                > Add Review
+                                                </button>
+                                                
                                             </div>
-                                </div>       
-                            </div>
-                </div>
+                                            <div class="card-body">
+                                                <table class="table my-0" id="dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Reviewer Name</th>
+                                                            <th>Subject</th>
+                                                            <th>Review</th>
+                                                            <th>Rating</th>
+                                                            <th>Date</th>
+                                                        </tr>
+                                                    </thead>
 
-             
+
+                                                    <tbody>
+
+                                                        <% for( let i = 0; i < review_details.length; ++i) { %>
+                                                        
+
+                                                            <tr>
+                                                                <td>
+                                                                    <%=review_details[i].reviewer_name %>
+                                                                </td>
+
+                                                                <td>
+                                                                    <%=review_details[i].subject %>
+                                                                </td>
+
+                                                                <td>
+                                                                        <%=review_details[i].review %>
+                                                                </td>
+
+                                                                <td>
+                                                                    <% for( let j = 0; j < review_details[i].rating; ++j) {%>
+                                                                        <span class="fa fa-star checked"></span>
+                                                                    <% } %>
+                                                                    <% for( let j = review_details[i].rating; j < 5; ++j) {%>
+                                                                        <span class="fa fa-star "></span>
+                                                                    <% } %>
+                                                                    
+                                                                </td>
+
+                                                                <td>
+                                                                    <%let date = new Date(review_details[i].date)%>
+                                                                    <%=date.getDate()%>/<%=date.getMonth()+1%>/<%=date.getFullYear()%>
+                                                                </td>
+                                                                
+                                                        
+                                                            </tr>
+                                                        <% } %>
+                                                    
+                                                    </tbody>
+
+                                                </table>
+
+
+                                    <div id="myReview" class="card-body overlay" style=" border: 3px solid #3a9ecb; border-bottom-right-radius: 50px 20px;">
+
+                                        <a href="javascript:void(0)" class="closebtn" onclick="closeReview()">&times;</a>
+        
+                                        <form method="POST" action="/doctor_profile/review/:id"  style="display:inline-block;">
+
+                                            <h1>New Review</h1> <br>
+                                            
+                                            
+                                            <label for="type">Reviewer Name:</label>
+                                            <select name="name" class="form-control form-control-user" style="width: 40%">
+                                                <option>anonymo</option>
+                                                <option><%=data.first_name%> <%= data.last_name%></option>
+                                            </select><br><br>
+    
+                                            
+                                            <label for="type">Please write the review subject:</label>
+                                            <input
+                                            id='1' 
+                                            class="form-control" 
+                                            style="width: 40%;"
+                                            rows="2"
+                                            cols="50" 
+                                            name="subject"/>
+                                            <br>
+    
+                                            <label for="type">Please write your review here:</label>
+                                            <textarea
+                                            id='1' 
+                                            class="form-control" 
+                                            style="width: 80%;"
+                                            rows="4"
+                                            cols="50" 
+                                            name="review" placeholder="Place your text here"></textarea>
+                                            <br>
+    
+        
+                                        
+                                            <label for="type">Please select your satisfaction with the doctor ( 1 - lowest, 5 - highest ):</label>
+                                            <select name="rating" class="form-control form-control-user" style="width: 30%">
+                                                <option >1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select><br><br>
+    
+    
+                                            <button
+                                            id="Button"
+                                            class="btn btn-primary mb-3"
+                                            type="submit"
+                                            value=<%=appointment_details._id%>
+                                            style="height: 60px;" > Save Review
+                                            </button>
+                                            
+        
+                                        </form>
+        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>       
+                    </div>
+                </div>
+            </div>
                 <!-- footer starts here -->
                 <%- include('partials/footer'); %>
         </div>
@@ -249,6 +316,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="/assets/js/theme.js"></script>
     <script src="../views/profiles_js.js"></script>
+
                                                                             
                                                              
 </body>
