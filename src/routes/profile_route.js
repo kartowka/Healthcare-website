@@ -112,6 +112,7 @@ profile
 		user_controller.grantAccess('readAny', 'doctor_profile'),
 		user_controller.getUser,
 		review_controllers.get_review,
+		appointment_management_controller.getAppointments,
 		(req, res) => {
 			res.render('doctor_profile', {
 				data: req.user,
@@ -119,14 +120,13 @@ profile
 				user: res.locals.loggedInUser,
 				review_details: req.review_details,
 				average_rating: req.average_rating,
+				appointment_details: req.appointment_details,
 			})
 		}
 	)
-	.post(
-		user_controller.allowIfLoggedin,
-		// user_controller.grantAccess('updateOwn', 'doctor_settings'),
-		sending_messages.sendMsg,
-		(req, res) => {
+	.post( (req, res) => {
+		if(req.params['action'] === '/review'){
+			review_controllers.new_review,
 			res.redirect(
 				url.format({
 					pathname: `/doctor_profile/${req.params.id}`,
@@ -136,7 +136,69 @@ profile
 				})
 			)
 		}
-	)
+		else if(req.params['action'] === '/send_messsage'){
+			sending_messages.sendMsg,
+			res.redirect(
+				url.format({
+					pathname: `/doctor_profile/${req.params.id}`,
+					query: {
+						Message: req.error,
+					},
+				})
+			)
+		}
+		if(req.error){
+			console.log(req.error)
+		}
+
+	})
+		
+	
+// profile
+// 		.route('/doctor_profile/:action/:id')
+// 		.post((req, res) => {
+// 			if(req.param('action') == 'send_messsage'){
+// 				sending_messages.sendMsg,
+// 				res.redirect(
+// 					url.format({
+// 						pathname: `/doctor_profile/${req.params.id}`,
+// 						query: {
+// 							Message: req.error,
+// 						},
+// 					})
+// 				)
+// 			}
+// 		})
+	
+
+// profile
+// 	.route('/doctor_profile/send_messsage/:id')
+// 	.get(
+// 		user_controller.allowIfLoggedin,
+// 		user_controller.grantAccess('readAny', 'doctor_profile'),
+// 		user_controller.getUser,
+// 		(req, res) => {
+// 			res.render('/send_messsage', {
+// 				data: req.user,
+// 				user: res.locals.loggedInUser,
+				
+// 			})
+// 		}
+// 	)
+// 	.post(
+// 		sending_messages.sendMsg, 
+// 		(req, res) => {
+// 			console.log(req.body.action)
+// 			res.redirect(
+// 				url.format({
+// 					pathname: `/doctor_profile/${req.params.id}`,
+// 					query: {
+// 						Message: req.error,
+// 					},
+// 				})
+// 			)
+
+// 		})
 
 
 //doctor settings
