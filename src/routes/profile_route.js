@@ -113,6 +113,7 @@ profile
 		user_controller.getUser,
 		review_controllers.get_review,
 		appointment_management_controller.getAppointments,
+		sending_messages.getMsg,
 		(req, res) => {
 			res.render('doctor_profile', {
 				data: req.user,
@@ -121,6 +122,7 @@ profile
 				review_details: req.review_details,
 				average_rating: req.average_rating,
 				appointment_details: req.appointment_details,
+				messages: req.msg,
 			})
 		}
 	)
