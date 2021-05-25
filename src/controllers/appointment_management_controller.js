@@ -130,11 +130,15 @@ exports.getAppointments = async (req, res, next) => {
 			let doctor_details = []
 			let user_doctor = []
 			let user_patient =[]
+			let has_appointment  = false
 
 			for(let i = 0; i < appointment_details.length; ++i){
 				let doctor = await DoctorDetails.findOne({ _id: appointment_details[i].doctor })
 				let  user = await User.findOne({ _id: doctor._doctor_id })
 				let patient = await User.findOne({ _id: appointment_details[i].patient })
+				if( appointment_details[i].patient == res.locals.loggedInUser._id){
+					has_appointment  == true
+				}
 				doctor_details.push(doctor)
 				user_doctor.push(user)
 				user_patient.push(patient)
@@ -144,6 +148,7 @@ exports.getAppointments = async (req, res, next) => {
 			req.doctor_details = doctor_details
 			req.user_doctor = user_doctor
 			req.patient = user_patient
+			req.has_appointment = has_appointment 
 
 		}
 		next()

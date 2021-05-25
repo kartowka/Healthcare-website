@@ -172,12 +172,23 @@
                                         <div class="card shadow">
                                             <div class="card-header py-3">
                                                 <h5 class="text-primary m-0 font-weight-bold">Reviews</h5>
-                                                <button
-                                                id="butReview"
-                                                class="btn btn-primary mb-3"
-                                                onclick="openReview()"
-                                                > Add Review
-                                                </button>
+                                                <% 
+                                                if (data.id != userID && has_appointment && has_review ){ %>
+                                                    <button
+                                                    id="butReview"
+                                                    class="btn btn-primary mb-3"
+                                                    onclick="openReview()"
+                                                    > Add Review
+                                                    </button>
+                                                <% } else {%>
+                                                    <button
+                                                    disabled = true;
+                                                    class="btn btn-primary mb-3"
+                                                    > Add Review
+                                                    </button>
+
+                                                <% } %>
+
                                                 
                                             </div>
                                             <div class="card-body">

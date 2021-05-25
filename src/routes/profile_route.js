@@ -114,6 +114,7 @@ profile
 		review_controllers.get_review,
 		appointment_management_controller.getAppointments,
 		(req, res) => {
+			
 			res.render('doctor_profile', {
 				data: req.user,
 				doctor_details: req.doctor_details,
@@ -121,6 +122,8 @@ profile
 				review_details: req.review_details,
 				average_rating: req.average_rating,
 				appointment_details: req.appointment_details,
+				has_appointment: req.has_appointment,
+				has_review: req.has_review
 			})
 		}
 	)
