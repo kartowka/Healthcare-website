@@ -115,6 +115,7 @@ profile
 		appointment_management_controller.getAppointments,
 		sending_messages.getMsg,
 		(req, res) => {
+			
 			res.render('doctor_profile', {
 				data: req.user,
 				doctor_details: req.doctor_details,
@@ -122,7 +123,12 @@ profile
 				review_details: req.review_details,
 				average_rating: req.average_rating,
 				appointment_details: req.appointment_details,
+<<<<<<< HEAD
 				messages: req.msg,
+=======
+				has_appointment: req.has_appointment,
+				has_review: req.has_review
+>>>>>>> 900f094ef2d85fae4ce395103d7311311f841562
 			})
 		}
 	)

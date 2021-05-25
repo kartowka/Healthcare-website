@@ -2274,7 +2274,7 @@ responsive area
   cursor: pointer;
 }
 
-.modal_message a {
+  .modal_message a {
   position: relative;
   float: right;
   padding-right: 8px;
@@ -2286,7 +2286,7 @@ responsive area
   cursor:pointer"
 }
 
-
+/* 
 #butReview {
   position:relative;
   top: 20px;
@@ -2347,4 +2347,4 @@ form{
   top: 15px;
   right: 35px;
   }
-}
+}  */
