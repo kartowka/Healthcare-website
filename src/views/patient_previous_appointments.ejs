@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
     <link href='https://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/assets/css/patient_previous_appointments.css">
+  
 
 
 </head>
@@ -47,7 +47,6 @@
                                         <th>Type of Appointment</th>
                                         <th>Clinic Address</th>
                                         <th>Summary</th>
-                                        <th>Review</th>
                                     </tr>
                                 </thead>
                                 <%if(appointment_details != []) { %>
@@ -91,80 +90,10 @@
                                                                 The doctor has not yet updated the summary of the appointment
                                                             <% }%> 
                                                         </td>
-                                                        <td>
-                                                            <button
-                                                            class="btn btn-primary mb-3"
-                                                            onclick="openReview()"
-                                                            type="submit"
-                                                            name="_id"
-                                                            value=<%=appointment_details[i]._id%>>
-                                                                Add Review
-                                                            </button>
-                                                        </td>
+                                                    
                                                     </tr>
                                                 </tbody>
 
-                                                <div id="myReview" class="card-body overlay" style=" border: 3px solid #3a9ecb; border-bottom-right-radius: 50px 20px;">
-
-                                                    <a href="javascript:void(0)" class="closebtn" onclick="closeReview()">&times;</a>
-                    
-                                                    <form method="POST">
-
-                                                        <h1>New Review</h1> <br>
-                                                        
-                                                        <label for="type">Reviewer Name:</label>
-                                                        <select name="name" class="form-control form-control-user" style="width: 40%">
-                                                            <option>anonymo</option>
-                                                            <option><%=data.first_name%> <%= data.last_name%></option>
-                                                        </select><br><br>
-                
-                                                        
-                                                        <label for="type">Please write the review subject:</label>
-                                                        <input
-                                                        id='1' 
-                                                        class="form-control" 
-                                                        style="width: 40%;"
-                                                        rows="2"
-                                                        cols="50" 
-                                                        name="subject"/>
-                                                        <br>
-                
-                                                        <label for="type">Please write your review here:</label>
-                                                        <textarea
-                                                        id='1' 
-                                                        class="form-control" 
-                                                        style="width: 80%;"
-                                                        rows="4"
-                                                        cols="50" 
-                                                        name="review" placeholder="Place your text here"></textarea>
-                                                        <br>
-                
-                    
-                                                    
-                                                        <label for="type">Please select your satisfaction with the doctor ( 1 - lowest, 5 - highest ):</label>
-                                                        <select name="rating" class="form-control form-control-user" style="width: 30%">
-                                                            <option >1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
-                                                        </select><br><br>
-                
-                
-                                                        <button
-                                                        id="Button"
-                                                        class="btn btn-primary mb-3"
-                                                        type="submit"
-                                                        value=<%=appointment_details[i]._id%>
-                                                        style="height: 60px;" > Save Review
-                                                        </button>
-                                                        
-                                                    
-                                                    
-                    
-                                                    </form>
-                    
-                                                </div>
                     
                                             <% } %>
                                     <% } %>
@@ -189,15 +118,7 @@
     <script src="/assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="/assets/js/theme.js"></script>
-    <script>
-        function openReview() {
-          document.getElementById("myReview").style.display = "block";
-        }
-        
-        function closeReview() {
-          document.getElementById("myReview").style.display = "none";
-        }
-    </script>
+  
 
 </body>
 
