@@ -10,12 +10,6 @@ exports.sendMsg = async (req, res, next) =>
     try {
 		let msg_details = req.body
 
-        console.log('req.params.id')
-        console.log(req.params.id)
-        console.log('res.locals.loggedInUser._id')
-        console.log(res.locals.loggedInUser._id)
-        console.log('msg_details.message')
-        console.log(msg_details.message)
 	
 		const newMsg = new Msg({
 	
