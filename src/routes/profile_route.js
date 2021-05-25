@@ -212,11 +212,13 @@ profile
 		user_controller.allowIfLoggedin,
 		user_controller.grantAccess('readOwn', 'doctor_settings'),
 		user_controller.getUser,
+		sending_messages.getMsg,
 		(req, res) => {
 			res.render('doctor_settings', {
 				data: req.user,
 				doctor_details: req.doctor_details,
 				alert: req.query.Message,
+				messages: req.msg,
 			})
 		}
 	)
@@ -244,26 +246,32 @@ profile
 		user_controller.grantAccess('readOwn', 'doctor_future_appointments'),
 		user_controller.getUser,
 		appointment_management_controller.getAppointments,
+		sending_messages.getMsg,
 		(req, res) => {
 			res.render('doctor_future_appointments', {
 				data: req.user,
 				appointment_details: req.appointment_details,
 				doctor_details: req.doctor_details,
 				user_patient : req.patient,
+				messages: req.msg,
 			})
 		}
 	)
 
-profile
-	.route('/doctor_profile/doctor_previous_appointments/:id')
-	.get(
-		user_controller.allowIfLoggedin,
-		user_controller.grantAccess('readOwn', 'doctor_previous_appointments'),
-		user_controller.getUser,
-		(req, res) => {
-			res.render('doctor_previous_appointments', { data: req.user })
-		}
-	)
+// profile
+// 	.route('/doctor_profile/doctor_previous_appointments/:id')
+// 	.get(
+// 		user_controller.allowIfLoggedin,
+// 		user_controller.grantAccess('readOwn', 'doctor_previous_appointments'),
+// 		user_controller.getUser,
+// 		sending_messages.getMsg,
+// 		(req, res) => {
+// 			res.render('doctor_previous_appointments', {
+// 				data: req.user,
+// 				messages: req.msg,
+// 			})
+// 		}
+// 	)
 
 // doctor Appointment summary
 profile
@@ -273,6 +281,7 @@ profile
 		user_controller.grantAccess('readOwn', 'doctor_appointment_summary'),
 		user_controller.getUser,
 		appointment_management_controller.previousAppointment,
+		sending_messages.getMsg,
 		(req, res) => {
 			res.render('doctor_appointment_summary', { 
 				data: req.user,
@@ -280,6 +289,7 @@ profile
 				doctor_details: req.doctor_details,
 				user_patient : req.patient,
 				alert: req.query.Message,
+				messages: req.msg,
 			})
 		}
 	)
@@ -299,22 +309,6 @@ profile
 	)
 
 	
-// doctor Reviwe
-profile
-	.route('/doctor_profile/doctor_Review/:id')
-	.get(
-		user_controller.allowIfLoggedin,
-		user_controller.grantAccess('readOwn', 'doctor_Review'),
-		user_controller.getUser,
-		review_controllers.get_review,
-		(req, res) => {
-			res.render('doctor_Review', {
-				data: req.user,
-				review_details: req.review_details,
-				average_rating: req.average_rating,
-			})
-		}
-	)
 
 
 // Make an Appointment
@@ -348,21 +342,7 @@ profile
 		}
 	)
 
-	profile
-	.route('/doctor_profile/doctor_Review/:id')
-	.get(
-		user_controller.allowIfLoggedin,
-		user_controller.grantAccess('readOwn', 'doctor_Review'),
-		user_controller.getUser,
-		review_controllers.get_review,
-		(req, res) => {
-			res.render('doctor_Review', {
-				data: req.user,
-				review_details: req.review_details,
-				average_rating: req.average_rating,
-			})
-		}
-	)
+
 
 
 
