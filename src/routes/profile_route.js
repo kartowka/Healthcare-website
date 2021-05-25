@@ -18,7 +18,7 @@ profile
 			res.render('patient_profile', {
 				data: req.user,
 				appointment_details: req.appointment_details,
-				doctor_details: req.doctor_details,
+				doctor_appintment_details: req.doctor_appintment_details,
 				user_doctor: req.user_doctor,
 			})
 		}
@@ -65,7 +65,7 @@ profile
 			res.render('patient_previous_appointments', { 
 				data: req.user,
 				appointment_details: req.appointment_details,
-				doctor_details: req.doctor_details,
+				doctor_appintment_details: req.doctor_appintment_details,
 				user_doctor: req.user_doctor,
 				alert: req.query.Message,
 			})
@@ -98,7 +98,7 @@ profile
 			res.render('patient_future_appointments', {
 				data: req.user,
 				appointment_details: req.appointment_details,
-				doctor_details: req.doctor_details,
+				doctor_appintment_details: req.doctor_appintment_details,
 				user_doctor: req.user_doctor,
 			})
 		}
@@ -250,8 +250,8 @@ profile
 		(req, res) => {
 			res.render('doctor_future_appointments', {
 				data: req.user,
-				appointment_details: req.appointment_details,
 				doctor_details: req.doctor_details,
+				appointment_details: req.appointment_details,
 				user_patient : req.patient,
 				messages: req.msg,
 			})
@@ -285,8 +285,8 @@ profile
 		(req, res) => {
 			res.render('doctor_appointment_summary', { 
 				data: req.user,
-				appointment_details: req.appointment_details,
 				doctor_details: req.doctor_details,
+				appointment_details: req.appointment_details,
 				user_patient : req.patient,
 				alert: req.query.Message,
 				messages: req.msg,

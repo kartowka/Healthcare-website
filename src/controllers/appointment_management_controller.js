@@ -127,7 +127,7 @@ exports.getAppointments = async (req, res, next) => {
 		
 		if(appointment_details != []){
 
-			let doctor_details = []
+			let doctor_appintment_details = []
 			let user_doctor = []
 			let user_patient =[]
 			let has_appointment = false
@@ -140,13 +140,13 @@ exports.getAppointments = async (req, res, next) => {
 				if( appointment_details[i].patient.toString() == res.locals.loggedInUser._id.toString()){
 					has_appointment = true
 				}
-				doctor_details.push(doctor)
+				doctor_appintment_details.push(doctor)
 				user_doctor.push(user)
 				user_patient.push(patient)
 			}
 		
 			req.appointment_details = appointment_details
-			req.doctor_details = doctor_details
+			req.doctor_appintment_details = doctor_appintment_details
 			req.user_doctor = user_doctor
 			req.patient = user_patient
 			req.has_appointment = has_appointment 
