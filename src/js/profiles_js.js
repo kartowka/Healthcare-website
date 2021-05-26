@@ -45,3 +45,31 @@ function closeReview() {
   document.getElementById('myReview').style.display = 'none'
 }
 
+
+function togglediv() {
+  var element = document.getElementById('previous')
+  var but = document.getElementById('previous_but')
+  if (element.style.display != 'none') {
+      element.style.display = 'none'
+      but.innerHTML = 'Open'
+  } else {
+    if (element.style.display == 'none') {
+      element.style.display = 'block'
+      but.innerHTML = 'Close'
+    }
+  }
+}
+
+function toggle_future_appointments() {
+  var element = document.getElementById('future')
+  var but = document.getElementById('future_but')
+  if (element.style.display != 'none') {
+      element.style.display = 'none'
+      but.innerHTML = 'Open'
+  } else {
+    if (element.style.display == 'none') {
+      element.style.display = 'block'
+      but.innerHTML = 'Close'
+    }
+  }
+}

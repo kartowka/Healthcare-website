@@ -70,9 +70,10 @@
                                                 <div class="card shadow mb-2" id="User_Settings">
                                                     <div class="card-header">
                                                         <h5 class="text-primary m-0 font-weight-bold">Future Appointments
-                                                    </h5>
+                                                            <button id="future_but" class="btn btn-primary" onclick="toggle_future_appointments();" style="float:right;">close</button>
+                                                        </h5>
                                                     </div>
-                                                    <div class="card-body">
+                                                    <div class="card-body" id="future">
                                                         <table class="table my-0" id="dataTable">
                                                             <thead>
                                                                 <tr>
@@ -132,14 +133,17 @@
                                                             <% } %>
                         
                                                         </table>
+                                                        <a class="dropdown-item text-center small text-gray-500" style="border: 1px double #3a9ecb;" href="/patient_profile/patient_future_appointments/<%= data.id %>">Show All Future Appointments</a>
                                                         
                                                     </div>
                                                 </div>
                                                 <div class="card shadow">
                                                     <div class="card-header py-3">
-                                                    <h5 class="text-primary font-weight-bold m-0">Previous Appointments</h5>
+                                                    <h5 class="text-primary font-weight-bold m-0">Previous Appointments
+                                                        <button id="previous_but" class="btn btn-primary" onclick="togglediv();" style="float:right;">close</button>
+                                                    </h5>
                                                     </div>
-                                                    <div class="card-body">
+                                                    <div class="card-body" id="previous">
                                                         <table class="table my-0" id="dataTable">
                                                             <thead>
                                                                 <tr>
@@ -147,8 +151,8 @@
                                                                     <th>Subject</th>
                                                                     <th>date</th>
                                                                     <th>Start Appointment</th>
-                                                                    <th>Type of Appointment</th>
-                                                                    <th>Clinic Address</th>
+                                                                    <th>end Appointment</th>
+                                                                    <th>Summary</th>
                                                                 </tr>
                                                             </thead>
                                                             <%if(appointment_details != []) { %>
@@ -180,12 +184,10 @@
                                                                                     <%=appointment_details[i].start_time%>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <%=appointment_details[i].type%>
+                                                                                    <%=appointment_details[i].end_time%>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <%=doctor_appintment_details[i].clinic_address.city%>
-                                                                                    &nbsp;
-                                                                                    <%=doctor_appintment_details[i].clinic_address.street%>
+                                                                                    <%=appointment_details[i].summary%>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -199,6 +201,7 @@
                                                             <% } %>
                                                             
                                                         </table>
+                                                        <a class="dropdown-item text-center small text-gray-500" style="border: 1px double #3a9ecb; " href="/patient_profile/patient_previous_appointments/<%= data.id %>">Show All Previous Appointments</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,6 +224,7 @@
     <script src="/assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="/assets/js/theme.js"></script>
+    <script src="../js/profiles_js.js"></script>
 
 </body>
 
