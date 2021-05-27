@@ -1,4 +1,4 @@
-let enabel_day = document.getElementById('working_days').textContent.split(',')
+let enable_day = document.getElementById('working_days').textContent.split(',')
 let start_time = document.getElementById('start_time').textContent.split(':')
 let end_time = document.getElementById('end_time').textContent.split(':')
 let dic = {
@@ -27,7 +27,7 @@ let hoursEnable = hours.filter(
 	(value) => start_time[0] <= value && value <= end_time[0]
 )
 let disablehour = hours.filter((n) => !hoursEnable.includes(n))
-day_of_week = day_of_week.filter((n) => !enabel_day.includes(n))
+day_of_week = day_of_week.filter((n) => !enable_day.includes(n))
 day_of_week = day_of_week.map((n) => dic[n])
 let date = new Date()
 let currentMonth = date.getMonth()
