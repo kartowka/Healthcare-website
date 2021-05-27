@@ -71,20 +71,7 @@ profile
 			})
 		}
 	)
-	.post(
-		user_controller.allowIfLoggedin,
-		review_controllers.new_review,
-		(req, res) => {
-			res.redirect(
-				url.format({
-					pathname: `/patient_profile/patient_previous_appointments/${req.params.id}`,
-					query: {
-						Message: req.error,
-					},
-				})
-			)
-		}
-	)
+	
 
 //previous and future appointments
 profile
@@ -128,9 +115,9 @@ profile
 			})
 		}
 	)
-	.post( (req, res) => {
-		if(req.params['action'] === '/review'){
-			review_controllers.new_review,
+	.post(
+		review_controllers.new_review,
+		(req, res) => {
 			res.redirect(
 				url.format({
 					pathname: `/doctor_profile/${req.params.id}`,
@@ -140,70 +127,39 @@ profile
 				})
 			)
 		}
-		else if(req.params['action'] === '/send_messsage'){
+	)
+	
+profile
+		.route('/doctor_profile/send_message/:id')
+		.get(
+			user_controller.allowIfLoggedin,
+			user_controller.grantAccess('readAny', 'doctor_profile'),
+			user_controller.getUser,
+			sending_messages.getMsg,
+			(req, res) => {
+				res.render('send_message', {
+					data: req.user,
+					user: res.locals.loggedInUser,
+					messages: req.msg,
+				})
+			}
+		)
+		.post(
+			user_controller.allowIfLoggedin,
+			user_controller.grantAccess('updateOwn', 'send_message'),
 			sending_messages.sendMsg,
-			res.redirect(
-				url.format({
-					pathname: `/doctor_profile/${req.params.id}`,
-					query: {
-						Message: req.error,
-					},
-				})
-			)
-		}
-		if(req.error){
-			console.log(req.error)
-		}
-
-	})
-		
+			(req, res) => {
+				res.redirect(
+					url.format({
+						pathname: `/doctor_profile/${req.params.id}`,
+						query: {
+							Message: req.error,
+						},
+					})
+				)
+			}
+		)
 	
-// profile
-// 		.route('/doctor_profile/:action/:id')
-// 		.post((req, res) => {
-// 			if(req.param('action') == 'send_messsage'){
-// 				sending_messages.sendMsg,
-// 				res.redirect(
-// 					url.format({
-// 						pathname: `/doctor_profile/${req.params.id}`,
-// 						query: {
-// 							Message: req.error,
-// 						},
-// 					})
-// 				)
-// 			}
-// 		})
-	
-
-// profile
-// 	.route('/doctor_profile/send_messsage/:id')
-// 	.get(
-// 		user_controller.allowIfLoggedin,
-// 		user_controller.grantAccess('readAny', 'doctor_profile'),
-// 		user_controller.getUser,
-// 		(req, res) => {
-// 			res.render('/send_messsage', {
-// 				data: req.user,
-// 				user: res.locals.loggedInUser,
-				
-// 			})
-// 		}
-// 	)
-// 	.post(
-// 		sending_messages.sendMsg, 
-// 		(req, res) => {
-// 			console.log(req.body.action)
-// 			res.redirect(
-// 				url.format({
-// 					pathname: `/doctor_profile/${req.params.id}`,
-// 					query: {
-// 						Message: req.error,
-// 					},
-// 				})
-// 			)
-
-// 		})
-
 
 //doctor settings
 profile
@@ -258,20 +214,6 @@ profile
 		}
 	)
 
-// profile
-// 	.route('/doctor_profile/doctor_previous_appointments/:id')
-// 	.get(
-// 		user_controller.allowIfLoggedin,
-// 		user_controller.grantAccess('readOwn', 'doctor_previous_appointments'),
-// 		user_controller.getUser,
-// 		sending_messages.getMsg,
-// 		(req, res) => {
-// 			res.render('doctor_previous_appointments', {
-// 				data: req.user,
-// 				messages: req.msg,
-// 			})
-// 		}
-// 	)
 
 // doctor Appointment summary
 profile
