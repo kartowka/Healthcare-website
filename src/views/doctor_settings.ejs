@@ -195,13 +195,13 @@
                                                                                     <div class="form-row">
                                                                                         <div class="col-lg-6 ">   
                                                                                             <div class="input-group">
-                                                                                                <input
+                                                                                                <input 
                                                                                                     class="form-control"
-                                                                                                    type="text"
+                                                                                                    type="text" required
                                                                                                     id="specialization"
                                                                                                     name="specialization[]"
                                                                                                     pattern="{1}[A-Za-z]"
-                                                                                                    value="<%=s%>">
+                                                                                                    value="<%=s%>" >
                                                                                                 <div class="input-group-append">
                                                                                                     <a href="javascript:void(0);" id="delete_specialization" class="btn btn-danger">Delete</a>
                                                                                                 </div>
@@ -299,11 +299,12 @@
                                                                                                         <div class="input-group">    
                                                                                                             <input                                                                                          
                                                                                                                 class="form-control" 
-                                                                                                                type="text"
+                                                                                                                type="text" required
                                                                                                                 id="Languages"
                                                                                                                 name="spoken_languages"
-                                                                                                                pattern="{1}[A-Za-z]"
-                                                                                                                value="<%=L%>">
+                                                                                                                pattern="{1}[A-Za-z] | [A-Za-z]{1}"
+                                                                                                                value="<%=L%>"> 
+                                                                                                                
                                                                                                             <div class="input-group-append">
                                                                                                                 <a href="javascript:void(0);" id="delete_spoken_languages" class="btn btn-danger">Delete</a>
                                                                                                              </div> 
