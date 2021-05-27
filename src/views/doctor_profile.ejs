@@ -23,13 +23,19 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <%- include('partials/header'); %>
                 <div id="content">
-                    <% if (data.id == userID || userRole == 'admin')
-                     {%>
+                    <% if (data.id == userID || userRole == 'admin'){ %>
                         <%- include('doctor_partials/header');%>
                     <%} else{ %>
-                        <%- include('patient_partials/header');%> 
+                        <div class="navbar navbar-light navbar-expand bg-white shadow topbar static-top" >
+                            <a href="/doctor_profile/send_message/<%= data.id %>"
+                                class="btn btn-primary mb-3"
+                                style="float: right;"> 
+                                Send Message To Doctor <%=data.first_name%> &nbsp; <%=data.last_name%>
+                            </a>
+                            
+                        </div></div>
                     <% } %>
-                
+                    
                     <div class="container-fluid">
                         <div class="card shadow mb-4">
                             <div class="row mr-8">
@@ -146,8 +152,7 @@
                                                             <h5 class="text-primary font-weight-bold m-0">About Me</h5>
                                                         </div>
                                                         <div class="card-body mb-4">
-                                                            <p> <%=doctor_details.bio%> </p>
-                                                            
+                                                            <p> <%=doctor_details.bio%> </p>   
                                                         </div>
                                                     </div>
                                                 </div>
@@ -157,6 +162,7 @@
                                                 <div class="card-header py-3">
                                                     <h5 class="text-primary font-weight-bold m-0">General Rating</h5>
                                                     <% if(average_rating == 0){%>
+                                                        <br>
                                                         <span>The doctor has not yet been rated</span>
                                                     <% } else {%>
                                                         <% for( let j = 0; j < average_rating; ++j) {%>
@@ -187,9 +193,9 @@
                                                     <button
                                                     disabled = true;
                                                     class="btn btn-primary mb-3"
+                                                    style="float: right;"
                                                     > Add Review
                                                     </button>
-
                                                 <% } %>
 
                                                 
@@ -248,67 +254,6 @@
 
                                                 </table>
 
-
-                                    <div id="myReview" class="card-body overlay" style=" border: 3px solid #3a9ecb; border-bottom-right-radius: 50px 20px;">
-
-                                        <a href="javascript:void(0)" class="closebtn" onclick="closeReview()">&times;</a>
-        
-                                        <form method="POST" action="/review"  style="display:inline-block;">
-
-                                            <h1>New Review</h1> <br>
-                                            
-                                            
-                                            <label for="type">Reviewer Name:</label>
-                                            <select name="name" class="form-control form-control-user" style="width: 40%">
-                                                <option>anonymo</option>
-                                                <option><%=data.first_name%> <%= data.last_name%></option>
-                                            </select><br><br>
-    
-                                            
-                                            <label for="type">Please write the review subject:</label>
-                                            <input
-                                            id='1' 
-                                            class="form-control" 
-                                            style="width: 40%;"
-                                            rows="2"
-                                            cols="50" 
-                                            name="subject"/>
-                                            <br>
-    
-                                            <label for="type">Please write your review here:</label>
-                                            <textarea
-                                            id='1' 
-                                            class="form-control" 
-                                            style="width: 80%;"
-                                            rows="4"
-                                            cols="50" 
-                                            name="review" placeholder="Place your text here"></textarea>
-                                            <br>
-    
-        
-                                        
-                                            <label for="type">Please select your satisfaction with the doctor ( 1 - lowest, 5 - highest ):</label>
-                                            <select name="rating" class="form-control form-control-user" style="width: 30%">
-                                                <option >1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select><br><br>
-    
-    
-                                            <button
-                                            id="Button"
-                                            class="btn btn-primary mb-3"
-                                            type="submit"
-                                            style="height: 60px;" > Save Review
-                                            </button>
-                                            
-        
-                                        </form>
-        
-                                    </div>
-                                    
                                 </div>
                             </div>
                         </div>       
@@ -330,7 +275,65 @@
     <script src="/assets/js/theme.js"></script>
     <script src="../js/profiles_js.js"></script>
 
-                                                                            
-                                                             
+
+    <div id="myReview" class="card-body overlay" style=" border: 3px solid #3a9ecb; border-bottom-right-radius: 50px 20px;">
+
+        <a href="javascript:void(0)" class="closebtn" onclick="closeReview()">&times;</a>
+
+        <form method="POST">
+
+            <h1>New Review</h1> <br>
+            
+            
+            <label for="type">Reviewer Name:</label>
+            <select name="name" class="form-control form-control-user" style="width: 40%">
+                <option>anonymo</option>
+                <option><%=user.first_name%> <%= user.last_name%></option>
+            </select><br><br>
+
+            
+            <label for="type">Please write the review subject:</label>
+            <input
+            id='1' 
+            class="form-control" 
+            style="width: 40%;"
+            rows="2"
+            cols="50" 
+            name="subject"/>
+            <br>
+
+            <label for="type">Please write your review here:</label>
+            <textarea
+            id='1' 
+            class="form-control" 
+            style="width: 80%;"
+            rows="4"
+            cols="50" 
+            name="review" placeholder="Place your text here"></textarea>
+            <br>
+
+
+        
+            <label for="type">Please select your satisfaction with the doctor ( 1 - lowest, 5 - highest ):</label>
+            <select name="rating" class="form-control form-control-user" style="width: 30%">
+                <option >1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select><br><br>
+
+
+            <button
+            class="btn btn-primary mb-3"
+            type="submit"> Save Review
+            </button>
+            
+
+        </form>
+
+    </div>
+
+                                                                                                                              
 </body>
 </html>

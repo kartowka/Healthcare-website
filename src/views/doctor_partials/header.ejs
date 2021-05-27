@@ -5,51 +5,43 @@
                 <div class="nav-item dropdown no-arrow">
                     <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
                     </div>
-                    <% if(data.id != userID && userRole != 'admin'){ %>
-                        <button class="dropdown-toggle nav-link" style="border: none; background: none;"" id="myBtn" onclick="open()"><i class="fas fa-envelope fa-fw text-gray-500"></i> </button> 
-                    <% }else {  %>
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><i class="fas fa-envelope fa-fw"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
-                                    <h6 class="dropdown-header">messages</h6>
-                                    
-                                    <%if(messages.length > 0){ %>
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><i class="fas fa-envelope fa-fw"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
+                                <h6 class="dropdown-header">messages</h6>
+                                
+                                <%if(messages.length > 0){ %>
                                     <% for(let i=0; i < messages.length; ++i){ %>
-                                        
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <!-- <div class="bg-success status-indicator"></div> -->
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><span><%=messages[i].message%></span></div>
-                                                <p class="small text-gray-500 mb-0">From: <%=messages[i].from.first_name%>
-                                                <span><%=messages[i].from.last_name%></span>
-                                                </p>
-                                            </div>
-                                        </a>
-                                     <% } %>  
-                                    <% } else{  %>
                                     
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image mr-3">
-                                                <!-- <div class="bg-success status-indicator"></div> -->
-                                            </div>
-                                            <div class="font-weight-bold">
-                                                <div class="text-truncate"><h6>The message box is empty</h6></div>
-                                                <p class="small text-gray-500 mb-0"></p>
-                                            </div>
-                        <% } } %>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                    
-                                    
-                                </div>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <!-- <div class="bg-success status-indicator"></div> -->
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate"><span><%=messages[i].message%></span></div>
+                                            <p class="small text-gray-500 mb-0">From: <%=messages[i].from.first_name%>
+                                            <span><%=messages[i].from.last_name%></span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <% } %>  
+                                <% } else{  %>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <!-- <div class="bg-success status-indicator"></div> -->
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate"><h6>The message box is empty</h6></div>
+                                        <p class="small text-gray-500 mb-0"></p>
+                                    </div>
+                                <% } %>
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> 
                             </div>
-                            <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">  
-                            </div>
-                    
-                        </li>
-                  
-                   
+                        </div>
+                        <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">  
+                        </div>
+                    </li>
+                
                 </div>
             </li>
         
@@ -70,32 +62,4 @@
     </div>
 </div>
 
-  <!-- The Modal -->
-  <div id="myModal" class="modal_message">
-    <!-- Modal content -->
-    <div class="modal-content_message">
-        <a href="javascript:void(0)" id="close" class="closebtn close_model">&times;</a>
-        <form method="POST" action="/send_messsage" name="/send_messsage" value="judy">
-            
-            <h1>Send messsage to Doctor</h1> <br>
-    
-            <div class="form-group">
-                <label class="col-sm-2" for="inputSubject" name="subject"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;Subject</label>
-                <div class="col-sm-10"><input type="text" class="form-control" id="inputSubject" placeholder="subject"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-12" for="inputBody" name="message"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Message</label>
-                <div class="col-sm-12"><textarea class="form-control" id="inputBody" rows="8"></textarea></div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" id="cancel" class="btn btn-default pull-left btn-danger close_model" data-dismiss="modal">Cancel</button> 
-                <button type="submit" id="send" class="btn btn-primary">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
-            </div>
-    
-        </form>
-    </div>
-</div>
-
-<script src="../views/profiles_js.js"></script>
 
