@@ -32,24 +32,26 @@ exports.new_review = async (req, res, next) => {
 
 exports.get_review = async (req, res, next) => {
 	try {
-
+        
         let review_details = await Review.find({ doctor: req.params.id })
-        review_details.rating
-
         let average_rating = 0
         let has_review = false
 
+        
+
         for(let i =0; i< review_details.length; ++i){
+            
             average_rating+=review_details[i].rating
-            if( review_details[i].patient.toString() == res.locals.loggedInUser._id.toString() ){
+            
+            if( review_details[i].reviewer_by.toString() == res.locals.loggedInUser._id.toString() ){
                 has_review = true
             }
 
         }
-        
         if(average_rating > 0){
             average_rating = average_rating / review_details.length
         }
+       
         req.review_details = review_details
         req.average_rating = average_rating
         req.has_review = has_review
@@ -57,5 +59,6 @@ exports.get_review = async (req, res, next) => {
 		next()
 	} catch (error) {
 		req.error = error
+        
 	}
 }
