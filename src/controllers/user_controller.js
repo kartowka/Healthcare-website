@@ -20,7 +20,8 @@ exports.grantAccess = function (action, resource) {
 				req.user.id != user.id &&
 				user.role == 'doctor' &&
 				req.user.role == 'doctor' &&
-				resource != 'doctor_profile'
+				resource != 'doctor_profile' && 
+				resource != 'appointment_management'
 			)
 				granted = false
 			var permission = roles.can(req.user.role)[action](resource)
