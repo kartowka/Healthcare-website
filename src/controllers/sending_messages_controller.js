@@ -1,9 +1,4 @@
-const User = require('../models/user_model')
-const User_doctor=require('../models/doctor_model')
 const Msg = require('../models/sending_messages_model')
-const e = require('express')
-const { roles } = require('../roles/roles')
-
 
 exports.sendMsg = async (req, res, next) =>
 {
@@ -45,27 +40,3 @@ exports.getMsg = async (req, res, next) =>
 	}
 
 }
-	// try {
-	// 	const userId = req.params.id
-	// 	const user = await User.findById(userId)
-	// 	if (!user) {
-	// 		throw new Error('User does not exist')
-	// 	}
-		
-	// 	let msg_details = []
-
-	// 	if(user.role == )
-    //     {
-	// 		msg_details = await Msg.find({ to: userId })
-			
-	// 	} 
-	// 	else if(user.role == 'doctor')
-
-				
-	// } catch (error) {
-	// 	req.error = error
-	// }
-
-
-
-

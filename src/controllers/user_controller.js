@@ -256,7 +256,6 @@ exports.updateUser = async (req, res, next) => {
 				}
 				throw `${user.first_name} ${user.last_name} has been updated`
 			}
-			//else throw new Error('No updated, missing data in one of the fields')
 		}
 	} catch (error) {
 		req.error = error

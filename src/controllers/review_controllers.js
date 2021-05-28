@@ -1,7 +1,5 @@
 const User = require('../models/user_model')
-const DoctorDetails = require('../models/doctor_model')
 const Review = require('../models/doctor_review_model')
-
 
 exports.new_review = async (req, res, next) => {
 	try {

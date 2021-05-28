@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken')
 const nodemailer = require('../js/nodemailer')
 const Insurance = require('../models/insurance_model')
 const user_controller = require('../controllers/user_controller')
@@ -62,7 +61,5 @@ async function paymentConfirmation(
 	card_expiredate,
 	card_securitycode
 ) {
-	//No logic should be here because its a test website, and no need to require a payment.
-	//dummy confirmantion
 	return true
 }
