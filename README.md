@@ -25,6 +25,9 @@ We chose to use [MongoDB](https://www.mongodb.com/) as our project database and 
 
 As for communication, we started using [Slack](https://slack.com/) for cross-notification convenience, we integrated Github, CircleCI & Clubhouse notifications to it which resulted in a really smooth and simple system where especially in things related to development because now we know who pushed what commits and because of it we minimized merge conflicts & requests.
  
+#### Sprint Nº 4
+In the **final** Sprint, we were tasked to implement the remaining of the system requirements (40%) we wrote in Sprint 2, just like in the previous Sprint, we divided the work among us and managed to achieve around 99% of the logic we were trying to achieve.
+
 ### Requirements
 Have `npm` & `node.js` installed.
 
@@ -36,15 +39,21 @@ Our dependencies list:
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "dompurify": "^2.2.8",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "jsdom": "^16.5.3",
     "jsonwebtoken": "^8.5.1",
+    "marked": "^2.0.3",
+    "method-override": "^3.0.0",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.7",
     "node-gyp": "^8.0.0",
     "node-pre-gyp": "^0.17.0",
-    "nodemailer": "^6.5.0"
+    "nodemailer": "^6.5.0",
+    "slugify": "^1.5.3",
+    "url": "^0.11.0"
   }
 ```
 ## Installation
