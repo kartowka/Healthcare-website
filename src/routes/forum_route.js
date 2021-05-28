@@ -1,6 +1,5 @@
 const express = require('express')
 const Forum = require('./../models/forum_model')
-const User = require('./../models/user_model')
 const user_controller = require('../controllers/user_controller')
 const router = express.Router()
 const forum_controller = require('../controllers/forum_controller')

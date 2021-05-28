@@ -45,7 +45,6 @@ jQuery(document).ready(function () {
         })
     }
 
-
     //this code is for animation nav
     jQuery(window).scroll(function () {
         var windowScrollPosTop = jQuery(window).scrollTop()
@@ -76,8 +75,4 @@ jQuery(document).ready(function () {
 
         }
     })
-
-
-
-
 })

@@ -31,14 +31,5 @@ const MessagesSchema = new Schema({
     },
 })
 
-const ConversationSchema = new Schema
-({
-    subject: 
-    {
-        type: String,
-        required: true,
-        
-    },
-})
     const Msg = mongoose.model('message_details', MessagesSchema)
     module.exports = Msg 

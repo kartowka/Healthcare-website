@@ -71,7 +71,6 @@ profile
 			})
 		}
 	)
-	
 
 //previous and future appointments
 profile
@@ -249,10 +248,6 @@ profile
 			)
 		}
 	)
-
-	
-
-
 // Make an Appointment
 profile
 	.route('/appointment_management/:id')
@@ -283,9 +278,5 @@ profile
 			)
 		}
 	)
-
-
-
-
 
 module.exports = profile
