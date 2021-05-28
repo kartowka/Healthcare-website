@@ -7,6 +7,19 @@ const slugify = require('slugify')
 exports.grantForumAccess = function (action, resource) {
 	return async (req, res, next) => {
 		try {
+			if (resource == 'edit_forum') {
+				let forum = await Forum.findOne({
+					_id: req.params.forumID,
+				})
+				console.log(forum)
+				if (
+					String(req.user._id) !== String(forum._doctor_id) &&
+					req.user.role != 'admin'
+				) {
+					throw new Error('You are not allowed to perform this action.')
+				}
+			}
+
 			if (resource == 'edit_question') {
 				let forum = await Forum.findOne({
 					slug: req.params.slug,
