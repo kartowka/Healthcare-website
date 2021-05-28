@@ -41,7 +41,7 @@
 
                                     <% for(let i = 0; i < appointment_details.length; ++i){ %>
                                         
-                                            <%if( new Date(appointment_details[i].date) > new Date()){ %>
+                                            <%if( Date.parse(appointment_details[i].date.toUTCString()) > Date.parse(new Date(Date.now()).toUTCString()) ){ %>
                                                 <tbody>
                                                     <tr>
                                                         <td>
