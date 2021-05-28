@@ -16,7 +16,6 @@ exports.roles = (function () {
         .readAny(forum_pages_paths)
         .updateOwn(patient_paths)
         .readAny('doctor_profile')
-        .readAny('appointment_management')   
         .updateOwn('appointment_management') 
         .updateOwn('send_message')
           
@@ -29,7 +28,6 @@ exports.roles = (function () {
         .readOwn(doctor_paths)
         .updateOwn(doctor_paths)
         .readOwn('patient_profile')
-        .readAny('appointment_management')   
         .updateOwn('appointment_management') 
         .updateOwn('send_message')  
 
