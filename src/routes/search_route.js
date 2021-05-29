@@ -54,6 +54,14 @@ router.route('/').get(user_controller.allowIfLoggedin, async (req, res) => {
 			.catch((e) => {
 				//console.log(e)
 			})
+		doctors = doctors.filter((doctor, index) => {
+			const _doctor = JSON.stringify(doctor)
+			return index === doctors.findIndex(obj => {
+				return JSON.stringify(obj) === _doctor
+			})
+		})
+		console.log(doctors)
+
 		res.render('search', { doctors: doctors })
 	} catch (e) {
 		res.render('search', { doctors: '' })
