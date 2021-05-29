@@ -68,7 +68,11 @@
 							</div>
 							<div class="card-body">
 
-									<% if(!(doctor_details.doctor_related_clinics.includes(patient.clinic))){ %>
+									<% if(data.id == patient.id){ %>
+										<p class="dis" style="color: #3a9ecb; font-size: 22px;">
+											It is not possible to make an appointment. 
+										</p >
+									<% } else if(!(doctor_details.doctor_related_clinics.includes(patient.clinic))){ %>
 										<p class="dis" style="color: #3a9ecb; font-size: 22px;">
 											Please note, you can't make an appointment with doctor 
 											<%=data.first_name%> <%=data.last_name%>,
@@ -114,7 +118,7 @@
 												<option>frontal</option>
 												<option>remote</option>
 											</select><br><br>
-											<% if((doctor_details.doctor_related_clinics.includes(patient.clinic)) && (doctor_details.working_days.length != 0 && (doctor_details.start_time))){ %>
+											<% if(data.id != patient.id  && (doctor_details.doctor_related_clinics.includes(patient.clinic)) && (doctor_details.working_days.length != 0 && (doctor_details.start_time))){ %>
 												<div class="form-group"><button class="btn btn-primary btn-sm"
 													type="submit" id="btn" >Make an appointment</button>
 												</div>
