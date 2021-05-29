@@ -188,6 +188,15 @@ exports.editAppointment = async (req, res, next) => {
 
 		let update = req.body
 
+		if(update.appointment_summary == ''){
+			throw 'Please add an appointment summary.'
+		}
+
+		if(update.end_time == ''){
+			throw 'Please add the end time.'
+		}
+		
+
 		await Appointment.findOneAndUpdate(
 			{
 				_id: update._id,

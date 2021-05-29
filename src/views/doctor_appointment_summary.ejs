@@ -57,7 +57,7 @@
                                 
                                     <% for(let i = 0; i < appointment_details.length; ++i){ %>
                                         
-                                            <%if(new Date(appointment_details[i].date) < new Date()){ %>
+                                            <%if(new Date(appointment_details[i].date) < new Date() && appointment_details[i].end_time == null){ %>
                                                 <form method="POST">
                                                     <tbody>
                                                         <tr>
