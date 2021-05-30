@@ -51,7 +51,7 @@ exports.get_review = async (req, res, next) => {
         }
        
         req.review_details = review_details
-        req.average_rating = average_rating
+        req.average_rating = Math.ceil(average_rating)
         req.has_review = has_review
 
 		next()
